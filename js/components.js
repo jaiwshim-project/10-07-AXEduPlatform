@@ -25,7 +25,14 @@ const Components = {
       <img src="${base}images/logo.png" alt="AX EDU GROUP">
     </a>
     <ul class="nav-links">
-      <li><a href="${base}pages/courses.html"${active('courses.html')}>교육과정</a></li>
+      <li class="nav-dropdown">
+        <a href="${base}pages/courses.html"${active('courses.html')} class="nav-dropdown-toggle">교육과정 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="vertical-align:middle;margin-left:2px;"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <ul class="nav-submenu">
+          <li><a href="${base}pages/online-courses.html"${active('online-courses.html')}>🖥️ 온라인 교육</a></li>
+          <li><a href="${base}pages/online-projects.html"${active('online-projects.html')}>💻 온라인 프로젝트</a></li>
+          <li><a href="${base}pages/offline-courses.html"${active('offline-courses.html')}>🏫 오프라인 교육</a></li>
+        </ul>
+      </li>
       <li><a href="${base}pages/projects.html"${active('projects.html')}>프로젝트</a></li>
       <li><a href="${base}pages/certification.html"${active('certification.html')}>인증</a></li>
       <li><a href="${base}pages/community.html"${active('community.html')}>커뮤니티</a></li>

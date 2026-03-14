@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>온라인 프로젝트 — AX교육플랫폼</title>
+  <meta name="description" content="실제 기업 AX 프로젝트에 참여해 경험을 쌓으세요. 팀 빌딩부터 결과물 발표까지 실전 프로젝트 실습.">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <script>/* FOUC 방지 */const _t=localStorage.getItem('ax-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);</script>
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, #0A2540 0%, #0d4f3c 60%, #0A2540 100%);
+      color: white;
+      padding: 64px 0 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, rgba(0,200,150,0.15) 0%, transparent 55%);
+    }
+    .page-hero .container { position: relative; }
+    .page-hero .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(0,200,150,0.18); border: 1px solid rgba(0,200,150,0.4);
+      color: #00C896; padding: 6px 14px; border-radius: 20px;
+      font-size: 0.8rem; font-weight: 700; margin-bottom: 18px;
+    }
+    .page-hero h1 { font-size: 2.2rem; font-weight: 900; margin-bottom: 14px; line-height: 1.25; }
+    .page-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.78); max-width: 560px; }
+
+    .process-section { padding: 56px 0 0; background: var(--color-bg, #f0f4f9); }
+    [data-theme="dark"] .process-section { background: #0f172a; }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-bottom: 48px;
+      background: white; border: 1px solid #E5E7EB; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 2px 12px rgba(10,37,64,0.06);
+    }
+    [data-theme="dark"] .process-steps { background: #1e293b; border-color: #334155; }
+    .process-step {
+      padding: 28px 20px; text-align: center;
+      border-right: 1px solid #E5E7EB; position: relative;
+    }
+    [data-theme="dark"] .process-step { border-color: #334155; }
+    .process-step:last-child { border-right: none; }
+    .step-num {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg,#FF6B35,#e85d20);
+      color: white; font-weight: 800; font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .step-icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .step-title { font-weight: 700; font-size: 0.9rem; color: #111827; margin-bottom: 6px; }
+    [data-theme="dark"] .step-title { color: #f1f5f9; }
+    .step-desc { font-size: 0.78rem; color: #6B7280; line-height: 1.5; }
+    [data-theme="dark"] .step-desc { color: #94a3b8; }
+
+    .projects-section { padding: 48px 0 64px; }
+    .section-title { font-size: 1.4rem; font-weight: 800; color: var(--color-primary, #0A2540); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    [data-theme="dark"] .section-title { color: #f1f5f9; }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+
+    .project-card {
+      background: white;
+      border: 1px solid #E5E7EB;
+      border-left: 4px solid #00C896;
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.25s;
+      box-shadow: 0 2px 10px rgba(10,37,64,0.06);
+    }
+    [data-theme="dark"] .project-card { background: #1e293b; border-color: #334155; border-left-color: #00C896; }
+    .project-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(10,37,64,0.1); }
+
+    .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .project-category { font-size: 0.75rem; font-weight: 700; color: #00C896; background: rgba(0,200,150,0.1); border: 1px solid rgba(0,200,150,0.25); padding: 3px 9px; border-radius: 10px; }
+    .project-status { font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 10px; }
+    .status-open { background: rgba(255,107,53,0.1); color: #FF6B35; border: 1px solid rgba(255,107,53,0.3); }
+    .status-ongoing { background: rgba(59,130,246,0.1); color: #3b82f6; border: 1px solid rgba(59,130,246,0.3); }
+    .status-done { background: rgba(107,114,128,0.1); color: #6B7280; border: 1px solid rgba(107,114,128,0.2); }
+
+    .project-title { font-size: 1.05rem; font-weight: 700; color: #111827; margin-bottom: 8px; }
+    [data-theme="dark"] .project-title { color: #f1f5f9; }
+    .project-desc { font-size: 0.85rem; color: #6B7280; line-height: 1.55; margin-bottom: 14px; }
+    [data-theme="dark"] .project-desc { color: #94a3b8; }
+
+    .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+    .skill-tag { font-size: 0.72rem; background: rgba(10,37,64,0.06); color: #374151; border: 1px solid rgba(10,37,64,0.1); padding: 2px 8px; border-radius: 6px; }
+    [data-theme="dark"] .skill-tag { background: rgba(255,255,255,0.06); color: #94a3b8; border-color: rgba(255,255,255,0.1); }
+
+    .project-meta { display: flex; gap: 16px; font-size: 0.8rem; color: #9CA3AF; margin-bottom: 16px; }
+    .apply-btn { display: block; text-align: center; padding: 10px; background: linear-gradient(135deg,#00C896,#00a87c); color: white; border-radius: 8px; font-weight: 700; font-size: 0.875rem; text-decoration: none; transition: opacity 0.2s; }
+    .apply-btn:hover { opacity: 0.88; }
+    .apply-btn.disabled { background: #9CA3AF; cursor: not-allowed; }
+
+    @media (max-width: 768px) {
+      .page-hero h1 { font-size: 1.7rem; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
+      .process-step:nth-child(2) { border-right: none; }
+      .process-step:nth-child(1), .process-step:nth-child(2) { border-bottom: 1px solid #E5E7EB; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="logo"><img src="../images/logo.png" alt="AX EDU GROUP"></a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="badge">💻 온라인 프로젝트</div>
+    <h1>실전 AX 프로젝트로<br><span style="color:#00C896;">포트폴리오를 완성</span>하세요</h1>
+    <p>팀을 구성하고 실제 기업 과제를 해결하며 AX 전문가로 성장합니다. 수료 시 인증서 발급.</p>
+  </div>
+</div>
+
+<div class="process-section">
+  <div class="container">
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-icon">🔍</div>
+        <div class="step-num">1</div>
+        <div class="step-title">프로젝트 선택</div>
+        <div class="step-desc">관심 분야의 프로젝트를 선택하고 지원합니다</div>
+      </div>
+      <div class="process-step">
+        <div class="step-icon">👥</div>
+        <div class="step-num">2</div>
+        <div class="step-title">팀 빌딩</div>
+        <div class="step-desc">3~5명의 팀을 구성하고 역할을 분담합니다</div>
+      </div>
+      <div class="process-step">
+        <div class="step-icon">🚀</div>
+        <div class="step-num">3</div>
+        <div class="step-title">프로젝트 수행</div>
+        <div class="step-desc">4~8주간 실제 과제를 AI와 함께 해결합니다</div>
+      </div>
+      <div class="process-step">
+        <div class="step-icon">🏅</div>
+        <div class="step-num">4</div>
+        <div class="step-title">결과 발표 & 인증</div>
+        <div class="step-desc">성과를 발표하고 AX 인증서를 획득합니다</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="projects-section">
+  <div class="container">
+    <div class="section-title">📋 참여 가능한 프로젝트</div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-category">마케팅 자동화</span>
+          <span class="project-status status-open">모집 중</span>
+        </div>
+        <div class="project-title">AI 콘텐츠 마케팅 자동화 시스템 구축</div>
+        <div class="project-desc">SNS 콘텐츠 자동 생성, 예약 게시, 성과 분석을 AI로 자동화하는 시스템을 만듭니다.</div>
+        <div class="project-tags">
+          <span class="skill-tag">Claude API</span><span class="skill-tag">자동화</span><span class="skill-tag">마케팅</span>
+        </div>
+        <div class="project-meta"><span>⏱ 6주</span><span>👥 0/4명</span><span>🏅 인증 획득 가능</span></div>
+        <a href="auth.html" class="apply-btn">팀 참여 신청</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-category">업무 자동화</span>
+          <span class="project-status status-open">모집 중</span>
+        </div>
+        <div class="project-title">중소기업 경영 리포트 자동화 도구</div>
+        <div class="project-desc">월별 매출, 비용, 인사 데이터를 취합해 경영진을 위한 자동 보고서를 생성합니다.</div>
+        <div class="project-tags">
+          <span class="skill-tag">Python</span><span class="skill-tag">LLM</span><span class="skill-tag">데이터 분석</span>
+        </div>
+        <div class="project-meta"><span>⏱ 8주</span><span>👥 2/5명</span><span>🏅 인증 획득 가능</span></div>
+        <a href="auth.html" class="apply-btn">팀 참여 신청</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-category">고객 서비스</span>
+          <span class="project-status status-ongoing">진행 중</span>
+        </div>
+        <div class="project-title">AI 고객 응대 챗봇 개발</div>
+        <div class="project-desc">FAQ 자동 답변, 불만 처리 에스컬레이션, 상담 품질 분석 기능을 갖춘 CS 챗봇 구축.</div>
+        <div class="project-tags">
+          <span class="skill-tag">RAG</span><span class="skill-tag">Chatbot</span><span class="skill-tag">NLP</span>
+        </div>
+        <div class="project-meta"><span>⏱ 6주</span><span>👥 4/4명</span><span>🏅 인증 획득 가능</span></div>
+        <a class="apply-btn disabled">모집 마감</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-category">교육 테크</span>
+          <span class="project-status status-open">모집 중</span>
+        </div>
+        <div class="project-title">맞춤형 학습 경로 추천 시스템</div>
+        <div class="project-desc">학습자의 수준과 목표에 따라 개인화된 강의 순서와 학습 방법을 AI가 추천합니다.</div>
+        <div class="project-tags">
+          <span class="skill-tag">추천 시스템</span><span class="skill-tag">ML</span><span class="skill-tag">교육</span>
+        </div>
+        <div class="project-meta"><span>⏱ 8주</span><span>👥 1/4명</span><span>🏅 인증 획득 가능</span></div>
+        <a href="auth.html" class="apply-btn">팀 참여 신청</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer class="footer"></footer>
+<script src="../js/components.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/theme.js"></script>
+</body>
+</html>
