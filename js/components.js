@@ -82,9 +82,21 @@ const Components = {
     </button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="${base}pages/about.html">🏢 회사소개</a>
-    <a href="${base}pages/ceo.html">👤 CEO 소개</a>
-    <a href="${base}pages/courses.html">📚 교육과정</a>
+    <div class="mob-group">
+      <button class="mob-group-toggle" onclick="this.parentElement.classList.toggle('open')">🏢 회사소개 <span class="mob-arrow">▾</span></button>
+      <div class="mob-sub">
+        <a href="${base}pages/about.html">🏢 회사 소개</a>
+        <a href="${base}pages/ceo.html">👤 CEO 소개</a>
+      </div>
+    </div>
+    <div class="mob-group">
+      <button class="mob-group-toggle" onclick="this.parentElement.classList.toggle('open')">📚 교육과정 <span class="mob-arrow">▾</span></button>
+      <div class="mob-sub">
+        <a href="${base}pages/online-courses.html">🖥️ 온라인 교육</a>
+        <a href="${base}pages/online-projects.html">💻 온라인 프로젝트</a>
+        <a href="${base}pages/offline-courses.html">🏫 오프라인 교육</a>
+      </div>
+    </div>
     <a href="${base}pages/projects.html">📁 프로젝트</a>
     <a href="${base}pages/certification.html">🏅 인증</a>
     <a href="${base}pages/community.html">💬 커뮤니티</a>
@@ -227,6 +239,13 @@ const Components = {
       st.textContent = `
         #userProfileBtn:hover { background: rgba(255,107,53,0.18) !important; }
         #userDropdown a:hover, #userDropdown button:hover { background: #F9FAFB; }
+        .mob-group { display:flex; flex-direction:column; }
+        .mob-group-toggle { display:flex; align-items:center; justify-content:space-between; width:100%; padding:12px 16px; background:none; border:none; border-bottom:1px solid rgba(255,255,255,0.1); color:inherit; font-size:0.95rem; font-weight:600; font-family:inherit; cursor:pointer; text-align:left; }
+        .mob-arrow { font-size:0.8rem; transition:transform 0.2s; }
+        .mob-group.open .mob-arrow { transform:rotate(180deg); }
+        .mob-sub { display:none; flex-direction:column; background:rgba(0,0,0,0.15); }
+        .mob-group.open .mob-sub { display:flex; }
+        .mob-sub a { padding:10px 16px 10px 32px !important; font-size:0.875rem !important; border-bottom:1px solid rgba(255,255,255,0.06) !important; }
         [data-theme="dark"] #userDropdown { background: #1e293b !important; border-color: #334155 !important; }
         [data-theme="dark"] #userDropdown a, [data-theme="dark"] #userDropdown button { color: #e2e8f0 !important; }
         [data-theme="dark"] #userDropdown a:hover, [data-theme="dark"] #userDropdown button:hover { background: #334155 !important; }
