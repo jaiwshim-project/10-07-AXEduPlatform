@@ -68,8 +68,13 @@
 .sidebar-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
   text-decoration: none;
+}
+
+.sidebar-logo img {
+  height: 36px;
+  width: auto;
+  display: block;
 }
 
 .sidebar-logo-icon {
