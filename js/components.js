@@ -35,7 +35,32 @@ const Components = {
     <div class="nav-actions">
       <button id="themeToggle" onclick="ThemeManager && ThemeManager.toggle()" title="테마 전환">🌙</button>
       <a href="${base}pages/auth.html" class="btn btn-outline btn-sm" id="loginBtn">로그인</a>
-      <a href="${base}pages/dashboard.html" class="btn btn-primary btn-sm" id="dashboardBtn" style="display:none">대시보드</a>
+      <div id="userProfile" style="display:none;position:relative;">
+        <button id="userProfileBtn" onclick="document.getElementById('userDropdown').classList.toggle('show')" style="display:flex;align-items:center;gap:6px;background:rgba(255,107,53,0.12);border:1.5px solid rgba(255,107,53,0.4);border-radius:20px;padding:5px 10px 5px 5px;cursor:pointer;transition:all 0.2s;">
+          <span id="userAvatar" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#FF6B35,#e85d20);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8rem;flex-shrink:0;">U</span>
+          <span id="userName" style="font-weight:700;font-size:0.85rem;color:#FF6B35;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+          <svg id="userDropArrow" width="12" height="12" viewBox="0 0 12 12" fill="none" style="flex-shrink:0;transition:transform 0.2s;"><path d="M2 4l4 4 4-4" stroke="#FF6B35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div id="userDropdown" style="position:absolute;right:0;top:calc(100% + 10px);background:white;border:1px solid #E5E7EB;border-radius:14px;box-shadow:0 12px 32px rgba(10,37,64,0.14);min-width:196px;padding:8px;z-index:9999;display:none;">
+          <div id="userEmailLabel" style="padding:8px 12px 10px;border-bottom:1px solid #F3F4F6;margin-bottom:6px;">
+            <div id="userFullName" style="font-weight:700;font-size:0.875rem;color:#111827;"></div>
+            <div id="userEmailText" style="font-size:0.75rem;color:#9CA3AF;margin-top:2px;"></div>
+          </div>
+          <a href="${base}pages/dashboard.html" style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;color:#374151;text-decoration:none;font-size:0.875rem;font-weight:500;">
+            <span style="font-size:1rem;">📊</span> 마이페이지
+          </a>
+          <a href="${base}pages/dashboard.html#courses" style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;color:#374151;text-decoration:none;font-size:0.875rem;font-weight:500;">
+            <span style="font-size:1rem;">📚</span> 내 강의
+          </a>
+          <a href="${base}pages/dashboard.html#cert" style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;color:#374151;text-decoration:none;font-size:0.875rem;font-weight:500;">
+            <span style="font-size:1rem;">🏅</span> 인증 현황
+          </a>
+          <div style="border-top:1px solid #F3F4F6;margin:6px 0;"></div>
+          <button onclick="Auth && Auth.signOut()" style="display:flex;align-items:center;gap:10px;width:100%;padding:9px 12px;border-radius:8px;color:#EF4444;background:none;border:none;cursor:pointer;font-size:0.875rem;font-weight:600;font-family:inherit;">
+            <span style="font-size:1rem;">🚪</span> 로그아웃
+          </button>
+        </div>
+      </div>
     </div>
     <button class="hamburger" id="hamburger" aria-label="메뉴" aria-expanded="false"
       onclick="this.classList.toggle('open');this.setAttribute('aria-expanded',this.classList.contains('open'));document.getElementById('mobileMenu').classList.toggle('active')">
@@ -130,6 +155,51 @@ const Components = {
       footer.outerHTML = this.footerHTML(base);
     } else {
       document.body.insertAdjacentHTML('beforeend', this.footerHTML(base));
+    }
+
+    // 3. 드롭다운 바깥 클릭 닫힘
+    document.addEventListener('click', (e) => {
+      const profile = document.getElementById('userProfile');
+      const dropdown = document.getElementById('userDropdown');
+      if (dropdown && profile && !profile.contains(e.target)) {
+        dropdown.style.display = 'none';
+        const arrow = document.getElementById('userDropArrow');
+        if (arrow) arrow.style.transform = '';
+      }
+    });
+
+    // 4. 드롭다운 toggle 함수 전역 등록
+    window._axToggleUserDrop = function() {
+      const dd = document.getElementById('userDropdown');
+      const arrow = document.getElementById('userDropArrow');
+      if (!dd) return;
+      const isOpen = dd.style.display === 'block';
+      dd.style.display = isOpen ? 'none' : 'block';
+      if (arrow) arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+    };
+
+    // 5. 드롭다운 버튼에 올바른 핸들러 연결
+    const profileBtn = document.getElementById('userProfileBtn');
+    if (profileBtn) {
+      profileBtn.setAttribute('onclick', 'window._axToggleUserDrop()');
+    }
+
+    // 6. 드롭다운 hover 스타일 (동적 삽입)
+    if (!document.getElementById('ax-dropdown-style')) {
+      const st = document.createElement('style');
+      st.id = 'ax-dropdown-style';
+      st.textContent = `
+        #userProfileBtn:hover { background: rgba(255,107,53,0.18) !important; }
+        #userDropdown a:hover, #userDropdown button:hover { background: #F9FAFB; }
+        [data-theme="dark"] #userDropdown { background: #1e293b !important; border-color: #334155 !important; }
+        [data-theme="dark"] #userDropdown a, [data-theme="dark"] #userDropdown button { color: #e2e8f0 !important; }
+        [data-theme="dark"] #userDropdown a:hover, [data-theme="dark"] #userDropdown button:hover { background: #334155 !important; }
+        [data-theme="dark"] #userDropdown .logout-btn { color: #f87171 !important; }
+        [data-theme="dark"] #userName { color: #FF6B35 !important; }
+        [data-theme="dark"] #userFullName { color: #f1f5f9 !important; }
+        [data-theme="dark"] #userDropdown { border-color: #334155 !important; }
+      `;
+      document.head.appendChild(st);
     }
   }
 };

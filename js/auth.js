@@ -65,7 +65,8 @@ const Auth = {
     this.currentUser = null;
     Utils.storage.remove('user');
     this.updateNavUI();
-    window.location.href = '../index.html';
+    const isPages = window.location.pathname.includes('/pages/');
+    window.location.href = isPages ? '../index.html' : './index.html';
   },
 
   // 현재 사용자
@@ -84,15 +85,24 @@ const Auth = {
   // 네비 UI 업데이트
   updateNavUI() {
     const loginBtn = document.getElementById('loginBtn');
-    const dashBtn = document.getElementById('dashboardBtn');
-    const userInfo = document.getElementById('userInfo');
+    const userProfile = document.getElementById('userProfile');
     if (this.currentUser) {
       if (loginBtn) loginBtn.style.display = 'none';
-      if (dashBtn) dashBtn.style.display = 'inline-block';
-      if (userInfo) userInfo.textContent = this.currentUser.name;
+      if (userProfile) userProfile.style.display = 'block';
+      // 아바타 이니셜
+      const name = this.currentUser.name || this.currentUser.email || 'U';
+      const initial = name.charAt(0).toUpperCase();
+      const avatarEl = document.getElementById('userAvatar');
+      const nameEl = document.getElementById('userName');
+      const fullNameEl = document.getElementById('userFullName');
+      const emailEl = document.getElementById('userEmailText');
+      if (avatarEl) avatarEl.textContent = initial;
+      if (nameEl) nameEl.textContent = name;
+      if (fullNameEl) fullNameEl.textContent = name;
+      if (emailEl) emailEl.textContent = this.currentUser.email || '';
     } else {
       if (loginBtn) loginBtn.style.display = 'inline-block';
-      if (dashBtn) dashBtn.style.display = 'none';
+      if (userProfile) userProfile.style.display = 'none';
     }
   },
 
