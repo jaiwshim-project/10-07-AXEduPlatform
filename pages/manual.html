@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사용자 매뉴얼 - AX교육플랫폼</title>
+  <meta name="description" content="AX교육플랫폼 사용자 가이드. 강의 수강, 인증, AI 튜터, 기업 서비스 이용 방법.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <script>/* FOUC 방지 */const _t=localStorage.getItem('ax-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);</script>
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <style>
+    /* Manual Layout */
+    .manual-wrapper {
+      display: flex;
+      min-height: calc(100vh - 64px);
+    }
+
+    /* Manual Sidebar */
+    .manual-sidebar {
+      width: 280px;
+      background: white;
+      border-right: 1px solid var(--color-border);
+      position: sticky;
+      top: 64px;
+      height: calc(100vh - 64px);
+      overflow-y: auto;
+      flex-shrink: 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-border) transparent;
+    }
+
+    .manual-sidebar::-webkit-scrollbar { width: 4px; }
+    .manual-sidebar::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 2px; }
+
+    .sidebar-search {
+      padding: 16px;
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 10;
+    }
+
+    .sidebar-search input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-family: var(--font-korean);
+      background: var(--color-bg);
+    }
+
+    .sidebar-search input:focus {
+      outline: none;
+      border-color: var(--color-accent);
+    }
+
+    .nav-section {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-section:last-child { border-bottom: none; }
+
+    .nav-section-title {
+      padding: 6px 16px 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px 9px 20px;
+      color: var(--color-text);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all var(--transition);
+    }
+
+    .nav-item:hover {
+      background: rgba(255,107,53,0.05);
+      color: var(--color-accent);
+      border-left-color: rgba(255,107,53,0.3);
+    }
+
+    .nav-item.active {
+      background: rgba(255,107,53,0.08);
+      color: var(--color-accent);
+      border-left-color: var(--color-accent);
+      font-weight: 700;
+    }
+
+    .nav-item-icon { font-size: 1rem; width: 20px; text-align: center; flex-shrink: 0; }
+
+    /* Main Content */
+    .manual-content {
+      flex: 1;
+      padding: 40px 48px;
+      max-width: 860px;
+      min-width: 0;
+    }
+
+    .manual-section {
+      display: none;
+    }
+
+    .manual-section.active {
+      display: block;
+    }
+
+    /* Content Styles */
+    .content-title {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .content-lead {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .content-h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin: 32px 0 16px;
+      padding-left: 12px;
+      border-left: 4px solid var(--color-accent);
+    }
+
+    .content-h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin: 24px 0 12px;
+    }
+
+    .content-p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--color-text);
+      margin-bottom: 16px;
+    }
+
+    /* Screenshot Placeholder */
+    .screenshot {
+      background: linear-gradient(135deg, var(--color-bg) 0%, #e8ecf0 100%);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin: 20px 0;
+      overflow: hidden;
+    }
+
+    .screenshot-bar {
+      background: #d0d5dd;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .screenshot-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .screenshot-body {
+      padding: 24px;
+      text-align: center;
+      color: var(--color-text-muted);
+      font-size: 0.875rem;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .screenshot-body .icon { font-size: 2.5rem; }
+    .screenshot-caption {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      text-align: center;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* Steps */
+    .steps-list { margin: 20px 0; }
+    .step-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-content { flex: 1; }
+    .step-title { font-weight: 700; color: var(--color-primary); margin-bottom: 4px; }
+    .step-desc { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.6; }
+
+    /* Tips Box */
+    .tip-box {
+      background: rgba(0,200,150,0.06);
+      border: 1px solid rgba(0,200,150,0.2);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin: 16px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .tip-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .tip-text { font-size: 0.9rem; color: var(--color-text); line-height: 1.6; }
+    .tip-text strong { color: var(--color-primary); }
+
+    .warning-box {
+      background: rgba(245,158,11,0.06);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin: 16px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    /* FAQ */
+    .faq-item {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 16px 20px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      transition: background var(--transition);
+      user-select: none;
+    }
+
+    .faq-question:hover { background: var(--color-bg); }
+    .faq-arrow { transition: transform var(--transition); font-size: 0.85rem; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+    .faq-answer {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding: 0 20px 16px;
+    }
+
+    /* Breadcrumb in manual */
+    .manual-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-bottom: 16px;
+    }
+
+    .manual-breadcrumb a { color: var(--color-text-muted); text-decoration: none; }
+    .manual-breadcrumb a:hover { color: var(--color-accent); }
+
+    /* On-this-page */
+    .on-this-page {
+      width: 200px;
+      position: sticky;
+      top: 88px;
+      flex-shrink: 0;
+      align-self: flex-start;
+      padding: 16px;
+      font-size: 0.8rem;
+    }
+
+    .on-this-page-title {
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    .on-this-page-link {
+      display: block;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      padding: 4px 0;
+      border-left: 2px solid var(--color-border);
+      padding-left: 10px;
+      transition: all var(--transition);
+    }
+
+    .on-this-page-link:hover {
+      color: var(--color-accent);
+      border-left-color: var(--color-accent);
+    }
+
+    /* Mobile */
+    .manual-mobile-nav {
+      display: none;
+      padding: 12px 16px;
+      background: white;
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: 64px;
+      z-index: 100;
+    }
+
+    .manual-mobile-select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-korean);
+      font-size: 0.95rem;
+      background: white;
+    }
+
+    @media (max-width: 1100px) {
+      .on-this-page { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .manual-sidebar { display: none; }
+      .manual-mobile-nav { display: block; }
+      .manual-content { padding: 24px 16px; }
+      .content-title { font-size: 1.4rem; }
+    }
+
+    [data-theme="dark"] .manual-sidebar { background: var(--color-surface, #1e293b); }
+    [data-theme="dark"] .sidebar-search { background: var(--color-surface, #1e293b); }
+    [data-theme="dark"] .faq-question { background: var(--color-surface, #1e293b); }
+    [data-theme="dark"] .faq-question:hover { background: var(--color-bg, #0f172a); }
+    [data-theme="dark"] .manual-mobile-nav { background: var(--color-surface, #1e293b); }
+    [data-theme="dark"] .manual-mobile-select { background: var(--color-surface, #1e293b); color: var(--color-text); }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="logo">AX플랫폼 <span class="logo-badge">BETA</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">홈</a></li>
+      <li><a href="./courses.html">강의</a></li>
+      <li><a href="./community.html">커뮤니티</a></li>
+      <li><a href="./expert-profile.html">전문가</a></li>
+      <li><a href="./enterprise.html">기업서비스</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="themeToggle" onclick="ThemeManager.toggle()">🌙</button>
+      <a href="./login.html" class="btn btn-outline btn-sm">로그인</a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- Mobile Navigation -->
+<div class="manual-mobile-nav">
+  <select class="manual-mobile-select" onchange="showSection(this.value)">
+    <option value="intro">1. 플랫폼 소개</option>
+    <option value="signup">1-2. 회원가입/로그인</option>
+    <option value="first-course">1-3. 첫 강의 시작하기</option>
+    <option value="learning">2. 강의 수강 방법</option>
+    <option value="homework">2-2. 과제 제출</option>
+    <option value="project">2-3. 프로젝트 참여</option>
+    <option value="cert-intro">3. 인증 단계 소개</option>
+    <option value="exam">3-2. 시험 응시 방법</option>
+    <option value="certificate">3-3. 인증서 발급</option>
+    <option value="ai-tutor">4. AI 튜터 소개</option>
+    <option value="good-question">4-2. 효과적인 질문 방법</option>
+    <option value="instructor">5. 강의 개설 방법</option>
+    <option value="mentoring">5-2. 프로젝트 멘토링</option>
+    <option value="enterprise-guide">6. 프로젝트 의뢰</option>
+    <option value="matching">6-2. 전문가 매칭 프로세스</option>
+  </select>
+</div>
+
+<div class="manual-wrapper">
+
+  <!-- Sidebar Navigation -->
+  <aside class="manual-sidebar">
+    <div class="sidebar-search">
+      <input type="text" placeholder="🔍 매뉴얼 검색..." oninput="searchManual(this.value)" id="manualSearch">
+    </div>
+
+    <!-- 1. 시작하기 -->
+    <div class="nav-section">
+      <div class="nav-section-title">1. 시작하기</div>
+      <a class="nav-item active" onclick="showSection('intro')">
+        <span class="nav-item-icon">🏠</span> 플랫폼 소개
+      </a>
+      <a class="nav-item" onclick="showSection('signup')">
+        <span class="nav-item-icon">👤</span> 회원가입/로그인
+      </a>
+      <a class="nav-item" onclick="showSection('first-course')">
+        <span class="nav-item-icon">🚀</span> 첫 강의 시작하기
+      </a>
+    </div>
+
+    <!-- 2. 학습자 가이드 -->
+    <div class="nav-section">
+      <div class="nav-section-title">2. 학습자 가이드</div>
+      <a class="nav-item" onclick="showSection('learning')">
+        <span class="nav-item-icon">📚</span> 강의 수강 방법
+      </a>
+      <a class="nav-item" onclick="showSection('homework')">
+        <span class="nav-item-icon">📝</span> 과제 제출
+      </a>
+      <a class="nav-item" onclick="showSection('project')">
+        <span class="nav-item-icon">💼</span> 프로젝트 참여
+      </a>
+    </div>
+
+    <!-- 3. 인증 -->
+    <div class="nav-section">
+      <div class="nav-section-title">3. 전문가 인증 가이드</div>
+      <a class="nav-item" onclick="showSection('cert-intro')">
+        <span class="nav-item-icon">🏅</span> 인증 단계 소개
+      </a>
+      <a class="nav-item" onclick="showSection('exam')">
+        <span class="nav-item-icon">📋</span> 시험 응시 방법
+      </a>
+      <a class="nav-item" onclick="showSection('certificate')">
+        <span class="nav-item-icon">🎓</span> 인증서 발급
+      </a>
+    </div>
+
+    <!-- 4. AI 튜터 -->
+    <div class="nav-section">
+      <div class="nav-section-title">4. AI 튜터 사용법</div>
+      <a class="nav-item" onclick="showSection('ai-tutor')">
+        <span class="nav-item-icon">🤖</span> AI 튜터 소개
+      </a>
+      <a class="nav-item" onclick="showSection('good-question')">
+        <span class="nav-item-icon">💡</span> 효과적인 질문 방법
+      </a>
+    </div>
+
+    <!-- 5. 강사/멘토 -->
+    <div class="nav-section">
+      <div class="nav-section-title">5. 강사/멘토 가이드</div>
+      <a class="nav-item" onclick="showSection('instructor')">
+        <span class="nav-item-icon">🎤</span> 강의 개설 방법
+      </a>
+      <a class="nav-item" onclick="showSection('mentoring')">
+        <span class="nav-item-icon">🤝</span> 프로젝트 멘토링
+      </a>
+    </div>
+
+    <!-- 6. 기업 서비스 -->
+    <div class="nav-section">
+      <div class="nav-section-title">6. 기업 서비스 가이드</div>
+      <a class="nav-item" onclick="showSection('enterprise-guide')">
+        <span class="nav-item-icon">🏢</span> 프로젝트 의뢰
+      </a>
+      <a class="nav-item" onclick="showSection('matching')">
+        <span class="nav-item-icon">🔗</span> 전문가 매칭 프로세스
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="manual-content">
+
+    <!-- 1. 플랫폼 소개 -->
+    <div class="manual-section active" id="section-intro">
+      <div class="manual-breadcrumb">
+        <a href="../index.html">홈</a> ›
+        <a href="#">매뉴얼</a> ›
+        <span>플랫폼 소개</span>
+      </div>
+      <h1 class="content-title">🏠 AX교육플랫폼 소개</h1>
+      <p class="content-lead">AX교육플랫폼은 AI 전환(AX) 전문가를 양성하는 한국 최초의 통합 생태계 플랫폼입니다. 교육 → 인증 → 커뮤니티 → 실전 프로젝트로 이어지는 완전한 AX 전문가 성장 경로를 제공합니다.</p>
+
+      <h2 class="content-h2">플랫폼의 핵심 가치</h2>
+      <div class="grid grid-2 gap-md" style="margin-bottom:24px;">
+        <div class="card" style="border-left:4px solid var(--color-accent);">
+          <h3 style="font-weight:800;margin-bottom:8px;">📚 체계적인 AX 교육</h3>
+          <p class="content-p" style="margin:0;font-size:0.875rem;">입문부터 심화까지 50개 강의. Gemini API, Supabase, 바이브코딩 등 실전 중심 커리큘럼.</p>
+        </div>
+        <div class="card" style="border-left:4px solid var(--color-green);">
+          <h3 style="font-weight:800;margin-bottom:8px;">🏅 공신력 있는 인증</h3>
+          <p class="content-p" style="margin:0;font-size:0.875rem;">AX Practitioner → Expert → Architect 3단계 인증. 업계 공인 전문가 자격 부여.</p>
+        </div>
+        <div class="card" style="border-left:4px solid var(--color-primary);">
+          <h3 style="font-weight:800;margin-bottom:8px;">🤝 활발한 커뮤니티</h3>
+          <p class="content-p" style="margin:0;font-size:0.875rem;">2,847명 AI 전환 전문가 네트워크. Q&A, 프로젝트 모집, 스터디 모임.</p>
+        </div>
+        <div class="card" style="border-left:4px solid #7c3aed;">
+          <h3 style="font-weight:800;margin-bottom:8px;">🚀 실전 프로젝트 매칭</h3>
+          <p class="content-p" style="margin:0;font-size:0.875rem;">247개 기업과 AX 전문가 매칭. 실제 수익을 창출하는 프로젝트 참여 기회.</p>
+        </div>
+      </div>
+
+      <div class="screenshot">
+        <div class="screenshot-bar">
+          <div class="screenshot-dot" style="background:#ff5f57;"></div>
+          <div class="screenshot-dot" style="background:#febc2e;"></div>
+          <div class="screenshot-dot" style="background:#28c840;"></div>
+          <span style="font-size:0.8rem;color:#888;margin-left:8px;">ax-education-platform.vercel.app</span>
+        </div>
+        <div class="screenshot-body">
+          <div class="icon">🖥️</div>
+          <div>메인 랜딩 페이지 스크린샷</div>
+          <div style="font-size:0.75rem;">Hero 섹션, 주요 기능 소개, CTA 버튼</div>
+        </div>
+      </div>
+      <p class="screenshot-caption">▲ AX교육플랫폼 메인 화면. 학습 경로, 주요 기능, 전문가 통계를 한 눈에 확인할 수 있습니다.</p>
+
+      <h2 class="content-h2">이런 분들에게 적합합니다</h2>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="background:rgba(255,107,53,0.1);color:var(--color-accent);padding:4px 10px;border-radius:6px;font-size:0.8rem;font-weight:700;white-space:nowrap;">입문자</span>
+          <span class="content-p" style="margin:0;">AI 코딩 경험이 없어도 시작할 수 있습니다. 바이브코딩으로 2시간 만에 첫 AI 앱을 완성!</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="background:rgba(0,200,150,0.1);color:var(--color-green);padding:4px 10px;border-radius:6px;font-size:0.8rem;font-weight:700;white-space:nowrap;">개발자</span>
+          <span class="content-p" style="margin:0;">기존 개발 역량에 AI를 더해 AX 전문가로 업그레이드. 연봉 2배 전환 레퍼런스 다수.</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="background:rgba(10,37,64,0.08);color:var(--color-primary);padding:4px 10px;border-radius:6px;font-size:0.8rem;font-weight:700;white-space:nowrap;">기업 임원</span>
+          <span class="content-p" style="margin:0;">조직의 AI 전환을 이끌 전략과 실행 역량을 습득. 검증된 전문가와 즉시 협업 가능.</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="background:rgba(139,92,246,0.1);color:#7c3aed;padding:4px 10px;border-radius:6px;font-size:0.8rem;font-weight:700;white-space:nowrap;">강사/멘토</span>
+          <span class="content-p" style="margin:0;">AX 강의를 개설하고 수강료 수익을 창출. 멘토링으로 추가 소득 가능.</span>
+        </li>
+      </ul>
+
+      <div class="tip-box">
+        <span class="tip-icon">💡</span>
+        <div class="tip-text"><strong>빠른 시작 팁:</strong> 플랫폼을 처음 방문하셨다면 회원가입 후 무료 제공되는 "바이브코딩 입문" 강의부터 시작해보세요. 2시간 만에 첫 AI 앱을 완성할 수 있습니다!</div>
+      </div>
+    </div>
+
+    <!-- 1-2. 회원가입/로그인 -->
+    <div class="manual-section" id="section-signup">
+      <div class="manual-breadcrumb"><a href="#">매뉴얼</a> › <a href="#" onclick="showSection('intro')">시작하기</a> › <span>회원가입/로그인</span></div>
+      <h1 class="content-title">👤 회원가입 / 로그인</h1>
+      <p class="content-lead">AX교육플랫폼은 Supabase Auth를 기반으로 안전한 인증을 제공합니다. 이메일 또는 소셜 로그인(Google, GitHub)으로 30초 만에 가입할 수 있습니다.</p>
+
+      <h2 class="content-h2">회원가입 방법</h2>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">우측 상단 "무료 시작" 버튼 클릭</div>
+            <div class="step-desc">네비게이션 바의 주황색 "무료 시작" 버튼을 클릭하면 회원가입 페이지로 이동합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">가입 방법 선택</div>
+            <div class="step-desc">이메일 직접 가입 또는 Google/GitHub 소셜 로그인 중 선택할 수 있습니다. 소셜 로그인이 가장 빠릅니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">프로필 설정</div>
+            <div class="step-desc">이름, 직업/역할, 관심 분야를 입력하면 맞춤 강의를 추천받을 수 있습니다. (선택 사항)</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-title">이메일 인증 (이메일 가입 시)</div>
+            <div class="step-desc">가입하신 이메일로 인증 링크가 발송됩니다. 링크 클릭 후 로그인하세요.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="screenshot">
+        <div class="screenshot-bar">
+          <div class="screenshot-dot" style="background:#ff5f57;"></div>
+          <div class="screenshot-dot" style="background:#febc2e;"></div>
+          <div class="screenshot-dot" style="background:#28c840;"></div>
+        </div>
+        <div class="screenshot-body">
+          <div class="icon">🔐</div>
+          <div>회원가입 / 로그인 화면 스크린샷</div>
+          <div style="font-size:0.75rem;">이메일 입력, 소셜 로그인 버튼, 이용약관 동의</div>
+        </div>
+      </div>
+      <p class="screenshot-caption">▲ 회원가입 페이지. Google 또는 GitHub 계정으로 원클릭 가입이 가능합니다.</p>
+
+      <div class="warning-box">
+        <span class="tip-icon">⚠️</span>
+        <div class="tip-text"><strong>보안 주의:</strong> 비밀번호는 8자 이상, 영문+숫자+특수문자 조합을 권장합니다. 플랫폼은 비밀번호를 평문으로 저장하지 않습니다 (bcrypt 암호화).</div>
+      </div>
+    </div>
+
+    <!-- 1-3. 첫 강의 시작하기 -->
+    <div class="manual-section" id="section-first-course">
+      <div class="manual-breadcrumb"><a href="#">매뉴얼</a> › <span>첫 강의 시작하기</span></div>
+      <h1 class="content-title">🚀 첫 강의 시작하기</h1>
+      <p class="content-lead">로그인 후 바로 무료 강의를 시작할 수 있습니다. AI 코딩 경험이 없어도 "바이브코딩 입문" 강의로 2시간 만에 첫 번째 AI 앱을 만들어보세요.</p>
+
+      <h2 class="content-h2">추천 첫 강의</h2>
+      <div class="grid grid-3 gap-md" style="margin-bottom:24px;">
+        <div class="card card-hover">
+          <div style="font-size:2rem;margin-bottom:8px;">⚡</div>
+          <h3 style="font-weight:800;font-size:0.95rem;margin-bottom:6px;">바이브코딩 입문</h3>
+          <p style="font-size:0.8rem;color:var(--color-text-muted);margin-bottom:10px;">2시간 · 무료</p>
+          <span class="badge badge-green">강력 추천</span>
+        </div>
+        <div class="card card-hover">
+          <div style="font-size:2rem;margin-bottom:8px;">🤖</div>
+          <h3 style="font-weight:800;font-size:0.95rem;margin-bottom:6px;">Gemini API 기초</h3>
+          <p style="font-size:0.8rem;color:var(--color-text-muted);margin-bottom:10px;">4시간 · 무료</p>
+          <span class="badge badge-orange">인기</span>
+        </div>
+        <div class="card card-hover">
+          <div style="font-size:2rem;margin-bottom:8px;">🗄️</div>
+          <h3 style="font-weight:800;font-size:0.95rem;margin-bottom:6px;">Supabase 입문</h3>
+          <p style="font-size:0.8rem;color:var(--color-text-muted);margin-bottom:10px;">3시간 · 무료</p>
+          <span class="badge badge-primary">기초필수</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 강의 수강 방법 -->
+    <div class="manual-section" id="section-learning">
+      <div class="manual-breadcrumb"><a href="#">매뉴얼</a> › <span>강의 수강 방법</span></div>
+      <h1 class="content-title">📚 강의 수강 방법</h1>
+      <p class="content-lead">AX교육플랫폼의 강의는 영상 + 실습 + AI 튜터의 3박자 학습 방식으로 구성됩니다. 내 속도에 맞춰 언제 어디서나 수강할 수 있습니다.</p>
+
+      <h2 class="content-h2">수강 화면 구성</h2>
+      <div class="screenshot">
+        <div class="screenshot-bar">
+          <div class="screenshot-dot" style="background:#ff5f57;"></div>
+          <div class="screenshot-dot" style="background:#febc2e;"></div>
+          <div class="screenshot-dot" style="background:#28c840;"></div>
+        </div>
+        <div class="screenshot-body">
+          <div class="icon">🎬</div>
+          <div>강의 수강 화면 스크린샷</div>
+          <div style="font-size:0.75rem;">영상 플레이어 · 목차 · AI 튜터 패널 · 노트 기능</div>
+        </div>
+      </div>
+
+      <h2 class="content-h2">학습 기능 안내</h2>
+      <div class="grid grid-2 gap-md">
+        <div class="card">
+          <h3 style="font-weight:700;margin-bottom:8px;">🎬 영상 강의</h3>
+          <p style="font-size:0.875rem;color:var(--color-text-muted);">배속 조절(0.5x~2.0x), 자막, 화질 설정. 북마크로 중요 구간 저장 가능.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:700;margin-bottom:8px;">💻 실습 코드</h3>
+          <p style="font-size:0.875rem;color:var(--color-text-muted);">강의별 실습 코드 다운로드. GitHub 연동으로 나만의 포트폴리오 자동 생성.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:700;margin-bottom:8px;">🤖 AI 튜터</h3>
+          <p style="font-size:0.875rem;color:var(--color-text-muted);">강의 내용 관련 질문을 실시간으로 해결. Gemini API 기반 맞춤 답변 제공.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:700;margin-bottom:8px;">📝 노트</h3>
+          <p style="font-size:0.875rem;color:var(--color-text-muted);">강의 시청 중 실시간 노트 작성. PDF로 내보내기 지원.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2-2. 과제 제출 -->
+    <div class="manual-section" id="section-homework">
+      <div class="manual-breadcrumb"><a href="#">매뉴얼</a> › <span>과제 제출</span></div>
+      <h1 class="content-title">📝 과제 제출</h1>
+      <p class="content-lead">각 강의 모듈 완료 후 실습 과제를 제출합니다. AI가 1차 피드백을 제공하고, 강사가 최종 리뷰를 완료합니다.</p>
+
+      <h2 class="content-h2">과제 제출 방법</h2>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">GitHub 저장소 생성</div>
+            <div class="step-desc">과제 코드를 올릴 GitHub 공개 저장소를 생성합니다. 플랫폼에서 자동 연동 지원.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">코드 작성 및 커밋</div>
+            <div class="step-desc">바이브코딩 방식으로 과제를 완성하고 GitHub에 푸시합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">URL 제출</div>
+            <div class="step-desc">GitHub URL과 배포된 서비스 URL을 과제 제출 폼에 입력합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-title">AI + 강사 리뷰</div>
+            <div class="step-desc">AI가 48시간 내 1차 코드 리뷰, 강사가 72시간 내 최종 피드백을 제공합니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2-3. 프로젝트 -->
+    <div class="manual-section" id="section-project">
+      <div class="manual-breadcrumb"><a href="#">매뉴얼</a> › <span>프로젝트 참여</span></div>
+      <h1 class="content-title">💼 프로젝트 참여</h1>
+      <p class="content-lead">커리큘럼 수료 후 실제 기업 프로젝트에 참여하거나 커뮤니티 팀 프로젝트를 진행할 수 있습니다. 실전 경험이 AX 전문가로 성장하는 가장 빠른 길입니다.</p>
+
+      <div class="tip-box">
+        <span class="tip-icon">💡</span>
+        <div class="tip-text"><strong>프로젝트 참여 자격:</strong> AX Practitioner 인증 이상이면 기업 프로젝트 지원이 가능합니다. 커뮤니티 팀 프로젝트는 누구나 참여 가능합니다.</div>
+      </div>
+    </div>
+
+    <!-- 3. 인증 단계 소개 -->
+    <div class="manual-section" id="section-cert-intro">
+      <div class="manual-breadcrumb"><a href="#">매뉴얼</a> › <span>인증 단계 소개</span></div>
+      <h1 class="content-title">🏅 전문가 인증 단계</h1>
+      <p class="content-lead">AX교육플랫폼은 3단계 전문가 인증 시스템을 운영합니다. 각 단계는 이론 시험 + 실전 포트폴리오로 구성되며, 업계 공신력 있는 자격을 부여합니다.</p>
+
+      <h2 class="content-h2">인증 단계별 요건</h2>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="card" style="border-left:4px solid #2563eb;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+            <span style="font-size:1.8rem;">🎯</span>
+            <div>
+              <h3 style="font-weight:800;">AX Practitioner</h3>
+              <span class="badge badge-blue">입문 → 중급</span>
+            </div>
+          </div>
+          <ul style="font-size:0.875rem;color:var(--color-text-muted);display:flex;flex-direction:column;gap:4px;">
+            <li>✓ 필수 강의 20개 완료</li>
+            <li>✓ 과제 통과율 70% 이상</li>
+            <li>✓ 온라인 객관식 시험 (100점 만점, 70점 이상)</li>
+            <li>✓ 포트폴리오 프로젝트 1개 제출</li>
+          </ul>
+        </div>
+
+        <div class="card" style="border-left:4px solid var(--color-green);">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+            <span style="font-size:1.8rem;">⭐</span>
+            <div>
+              <h3 style="font-weight:800;">AX Expert</h3>
+              <span class="badge badge-green">중급 → 고급</span>
+            </div>
+          </div>
+          <ul style="font-size:0.875rem;color:var(--color-text-muted);display:flex;flex-direction:column;gap:4px;">
+            <li>✓ AX Practitioner 인증 보유</li>
+            <li>✓ 필수 강의 40개 완료</li>
+            <li>✓ 온라인 + 실기 복합 시험</li>
+            <li>✓ 포트폴리오 프로젝트 3개 (실제 배포 필수)</li>
+            <li>✓ 멘토 추천서 1부</li>
+          </ul>
+        </div>
+
+        <div class="card" style="border-left:4px solid var(--color-accent);">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+            <span style="font-size:1.8rem;">🏆</span>
+            <div>
+              <h3 style="font-weight:800;">AX Architect</h3>
+              <span class="badge badge-accent">최고급 전문가</span>
+            </div>
+          </div>
+          <ul style="font-size:0.875rem;color:var(--color-text-muted);display:flex;flex-direction:column;gap:4px;">
+            <li>✓ AX Expert 인증 1년 이상 유지</li>
+            <li>✓ 전 강의 완료</li>
+            <li>✓ 위원회 심층 구술 시험</li>
+            <li>✓ 실제 기업 AX 프로젝트 2건 이상</li>
+            <li>✓ 커뮤니티 기여도 평가 (Q&A 답변 50개 이상)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-2. 시험 응시 -->
+    <div class="manual-section" id="section-exam">
+      <div class="manual-breadcrumb"><a href="#">매뉴얼</a> › <span>시험 응시 방법</span></div>
+      <h1 class="content-title">📋 시험 응시 방법</h1>
+      <p class="content-lead">인증 시험은 온라인으로 진행됩니다. 언제든지 응시 가능하며, 탈락 시 2주 후 재응시 가능합니다.</p>
+
+      <h2 class="content-h2">시험 신청 방법</h2>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">마이페이지 → 인증 탭 이동</div>
+            <div class="step-desc">좌측 대시보드에서 "인증 관리" 메뉴를 클릭합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">응시 자격 확인</div>
+            <div class="step-desc">시스템이 자동으로 응시 자격을 검증합니다. 완료된 강의 수, 과제 통과율을 확인합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">시험 시작</div>
+            <div class="step-desc">객관식 50문항, 90분 제한. 안정적인 인터넷 환경에서 응시하세요.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <span class="tip-icon">⚠️</span>
+        <div class="tip-text"><strong>시험 부정행위 방지:</strong> 시험 중 별도 탭 전환 3회 이상 시 자동 종료됩니다. 신뢰할 수 있는 환경에서 응시하세요.</div>
+      </div>
+    </div>
+
+    <!-- 3-3. 인증서 발급 -->
+    <div class="manual-section" id="section-certificate">
+      <div class="manual-breadcrumb"><a href="#">매뉴얼</a> › <span>인증서 발급</span></div>
+      <h1 class="content-title">🎓 인증서 발급</h1>
+      <p class="content-lead">시험 합격 후 디지털 인증서가 즉시 발급됩니다. 링크드인 공유, PDF 다운로드, 실물 인증서(우편) 신청이 가능합니다.</p>
+
+      <h2 class="content-h2">인증서 활용 방법</h2>
+      <div class="grid grid-2 gap-md">
+        <div class="card">
+          <h3 style="font-weight:700;margin-bottom:8px;">💼 LinkedIn 공유</h3>
+          <p style="font-size:0.875rem;color:var(--color-text-muted);">"LinkedIn에 추가" 버튼으로 프로필 자격증 섹션에 자동 등록.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:700;margin-bottom:8px;">📄 PDF 다운로드</h3>
+          <p style="font-size:0.875rem;color:var(--color-text-muted);">A4 고품질 PDF. 입사지원서, 제안서 첨부용.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:700;margin-bottom:8px;">🔗 검증 URL</h3>
+          <p style="font-size:0.875rem;color:var(--color-text-muted);">각 인증서에 고유 URL 부여. QR 코드로 위변조 검증 가능.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:700;margin-bottom:8px;">📮 실물 인증서</h3>
+          <p style="font-size:0.875rem;color:var(--color-text-muted);">AX Expert 이상 신청 가능. 제작비 15,000원, 배송 3-5일.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. AI 튜터 소개 -->
+    <div class="manual-section" id="section-ai-tutor">
+      <div class="manual-breadcrumb"><a href="#">매뉴얼</a> › <span>AI 튜터 소개</span></div>
+      <h1 class="content-title">🤖 AI 튜터 소개</h1>
+      <p class="content-lead">AX교육플랫폼의 AI 튜터는 Google Gemini 1.5 Pro를 기반으로 합니다. 강의 내용을 깊이 이해하고, 학습자의 수준에 맞춘 개인화 답변을 제공합니다.</p>
+
+      <h2 class="content-h2">AI 튜터 주요 기능</h2>
+      <div class="grid grid-2 gap-md" style="margin-bottom:24px;">
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-accent">🎯</div>
+          <h3 style="font-weight:700;margin-bottom:8px;">강의 맞춤 질의응답</h3>
+          <p style="font-size:0.875rem;color:var(--color-text-muted);">현재 수강 중인 강의 내용을 기반으로 정확한 답변 제공.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-green">💻</div>
+          <h3 style="font-weight:700;margin-bottom:8px;">코드 리뷰 & 디버깅</h3>
+          <p style="font-size:0.875rem;color:var(--color-text-muted);">코드를 붙여넣으면 오류 원인과 수정 방법을 상세히 설명.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-primary">📚</div>
+          <h3 style="font-weight:700;margin-bottom:8px;">개념 설명 & 예시</h3>
+          <p style="font-size:0.875rem;color:var(--color-text-muted);">어려운 개념을 초보자도 이해할 수 있는 예시로 설명.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-accent">🗺️</div>
+          <h3 style="font-weight:700;margin-bottom:8px;">학습 경로 추천</h3>
+          <p style="font-size:0.875rem;color:var(--color-text-muted);">현재 수준과 목표에 맞는 다음 학습 단계를 안내.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4-2. 효과적인 질문 방법 -->
+    <div class="manual-section" id="section-good-question">
+      <div class="manual-breadcrumb"><a href="#">매뉴얼</a> › <span>효과적인 질문 방법</span></div>
+      <h1 class="content-title">💡 효과적인 질문 방법</h1>
+      <p class="content-lead">AI 튜터에게 더 정확하고 유용한 답변을 얻으려면 질문을 구체적으로 작성하는 것이 중요합니다. 아래 가이드를 참고하세요.</p>
+
+      <h2 class="content-h2">좋은 질문 vs 나쁜 질문</h2>
+      <div class="grid grid-2 gap-md" style="margin-bottom:24px;">
+        <div class="card" style="border-left:4px solid #EF4444;">
+          <h3 style="color:#EF4444;font-weight:700;margin-bottom:10px;">❌ 이렇게 하지 마세요</h3>
+          <div style="background:var(--color-bg);padding:12px;border-radius:6px;font-size:0.85rem;font-family:monospace;">"코드가 안 돼요. 왜인가요?"</div>
+          <p style="font-size:0.8rem;color:var(--color-text-muted);margin-top:8px;">어떤 코드인지, 어떤 오류인지, 무엇을 시도했는지 정보가 없어 도움이 어렵습니다.</p>
+        </div>
+        <div class="card" style="border-left:4px solid var(--color-green);">
+          <h3 style="color:var(--color-green);font-weight:700;margin-bottom:10px;">✅ 이렇게 질문하세요</h3>
+          <div style="background:var(--color-bg);padding:12px;border-radius:6px;font-size:0.85rem;font-family:monospace;">"Supabase에서 insert 후 바로 select 해도 데이터가 안 나옵니다. 코드: [코드] 오류: [오류메시지]"</div>
+          <p style="font-size:0.8rem;color:var(--color-text-muted);margin-top:8px;">구체적인 상황, 코드, 오류 메시지를 포함하면 정확한 답변을 받을 수 있습니다.</p>
+        </div>
+      </div>
+
+      <h2 class="content-h2">질문 템플릿</h2>
+      <div style="background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:20px;font-family:monospace;font-size:0.875rem;line-height:1.8;">
+        <div style="color:var(--color-text-muted);">## 상황</div>
+        [무엇을 만들려고 하는지 간략히 설명]<br><br>
+        <div style="color:var(--color-text-muted);">## 문제</div>
+        [어떤 문제가 발생했는지]<br><br>
+        <div style="color:var(--color-text-muted);">## 시도한 것</div>
+        [어떤 해결책을 시도했는지]<br><br>
+        <div style="color:var(--color-text-muted);">## 코드</div>
+        ```javascript<br>
+        [관련 코드]<br>
+        ```<br><br>
+        <div style="color:var(--color-text-muted);">## 오류 메시지</div>
+        [오류 메시지 전문]
+      </div>
+    </div>
+
+    <!-- 5. 강의 개설 방법 -->
+    <div class="manual-section" id="section-instructor">
+      <div class="manual-breadcrumb"><a href="#">매뉴얼</a> › <span>강의 개설 방법</span></div>
+      <h1 class="content-title">🎤 강의 개설 방법</h1>
+      <p class="content-lead">AX Expert 이상의 인증을 보유하면 강의를 개설하고 수익을 창출할 수 있습니다. 플랫폼이 결제, 관리, 마케팅을 모두 지원합니다.</p>
+
+      <h2 class="content-h2">강사 등록 요건</h2>
+      <div class="tip-box">
+        <span class="tip-icon">📋</span>
+        <div class="tip-text">
+          <strong>최소 요건:</strong> AX Expert 인증 · 실무 경험 2년 이상 · 샘플 강의 영상 (10분) · 강사 소개서 제출
+        </div>
+      </div>
+
+      <h2 class="content-h2">수익 구조</h2>
+      <div class="grid grid-3 gap-md">
+        <div class="stat-card">
+          <div class="stat-value">70%</div>
+          <div class="stat-label">강사 수익 분배율</div>
+          <div class="stat-change up">플랫폼 평균의 1.4배</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">월 정산</div>
+          <div class="stat-label">정산 주기</div>
+          <div class="stat-change" style="color:var(--color-text-muted);">매월 15일 지급</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">10만원</div>
+          <div class="stat-label">강사 평균 월 수익</div>
+          <div class="stat-change up">최고 월 800만원</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5-2. 멘토링 -->
+    <div class="manual-section" id="section-mentoring">
+      <div class="manual-breadcrumb"><a href="#">매뉴얼</a> › <span>프로젝트 멘토링</span></div>
+      <h1 class="content-title">🤝 프로젝트 멘토링</h1>
+      <p class="content-lead">커뮤니티 프로젝트 또는 기업 AX 프로젝트에서 멘토로 참여할 수 있습니다. 전문 지식을 나누고, 멘토링 수수료를 받으세요.</p>
+
+      <h2 class="content-h2">멘토링 방식</h2>
+      <div class="grid grid-2 gap-md">
+        <div class="card">
+          <h3 style="font-weight:700;margin-bottom:8px;">🗓️ 1:1 정기 세션</h3>
+          <p style="font-size:0.875rem;color:var(--color-text-muted);">주 1-2회, 화상 미팅. 멘티의 학습/프로젝트를 체계적으로 가이드.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:700;margin-bottom:8px;">💬 비동기 리뷰</h3>
+          <p style="font-size:0.875rem;color:var(--color-text-muted);">코드 리뷰, 문서 리뷰를 텍스트/영상 피드백으로 제공.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. 기업 서비스 -->
+    <div class="manual-section" id="section-enterprise-guide">
+      <div class="manual-breadcrumb"><a href="#">매뉴얼</a> › <span>프로젝트 의뢰</span></div>
+      <h1 class="content-title">🏢 기업 프로젝트 의뢰</h1>
+      <p class="content-lead">AX교육플랫폼을 통해 검증된 AI 전문가와 협업하세요. 의뢰부터 완료까지 전담 PM이 관리합니다.</p>
+
+      <h2 class="content-h2">의뢰 방법</h2>
+      <a href="./enterprise.html" class="btn btn-primary btn-lg">
+        기업 서비스 페이지로 이동 →
+      </a>
+
+      <h2 class="content-h2">FAQ</h2>
+      <div style="margin-top:16px;">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">최소 프로젝트 예산이 얼마인가요? <span class="faq-arrow">▼</span></div>
+          <div class="faq-answer">최소 300만원부터 의뢰 가능합니다. 자동화 프로젝트의 경우 더 저렴하게 진행될 수 있으며, 구체적인 요구사항에 따라 견적이 달라집니다.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">프리랜서와의 차이점은 무엇인가요? <span class="faq-arrow">▼</span></div>
+          <div class="faq-answer">모든 전문가는 AX 인증 보유자로, 역량이 검증되어 있습니다. 또한 전담 PM이 품질을 관리하고, 결과물 미달 시 환불 또는 재작업을 보장합니다. 프리랜서 플랫폼과 달리 AX 특화 전문가만 등록되어 있습니다.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">NDA (비밀유지계약)는 어떻게 처리되나요? <span class="faq-arrow">▼</span></div>
+          <div class="faq-answer">모든 프로젝트에 표준 NDA가 자동으로 체결됩니다. 추가 보안 조항이 필요하시면 계약 전 요청하시면 됩니다. 전자 서명으로 빠르게 처리됩니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6-2. 매칭 프로세스 -->
+    <div class="manual-section" id="section-matching">
+      <div class="manual-breadcrumb"><a href="#">매뉴얼</a> › <span>전문가 매칭 프로세스</span></div>
+      <h1 class="content-title">🔗 전문가 매칭 프로세스</h1>
+      <p class="content-lead">AI 기반 매칭 시스템이 247명의 전문가 중 귀사 프로젝트에 가장 적합한 3명을 24시간 내에 추천합니다.</p>
+
+      <h2 class="content-h2">매칭 알고리즘</h2>
+      <p class="content-p">다음 요소를 종합적으로 분석하여 매칭 점수를 산출합니다:</p>
+      <div class="grid grid-2 gap-md">
+        <div class="card"><strong>🔧 기술 스택 일치도</strong><p style="font-size:0.875rem;color:var(--color-text-muted);margin-top:6px;">요청 기술과 전문가 보유 기술 매칭률</p></div>
+        <div class="card"><strong>🏭 도메인 경험</strong><p style="font-size:0.875rem;color:var(--color-text-muted);margin-top:6px;">동일 산업 프로젝트 수행 경험</p></div>
+        <div class="card"><strong>📅 가용 일정</strong><p style="font-size:0.875rem;color:var(--color-text-muted);margin-top:6px;">프로젝트 기간 내 가용 가능 여부</p></div>
+        <div class="card"><strong>⭐ 고객 평점</strong><p style="font-size:0.875rem;color:var(--color-text-muted);margin-top:6px;">이전 프로젝트 고객 만족도</p></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Help Button (redundant on manual page — links to top) -->
+<button class="help-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="맨 위로">↑</button>
+
+<!-- Toast -->
+<div id="toast-container"></div>
+
+<script src="../js/theme.js"></script>
+<script>
+
+function showSection(id) {
+  // Hide all sections
+  document.querySelectorAll('.manual-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+  // Show target
+  const section = document.getElementById('section-' + id);
+  if (section) {
+    section.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Highlight nav item
+  document.querySelectorAll('.nav-item').forEach(item => {
+    if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(`'${id}'`)) {
+      item.classList.add('active');
+    }
+  });
+
+  // Sync mobile select
+  const select = document.querySelector('.manual-mobile-select');
+  if (select) select.value = id;
+}
+
+function toggleFaq(el) {
+  el.classList.toggle('open');
+}
+
+function searchManual(query) {
+  if (!query.trim()) return;
+
+  const sections = [
+    { id: 'intro', keywords: ['소개', '플랫폼', 'AX', '시작'] },
+    { id: 'signup', keywords: ['회원가입', '로그인', '가입', '이메일', '인증'] },
+    { id: 'first-course', keywords: ['첫 강의', '시작', '무료', '입문'] },
+    { id: 'learning', keywords: ['강의', '수강', '학습', '영상', '배속'] },
+    { id: 'homework', keywords: ['과제', '제출', 'github', '리뷰'] },
+    { id: 'project', keywords: ['프로젝트', '참여', '실전'] },
+    { id: 'cert-intro', keywords: ['인증', 'practitioner', 'expert', 'architect', '자격'] },
+    { id: 'exam', keywords: ['시험', '응시', '합격', '점수'] },
+    { id: 'certificate', keywords: ['인증서', '발급', 'linkedin', 'pdf'] },
+    { id: 'ai-tutor', keywords: ['ai튜터', 'ai 튜터', '튜터', 'gemini', '질문'] },
+    { id: 'good-question', keywords: ['질문', '방법', '효과적', '템플릿'] },
+    { id: 'instructor', keywords: ['강사', '강의개설', '수익', '등록'] },
+    { id: 'mentoring', keywords: ['멘토링', '멘토', '세션'] },
+    { id: 'enterprise-guide', keywords: ['기업', '의뢰', '서비스', '비용'] },
+    { id: 'matching', keywords: ['매칭', '전문가', '알고리즘'] }
+  ];
+
+  const q = query.toLowerCase();
+  const matched = sections.find(s => s.keywords.some(k => k.includes(q)));
+
+  if (matched) {
+    showSection(matched.id);
+    Toast.info(`"${query}" 관련 섹션으로 이동했습니다.`);
+  } else {
+    Toast.warning('검색 결과가 없습니다. 다른 키워드를 시도해보세요.');
+  }
+}
+
+// Handle hash navigation
+window.addEventListener('load', () => {
+  const hash = window.location.hash.replace('#', '');
+  if (hash) showSection(hash);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AX 프로젝트 마켓플레이스 | AX교육플랫폼</title>
+  <meta name="description" content="실무 AX 프로젝트에 참여하세요. 기업과 전문가를 연결하는 프로젝트 마켓플레이스.">
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <script>/* FOUC 방지 */const _t=localStorage.getItem('ax-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:   #0A2540;
+      --accent:    #FF6B35;
+      --green:     #00C896;
+      --gray-50:   #F8FAFC;
+      --gray-100:  #F1F5F9;
+      --gray-200:  #E2E8F0;
+      --gray-400:  #94A3B8;
+      --gray-600:  #475569;
+      --gray-800:  #1E293B;
+      --white:     #FFFFFF;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 1px 3px rgba(10,37,64,.08);
+      --shadow-md: 0 4px 16px rgba(10,37,64,.12);
+      --shadow-lg: 0 8px 32px rgba(10,37,64,.16);
+      --font-sans: 'Inter', 'Noto Sans KR', sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --primary:  #4a90d9;
+      --white:    #1e293b;
+      --gray-50:  #0f172a;
+      --gray-100: #1e293b;
+      --gray-200: #334155;
+      --gray-400: #64748b;
+      --gray-600: #94a3b8;
+      --gray-800: #f1f5f9;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.5);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.6);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--gray-800);
+      background: var(--gray-50);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: var(--font-sans); }
+    img { display: block; max-width: 100%; }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .navbar__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--primary);
+    }
+
+    .navbar__logo-icon {
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(135deg, var(--primary), #1a4a7a);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .navbar__nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .navbar__nav a {
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: .875rem;
+      font-weight: 500;
+      color: var(--gray-600);
+      transition: background .15s, color .15s;
+    }
+
+    .navbar__nav a:hover,
+    .navbar__nav a.active {
+      background: var(--gray-100);
+      color: var(--primary);
+    }
+
+    .navbar__nav a.active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .navbar__actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: var(--radius-sm);
+      font-size: .875rem;
+      font-weight: 600;
+      border: none;
+      transition: all .18s;
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--gray-600);
+      border: 1.5px solid var(--gray-200);
+    }
+
+    .btn--ghost:hover { background: var(--gray-100); color: var(--primary); }
+
+    .btn--primary {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .btn--primary:hover {
+      background: #e85a22;
+      box-shadow: 0 4px 12px rgba(255,107,53,.35);
+      transform: translateY(-1px);
+    }
+
+    .btn--outline-primary {
+      background: transparent;
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+    }
+
+    .btn--outline-primary:hover {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .btn--green {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .btn--green:hover {
+      background: #00a87e;
+      transform: translateY(-1px);
+    }
+
+    .btn--gray {
+      background: var(--gray-200);
+      color: var(--gray-600);
+    }
+
+    .btn--gray:hover { background: var(--gray-400); color: var(--white); }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #1a4a7a 60%, #0d3560 100%);
+      color: var(--white);
+      padding: 72px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 120%, rgba(255,107,53,.18) 0%, transparent 60%);
+    }
+
+    .hero__inner {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,107,53,.2);
+      border: 1px solid rgba(255,107,53,.4);
+      color: #FFB399;
+      font-size: .8rem;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .hero__title {
+      font-size: clamp(1.75rem, 4vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      letter-spacing: -.02em;
+    }
+
+    .hero__title span { color: var(--accent); }
+
+    .hero__subtitle {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,.75);
+      max-width: 520px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+
+    .hero__cta {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero__cta .btn {
+      padding: 12px 24px;
+      font-size: .95rem;
+    }
+
+    /* ── Stats Bar ── */
+    .stats-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0 24px;
+    }
+
+    .stats-bar__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      divide-x: 1px solid var(--gray-200);
+    }
+
+    .stat-item {
+      padding: 20px 16px;
+      text-align: center;
+      border-right: 1px solid var(--gray-200);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-item__value {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-item__value.accent { color: var(--accent); }
+    .stat-item__value.green  { color: var(--green); }
+
+    .stat-item__label {
+      font-size: .8rem;
+      color: var(--gray-400);
+      font-weight: 500;
+    }
+
+    /* ── Main Content ── */
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ── Filter Tabs ── */
+    .filter-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--gray-100);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      width: fit-content;
+      margin-bottom: 20px;
+    }
+
+    .filter-tab {
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: .875rem;
+      font-weight: 600;
+      border: none;
+      background: transparent;
+      color: var(--gray-600);
+      transition: all .18s;
+      position: relative;
+    }
+
+    .filter-tab .tab-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      background: var(--gray-200);
+      color: var(--gray-600);
+      border-radius: 100px;
+      font-size: .7rem;
+      font-weight: 700;
+      margin-left: 6px;
+      transition: all .18s;
+    }
+
+    .filter-tab.active {
+      background: var(--white);
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .filter-tab.active .tab-count {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .filter-tab:hover:not(.active) {
+      background: rgba(255,255,255,.6);
+      color: var(--primary);
+    }
+
+    /* ── Category Pills ── */
+    .category-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .category-pill {
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: .8rem;
+      font-weight: 600;
+      border: 1.5px solid var(--gray-200);
+      background: var(--white);
+      color: var(--gray-600);
+      transition: all .18s;
+    }
+
+    .category-pill.active,
+    .category-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(255,107,53,.06);
+    }
+
+    /* ── Projects Grid ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+
+    @media (max-width: 960px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .projects-grid { grid-template-columns: 1fr; } }
+
+    /* ── Project Card ── */
+    .project-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow .2s, transform .2s;
+    }
+
+    .project-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+    }
+
+    .project-card--faded { opacity: .5; pointer-events: none; }
+
+    .project-card__header {
+      padding: 20px 20px 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .project-card__badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    /* Status badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+    }
+
+    .badge--recruiting {
+      background: rgba(0,200,150,.12);
+      color: #007a5a;
+      border: 1px solid rgba(0,200,150,.3);
+    }
+
+    .badge--recruiting::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .badge--in-progress {
+      background: rgba(255,107,53,.12);
+      color: #c44a0f;
+      border: 1px solid rgba(255,107,53,.3);
+    }
+
+    .badge--in-progress::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .badge--completed {
+      background: var(--gray-100);
+      color: var(--gray-400);
+      border: 1px solid var(--gray-200);
+    }
+
+    .badge--category {
+      background: rgba(10,37,64,.06);
+      color: var(--primary);
+      border: 1px solid rgba(10,37,64,.12);
+    }
+
+    .project-card__bookmark {
+      background: none;
+      border: none;
+      color: var(--gray-400);
+      font-size: 1.1rem;
+      transition: color .15s;
+      padding: 2px;
+      line-height: 1;
+    }
+
+    .project-card__bookmark:hover { color: var(--accent); }
+
+    .project-card__body {
+      padding: 14px 20px 0;
+      flex: 1;
+    }
+
+    .project-card__title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+
+    .project-card__desc {
+      font-size: .845rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Stack tags */
+    .stack-tags {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .stack-tag {
+      padding: 3px 9px;
+      background: var(--gray-100);
+      color: var(--gray-600);
+      border-radius: 4px;
+      font-size: .75rem;
+      font-weight: 600;
+      font-family: 'Inter', monospace;
+    }
+
+    /* Team progress */
+    .team-progress {
+      margin-bottom: 14px;
+    }
+
+    .team-progress__label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .8rem;
+      color: var(--gray-600);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .team-progress__label strong {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: var(--gray-200);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .progress-bar__fill {
+      height: 100%;
+      border-radius: 100px;
+      transition: width .4s ease;
+    }
+
+    .progress-bar__fill--recruiting { background: var(--green); }
+    .progress-bar__fill--full       { background: var(--accent); }
+    .progress-bar__fill--completed  { background: var(--gray-400); }
+
+    /* Meta row */
+    .project-meta {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: .78rem;
+      color: var(--gray-500, #64748b);
+    }
+
+    .meta-item__icon { font-size: .85rem; }
+
+    .difficulty {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: .72rem;
+      font-weight: 700;
+    }
+
+    .difficulty--mid  { background: rgba(255,193,7,.15); color: #b45309; }
+    .difficulty--high { background: rgba(239,68,68,.12); color: #b91c1c; }
+
+    /* Card footer */
+    .project-card__footer {
+      padding: 14px 20px 18px;
+      border-top: 1px solid var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .leader-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .leader-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), #1a4a7a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: .7rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .leader-name {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .leader-rating {
+      font-size: .75rem;
+      color: var(--gray-400);
+    }
+
+    .card-action-btn {
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: .82rem;
+      font-weight: 700;
+      border: none;
+      transition: all .18s;
+      white-space: nowrap;
+    }
+
+    .card-action-btn--apply {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .card-action-btn--apply:hover {
+      background: #e85a22;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(255,107,53,.3);
+    }
+
+    .card-action-btn--view {
+      background: rgba(10,37,64,.08);
+      color: var(--primary);
+    }
+
+    .card-action-btn--view:hover {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .card-action-btn--case {
+      background: transparent;
+      color: var(--gray-400);
+      border: 1.5px solid var(--gray-200);
+    }
+
+    .card-action-btn--case:hover {
+      border-color: var(--gray-400);
+      color: var(--gray-600);
+    }
+
+    /* ── Propose CTA Section ── */
+    .propose-section {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 48px 40px;
+      margin-bottom: 64px;
+    }
+
+    .propose-section__header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .propose-section__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,107,53,.1);
+      color: var(--accent);
+      font-size: .8rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+      letter-spacing: .04em;
+    }
+
+    .propose-section__title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .propose-section__subtitle {
+      font-size: .95rem;
+      color: var(--gray-600);
+    }
+
+    .propose-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) { .propose-form { grid-template-columns: 1fr; } }
+
+    .propose-form .form-group--full { grid-column: 1 / -1; }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 10px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-size: .88rem;
+      font-family: var(--font-sans);
+      color: var(--gray-800);
+      background: var(--white);
+      transition: border-color .15s, box-shadow .15s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255,107,53,.12);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 90px; }
+
+    .propose-form__footer {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 8px;
+    }
+
+    .propose-form__footer .btn { padding: 12px 32px; font-size: .95rem; }
+
+    /* ── How It Works ── */
+    .how-section {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .how-section__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,200,150,.1);
+      color: #007a5a;
+      font-size: .8rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+      letter-spacing: .04em;
+    }
+
+    .how-section__title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .how-section__sub {
+      font-size: .9rem;
+      color: var(--gray-400);
+      margin-bottom: 40px;
+    }
+
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+      .how-steps { grid-template-columns: 1fr; gap: 24px; }
+      .how-step__arrow { display: none; }
+    }
+
+    .how-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 24px;
+      position: relative;
+    }
+
+    .how-step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-60%);
+      font-size: 1.5rem;
+      color: var(--gray-200);
+      z-index: 1;
+    }
+
+    .how-step__number {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .how-step__number--1 { background: linear-gradient(135deg, var(--accent), #ff8c5a); color: var(--white); }
+    .how-step__number--2 { background: linear-gradient(135deg, var(--primary), #1a4a7a); color: var(--white); }
+    .how-step__number--3 { background: linear-gradient(135deg, var(--green), #00a87e); color: var(--white); }
+
+    .how-step__label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 8px;
+    }
+
+    .how-step__title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+
+    .how-step__desc {
+      font-size: .83rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--primary);
+      color: var(--white);
+      padding: 14px 22px;
+      border-radius: var(--radius-md);
+      font-size: .88rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(120px);
+      opacity: 0;
+      transition: all .35s cubic-bezier(.4,0,.2,1);
+      z-index: 9999;
+      max-width: 340px;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast__icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      flex-shrink: 0;
+    }
+
+    /* ── No results ── */
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray-400);
+    }
+
+    .no-results__icon { font-size: 3rem; margin-bottom: 12px; }
+    .no-results__text { font-size: 1rem; font-weight: 600; }
+    .no-results__sub  { font-size: .85rem; margin-top: 6px; }
+
+    /* ── Section divider ── */
+    .section-divider {
+      height: 1px;
+      background: var(--gray-200);
+      margin-bottom: 64px;
+    }
+
+    /* ── Responsive navbar ── */
+    @media (max-width: 768px) {
+      .navbar__nav { display: none; }
+      .stats-bar__inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════════ -->
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__logo">
+      <div class="navbar__logo-icon">AX</div>
+      AX교육플랫폼
+    </a>
+
+    <div class="navbar__nav">
+      <a href="../index.html">홈</a>
+      <a href="courses.html">과정</a>
+      <a href="projects.html" class="active">프로젝트</a>
+      <a href="community.html">커뮤니티</a>
+      <a href="mentors.html">멘토</a>
+      <a href="dashboard.html">대시보드</a>
+    </div>
+
+    <div class="navbar__actions">
+      <button class="btn btn--ghost">로그인</button>
+      <button class="btn btn--primary">무료 시작</button>
+    </div>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero__inner">
+      <div class="hero__badge">🚀 AX Project Marketplace</div>
+      <h1 class="hero__title">
+        실전 <span>AX 프로젝트</span>에<br />참여하세요
+      </h1>
+      <p class="hero__subtitle">
+        학습한 AI 기술로 실제 비즈니스 문제를 해결하고<br />
+        포트폴리오를 쌓으세요
+      </p>
+      <div class="hero__cta">
+        <button class="btn btn--primary" onclick="document.getElementById('propose').scrollIntoView({behavior:'smooth'})">
+          ✦ 프로젝트 제안하기
+        </button>
+        <button class="btn btn--ghost" style="color:#fff; border-color:rgba(255,255,255,.35);"
+                onclick="document.getElementById('projects-grid').scrollIntoView({behavior:'smooth'})">
+          프로젝트 탐색 →
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       STATS BAR
+  ══════════════════════════════════════════ -->
+  <div class="stats-bar">
+    <div class="stats-bar__inner">
+      <div class="stat-item">
+        <div class="stat-item__value accent">42개</div>
+        <div class="stat-item__label">진행 중 프로젝트</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-item__value">186개</div>
+        <div class="stat-item__label">완료된 프로젝트</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-item__value green">1,247명</div>
+        <div class="stat-item__label">참여 인원</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-item__value">6주</div>
+        <div class="stat-item__label">평균 프로젝트 기간</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       MAIN CONTENT
+  ══════════════════════════════════════════ -->
+  <main class="main">
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs" id="filter-tabs" role="tablist">
+      <button class="filter-tab active" data-tab="all" role="tab" aria-selected="true">
+        전체 <span class="tab-count">6</span>
+      </button>
+      <button class="filter-tab" data-tab="recruiting" role="tab">
+        모집 중 <span class="tab-count">3</span>
+      </button>
+      <button class="filter-tab" data-tab="in-progress" role="tab">
+        진행 중 <span class="tab-count">2</span>
+      </button>
+      <button class="filter-tab" data-tab="completed" role="tab">
+        완료 <span class="tab-count">1</span>
+      </button>
+    </div>
+
+    <!-- Category Pills -->
+    <div class="category-pills" id="category-pills">
+      <button class="category-pill active" data-cat="all">전체</button>
+      <button class="category-pill" data-cat="ai-chatbot">AI 챗봇</button>
+      <button class="category-pill" data-cat="data">데이터 분석</button>
+      <button class="category-pill" data-cat="automation">자동화</button>
+      <button class="category-pill" data-cat="platform">플랫폼 구축</button>
+      <button class="category-pill" data-cat="consulting">컨설팅</button>
+    </div>
+
+
+    <!-- ── Projects Grid ── -->
+    <div class="projects-grid" id="projects-grid">
+
+      <!-- Card 1: 소상공인 AI 마케팅 도우미 -->
+      <article class="project-card" data-status="recruiting" data-cat="ai-chatbot">
+        <div class="project-card__header">
+          <div class="project-card__badges">
+            <span class="badge badge--recruiting">모집 중</span>
+            <span class="badge badge--category">AI 챗봇</span>
+          </div>
+          <button class="project-card__bookmark" title="북마크">♡</button>
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">소상공인 AI 마케팅 도우미</h3>
+          <p class="project-card__desc">소상공인을 위한 SNS 콘텐츠 자동 생성 및 고객 응대 챗봇 개발</p>
+          <div class="stack-tags">
+            <span class="stack-tag">Claude API</span>
+            <span class="stack-tag">React</span>
+            <span class="stack-tag">Supabase</span>
+          </div>
+          <div class="team-progress">
+            <div class="team-progress__label">
+              <span>팀 구성</span>
+              <strong>2 / 4명</strong>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar__fill progress-bar__fill--recruiting" style="width: 50%"></div>
+            </div>
+          </div>
+          <div class="project-meta">
+            <span class="meta-item">
+              <span class="meta-item__icon">🗓</span> 8주
+            </span>
+            <span class="meta-item">
+              <span class="difficulty difficulty--mid">⚡ 중급</span>
+            </span>
+          </div>
+        </div>
+        <div class="project-card__footer">
+          <div class="leader-info">
+            <div class="leader-avatar">이</div>
+            <div>
+              <div class="leader-name">이프로</div>
+              <div class="leader-rating">⭐ 4.8</div>
+            </div>
+          </div>
+          <button class="card-action-btn card-action-btn--apply">지원하기</button>
+        </div>
+      </article>
+
+
+      <!-- Card 2: 의료 데이터 AI 분석 플랫폼 -->
+      <article class="project-card" data-status="recruiting" data-cat="data">
+        <div class="project-card__header">
+          <div class="project-card__badges">
+            <span class="badge badge--recruiting">모집 중</span>
+            <span class="badge badge--category">데이터 분석</span>
+          </div>
+          <button class="project-card__bookmark" title="북마크">♡</button>
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">의료 데이터 AI 분석 플랫폼</h3>
+          <p class="project-card__desc">병원 진단 데이터를 AI로 분석하여 패턴을 발견하고 의사 결정을 지원하는 플랫폼 구축</p>
+          <div class="stack-tags">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">Gemini API</span>
+            <span class="stack-tag">Tableau</span>
+          </div>
+          <div class="team-progress">
+            <div class="team-progress__label">
+              <span>팀 구성</span>
+              <strong>3 / 5명</strong>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar__fill progress-bar__fill--recruiting" style="width: 60%"></div>
+            </div>
+          </div>
+          <div class="project-meta">
+            <span class="meta-item">
+              <span class="meta-item__icon">🗓</span> 12주
+            </span>
+            <span class="meta-item">
+              <span class="difficulty difficulty--high">🔥 고급</span>
+            </span>
+          </div>
+        </div>
+        <div class="project-card__footer">
+          <div class="leader-info">
+            <div class="leader-avatar">박</div>
+            <div>
+              <div class="leader-name">박닥터</div>
+              <div class="leader-rating">⭐ 4.9</div>
+            </div>
+          </div>
+          <button class="card-action-btn card-action-btn--apply">지원하기</button>
+        </div>
+      </article>
+
+
+      <!-- Card 3: 법무법인 문서 자동화 -->
+      <article class="project-card" data-status="in-progress" data-cat="automation">
+        <div class="project-card__header">
+          <div class="project-card__badges">
+            <span class="badge badge--in-progress">진행 중</span>
+            <span class="badge badge--category">자동화</span>
+          </div>
+          <button class="project-card__bookmark" title="북마크">♡</button>
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">법무법인 문서 자동화 시스템</h3>
+          <p class="project-card__desc">반복적인 법무 문서 작성을 AI로 자동화하고 검토 프로세스를 간소화하는 시스템</p>
+          <div class="stack-tags">
+            <span class="stack-tag">Claude API</span>
+            <span class="stack-tag">Node.js</span>
+            <span class="stack-tag">PostgreSQL</span>
+          </div>
+          <div class="team-progress">
+            <div class="team-progress__label">
+              <span>팀 구성</span>
+              <strong>4 / 4명 완료</strong>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar__fill progress-bar__fill--full" style="width: 100%"></div>
+            </div>
+          </div>
+          <div class="project-meta">
+            <span class="meta-item">
+              <span class="meta-item__icon">🗓</span> 6주 (3주 진행 중)
+            </span>
+          </div>
+        </div>
+        <div class="project-card__footer">
+          <div class="leader-info">
+            <div class="leader-avatar">김</div>
+            <div>
+              <div class="leader-name">김변호</div>
+              <div class="leader-rating">⭐ 4.7</div>
+            </div>
+          </div>
+          <button class="card-action-btn card-action-btn--view">참관 신청</button>
+        </div>
+      </article>
+
+
+      <!-- Card 4: 스타트업 AX 전략 컨설팅 -->
+      <article class="project-card" data-status="recruiting" data-cat="consulting">
+        <div class="project-card__header">
+          <div class="project-card__badges">
+            <span class="badge badge--recruiting">모집 중</span>
+            <span class="badge badge--category">컨설팅</span>
+          </div>
+          <button class="project-card__bookmark" title="북마크">♡</button>
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">스타트업 AX 전략 컨설팅</h3>
+          <p class="project-card__desc">초기 스타트업의 AI 전환 전략을 수립하고 실행 로드맵을 제시하는 컨설팅 프로젝트</p>
+          <div class="stack-tags">
+            <span class="stack-tag">분석 프레임워크</span>
+            <span class="stack-tag">발표 도구</span>
+          </div>
+          <div class="team-progress">
+            <div class="team-progress__label">
+              <span>팀 구성</span>
+              <strong>1 / 3명</strong>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar__fill progress-bar__fill--recruiting" style="width: 33%"></div>
+            </div>
+          </div>
+          <div class="project-meta">
+            <span class="meta-item">
+              <span class="meta-item__icon">🗓</span> 4주
+            </span>
+            <span class="meta-item">
+              <span class="difficulty difficulty--mid">⚡ 중급</span>
+            </span>
+          </div>
+        </div>
+        <div class="project-card__footer">
+          <div class="leader-info">
+            <div class="leader-avatar">최</div>
+            <div>
+              <div class="leader-name">최전략</div>
+              <div class="leader-rating">⭐ 4.6</div>
+            </div>
+          </div>
+          <button class="card-action-btn card-action-btn--apply">지원하기</button>
+        </div>
+      </article>
+
+
+      <!-- Card 5: 온라인 교육 플랫폼 AI 튜터 -->
+      <article class="project-card" data-status="in-progress" data-cat="platform">
+        <div class="project-card__header">
+          <div class="project-card__badges">
+            <span class="badge badge--in-progress">진행 중</span>
+            <span class="badge badge--category">플랫폼 구축</span>
+          </div>
+          <button class="project-card__bookmark" title="북마크">♡</button>
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">온라인 교육 플랫폼 AI 튜터</h3>
+          <p class="project-card__desc">학습자 개인별 수준에 맞는 AI 튜터 시스템을 교육 플랫폼에 통합하는 프로젝트</p>
+          <div class="stack-tags">
+            <span class="stack-tag">Gemini API</span>
+            <span class="stack-tag">Vue.js</span>
+            <span class="stack-tag">Firebase</span>
+          </div>
+          <div class="team-progress">
+            <div class="team-progress__label">
+              <span>팀 구성</span>
+              <strong>6 / 6명 완료</strong>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar__fill progress-bar__fill--full" style="width: 100%"></div>
+            </div>
+          </div>
+          <div class="project-meta">
+            <span class="meta-item">
+              <span class="meta-item__icon">🗓</span> 10주 (7주 진행 중)
+            </span>
+          </div>
+        </div>
+        <div class="project-card__footer">
+          <div class="leader-info">
+            <div class="leader-avatar">정</div>
+            <div>
+              <div class="leader-name">정에듀</div>
+              <div class="leader-rating">⭐ 4.9</div>
+            </div>
+          </div>
+          <button class="card-action-btn card-action-btn--view">참관 신청</button>
+        </div>
+      </article>
+
+
+      <!-- Card 6: 커머스 AI 추천 엔진 -->
+      <article class="project-card" data-status="completed" data-cat="ai-chatbot">
+        <div class="project-card__header">
+          <div class="project-card__badges">
+            <span class="badge badge--completed">완료</span>
+            <span class="badge badge--category">AI 챗봇</span>
+          </div>
+          <button class="project-card__bookmark" title="북마크">♡</button>
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">커머스 AI 추천 엔진</h3>
+          <p class="project-card__desc">이커머스 플랫폼의 사용자 행동 데이터를 분석하여 개인화된 상품 추천 엔진 구축</p>
+          <div class="stack-tags">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">ML</span>
+            <span class="stack-tag">AWS</span>
+          </div>
+          <div class="team-progress">
+            <div class="team-progress__label">
+              <span>팀 구성</span>
+              <strong>4 / 4명</strong>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar__fill progress-bar__fill--completed" style="width: 100%"></div>
+            </div>
+          </div>
+          <div class="project-meta">
+            <span class="meta-item">
+              <span class="meta-item__icon">🗓</span> 10주 (완료)
+            </span>
+            <span class="meta-item">
+              <span class="meta-item__icon">✅</span> 성공적 완료
+            </span>
+          </div>
+        </div>
+        <div class="project-card__footer">
+          <div class="leader-info">
+            <div class="leader-avatar">한</div>
+            <div>
+              <div class="leader-name">한커머스</div>
+              <div class="leader-rating">⭐ 5.0</div>
+            </div>
+          </div>
+          <button class="card-action-btn card-action-btn--case">케이스 스터디 →</button>
+        </div>
+      </article>
+
+    </div><!-- /projects-grid -->
+
+
+    <div class="section-divider"></div>
+
+
+    <!-- ══════════════════════════════════════════
+         PROPOSE SECTION
+    ══════════════════════════════════════════ -->
+    <section class="propose-section" id="propose">
+      <div class="propose-section__header">
+        <div class="propose-section__badge">✦ 프로젝트 제안</div>
+        <h2 class="propose-section__title">내 프로젝트를 제안하세요</h2>
+        <p class="propose-section__subtitle">해결하고 싶은 비즈니스 문제가 있나요? 팀을 모아 함께 AX 솔루션을 만들어 보세요.</p>
+      </div>
+
+      <form class="propose-form" id="propose-form" novalidate>
+        <div class="form-group">
+          <label for="proj-name">프로젝트명 *</label>
+          <input type="text" id="proj-name" placeholder="예: 소상공인 AI 재고 관리 시스템" required />
+        </div>
+
+        <div class="form-group">
+          <label for="proj-category">카테고리 *</label>
+          <select id="proj-category" required>
+            <option value="" disabled selected>카테고리 선택</option>
+            <option value="ai-chatbot">AI 챗봇</option>
+            <option value="data">데이터 분석</option>
+            <option value="automation">자동화</option>
+            <option value="platform">플랫폼 구축</option>
+            <option value="consulting">컨설팅</option>
+            <option value="other">기타</option>
+          </select>
+        </div>
+
+        <div class="form-group form-group--full">
+          <label for="proj-desc">프로젝트 설명 *</label>
+          <textarea id="proj-desc" placeholder="해결하려는 문제와 기대 성과를 간략히 설명해 주세요." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="proj-skills">필요 스킬</label>
+          <input type="text" id="proj-skills" placeholder="예: Python, Claude API, React" />
+        </div>
+
+        <div class="form-group">
+          <label for="proj-team">팀 규모</label>
+          <select id="proj-team">
+            <option value="" disabled selected>팀원 수 선택</option>
+            <option value="2">2명</option>
+            <option value="3">3명</option>
+            <option value="4">4명</option>
+            <option value="5">5명</option>
+            <option value="6+">6명 이상</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="proj-duration">예상 기간</label>
+          <select id="proj-duration">
+            <option value="" disabled selected>기간 선택</option>
+            <option value="2">2주</option>
+            <option value="4">4주</option>
+            <option value="6">6주</option>
+            <option value="8">8주</option>
+            <option value="12">12주</option>
+            <option value="12+">12주 이상</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="proj-contact">연락처 (이메일)</label>
+          <input type="email" id="proj-contact" placeholder="example@email.com" />
+        </div>
+
+        <div class="propose-form__footer">
+          <button type="submit" class="btn btn--primary">
+            ✦ 프로젝트 제안 제출하기
+          </button>
+        </div>
+      </form>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         HOW IT WORKS
+    ══════════════════════════════════════════ -->
+    <section class="how-section">
+      <div class="how-section__badge">📋 진행 과정</div>
+      <h2 class="how-section__title">어떻게 진행되나요?</h2>
+      <p class="how-section__sub">3단계로 실전 프로젝트를 완성하고 포트폴리오를 쌓으세요</p>
+
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="how-step__number how-step__number--1">🔍</div>
+          <div class="how-step__label">Step 1</div>
+          <div class="how-step__title">프로젝트 탐색 & 지원</div>
+          <p class="how-step__desc">관심 있는 프로젝트를 찾아 지원서를 제출하세요. 리더가 검토 후 합류를 확정합니다.</p>
+        </div>
+
+        <div class="how-step">
+          <div class="how-step__number how-step__number--2">🤝</div>
+          <div class="how-step__label">Step 2</div>
+          <div class="how-step__title">팀 구성 & 킥오프</div>
+          <p class="how-step__desc">팀원이 모이면 킥오프 미팅을 통해 역할을 분배하고 프로젝트를 시작합니다.</p>
+        </div>
+
+        <div class="how-step">
+          <div class="how-step__number how-step__number--3">🏆</div>
+          <div class="how-step__label">Step 3</div>
+          <div class="how-step__title">완료 & 포트폴리오 등록</div>
+          <p class="how-step__desc">프로젝트를 완료하면 케이스 스터디가 작성되고 포트폴리오에 자동 등록됩니다.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ══════════════════════════════════════════
+       TOAST
+  ══════════════════════════════════════════ -->
+  <div class="toast" id="toast" role="alert" aria-live="polite">
+    <div class="toast__icon">✓</div>
+    <span id="toast-msg">프로젝트 제안이 성공적으로 제출되었습니다!</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SCRIPTS
+  ══════════════════════════════════════════ -->
+  <script src="../js/config.js" defer></script>
+  <script src="../js/utils.js" defer></script>
+  <script src="../js/auth.js" defer></script>
+  <script src="../js/theme.js" defer></script>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* ── State ── */
+      let activeTab = 'all';
+      let activeCat = 'all';
+
+      /* ── Elements ── */
+      const tabBtns    = document.querySelectorAll('.filter-tab');
+      const catBtns    = document.querySelectorAll('.category-pill');
+      const cards      = document.querySelectorAll('.project-card');
+      const grid       = document.getElementById('projects-grid');
+      const proposeForm = document.getElementById('propose-form');
+      const toast      = document.getElementById('toast');
+      const toastMsg   = document.getElementById('toast-msg');
+
+      /* ──────────────────────────────────────
+         FILTERING
+      ────────────────────────────────────── */
+      function filterCards () {
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+          const status = card.dataset.status; // recruiting | in-progress | completed
+          const cat    = card.dataset.cat;    // ai-chatbot | data | automation | platform | consulting
+
+          const tabMatch = activeTab === 'all' || status === activeTab;
+          const catMatch = activeCat === 'all' || cat === activeCat;
+
+          if (tabMatch && catMatch) {
+            card.style.display = '';
+            card.style.opacity = '1';
+            card.style.pointerEvents = '';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Show no-results message
+        const existing = grid.querySelector('.no-results');
+        if (existing) existing.remove();
+
+        if (visibleCount === 0) {
+          const msg = document.createElement('div');
+          msg.className = 'no-results';
+          msg.innerHTML = `
+            <div class="no-results__icon">🔍</div>
+            <div class="no-results__text">해당 조건의 프로젝트가 없습니다.</div>
+            <div class="no-results__sub">다른 필터를 선택해 보세요.</div>
+          `;
+          grid.appendChild(msg);
+        }
+      }
+
+      /* ── Tab click ── */
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabBtns.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+          activeTab = btn.dataset.tab;
+          filterCards();
+        });
+      });
+
+      /* ── Category pill click ── */
+      catBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          catBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeCat = btn.dataset.cat;
+          filterCards();
+        });
+      });
+
+      /* ──────────────────────────────────────
+         BOOKMARK TOGGLE
+      ────────────────────────────────────── */
+      document.querySelectorAll('.project-card__bookmark').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.textContent.trim() === '♡') {
+            btn.textContent = '♥';
+            btn.style.color = 'var(--accent)';
+          } else {
+            btn.textContent = '♡';
+            btn.style.color = '';
+          }
+        });
+      });
+
+      /* ──────────────────────────────────────
+         ACTION BUTTONS (apply / view / case)
+      ────────────────────────────────────── */
+      document.querySelectorAll('.card-action-btn--apply').forEach(btn => {
+        btn.addEventListener('click', () => showToast('지원서가 제출되었습니다! 리더의 연락을 기다려 주세요. 📨'));
+      });
+
+      document.querySelectorAll('.card-action-btn--view').forEach(btn => {
+        btn.addEventListener('click', () => showToast('참관 신청이 완료되었습니다! 진행 상황을 관찰할 수 있습니다. 👀'));
+      });
+
+      document.querySelectorAll('.card-action-btn--case').forEach(btn => {
+        btn.addEventListener('click', () => showToast('케이스 스터디 페이지로 이동합니다... 📄'));
+      });
+
+      /* ──────────────────────────────────────
+         PROPOSE FORM SUBMISSION
+      ────────────────────────────────────── */
+      proposeForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById('proj-name').value.trim();
+        const desc = document.getElementById('proj-desc').value.trim();
+        const cat  = document.getElementById('proj-category').value;
+
+        // Basic validation
+        if (!name) {
+          highlightInvalid(document.getElementById('proj-name'));
+          return;
+        }
+        if (!cat) {
+          highlightInvalid(document.getElementById('proj-category'));
+          return;
+        }
+        if (!desc) {
+          highlightInvalid(document.getElementById('proj-desc'));
+          return;
+        }
+
+        // Simulate submit
+        const submitBtn = proposeForm.querySelector('[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = '제출 중...';
+
+        setTimeout(() => {
+          proposeForm.reset();
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '✦ 프로젝트 제안 제출하기';
+          showToast('프로젝트 제안이 성공적으로 제출되었습니다! 검토 후 연락드리겠습니다. 🚀');
+        }, 900);
+      });
+
+      function highlightInvalid (el) {
+        el.style.borderColor = '#ef4444';
+        el.style.boxShadow = '0 0 0 3px rgba(239,68,68,.15)';
+        el.focus();
+        setTimeout(() => {
+          el.style.borderColor = '';
+          el.style.boxShadow = '';
+        }, 2500);
+      }
+
+      /* ──────────────────────────────────────
+         TOAST HELPER
+      ────────────────────────────────────── */
+      let toastTimer = null;
+
+      function showToast (message, duration) {
+        duration = duration || 3500;
+        toastMsg.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), duration);
+      }
+
+    })();
+  </script>
+
+<footer style="background:#0A2540;color:rgba(255,255,255,0.7);text-align:center;padding:24px;font-size:0.85rem;">
+  <p>© 2026 AX교육플랫폼. All rights reserved. | <a href="../index.html" style="color:#FF6B35;text-decoration:none;">홈으로</a> | <a href="manual.html" style="color:rgba(255,255,255,0.6);text-decoration:none;">이용가이드</a></p>
+</footer>
+</body>
+</html>

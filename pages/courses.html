@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>강의 목록 — AX교육플랫폼</title>
+  <meta name="description" content="AX 전문가가 되는 가장 빠른 길. 검증된 전문가의 강의로 AI 전환 역량을 키우세요.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <script>/* FOUC 방지 */const _t=localStorage.getItem('ax-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);</script>
+  <style>
+    /* ── Hero ── */
+    .courses-hero {
+      background: linear-gradient(135deg, #0A2540 0%, #1a3a5c 60%, #0e3050 100%);
+      color: white;
+      padding: 56px 0 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .courses-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(255,107,53,0.12) 0%, transparent 60%);
+    }
+    .courses-hero .container { position: relative; }
+    .courses-hero h1 {
+      font-size: 2.25rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+    .courses-hero h1 em { color: #FF6B35; font-style: normal; }
+    .courses-hero p { color: rgba(255,255,255,0.75); font-size: 1.05rem; margin-bottom: 28px; }
+
+    /* ── Search bar ── */
+    .hero-search { display: flex; gap: 10px; max-width: 600px; }
+    .hero-search-input {
+      flex: 1;
+      padding: 13px 20px;
+      border-radius: 10px;
+      border: none;
+      font-family: var(--font-korean);
+      font-size: 0.95rem;
+      outline: none;
+      box-shadow: 0 0 0 0 transparent;
+      transition: box-shadow 0.2s;
+    }
+    .hero-search-input:focus { box-shadow: 0 0 0 3px rgba(255,107,53,0.5); }
+    .hero-search-btn {
+      padding: 13px 24px;
+      background: #FF6B35;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font-korean);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .hero-search-btn:hover { background: #e55a27; }
+
+    /* ── Main layout ── */
+    .courses-layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
+
+    /* ── Filter bar ── */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 28px;
+    }
+    .category-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .cat-tab {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1.5px solid var(--color-border);
+      background: var(--color-white);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: all 0.18s;
+      font-family: var(--font-korean);
+      white-space: nowrap;
+    }
+    .cat-tab:hover { border-color: #0A2540; color: #0A2540; }
+    .cat-tab.active { background: #0A2540; color: white; border-color: #0A2540; }
+
+    /* ── Sort + Results ── */
+    .sort-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .results-info { font-size: 0.9rem; color: var(--color-text-muted); }
+    .results-info strong { color: var(--color-text); font-weight: 700; }
+    .sort-select {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1.5px solid var(--color-border);
+      background: var(--color-white);
+      font-family: var(--font-korean);
+      font-size: 0.875rem;
+      color: var(--color-text);
+      cursor: pointer;
+      outline: none;
+    }
+    .sort-select:focus { border-color: #0A2540; }
+
+    /* ── Course Grid ── */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 1024px) { .courses-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .courses-grid { grid-template-columns: 1fr; } }
+
+    /* ── Course Card ── */
+    .course-card {
+      background: var(--color-white);
+      border-radius: 16px;
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .course-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.13);
+      border-color: #FF6B35;
+    }
+
+    /* Thumbnail */
+    .course-thumb {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.2rem;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .thumb-badges {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .badge-cat-ax     { background: rgba(59,130,246,0.15); color: #2563EB; }
+    .badge-cat-ai     { background: rgba(16,185,129,0.15); color: #059669; }
+    .badge-cat-vibe   { background: rgba(255,107,53,0.15); color: #DC4A0A; }
+    .badge-cat-plat   { background: rgba(139,92,246,0.15); color: #7C3AED; }
+    .badge-cat-cons   { background: rgba(245,158,11,0.15); color: #B45309; }
+    .badge-free  { background: #DCFCE7; color: #15803D; }
+    .badge-paid  { background: #FEF3C7; color: #B45309; }
+    .level-badge { background: #F3F4F6; color: #374151; }
+    .level-입문  { background: #EFF6FF; color: #2563EB; }
+    .level-초급  { background: #F0FDF4; color: #16A34A; }
+    .level-중급  { background: #FFF7ED; color: #C2410C; }
+    .level-고급  { background: #FDF4FF; color: #7C3AED; }
+
+    /* Card body */
+    .course-body {
+      padding: 18px 20px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .course-cat-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .course-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-text);
+      line-height: 1.45;
+      margin-bottom: 6px;
+    }
+    .course-instructor {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* Rating row */
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+      font-size: 0.82rem;
+    }
+    .stars { color: #F59E0B; letter-spacing: 1px; font-size: 0.78rem; }
+    .rating-score { font-weight: 700; color: var(--color-text); }
+    .review-count { color: var(--color-text-muted); }
+
+    /* Meta row */
+    .meta-row {
+      display: flex;
+      gap: 14px;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-bottom: 14px;
+    }
+    .meta-row span { display: flex; align-items: center; gap: 3px; }
+
+    /* Footer */
+    .course-footer {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .price-tag {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--color-text);
+    }
+    .price-tag.free { color: #16A34A; }
+    .enroll-btn {
+      padding: 8px 18px;
+      background: #FF6B35;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-family: var(--font-korean);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.18s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .enroll-btn:hover { background: #e55a27; }
+
+    /* ── No Results ── */
+    .no-results {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--color-text-muted);
+      display: none;
+    }
+    .no-results .icon { font-size: 3rem; margin-bottom: 16px; }
+    .no-results h3 { font-size: 1.1rem; color: var(--color-text); margin-bottom: 6px; }
+
+    /* ── Pagination ── */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 48px;
+    }
+    .page-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      border: 1.5px solid var(--color-border);
+      background: var(--color-white);
+      cursor: pointer;
+      font-family: var(--font-korean);
+      font-size: 0.875rem;
+      color: var(--color-text);
+      transition: all 0.18s;
+    }
+    .page-btn:hover:not(.active) { border-color: #0A2540; color: #0A2540; }
+    .page-btn.active { background: #0A2540; color: white; border-color: #0A2540; }
+    .page-btn-arrow { width: auto; padding: 0 14px; }
+
+    /* ── Dark theme ── */
+    [data-theme="dark"] .courses-hero { background: linear-gradient(135deg,#061829,#0d2540); }
+    [data-theme="dark"] .cat-tab { background: var(--color-bg-secondary, #1e293b); }
+    [data-theme="dark"] .cat-tab:hover { background: #1e293b; }
+    [data-theme="dark"] .sort-select { background: var(--color-bg-secondary, #1e293b); }
+
+    @media (max-width: 768px) {
+      .courses-hero h1 { font-size: 1.6rem; }
+      .hero-search { flex-direction: column; }
+      .filter-bar { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="logo">
+      <span style="color:#FF6B35;font-weight:900;">AX</span>교육플랫폼
+      <span class="logo-badge">BETA</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">홈</a></li>
+      <li><a href="courses.html" class="active">강의</a></li>
+      <li><a href="workshops.html">워크숍</a></li>
+      <li><a href="certification.html">자격증</a></li>
+      <li><a href="community.html">커뮤니티</a></li>
+      <li><a href="enterprise.html">기업서비스</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="themeToggle" onclick="ThemeManager.toggle()" title="테마 전환" style="background:none;border:none;cursor:pointer;font-size:1.2rem;padding:4px 8px;">🌙</button>
+      <a href="auth.html" class="btn btn-ghost btn-sm">로그인</a>
+      <a href="dashboard.html" class="btn btn-primary btn-sm">대시보드</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../index.html">홈</a>
+  <a href="courses.html">강의</a>
+  <a href="workshops.html">워크숍</a>
+  <a href="certification.html">자격증</a>
+  <a href="community.html">커뮤니티</a>
+  <a href="enterprise.html">기업서비스</a>
+  <a href="auth.html">로그인</a>
+</div>
+
+<!-- ── Hero ── -->
+<section class="courses-hero">
+  <div class="container">
+    <h1>AX 전문가가 되는<br><em>가장 빠른 길</em></h1>
+    <p>검증된 전문가의 강의로 AI 전환 역량을 키우세요. 입문부터 고급까지.</p>
+    <div class="hero-search">
+      <input type="text" class="hero-search-input" id="searchInput"
+             placeholder="강의명, 강사명으로 검색..." oninput="applyFilters()">
+      <button class="hero-search-btn" onclick="applyFilters()">🔍 검색</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── Main content ── -->
+<div class="courses-layout">
+
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <div class="category-tabs" id="categoryTabs">
+      <button class="cat-tab active" data-cat="전체">전체</button>
+      <button class="cat-tab" data-cat="AX이해">🧠 AX이해</button>
+      <button class="cat-tab" data-cat="AI도구">🛠️ AI도구</button>
+      <button class="cat-tab" data-cat="바이브코딩">💻 바이브코딩</button>
+      <button class="cat-tab" data-cat="AI플랫폼설계">🏗️ AI플랫폼설계</button>
+      <button class="cat-tab" data-cat="AX컨설팅">💼 AX컨설팅</button>
+    </div>
+  </div>
+
+  <!-- Sort + results row -->
+  <div class="sort-row">
+    <div class="results-info" id="resultsInfo">전체 <strong>12</strong>개 강의</div>
+    <select class="sort-select" id="sortSelect" onchange="applyFilters()">
+      <option value="default">최신순</option>
+      <option value="popular">인기순</option>
+      <option value="rating">평점순</option>
+      <option value="level">난이도순</option>
+    </select>
+  </div>
+
+  <!-- Grid -->
+  <div class="courses-grid" id="coursesGrid"></div>
+
+  <!-- No results -->
+  <div class="no-results" id="noResults">
+    <div class="icon">🔍</div>
+    <h3>검색 결과가 없습니다</h3>
+    <p>다른 키워드나 카테고리를 선택해 보세요.</p>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination" id="pagination"></div>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/lms.js"></script>
+<script>
+/* ── 강의 데이터 (12개) ── */
+const COURSES = [
+  {
+    id: 1,
+    title: 'AX 전환 완전 정복',
+    category: 'AX이해',
+    instructor: '김전환',
+    rating: 4.9,
+    reviews: 892,
+    hours: 12,
+    students: 2341,
+    level: '입문',
+    price: 0,
+    emoji: '🎯',
+    bg: 'linear-gradient(135deg,rgba(59,130,246,0.12),rgba(99,102,241,0.12))'
+  },
+  {
+    id: 2,
+    title: 'Claude 마스터 클래스',
+    category: 'AI도구',
+    instructor: '이클로드',
+    rating: 4.8,
+    reviews: 634,
+    hours: 8,
+    students: 1892,
+    level: '초급',
+    price: 49000,
+    emoji: '🤖',
+    bg: 'linear-gradient(135deg,rgba(16,185,129,0.12),rgba(6,182,212,0.12))'
+  },
+  {
+    id: 3,
+    title: '바이브코딩 입문',
+    category: '바이브코딩',
+    instructor: '박비코',
+    rating: 4.9,
+    reviews: 1102,
+    hours: 10,
+    students: 3120,
+    level: '입문',
+    price: 0,
+    emoji: '💻',
+    bg: 'linear-gradient(135deg,rgba(255,107,53,0.12),rgba(251,146,60,0.12))'
+  },
+  {
+    id: 4,
+    title: 'ChatGPT 비즈니스 활용',
+    category: 'AI도구',
+    instructor: '최GPT',
+    rating: 4.7,
+    reviews: 978,
+    hours: 6,
+    students: 2847,
+    level: '입문',
+    price: 49000,
+    emoji: '💬',
+    bg: 'linear-gradient(135deg,rgba(16,185,129,0.12),rgba(5,150,105,0.12))'
+  },
+  {
+    id: 5,
+    title: 'AI 플랫폼 설계 실전',
+    category: 'AI플랫폼설계',
+    instructor: '정아키',
+    rating: 4.8,
+    reviews: 312,
+    hours: 20,
+    students: 891,
+    level: '고급',
+    price: 99000,
+    emoji: '🏗️',
+    bg: 'linear-gradient(135deg,rgba(139,92,246,0.12),rgba(109,40,217,0.12))'
+  },
+  {
+    id: 6,
+    title: '프롬프트 엔지니어링',
+    category: 'AI도구',
+    instructor: '한프롬',
+    rating: 4.9,
+    reviews: 1432,
+    hours: 8,
+    students: 4201,
+    level: '초급',
+    price: 49000,
+    emoji: '✍️',
+    bg: 'linear-gradient(135deg,rgba(59,130,246,0.12),rgba(37,99,235,0.12))'
+  },
+  {
+    id: 7,
+    title: 'RAG 시스템 구축',
+    category: 'AI플랫폼설계',
+    instructor: '이래그',
+    rating: 4.7,
+    reviews: 234,
+    hours: 15,
+    students: 672,
+    level: '중급',
+    price: 99000,
+    emoji: '🔗',
+    bg: 'linear-gradient(135deg,rgba(6,182,212,0.12),rgba(14,165,233,0.12))'
+  },
+  {
+    id: 8,
+    title: 'AX 컨설팅 방법론',
+    category: 'AX컨설팅',
+    instructor: '강컨설',
+    rating: 4.8,
+    reviews: 198,
+    hours: 12,
+    students: 542,
+    level: '고급',
+    price: 99000,
+    emoji: '📋',
+    bg: 'linear-gradient(135deg,rgba(245,158,11,0.12),rgba(217,119,6,0.12))'
+  },
+  {
+    id: 9,
+    title: 'Notion AI 완전 가이드',
+    category: 'AI도구',
+    instructor: '노션녀',
+    rating: 4.6,
+    reviews: 1289,
+    hours: 4,
+    students: 3891,
+    level: '입문',
+    price: 0,
+    emoji: '📝',
+    bg: 'linear-gradient(135deg,rgba(100,116,139,0.12),rgba(71,85,105,0.12))'
+  },
+  {
+    id: 10,
+    title: 'Claude Code 실전',
+    category: '바이브코딩',
+    instructor: '코드왕',
+    rating: 4.9,
+    reviews: 445,
+    hours: 16,
+    students: 1234,
+    level: '중급',
+    price: 99000,
+    emoji: '⚡',
+    bg: 'linear-gradient(135deg,rgba(255,107,53,0.15),rgba(239,68,68,0.12))'
+  },
+  {
+    id: 11,
+    title: 'AI 윤리와 거버넌스',
+    category: 'AX이해',
+    instructor: '윤리사',
+    rating: 4.7,
+    reviews: 312,
+    hours: 6,
+    students: 891,
+    level: '중급',
+    price: 49000,
+    emoji: '⚖️',
+    bg: 'linear-gradient(135deg,rgba(239,68,68,0.1),rgba(220,38,38,0.08))'
+  },
+  {
+    id: 12,
+    title: '기업 AX 전략 수립',
+    category: 'AX컨설팅',
+    instructor: '전략가',
+    rating: 4.9,
+    reviews: 167,
+    hours: 18,
+    students: 423,
+    level: '고급',
+    price: 99000,
+    emoji: '🗺️',
+    bg: 'linear-gradient(135deg,rgba(245,158,11,0.12),rgba(234,88,12,0.12))'
+  }
+];
+
+const LEVEL_ORDER = { '입문': 1, '초급': 2, '중급': 3, '고급': 4 };
+const CAT_BADGE = {
+  'AX이해':    'badge-cat-ax',
+  'AI도구':    'badge-cat-ai',
+  '바이브코딩': 'badge-cat-vibe',
+  'AI플랫폼설계':'badge-cat-plat',
+  'AX컨설팅':  'badge-cat-cons'
+};
+
+let currentCategory = '전체';
+let currentPage = 1;
+const PER_PAGE = 12;
+
+/* ── Stars ── */
+function renderStars(rating) {
+  const full = Math.floor(rating);
+  const half = (rating % 1) >= 0.5;
+  let s = '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(5 - full - (half ? 1 : 0));
+  return `<span class="stars">${s}</span>`;
+}
+
+/* ── Price ── */
+function fmtPrice(price) {
+  if (price === 0) return { text: '무료', cls: 'free' };
+  return { text: `₩${price.toLocaleString('ko-KR')}`, cls: '' };
+}
+
+/* ── Render card ── */
+function cardHTML(c) {
+  const p = fmtPrice(c.price);
+  const catCls = CAT_BADGE[c.category] || '';
+  return `
+  <div class="course-card" onclick="location.href='course-detail.html?id=${c.id}'" role="article" tabindex="0"
+       onkeydown="if(event.key==='Enter')location.href='course-detail.html?id=${c.id}'">
+    <div class="course-thumb" style="background:${c.bg};">
+      ${c.emoji}
+      <div class="thumb-badges">
+        <span class="badge ${catCls}">${c.category}</span>
+        <span class="badge ${c.price === 0 ? 'badge-free' : 'badge-paid'}">${c.price === 0 ? '무료' : '유료'}</span>
+      </div>
+    </div>
+    <div class="course-body">
+      <div class="course-title">${c.title}</div>
+      <div class="course-instructor">👤 ${c.instructor}</div>
+      <div class="rating-row">
+        ${renderStars(c.rating)}
+        <span class="rating-score">${c.rating}</span>
+        <span class="review-count">(${c.reviews.toLocaleString('ko-KR')}개 리뷰)</span>
+      </div>
+      <div class="meta-row">
+        <span>⏱ ${c.hours}시간</span>
+        <span>👥 ${c.students.toLocaleString('ko-KR')}명</span>
+        <span class="badge level-${c.level}" style="font-size:0.72rem;">${c.level}</span>
+      </div>
+      <div class="course-footer">
+        <span class="price-tag ${p.cls}">${p.text}</span>
+        <a href="course-detail.html?id=${c.id}" class="enroll-btn" onclick="event.stopPropagation()">수강하기</a>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ── Apply filters + sort ── */
+function applyFilters() {
+  const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+  const sort  = document.getElementById('sortSelect').value;
+
+  let list = COURSES.filter(c => {
+    const matchCat = currentCategory === '전체' || c.category === currentCategory;
+    const matchQ   = !query || c.title.toLowerCase().includes(query) || c.instructor.toLowerCase().includes(query);
+    return matchCat && matchQ;
+  });
+
+  if (sort === 'popular') list = [...list].sort((a,b) => b.students - a.students);
+  else if (sort === 'rating') list = [...list].sort((a,b) => b.rating - a.rating);
+  else if (sort === 'level')  list = [...list].sort((a,b) => LEVEL_ORDER[a.level] - LEVEL_ORDER[b.level]);
+
+  const total = list.length;
+  document.getElementById('resultsInfo').innerHTML = `총 <strong>${total}</strong>개 강의`;
+
+  const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
+  if (currentPage > totalPages) currentPage = 1;
+
+  const slice = list.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
+  const grid = document.getElementById('coursesGrid');
+  const noRes = document.getElementById('noResults');
+
+  if (slice.length === 0) {
+    grid.innerHTML = '';
+    noRes.style.display = 'block';
+  } else {
+    noRes.style.display = 'none';
+    grid.innerHTML = slice.map(cardHTML).join('');
+  }
+
+  renderPagination(totalPages);
+}
+
+/* ── Pagination ── */
+function renderPagination(total) {
+  const el = document.getElementById('pagination');
+  if (total <= 1) { el.innerHTML = ''; return; }
+  let html = '';
+  if (currentPage > 1)
+    html += `<button class="page-btn page-btn-arrow" onclick="goPage(${currentPage-1})">‹</button>`;
+  for (let i = 1; i <= total; i++)
+    html += `<button class="page-btn ${i===currentPage?'active':''}" onclick="goPage(${i})">${i}</button>`;
+  if (currentPage < total)
+    html += `<button class="page-btn page-btn-arrow" onclick="goPage(${currentPage+1})">›</button>`;
+  el.innerHTML = html;
+}
+
+function goPage(p) {
+  currentPage = p;
+  applyFilters();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── Category tab wiring ── */
+document.getElementById('categoryTabs').addEventListener('click', e => {
+  const btn = e.target.closest('.cat-tab');
+  if (!btn) return;
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  currentCategory = btn.dataset.cat;
+  currentPage = 1;
+  applyFilters();
+});
+
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded', applyFilters);
+</script>
+
+<footer style="background:#0A2540;color:rgba(255,255,255,0.7);text-align:center;padding:24px;font-size:0.85rem;margin-top:40px;">
+  <p>© 2026 AX교육플랫폼. All rights reserved. | <a href="../index.html" style="color:#FF6B35;text-decoration:none;">홈으로</a> | <a href="manual.html" style="color:rgba(255,255,255,0.6);text-decoration:none;">이용가이드</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude 마스터 클래스 — AX교육플랫폼</title>
+  <meta name="description" content="Claude AI를 마스터하는 완전한 강의. 프롬프트 엔지니어링부터 실전 프로젝트까지.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <script>/* FOUC 방지 */const _t=localStorage.getItem('ax-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);</script>
+  <style>
+    /* ── Hero Banner ── */
+    .course-hero {
+      background: linear-gradient(135deg, #0A2540 0%, #0d2d4f 50%, #061829 100%);
+      color: white;
+      padding: 56px 0 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .course-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 30%, rgba(0,200,150,0.1) 0%, transparent 55%),
+                  radial-gradient(ellipse at 20% 80%, rgba(255,107,53,0.08) 0%, transparent 50%);
+    }
+    .hero-inner { position: relative; }
+    .hero-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 20px;
+    }
+    .hero-breadcrumb a { color: rgba(255,255,255,0.6); text-decoration: none; }
+    .hero-breadcrumb a:hover { color: white; }
+    .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .hero-badge {
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.9);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .hero-badge.accent { background: rgba(255,107,53,0.25); border-color: rgba(255,107,53,0.4); color: #FFAA80; }
+    .hero-badge.green  { background: rgba(0,200,150,0.2); border-color: rgba(0,200,150,0.35); color: #6EE7C7; }
+    .course-hero h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .hero-desc { font-size: 1.05rem; color: rgba(255,255,255,0.78); margin-bottom: 24px; line-height: 1.6; max-width: 680px; }
+    .hero-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.75);
+    }
+    .hero-meta-row .stars { color: #F59E0B; letter-spacing: 1px; }
+    .hero-meta-row strong { color: white; font-weight: 700; }
+    .instructor-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .instructor-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,#FF6B35,#FF8C5A);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* ── 2-column layout ── */
+    .detail-layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 968px) {
+      .detail-layout { grid-template-columns: 1fr; }
+      .enrollment-card { order: -1; }
+    }
+
+    /* ── Enrollment Card ── */
+    .enrollment-card {
+      background: var(--color-white);
+      border-radius: 20px;
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 80px;
+    }
+    .card-preview {
+      height: 180px;
+      background: linear-gradient(135deg,#0A2540,#1a3a5c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+    }
+    .card-preview-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(255,107,53,0.9);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .card-body { padding: 24px; }
+    .card-price { font-size: 2rem; font-weight: 900; color: var(--color-text); margin-bottom: 6px; }
+    .card-original { font-size: 0.9rem; color: var(--color-text-muted); text-decoration: line-through; margin-bottom: 4px; }
+    .card-discount { font-size: 0.85rem; color: #DC2626; font-weight: 700; margin-bottom: 20px; }
+    .enroll-main-btn {
+      width: 100%;
+      padding: 15px;
+      background: #FF6B35;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font-korean);
+      font-size: 1.05rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      margin-bottom: 12px;
+    }
+    .enroll-main-btn:hover { background: #e55a27; transform: translateY(-1px); }
+    .trial-btn {
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      color: var(--color-text);
+      border: 1.5px solid var(--color-border);
+      border-radius: 10px;
+      font-family: var(--font-korean);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      margin-bottom: 20px;
+    }
+    .trial-btn:hover { border-color: #FF6B35; color: #FF6B35; }
+    .guarantee {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .guarantee span { color: #16A34A; font-weight: 700; }
+    .includes-title { font-size: 0.85rem; font-weight: 700; color: var(--color-text); margin-bottom: 12px; }
+    .includes-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    .includes-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.83rem;
+      color: var(--color-text-muted);
+    }
+    .includes-list li span:first-child { font-size: 1rem; }
+
+    /* ── Tab navigation ── */
+    .tab-nav {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--color-border);
+      margin-bottom: 32px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      padding: 14px 24px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      font-family: var(--font-korean);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: color 0.18s, border-color 0.18s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--color-text); }
+    .tab-btn.active { color: #0A2540; border-bottom-color: #FF6B35; }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* ── Curriculum ── */
+    .curriculum-summary {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      padding: 16px 20px;
+      background: var(--color-bg);
+      border-radius: 10px;
+      margin-bottom: 24px;
+    }
+    .curriculum-summary strong { color: var(--color-text); }
+
+    .section-item {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      background: var(--color-bg);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.18s;
+    }
+    .section-header:hover { background: #EFF2F7; }
+    .section-title { font-weight: 700; font-size: 0.95rem; color: var(--color-text); }
+    .section-meta { font-size: 0.8rem; color: var(--color-text-muted); display: flex; align-items: center; gap: 8px; }
+    .section-toggle { transition: transform 0.2s; }
+    .section-item.open .section-toggle { transform: rotate(180deg); }
+    .lessons-list { display: none; border-top: 1px solid var(--color-border); }
+    .section-item.open .lessons-list { display: block; }
+    .lesson-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      font-size: 0.875rem;
+      border-bottom: 1px solid var(--color-border);
+      transition: background 0.15s;
+    }
+    .lesson-row:last-child { border-bottom: none; }
+    .lesson-row:hover { background: rgba(0,0,0,0.02); }
+    .lesson-icon { font-size: 1rem; flex-shrink: 0; }
+    .lesson-name { flex: 1; color: var(--color-text); }
+    .lesson-duration { font-size: 0.78rem; color: var(--color-text-muted); }
+    .preview-badge {
+      padding: 2px 8px;
+      background: rgba(0,200,150,0.12);
+      color: #059669;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+    .lock-icon { color: var(--color-text-muted); font-size: 0.85rem; }
+
+    /* ── Instructor ── */
+    .instructor-card {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      padding: 24px;
+      background: var(--color-bg);
+      border-radius: 16px;
+      margin-bottom: 24px;
+    }
+    .instr-avatar-lg {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,#FF6B35,#FF8C5A);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem;
+      flex-shrink: 0;
+    }
+    .instr-name { font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; }
+    .instr-title { font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 12px; }
+    .instr-stats { display: flex; gap: 20px; font-size: 0.82rem; color: var(--color-text-muted); }
+    .instr-stats strong { color: var(--color-text); font-size: 0.95rem; }
+    .instr-bio { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.7; }
+
+    /* ── Reviews ── */
+    .reviews-summary {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      padding: 24px;
+      background: var(--color-bg);
+      border-radius: 16px;
+      margin-bottom: 28px;
+    }
+    .rating-big { font-size: 3.5rem; font-weight: 900; color: var(--color-text); line-height: 1; }
+    .stars-big { color: #F59E0B; font-size: 1.5rem; display: block; margin: 4px 0; }
+    .review-card {
+      padding: 20px;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .reviewer-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,#0A2540,#1a3a5c);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 700; font-size: 0.9rem;
+    }
+    .reviewer-name { font-weight: 700; font-size: 0.9rem; }
+    .review-date { font-size: 0.78rem; color: var(--color-text-muted); }
+    .review-stars { color: #F59E0B; font-size: 0.85rem; }
+    .review-text { font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.65; }
+
+    /* ── Q&A ── */
+    .qa-card {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .qa-question {
+      padding: 18px 20px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: var(--color-bg);
+    }
+    .qa-q-badge {
+      width: 28px; height: 28px;
+      background: #0A2540; color: white;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .qa-answer {
+      padding: 18px 20px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      border-top: 1px solid var(--color-border);
+    }
+    .qa-a-badge {
+      width: 28px; height: 28px;
+      background: #FF6B35; color: white;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .ask-btn-wrap { text-align: center; margin-top: 24px; }
+
+    /* ── Section card utility ── */
+    .content-section { margin-bottom: 36px; }
+    .content-section h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--color-text);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--color-border);
+    }
+
+    [data-theme="dark"] .course-hero { background: linear-gradient(135deg,#061829,#0a2138); }
+    [data-theme="dark"] .enrollment-card { background: #1e293b; border-color: #334155; }
+    [data-theme="dark"] .section-header { background: #1a2537; }
+    [data-theme="dark"] .section-header:hover { background: #1e2f45; }
+    [data-theme="dark"] .curriculum-summary { background: #1a2537; }
+    [data-theme="dark"] .instructor-card { background: #1a2537; }
+    [data-theme="dark"] .reviews-summary { background: #1a2537; }
+    [data-theme="dark"] .qa-question { background: #1a2537; }
+  </style>
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="logo">
+      <span style="color:#FF6B35;font-weight:900;">AX</span>교육플랫폼
+      <span class="logo-badge">BETA</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">홈</a></li>
+      <li><a href="courses.html" class="active">강의</a></li>
+      <li><a href="workshops.html">워크숍</a></li>
+      <li><a href="certification.html">자격증</a></li>
+      <li><a href="community.html">커뮤니티</a></li>
+      <li><a href="enterprise.html">기업서비스</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="themeToggle" onclick="ThemeManager.toggle()" title="테마 전환" style="background:none;border:none;cursor:pointer;font-size:1.2rem;padding:4px 8px;">🌙</button>
+      <a href="auth.html" class="btn btn-ghost btn-sm">로그인</a>
+      <a href="dashboard.html" class="btn btn-primary btn-sm">대시보드</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../index.html">홈</a>
+  <a href="courses.html">강의</a>
+  <a href="workshops.html">워크숍</a>
+  <a href="certification.html">자격증</a>
+  <a href="community.html">커뮤니티</a>
+  <a href="auth.html">로그인</a>
+</div>
+
+<!-- ── Hero Banner ── -->
+<section class="course-hero">
+  <div class="container hero-inner">
+    <div class="hero-breadcrumb">
+      <a href="../index.html">홈</a> › <a href="courses.html">강의</a> › Claude 마스터 클래스
+    </div>
+    <div class="hero-badges">
+      <span class="hero-badge">AI도구</span>
+      <span class="hero-badge accent">🔥 베스트셀러</span>
+      <span class="hero-badge green">✔ 최신 업데이트 2026.02</span>
+    </div>
+    <h1>Claude 마스터 클래스</h1>
+    <p class="hero-desc">
+      Anthropic Claude를 완전히 마스터하세요. 기본 활용부터 고급 프롬프트 엔지니어링,
+      실전 프로젝트까지 — 업무 생산성을 10배 높이는 완전한 가이드.
+    </p>
+    <div class="hero-meta-row">
+      <div class="instructor-chip">
+        <div class="instructor-avatar">🤖</div>
+        <span>강사 <strong>이클로드</strong></span>
+      </div>
+      <span>
+        <span class="stars">★★★★★</span>
+        <strong> 4.8</strong> (634개 리뷰)
+      </span>
+      <span>👥 <strong>1,892명</strong> 수강</span>
+      <span>⏱ <strong>8시간</strong></span>
+      <span>📖 <strong>22강</strong></span>
+      <span>🌐 한국어</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── Detail layout ── -->
+<div class="detail-layout">
+
+  <!-- ── Left: main content ── -->
+  <div class="course-main">
+
+    <!-- Tab nav -->
+    <div class="tab-nav" id="tabNav">
+      <button class="tab-btn active" data-tab="curriculum">커리큘럼</button>
+      <button class="tab-btn" data-tab="instructor">강사 소개</button>
+      <button class="tab-btn" data-tab="reviews">수강후기</button>
+      <button class="tab-btn" data-tab="qa">Q&amp;A</button>
+    </div>
+
+    <!-- ── Tab: 커리큘럼 ── -->
+    <div class="tab-pane active" id="tab-curriculum">
+      <div class="curriculum-summary">
+        <span>📁 <strong>5</strong>개 섹션</span>
+        <span>📖 <strong>22</strong>강</span>
+        <span>⏱ 총 <strong>8시간 20분</strong></span>
+        <span>🎓 수료증 발급</span>
+      </div>
+
+      <!-- Section 1 -->
+      <div class="section-item open">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div>
+            <div class="section-title">Section 1. AX 개요</div>
+            <div class="section-meta">4강 · 55분</div>
+          </div>
+          <span class="section-toggle">▼</span>
+        </div>
+        <ul class="lessons-list">
+          <li class="lesson-row">
+            <span class="lesson-icon">▶</span>
+            <span class="lesson-name">강의 소개 및 학습 로드맵</span>
+            <span class="preview-badge">미리보기</span>
+            <span class="lesson-duration">10분</span>
+          </li>
+          <li class="lesson-row">
+            <span class="lesson-icon">▶</span>
+            <span class="lesson-name">AI 전환(AX)이란 무엇인가</span>
+            <span class="preview-badge">미리보기</span>
+            <span class="lesson-duration">15분</span>
+          </li>
+          <li class="lesson-row">
+            <span class="lesson-icon">🔒</span>
+            <span class="lesson-name">Claude가 특별한 이유 — 다른 LLM과의 차이</span>
+            <span class="lock-icon">🔒</span>
+            <span class="lesson-duration">14분</span>
+          </li>
+          <li class="lesson-row">
+            <span class="lesson-icon">🔒</span>
+            <span class="lesson-name">학습 환경 세팅 & Claude 계정 준비</span>
+            <span class="lock-icon">🔒</span>
+            <span class="lesson-duration">16분</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="section-item">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div>
+            <div class="section-title">Section 2. Claude 기초 활용</div>
+            <div class="section-meta">5강 · 1시간 10분</div>
+          </div>
+          <span class="section-toggle">▼</span>
+        </div>
+        <ul class="lessons-list">
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">대화 구조 이해 — System, Human, Assistant</span><span class="lock-icon">🔒</span><span class="lesson-duration">14분</span></li>
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">효과적인 지시 작성법</span><span class="lock-icon">🔒</span><span class="lesson-duration">18분</span></li>
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">문서 요약 & 분석 실습</span><span class="lock-icon">🔒</span><span class="lesson-duration">16분</span></li>
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">이메일 & 보고서 작성 자동화</span><span class="lock-icon">🔒</span><span class="lesson-duration">12분</span></li>
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">번역 & 다국어 콘텐츠 생성</span><span class="lock-icon">🔒</span><span class="lesson-duration">10분</span></li>
+        </ul>
+      </div>
+
+      <!-- Section 3 -->
+      <div class="section-item">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div>
+            <div class="section-title">Section 3. 프롬프트 엔지니어링</div>
+            <div class="section-meta">6강 · 2시간</div>
+          </div>
+          <span class="section-toggle">▼</span>
+        </div>
+        <ul class="lessons-list">
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">프롬프트 구조화 — RACI 프레임워크</span><span class="lock-icon">🔒</span><span class="lesson-duration">20분</span></li>
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">Chain-of-Thought 프롬프팅</span><span class="lock-icon">🔒</span><span class="lesson-duration">22분</span></li>
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">Few-shot & Zero-shot 기법</span><span class="lock-icon">🔒</span><span class="lesson-duration">18분</span></li>
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">역할 설정 & 페르소나 활용</span><span class="lock-icon">🔒</span><span class="lesson-duration">16분</span></li>
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">출력 형식 제어 (JSON, Markdown, XML)</span><span class="lock-icon">🔒</span><span class="lesson-duration">20분</span></li>
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">반복 개선 & 프롬프트 최적화</span><span class="lock-icon">🔒</span><span class="lesson-duration">24분</span></li>
+        </ul>
+      </div>
+
+      <!-- Section 4 -->
+      <div class="section-item">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div>
+            <div class="section-title">Section 4. 실전 프로젝트</div>
+            <div class="section-meta">4강 · 2시간 15분</div>
+          </div>
+          <span class="section-toggle">▼</span>
+        </div>
+        <ul class="lessons-list">
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">프로젝트 1: AI 마케팅 콘텐츠 공장 구축</span><span class="lock-icon">🔒</span><span class="lesson-duration">40분</span></li>
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">프로젝트 2: 업무 자동화 파이프라인</span><span class="lock-icon">🔒</span><span class="lesson-duration">35분</span></li>
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">프로젝트 3: 고객 응대 AI 어시스턴트</span><span class="lock-icon">🔒</span><span class="lesson-duration">30분</span></li>
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">프로젝트 4: 데이터 분석 보고서 자동화</span><span class="lock-icon">🔒</span><span class="lesson-duration">30분</span></li>
+        </ul>
+      </div>
+
+      <!-- Section 5 -->
+      <div class="section-item">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div>
+            <div class="section-title">Section 5. 고급 기법</div>
+            <div class="section-meta">3강 · 2시간</div>
+          </div>
+          <span class="section-toggle">▼</span>
+        </div>
+        <ul class="lessons-list">
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">Claude API 연동 & 자동화 워크플로우</span><span class="lock-icon">🔒</span><span class="lesson-duration">45분</span></li>
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">멀티턴 대화 설계 & 컨텍스트 관리</span><span class="lock-icon">🔒</span><span class="lesson-duration">35분</span></li>
+          <li class="lesson-row"><span class="lesson-icon">🔒</span><span class="lesson-name">기업 도입 전략 & 팀 운용 방법</span><span class="lock-icon">🔒</span><span class="lesson-duration">40분</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── Tab: 강사 소개 ── -->
+    <div class="tab-pane" id="tab-instructor">
+      <div class="content-section">
+        <h2>강사 소개</h2>
+        <div class="instructor-card">
+          <div class="instr-avatar-lg">🤖</div>
+          <div>
+            <div class="instr-name">이클로드</div>
+            <div class="instr-title">Claude AI 전문가 · Anthropic 공인 파트너</div>
+            <div class="instr-stats">
+              <span>⭐ <strong>4.8</strong> 평점</span>
+              <span>👥 <strong>1,892명</strong> 수강생</span>
+              <span>📚 <strong>3개</strong> 강의</span>
+              <span>🏆 <strong>5년</strong> 경력</span>
+            </div>
+          </div>
+        </div>
+        <div class="instr-bio">
+          <p style="margin-bottom:12px;">
+            이클로드는 Claude AI 활용 분야의 국내 최고 전문가로, Anthropic의 공인 파트너사에서
+            기업 AI 도입을 지원해왔습니다. LLM 프롬프트 엔지니어링과 AI 워크플로우 자동화를
+            전문으로 하며, 50개 이상의 기업 AX 프로젝트를 성공적으로 완료했습니다.
+          </p>
+          <p style="margin-bottom:12px;">
+            삼성, LG, 카카오, 네이버 등 국내 주요 대기업과 스타트업에서 Claude 활용 교육을
+            진행했으며, AX교육플랫폼에서 가장 높은 수강생 만족도를 기록하고 있습니다.
+          </p>
+          <p>
+            현재 AX교육플랫폼의 커리큘럼 디렉터로 활동하며, Claude 관련 최신 기술을 꾸준히
+            연구하고 강의에 반영하고 있습니다.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Tab: 수강후기 ── -->
+    <div class="tab-pane" id="tab-reviews">
+      <div class="content-section">
+        <h2>수강후기</h2>
+        <div class="reviews-summary">
+          <div style="text-align:center;">
+            <div class="rating-big">4.8</div>
+            <span class="stars-big">★★★★★</span>
+            <div style="font-size:0.8rem;color:var(--color-text-muted);">634개 리뷰</div>
+          </div>
+          <div style="flex:1;">
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;">
+                <span style="width:32px;text-align:right;">5★</span>
+                <div style="flex:1;height:8px;background:var(--color-border);border-radius:4px;overflow:hidden;">
+                  <div style="width:78%;height:100%;background:#F59E0B;border-radius:4px;"></div>
+                </div>
+                <span style="color:var(--color-text-muted);width:28px;">78%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;">
+                <span style="width:32px;text-align:right;">4★</span>
+                <div style="flex:1;height:8px;background:var(--color-border);border-radius:4px;overflow:hidden;">
+                  <div style="width:15%;height:100%;background:#F59E0B;border-radius:4px;"></div>
+                </div>
+                <span style="color:var(--color-text-muted);width:28px;">15%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;">
+                <span style="width:32px;text-align:right;">3★</span>
+                <div style="flex:1;height:8px;background:var(--color-border);border-radius:4px;overflow:hidden;">
+                  <div style="width:5%;height:100%;background:#F59E0B;border-radius:4px;"></div>
+                </div>
+                <span style="color:var(--color-text-muted);width:28px;">5%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;">
+                <span style="width:32px;text-align:right;">2★</span>
+                <div style="flex:1;height:8px;background:var(--color-border);border-radius:4px;overflow:hidden;">
+                  <div style="width:1%;height:100%;background:#F59E0B;border-radius:4px;"></div>
+                </div>
+                <span style="color:var(--color-text-muted);width:28px;">1%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;">
+                <span style="width:32px;text-align:right;">1★</span>
+                <div style="flex:1;height:8px;background:var(--color-border);border-radius:4px;overflow:hidden;">
+                  <div style="width:1%;height:100%;background:#F59E0B;border-radius:4px;"></div>
+                </div>
+                <span style="color:var(--color-text-muted);width:28px;">1%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-avatar">김</div>
+            <div>
+              <div class="reviewer-name">김마케팅</div>
+              <div class="review-date">2026년 2월 15일</div>
+            </div>
+            <span class="review-stars" style="margin-left:auto;">★★★★★</span>
+          </div>
+          <p class="review-text">실무에 바로 적용할 수 있는 내용으로 가득합니다. 특히 프롬프트 엔지니어링 파트는 정말 눈이 떠지는 경험이었어요. 강사님이 설명을 너무 잘 해주셔서 어려운 개념도 쉽게 이해됐습니다. 수강하고 나서 업무 속도가 3배는 빨라진 것 같아요!</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-avatar" style="background:linear-gradient(135deg,#FF6B35,#FF8C5A);">박</div>
+            <div>
+              <div class="reviewer-name">박개발자</div>
+              <div class="review-date">2026년 2월 10일</div>
+            </div>
+            <span class="review-stars" style="margin-left:auto;">★★★★★</span>
+          </div>
+          <p class="review-text">Claude API를 활용한 자동화 부분이 특히 좋았습니다. 실전 프로젝트 섹션에서 실제 배포까지 해보니 자신감이 많이 생겼어요. 비개발자도 충분히 따라할 수 있는 수준으로 설명해주셔서 좋았습니다.</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-avatar" style="background:linear-gradient(135deg,#10B981,#059669);">이</div>
+            <div>
+              <div class="reviewer-name">이스타트업</div>
+              <div class="review-date">2026년 1월 28일</div>
+            </div>
+            <span class="review-stars" style="margin-left:auto;">★★★★☆</span>
+          </div>
+          <p class="review-text">스타트업 대표로서 AI 도구 활용이 절실했는데, 이 강의로 방향을 잡을 수 있었습니다. Chain-of-Thought 프롬프팅은 정말 게임 체인저네요. 팀 전체에게 추천하고 싶습니다. 고급 API 파트가 조금 더 상세하면 더 좋을 것 같아요.</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-avatar" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED);">최</div>
+            <div>
+              <div class="reviewer-name">최컨설턴트</div>
+              <div class="review-date">2026년 1월 20일</div>
+            </div>
+            <span class="review-stars" style="margin-left:auto;">★★★★★</span>
+          </div>
+          <p class="review-text">컨설팅 업무에서 보고서 작성, 자료 분석, 고객 커뮤니케이션 등 거의 모든 영역에 적용하고 있습니다. 투자 대비 가치가 매우 높은 강의입니다. 이클로드 강사님의 다른 강의도 모두 수강할 예정입니다.</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-avatar" style="background:linear-gradient(135deg,#F59E0B,#D97706);">정</div>
+            <div>
+              <div class="reviewer-name">정HR담당자</div>
+              <div class="review-date">2026년 1월 12일</div>
+            </div>
+            <span class="review-stars" style="margin-left:auto;">★★★★★</span>
+          </div>
+          <p class="review-text">HR 직무에서도 채용 공고 작성, JD 분석, 인터뷰 질문 생성 등 다양하게 활용하고 있습니다. 처음에는 반신반의했는데 수강 후 완전히 생각이 바뀌었어요. 우리 팀 전체 필수 교육으로 지정했습니다!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Tab: Q&A ── -->
+    <div class="tab-pane" id="tab-qa">
+      <div class="content-section">
+        <h2>Q&amp;A</h2>
+
+        <div class="qa-card">
+          <div class="qa-question">
+            <div class="qa-q-badge">Q</div>
+            <div>
+              <div style="font-weight:600;font-size:0.9rem;margin-bottom:4px;">프로그래밍 경험이 없어도 수강할 수 있나요?</div>
+              <div style="font-size:0.8rem;color:var(--color-text-muted);">박초보 · 2026.02.10</div>
+            </div>
+          </div>
+          <div class="qa-answer">
+            <div class="qa-a-badge">A</div>
+            <div>
+              <div style="font-size:0.88rem;line-height:1.65;color:var(--color-text-muted);">
+                네, 물론입니다! 이 강의는 프로그래밍 경험 없이도 완전히 따라올 수 있도록 설계되었습니다.
+                Claude를 활용한 업무 자동화는 코딩 없이도 충분히 강력한 결과를 낼 수 있습니다.
+                마지막 고급 섹션의 API 연동 부분만 약간의 기술적 내용이 포함되어 있으며, 이 부분도 상세히 설명됩니다.
+              </div>
+              <div style="font-size:0.78rem;color:var(--color-text-muted);margin-top:6px;">이클로드 (강사) · 2026.02.10</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-question">
+            <div class="qa-q-badge">Q</div>
+            <div>
+              <div style="font-weight:600;font-size:0.9rem;margin-bottom:4px;">강의 수료 후 자격증을 받을 수 있나요?</div>
+              <div style="font-size:0.8rem;color:var(--color-text-muted);">김수강생 · 2026.01.25</div>
+            </div>
+          </div>
+          <div class="qa-answer">
+            <div class="qa-a-badge">A</div>
+            <div>
+              <div style="font-size:0.88rem;line-height:1.65;color:var(--color-text-muted);">
+                네! 모든 강의를 80% 이상 수강하시면 AX교육플랫폼의 수료증이 발급됩니다.
+                추가로 'AX Practitioner' 자격증 시험에 응시하시면 공식 자격증도 취득하실 수 있습니다.
+                자격증 시험 할인 쿠폰이 수료 시 제공됩니다.
+              </div>
+              <div style="font-size:0.78rem;color:var(--color-text-muted);margin-top:6px;">이클로드 (강사) · 2026.01.25</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-question">
+            <div class="qa-q-badge">Q</div>
+            <div>
+              <div style="font-weight:600;font-size:0.9rem;margin-bottom:4px;">강의는 얼마나 오랫동안 시청할 수 있나요?</div>
+              <div style="font-size:0.8rem;color:var(--color-text-muted);">이질문 · 2026.01.18</div>
+            </div>
+          </div>
+          <div class="qa-answer">
+            <div class="qa-a-badge">A</div>
+            <div>
+              <div style="font-size:0.88rem;line-height:1.65;color:var(--color-text-muted);">
+                한 번 구매하시면 영구적으로 시청 가능합니다! 강의 업데이트도 무료로 제공됩니다.
+                Claude AI는 계속 발전하므로 커리큘럼도 지속적으로 업데이트할 예정입니다.
+                모바일 앱과 PC 모두에서 시청 가능합니다.
+              </div>
+              <div style="font-size:0.78rem;color:var(--color-text-muted);margin-top:6px;">이클로드 (강사) · 2026.01.18</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ask-btn-wrap">
+          <button class="btn btn-primary" onclick="handleAskQuestion()">✍️ 질문하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Right: Enrollment Card ── -->
+  <div>
+    <div class="enrollment-card">
+      <div class="card-preview">
+        🤖
+        <span class="card-preview-badge">미리보기 가능</span>
+      </div>
+      <div class="card-body">
+        <div class="card-original">₩98,000</div>
+        <div class="card-price">₩49,000</div>
+        <div class="card-discount">🔥 50% 할인 · 오늘만!</div>
+        <button class="enroll-main-btn" onclick="handleEnroll()">지금 수강하기</button>
+        <button class="trial-btn" onclick="handleTrial()">▶ 무료 미리보기 (2강)</button>
+        <div class="guarantee"><span>✔ 30일 환불 보장</span> — 만족 못하시면 100% 환불</div>
+        <div class="includes-title">이 강의에 포함된 것</div>
+        <ul class="includes-list">
+          <li><span>⏱</span><span>총 8시간 20분 영상</span></li>
+          <li><span>📖</span><span>22개 강의 (5개 섹션)</span></li>
+          <li><span>📝</span><span>실습 자료 & 프롬프트 템플릿</span></li>
+          <li><span>💬</span><span>강사 Q&A 지원</span></li>
+          <li><span>📱</span><span>모바일 & PC 영구 시청</span></li>
+          <li><span>🏆</span><span>수료증 발급</span></li>
+          <li><span>🔄</span><span>무료 업데이트 영구 제공</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Share -->
+    <div style="margin-top:16px;padding:16px;background:var(--color-white);border-radius:12px;border:1px solid var(--color-border);text-align:center;">
+      <div style="font-size:0.82rem;color:var(--color-text-muted);margin-bottom:10px;">이 강의 공유하기</div>
+      <div style="display:flex;justify-content:center;gap:10px;">
+        <button onclick="shareLink()" style="padding:8px 16px;border-radius:8px;border:1px solid var(--color-border);background:none;cursor:pointer;font-size:0.8rem;font-family:var(--font-korean);">🔗 링크 복사</button>
+        <button onclick="shareKakao()" style="padding:8px 16px;border-radius:8px;border:1px solid var(--color-border);background:none;cursor:pointer;font-size:0.8rem;font-family:var(--font-korean);">💬 카카오톡</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/theme.js"></script>
+<script>
+/* ── Tab switching ── */
+document.getElementById('tabNav').addEventListener('click', e => {
+  const btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const pane = document.getElementById('tab-' + btn.dataset.tab);
+  if (pane) pane.classList.add('active');
+});
+
+/* ── Curriculum accordion ── */
+function toggleSection(header) {
+  const item = header.closest('.section-item');
+  item.classList.toggle('open');
+}
+
+/* ── Enroll / Trial ── */
+function handleEnroll() {
+  Utils.showToast('로그인 후 수강 신청이 가능합니다.', 'warning');
+  setTimeout(() => window.location.href = 'auth.html', 1500);
+}
+
+function handleTrial() {
+  Utils.showToast('미리보기 강의를 시작합니다. (Section 1의 1, 2강)', 'success');
+}
+
+function handleAskQuestion() {
+  Utils.showToast('로그인 후 질문을 작성할 수 있습니다.', 'info');
+}
+
+function shareLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    Utils.showToast('강의 링크가 클립보드에 복사되었습니다!', 'success');
+  });
+}
+
+function shareKakao() {
+  Utils.showToast('카카오톡 공유는 카카오 SDK 연동 후 사용 가능합니다.', 'info');
+}
+</script>
+</body>
+</html>

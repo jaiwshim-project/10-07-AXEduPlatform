@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AX 자격증 — AX교육플랫폼</title>
+  <meta name="description" content="AX 전문가 자격증으로 커리어를 한 단계 업그레이드하세요. Practitioner부터 Strategist까지.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <script>/* FOUC 방지 */const _t=localStorage.getItem('ax-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);</script>
+  <style>
+    /* ── Hero ── */
+    .cert-hero {
+      background: linear-gradient(135deg, #0A2540 0%, #1a3a5c 50%, #0e2d48 100%);
+      color: white;
+      padding: 64px 0 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cert-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,107,53,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 100%, rgba(0,200,150,0.1) 0%, transparent 50%);
+    }
+    .cert-hero .container { position: relative; }
+    .cert-hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(255,107,53,0.2);
+      border: 1px solid rgba(255,107,53,0.4);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #FFAA80;
+      margin-bottom: 20px;
+    }
+    .cert-hero h1 { font-size: 2.8rem; font-weight: 900; margin-bottom: 12px; letter-spacing: -1px; }
+    .cert-hero h1 em { color: #FF6B35; font-style: normal; }
+    .cert-hero p { font-size: 1.1rem; color: rgba(255,255,255,0.75); max-width: 560px; margin: 0 auto 32px; line-height: 1.65; }
+    .hero-stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num { font-size: 1.8rem; font-weight: 900; color: #FF6B35; }
+    .hero-stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.65); margin-top: 2px; }
+
+    /* ── Section wrapper ── */
+    .cert-section { padding: 64px 0; }
+    .cert-section + .cert-section { padding-top: 0; }
+    .section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--color-text);
+      margin-bottom: 8px;
+    }
+    .section-subtitle {
+      text-align: center;
+      color: var(--color-text-muted);
+      font-size: 1rem;
+      margin-bottom: 40px;
+    }
+
+    /* ── Level cards ── */
+    .cert-levels {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    @media (max-width: 1024px) { .cert-levels { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px)  { .cert-levels { grid-template-columns: 1fr; } }
+
+    .level-card {
+      background: var(--color-white);
+      border-radius: 20px;
+      border: 2px solid var(--color-border);
+      padding: 28px 24px 24px;
+      text-align: center;
+      transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+      position: relative;
+      overflow: hidden;
+    }
+    .level-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+    .level-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(0,0,0,0.12); }
+
+    /* Bronze */
+    .level-bronze::before { background: linear-gradient(90deg, #CD7F32, #E8A060); }
+    .level-bronze:hover { border-color: #CD7F32; }
+    /* Silver */
+    .level-silver::before { background: linear-gradient(90deg, #9E9E9E, #C0C0C0); }
+    .level-silver:hover { border-color: #C0C0C0; }
+    /* Gold */
+    .level-gold::before { background: linear-gradient(90deg, #D4A017, #FFD700); }
+    .level-gold:hover { border-color: #D4A017; }
+    /* Platinum */
+    .level-platinum::before { background: linear-gradient(90deg, #0A2540, #FF6B35); }
+    .level-platinum:hover { border-color: #FF6B35; }
+
+    .level-medal { font-size: 3rem; margin-bottom: 12px; display: block; }
+    .level-name { font-size: 1.15rem; font-weight: 800; color: var(--color-text); margin-bottom: 6px; }
+    .level-desc { font-size: 0.82rem; color: var(--color-text-muted); line-height: 1.5; margin-bottom: 16px; min-height: 48px; }
+    .level-price {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--color-text);
+      margin-bottom: 16px;
+    }
+    .level-requirements {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      margin-bottom: 20px;
+      border-top: 1px solid var(--color-border);
+      padding-top: 16px;
+    }
+    .level-requirements li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      padding: 4px 0;
+    }
+    .level-requirements li span:first-child { color: #00C896; flex-shrink: 0; font-size: 0.85rem; }
+    .apply-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      font-family: var(--font-korean);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.18s, transform 0.15s;
+    }
+    .apply-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-bronze  { background: linear-gradient(135deg,#CD7F32,#E8A060); color: white; }
+    .btn-silver  { background: linear-gradient(135deg,#9E9E9E,#C0C0C0); color: white; }
+    .btn-gold    { background: linear-gradient(135deg,#D4A017,#FFD700); color: #5a3d00; }
+    .btn-platinum{ background: linear-gradient(135deg,#0A2540,#FF6B35); color: white; }
+
+    /* ── Exam info ── */
+    .exam-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 20px;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    @media (max-width: 768px) { .exam-grid { grid-template-columns: 1fr; } }
+    .exam-card {
+      background: var(--color-white);
+      border-radius: 16px;
+      border: 1px solid var(--color-border);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .exam-icon { font-size: 2.2rem; margin-bottom: 12px; }
+    .exam-label { font-size: 0.82rem; color: var(--color-text-muted); margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .exam-value { font-size: 1.4rem; font-weight: 800; color: var(--color-text); }
+    .exam-detail { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 4px; }
+
+    /* ── Sample test ── */
+    .sample-test-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .question-card {
+      background: var(--color-white);
+      border-radius: 16px;
+      border: 1px solid var(--color-border);
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+    .q-num { font-size: 0.78rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; margin-bottom: 10px; }
+    .q-text { font-size: 1rem; font-weight: 700; color: var(--color-text); margin-bottom: 20px; line-height: 1.5; }
+    .options { display: flex; flex-direction: column; gap: 10px; }
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1.5px solid var(--color-border);
+      cursor: pointer;
+      transition: all 0.18s;
+      font-size: 0.9rem;
+      color: var(--color-text);
+    }
+    .option:hover { border-color: #0A2540; background: rgba(10,37,64,0.04); }
+    .option.selected { border-color: #FF6B35; background: rgba(255,107,53,0.06); }
+    .option.correct  { border-color: #10B981; background: rgba(16,185,129,0.08); }
+    .option.wrong    { border-color: #EF4444; background: rgba(239,68,68,0.06); }
+    .option-letter {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1.5px solid var(--color-border);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.82rem;
+      flex-shrink: 0;
+      transition: all 0.18s;
+    }
+    .option.selected .option-letter { background: #FF6B35; border-color: #FF6B35; color: white; }
+    .option.correct  .option-letter { background: #10B981; border-color: #10B981; color: white; }
+    .option.wrong    .option-letter { background: #EF4444; border-color: #EF4444; color: white; }
+    .q-feedback {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      display: none;
+    }
+    .q-feedback.correct { background: rgba(16,185,129,0.1); color: #065F46; display: block; }
+    .q-feedback.wrong   { background: rgba(239,68,68,0.08); color: #991B1B; display: block; }
+    .check-btn {
+      padding: 10px 24px;
+      background: #0A2540;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-family: var(--font-korean);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: background 0.18s;
+    }
+    .check-btn:hover { background: #1a3a5c; }
+
+    /* ── Testimonials ── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    @media (max-width: 768px) { .testimonials-grid { grid-template-columns: 1fr; } }
+    .testimonial-card {
+      background: var(--color-white);
+      border-radius: 16px;
+      border: 1px solid var(--color-border);
+      padding: 28px 24px;
+    }
+    .testimonial-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .testimonial-text {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 10px; }
+    .testi-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .testi-name { font-weight: 700; font-size: 0.88rem; }
+    .testi-title { font-size: 0.78rem; color: var(--color-text-muted); }
+
+    /* ── FAQ ── */
+    .faq-wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    .faq-item {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 20px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--color-text);
+      background: var(--color-bg);
+      transition: background 0.18s;
+      user-select: none;
+    }
+    .faq-q:hover { background: #EFF2F7; }
+    .faq-toggle { transition: transform 0.22s; font-size: 0.85rem; color: var(--color-text-muted); }
+    .faq-item.open .faq-toggle { transform: rotate(180deg); }
+    .faq-a { display: none; padding: 16px 20px; font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.7; border-top: 1px solid var(--color-border); }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ── CTA ── */
+    .cert-cta {
+      background: linear-gradient(135deg,#0A2540,#1a3a5c);
+      color: white;
+      padding: 64px 24px;
+      text-align: center;
+    }
+    .cert-cta h2 { font-size: 2rem; font-weight: 900; margin-bottom: 12px; }
+    .cert-cta p { color: rgba(255,255,255,0.75); margin-bottom: 28px; }
+
+    [data-theme="dark"] .faq-q { background: #1a2537; }
+    [data-theme="dark"] .faq-q:hover { background: #1e2f45; }
+    [data-theme="dark"] .exam-card,
+    [data-theme="dark"] .question-card,
+    [data-theme="dark"] .testimonial-card,
+    [data-theme="dark"] .level-card { background: #1e293b; border-color: #334155; }
+
+    @media (max-width: 768px) {
+      .cert-hero h1 { font-size: 2rem; }
+      .hero-stats-row { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="logo">
+      <span style="color:#FF6B35;font-weight:900;">AX</span>교육플랫폼
+      <span class="logo-badge">BETA</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">홈</a></li>
+      <li><a href="courses.html">강의</a></li>
+      <li><a href="workshops.html">워크숍</a></li>
+      <li><a href="certification.html" class="active">자격증</a></li>
+      <li><a href="community.html">커뮤니티</a></li>
+      <li><a href="enterprise.html">기업서비스</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="themeToggle" onclick="ThemeManager.toggle()" title="테마 전환" style="background:none;border:none;cursor:pointer;font-size:1.2rem;padding:4px 8px;">🌙</button>
+      <a href="auth.html" class="btn btn-ghost btn-sm">로그인</a>
+      <a href="dashboard.html" class="btn btn-primary btn-sm">대시보드</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../index.html">홈</a>
+  <a href="courses.html">강의</a>
+  <a href="workshops.html">워크숍</a>
+  <a href="certification.html">자격증</a>
+  <a href="community.html">커뮤니티</a>
+  <a href="auth.html">로그인</a>
+</div>
+
+<!-- ── Hero ── -->
+<section class="cert-hero">
+  <div class="container">
+    <div class="cert-hero-eyebrow">🏆 국내 최초 AX 전문 자격증</div>
+    <h1>AX <em>전문가</em> 자격증</h1>
+    <p>AI 전환 시대의 경쟁력을 자격증으로 증명하세요.<br>4단계 레벨 시스템으로 체계적인 성장을 지원합니다.</p>
+    <div class="hero-stats-row">
+      <div class="hero-stat">
+        <div class="hero-stat-num">3,200+</div>
+        <div class="hero-stat-label">자격증 취득자</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">94%</div>
+        <div class="hero-stat-label">취업/승진 성공률</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">200+</div>
+        <div class="hero-stat-label">채용 연계 기업</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">2년</div>
+        <div class="hero-stat-label">자격 유효기간</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Certification Levels ── -->
+<section class="cert-section" style="background:var(--color-bg);">
+  <div class="section-title">자격증 레벨</div>
+  <div class="section-subtitle">단계별로 AX 역량을 인증받으세요</div>
+  <div class="cert-levels">
+
+    <!-- Bronze -->
+    <div class="level-card level-bronze reveal">
+      <span class="level-medal">🥉</span>
+      <div class="level-name">AX Practitioner</div>
+      <div class="level-desc">AI 도구를 활용하는 실무자를 위한 입문 자격증</div>
+      <div class="level-price">₩50,000</div>
+      <ul class="level-requirements">
+        <li><span>✓</span><span>기초 강의 2개 이상 수료</span></li>
+        <li><span>✓</span><span>AX 기초 개념 이해</span></li>
+        <li><span>✓</span><span>시험 응시 (4지선다 50문항, 120분)</span></li>
+        <li><span>✓</span><span>70점 이상 합격</span></li>
+      </ul>
+      <button class="apply-btn btn-bronze" onclick="applyExam('Practitioner')">응시 신청</button>
+    </div>
+
+    <!-- Silver -->
+    <div class="level-card level-silver reveal">
+      <span class="level-medal">🥈</span>
+      <div class="level-name">AX Builder</div>
+      <div class="level-desc">AI 솔루션을 구축하는 개발자 · 기획자를 위한 자격증</div>
+      <div class="level-price">₩80,000</div>
+      <ul class="level-requirements">
+        <li><span>✓</span><span>AX Practitioner 보유</span></li>
+        <li><span>✓</span><span>개발/기획 강의 3개 이상 수료</span></li>
+        <li><span>✓</span><span>실습 프로젝트 제출 및 통과</span></li>
+        <li><span>✓</span><span>시험 응시 (75점 이상 합격)</span></li>
+      </ul>
+      <button class="apply-btn btn-silver" onclick="applyExam('Builder')">응시 신청</button>
+    </div>
+
+    <!-- Gold -->
+    <div class="level-card level-gold reveal">
+      <span class="level-medal">🥇</span>
+      <div class="level-name">AX Architect</div>
+      <div class="level-desc">AI 시스템을 설계하는 아키텍트를 위한 고급 자격증</div>
+      <div class="level-price">₩120,000</div>
+      <ul class="level-requirements">
+        <li><span>✓</span><span>AX Builder 보유</span></li>
+        <li><span>✓</span><span>AI 플랫폼 설계 강의 수료</span></li>
+        <li><span>✓</span><span>실전 아키텍처 설계서 제출</span></li>
+        <li><span>✓</span><span>시험 + 구술 평가 (80점 합격)</span></li>
+      </ul>
+      <button class="apply-btn btn-gold" onclick="applyExam('Architect')">응시 신청</button>
+    </div>
+
+    <!-- Platinum -->
+    <div class="level-card level-platinum reveal">
+      <span class="level-medal">💎</span>
+      <div class="level-name">AX Strategist</div>
+      <div class="level-desc">AX 전략을 수립하는 C-레벨 리더를 위한 최고 자격증</div>
+      <div class="level-price">₩200,000</div>
+      <ul class="level-requirements">
+        <li><span>✓</span><span>AX Architect 보유</span></li>
+        <li><span>✓</span><span>기업 AX 전략 강의 수료</span></li>
+        <li><span>✓</span><span>실제 기업 AX 프로젝트 경험 제출</span></li>
+        <li><span>✓</span><span>위원회 심사 + 프레젠테이션</span></li>
+      </ul>
+      <button class="apply-btn btn-platinum" onclick="applyExam('Strategist')">응시 신청</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── Exam Info ── -->
+<section class="cert-section">
+  <div class="container">
+    <div class="section-title">시험 안내</div>
+    <div class="section-subtitle">체계적이고 공정한 평가 시스템</div>
+    <div class="exam-grid">
+      <div class="exam-card">
+        <div class="exam-icon">📝</div>
+        <div class="exam-label">시험 형식</div>
+        <div class="exam-value">4지선다</div>
+        <div class="exam-detail">총 50문항 객관식</div>
+      </div>
+      <div class="exam-card">
+        <div class="exam-icon">⏱</div>
+        <div class="exam-label">시험 시간</div>
+        <div class="exam-value">120분</div>
+        <div class="exam-detail">온라인 시험 (PC / 모바일)</div>
+      </div>
+      <div class="exam-card">
+        <div class="exam-icon">✅</div>
+        <div class="exam-label">합격 기준</div>
+        <div class="exam-value">70점 이상</div>
+        <div class="exam-detail">Practitioner 기준 / 레벨별 상이</div>
+      </div>
+      <div class="exam-card">
+        <div class="exam-icon">📅</div>
+        <div class="exam-label">시험 일정</div>
+        <div class="exam-value">상시 응시</div>
+        <div class="exam-detail">24시간 온라인 응시 가능</div>
+      </div>
+      <div class="exam-card">
+        <div class="exam-icon">🔄</div>
+        <div class="exam-label">재응시</div>
+        <div class="exam-value">7일 후</div>
+        <div class="exam-detail">불합격 시 7일 후 재응시 가능</div>
+      </div>
+      <div class="exam-card">
+        <div class="exam-icon">🏅</div>
+        <div class="exam-label">자격 유효기간</div>
+        <div class="exam-value">2년</div>
+        <div class="exam-detail">갱신 시 재시험 또는 CPE 이수</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Sample Test ── -->
+<section class="cert-section" style="background:var(--color-bg);">
+  <div class="container">
+    <div class="section-title">무료 샘플 문제 풀기</div>
+    <div class="section-subtitle">실제 시험 수준의 예제 문제를 체험해보세요</div>
+    <div class="sample-test-wrap">
+
+      <!-- Q1 -->
+      <div class="question-card" id="q1">
+        <div class="q-num">문제 1 / 3</div>
+        <div class="q-text">다음 중 AX(AI 전환)의 핵심 특성으로 가장 올바른 것은?</div>
+        <div class="options" data-correct="B">
+          <div class="option" data-val="A" onclick="selectOption(this,'q1')">
+            <span class="option-letter">A</span>
+            단순히 AI 소프트웨어를 도입하는 것으로, 기술 투자를 의미한다
+          </div>
+          <div class="option" data-val="B" onclick="selectOption(this,'q1')">
+            <span class="option-letter">B</span>
+            비즈니스 모델, 프로세스, 조직 문화 전반을 AI 중심으로 재설계하는 것이다
+          </div>
+          <div class="option" data-val="C" onclick="selectOption(this,'q1')">
+            <span class="option-letter">C</span>
+            AI 개발자를 고용해 내부 AI 서비스를 개발하는 것이다
+          </div>
+          <div class="option" data-val="D" onclick="selectOption(this,'q1')">
+            <span class="option-letter">D</span>
+            ChatGPT 같은 AI 도구를 사무 업무에 도입하는 것이다
+          </div>
+        </div>
+        <button class="check-btn" onclick="checkAnswer('q1')">정답 확인</button>
+        <div class="q-feedback" id="fb1"></div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question-card" id="q2">
+        <div class="q-num">문제 2 / 3</div>
+        <div class="q-text">프롬프트 엔지니어링에서 "Chain-of-Thought(CoT)" 기법의 주요 목적은?</div>
+        <div class="options" data-correct="C">
+          <div class="option" data-val="A" onclick="selectOption(this,'q2')">
+            <span class="option-letter">A</span>
+            AI 모델의 응답 속도를 높이기 위한 기법이다
+          </div>
+          <div class="option" data-val="B" onclick="selectOption(this,'q2')">
+            <span class="option-letter">B</span>
+            여러 AI 모델을 체인 형태로 연결해 처리하는 방식이다
+          </div>
+          <div class="option" data-val="C" onclick="selectOption(this,'q2')">
+            <span class="option-letter">C</span>
+            AI가 단계적 추론 과정을 거치도록 유도해 복잡한 문제 해결 능력을 높이는 기법이다
+          </div>
+          <div class="option" data-val="D" onclick="selectOption(this,'q2')">
+            <span class="option-letter">D</span>
+            긴 텍스트를 여러 번에 나눠 입력하는 분할 처리 기법이다
+          </div>
+        </div>
+        <button class="check-btn" onclick="checkAnswer('q2')">정답 확인</button>
+        <div class="q-feedback" id="fb2"></div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question-card" id="q3">
+        <div class="q-num">문제 3 / 3</div>
+        <div class="q-text">기업 AX 전략 수립 시 가장 먼저 수행해야 하는 단계는?</div>
+        <div class="options" data-correct="A">
+          <div class="option" data-val="A" onclick="selectOption(this,'q3')">
+            <span class="option-letter">A</span>
+            현재 비즈니스 프로세스 및 데이터 자산 현황 진단
+          </div>
+          <div class="option" data-val="B" onclick="selectOption(this,'q3')">
+            <span class="option-letter">B</span>
+            AI 개발팀 채용 및 인프라 구축
+          </div>
+          <div class="option" data-val="C" onclick="selectOption(this,'q3')">
+            <span class="option-letter">C</span>
+            경쟁사 AI 도입 사례 벤치마킹
+          </div>
+          <div class="option" data-val="D" onclick="selectOption(this,'q3')">
+            <span class="option-letter">D</span>
+            AI 솔루션 벤더사와 계약 체결
+          </div>
+        </div>
+        <button class="check-btn" onclick="checkAnswer('q3')">정답 확인</button>
+        <div class="q-feedback" id="fb3"></div>
+      </div>
+
+      <div style="text-align:center;margin-top:16px;">
+        <a href="courses.html" class="btn btn-primary">전체 강의 보러가기 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Alumni Testimonials ── -->
+<section class="cert-section">
+  <div class="container">
+    <div class="section-title">자격증 취득자 후기</div>
+    <div class="section-subtitle">AX 자격증이 커리어를 어떻게 바꿨는지 들어보세요</div>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <span class="testimonial-badge" style="background:rgba(205,127,50,0.12);color:#A0522D;">🥉 AX Practitioner</span>
+        <p class="testimonial-text">"자격증 취득 후 팀 내 AI 도입 프로젝트 리더를 맡게 됐습니다. 체계적인 지식 덕분에 자신감이 생겼어요. 연봉도 15% 올랐습니다!"</p>
+        <div class="testimonial-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#CD7F32,#E8A060);">😊</div>
+          <div>
+            <div class="testi-name">박지현</div>
+            <div class="testi-title">삼성SDS · AI 기획자</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="testimonial-badge" style="background:rgba(158,158,158,0.12);color:#616161;">🥈 AX Builder</span>
+        <p class="testimonial-text">"AX Builder 자격증이 스타트업 채용에서 결정적인 역할을 했습니다. 이력서에 자격증이 있으니 면접관들의 반응이 완전히 달라졌어요."</p>
+        <div class="testimonial-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#9E9E9E,#C0C0C0);">🚀</div>
+          <div>
+            <div class="testi-name">이준호</div>
+            <div class="testi-title">AI 스타트업 · 개발자</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="testimonial-badge" style="background:rgba(212,160,23,0.12);color:#92661A;">🥇 AX Architect</span>
+        <p class="testimonial-text">"기업 AX 컨설팅을 독립적으로 진행하는 데 AX Architect 자격증이 핵심 자격이 됐습니다. 고객사에서 신뢰를 얻는 데 큰 도움이 됩니다."</p>
+        <div class="testimonial-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#D4A017,#FFD700);">💼</div>
+          <div>
+            <div class="testi-name">김태영</div>
+            <div class="testi-title">AX 컨설턴트 · 프리랜서</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="cert-section" style="background:var(--color-bg);">
+  <div class="container">
+    <div class="section-title">자주 묻는 질문</div>
+    <div class="section-subtitle">궁금한 점을 해소하세요</div>
+    <div class="faq-wrap">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          자격증은 국가 공인 자격증인가요?
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-a">
+          현재 AX 자격증은 AX교육플랫폼의 민간 자격증으로, 국가 공인 자격증은 아닙니다.
+          그러나 국내 200개 이상의 기업이 채용 및 승진 심사에서 인정하고 있으며,
+          2026년 중 국가 공인 자격증 신청을 준비 중입니다.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          시험에 불합격하면 어떻게 되나요?
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-a">
+          불합격 시 7일 후 재응시가 가능합니다. 재응시 시에는 응시료의 50%만 납부하시면 됩니다.
+          3회 이상 불합격 시에는 관련 강의 추가 수강 후 재응시를 권장합니다.
+          AX교육플랫폼은 자격증 취득까지 끝까지 지원합니다.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          자격증 갱신은 어떻게 하나요?
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-a">
+          자격증 유효기간은 2년입니다. 갱신 방법은 두 가지입니다:
+          (1) 갱신 시험 응시 (응시료 50% 할인), 또는
+          (2) CPE(Continuing Professional Education) — 연 8시간 이상의 관련 강의 수강.
+          자격증 만료 3개월 전에 이메일로 안내를 드립니다.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          자격증을 레벨 순서대로 취득해야 하나요?
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-a">
+          AX Practitioner는 순서 없이 바로 응시 가능합니다.
+          AX Builder는 Practitioner 보유 후, AX Architect는 Builder 보유 후 응시 가능합니다.
+          AX Strategist는 Architect 보유 및 실제 기업 프로젝트 경험이 필요합니다.
+          단계별로 쌓아가는 구조로 설계되어 있습니다.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          기업 단체 응시 할인이 있나요?
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-a">
+          10명 이상 단체 응시 시 응시료 20% 할인, 30명 이상은 30% 할인이 적용됩니다.
+          기업 교육 프로그램과 연계 시 추가 혜택을 제공합니다.
+          enterprise@ax-edu.kr로 문의해 주시면 맞춤 견적을 드립니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cert-cta">
+  <div class="container">
+    <h2>지금 바로 AX 전문가가 되세요</h2>
+    <p>첫 번째 자격증을 취득하고 커리어 성장의 발판을 마련하세요</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn btn-primary" onclick="applyExam('Practitioner')" style="padding:14px 32px;font-size:1rem;">🥉 Practitioner 응시 신청</button>
+      <a href="courses.html" class="btn btn-ghost" style="padding:14px 32px;font-size:1rem;border:2px solid rgba(255,255,255,0.3);color:white;">강의 먼저 보기</a>
+    </div>
+  </div>
+</section>
+
+<script src="../js/config.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/theme.js"></script>
+<script>
+/* ── Sample quiz ── */
+const feedbacks = {
+  q1: { correct: '정답입니다! ✅ AX(AI 전환)는 단순 도구 도입을 넘어 비즈니스 전반을 AI 중심으로 재설계하는 근본적인 변혁입니다.', wrong: '오답입니다. ❌ 정답은 B입니다. AX는 기술 도입을 넘어 비즈니스 모델, 프로세스, 문화 전반의 AI 중심 재설계를 의미합니다.' },
+  q2: { correct: '정답입니다! ✅ Chain-of-Thought은 AI가 단계적 추론 과정을 명시적으로 거치도록 유도해 복잡한 문제에서 더 정확한 답을 이끌어내는 프롬프트 기법입니다.', wrong: '오답입니다. ❌ 정답은 C입니다. CoT는 AI의 단계적 사고 과정을 유도해 추론 능력을 높이는 기법입니다.' },
+  q3: { correct: '정답입니다! ✅ AX 전략 수립의 첫 단계는 현재 상태 진단입니다. 비즈니스 프로세스와 데이터 자산을 파악해야 어디에 AI를 적용할지 결정할 수 있습니다.', wrong: '오답입니다. ❌ 정답은 A입니다. 전략 수립은 항상 현황 진단부터 시작해야 합니다.' }
+};
+
+function selectOption(el, qId) {
+  const opts = el.closest('.options').querySelectorAll('.option');
+  opts.forEach(o => {
+    o.classList.remove('selected');
+    o.querySelector('.option-letter').style.background = '';
+    o.querySelector('.option-letter').style.color = '';
+  });
+  el.classList.add('selected');
+}
+
+function checkAnswer(qId) {
+  const card = document.getElementById(qId);
+  const selected = card.querySelector('.option.selected');
+  if (!selected) { Utils.showToast('답을 선택해주세요.', 'warning'); return; }
+  const correct = card.querySelector('.options').dataset.correct;
+  const isCorrect = selected.dataset.val === correct;
+  const fb = document.getElementById('fb' + qId.slice(1));
+
+  card.querySelectorAll('.option').forEach(o => {
+    o.style.pointerEvents = 'none';
+    if (o.dataset.val === correct) o.classList.add('correct');
+    else if (o.classList.contains('selected')) o.classList.add('wrong');
+  });
+
+  fb.className = 'q-feedback ' + (isCorrect ? 'correct' : 'wrong');
+  fb.textContent = feedbacks[qId][isCorrect ? 'correct' : 'wrong'];
+  card.querySelector('.check-btn').disabled = true;
+}
+
+/* ── FAQ accordion ── */
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+/* ── Apply exam ── */
+function applyExam(level) {
+  Utils.showToast(`AX ${level} 자격증 응시 신청 — 로그인 후 이용 가능합니다.`, 'info');
+  setTimeout(() => window.location.href = 'auth.html', 1500);
+}
+</script>
+
+<footer style="background:#0A2540;color:rgba(255,255,255,0.7);text-align:center;padding:24px;font-size:0.85rem;">
+  <p>© 2026 AX교육플랫폼. All rights reserved. | <a href="../index.html" style="color:#FF6B35;text-decoration:none;">홈으로</a> | <a href="manual.html" style="color:rgba(255,255,255,0.6);text-decoration:none;">이용가이드</a></p>
+</footer>
+</body>
+</html>

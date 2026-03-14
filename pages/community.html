@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>커뮤니티 - AX교육플랫폼</title>
+  <meta name="description" content="AX 전문가들이 모이는 커뮤니티. 질문, 프로젝트 모집, 스터디 모임을 공유하세요.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <script>/* FOUC 방지 */const _t=localStorage.getItem('ax-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);</script>
+  <style>
+    /* Community-specific styles */
+    .community-hero {
+      background: linear-gradient(135deg, var(--color-primary) 0%, #1a3a5c 100%);
+      color: white;
+      padding: 48px 0 40px;
+    }
+
+    .community-hero h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .community-hero p {
+      opacity: 0.8;
+      margin-bottom: 24px;
+    }
+
+    .search-bar {
+      display: flex;
+      gap: 12px;
+      max-width: 640px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      border: none;
+      font-size: 1rem;
+      font-family: var(--font-korean);
+      background: rgba(255,255,255,0.95);
+    }
+
+    .search-bar input:focus { outline: none; }
+
+    .community-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 24px;
+      opacity: 0.85;
+      font-size: 0.875rem;
+    }
+
+    .community-stat { display: flex; align-items: center; gap: 6px; }
+    .community-stat strong { font-weight: 700; font-size: 1.1rem; color: #FF6B35; }
+
+    /* Main Layout */
+    .community-layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 24px;
+    }
+
+    /* Tabs */
+    .community-tabs {
+      background: white;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+    }
+
+    .tabs-header {
+      display: flex;
+      border-bottom: 1px solid var(--color-border);
+      background: #FAFAFA;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 14px 20px;
+      border: none;
+      background: none;
+      color: var(--color-text-muted);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      transition: all var(--transition);
+      font-family: var(--font-korean);
+    }
+
+    .tab-btn:hover { color: var(--color-primary); background: rgba(10,37,64,0.04); }
+    .tab-btn.active { color: var(--color-accent); border-bottom-color: var(--color-accent); background: white; }
+
+    .tabs-actions {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .sort-select {
+      padding: 8px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-family: var(--font-korean);
+      background: white;
+      cursor: pointer;
+    }
+
+    /* Post Card */
+    .post-list { padding: 0; }
+
+    .post-card {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--color-border);
+      transition: background var(--transition);
+      cursor: pointer;
+    }
+
+    .post-card:hover { background: #FAFFF8; }
+    .post-card:last-child { border-bottom: none; }
+
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .post-author-info { flex: 1; }
+    .post-author-name { font-size: 0.875rem; font-weight: 600; color: var(--color-text); }
+    .post-meta { font-size: 0.78rem; color: var(--color-text-muted); }
+
+    .post-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .post-title:hover { color: var(--color-accent); }
+
+    .post-excerpt {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      margin-bottom: 12px;
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .post-footer {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .post-tags { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; }
+
+    .post-stats {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .post-stat {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    .post-stat.liked { color: #EF4444; }
+    .post-stat button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: all var(--transition);
+      font-family: var(--font-korean);
+    }
+
+    .post-stat button:hover { background: rgba(239,68,68,0.08); color: #EF4444; }
+    .post-stat button.liked { color: #EF4444; }
+
+    /* Sidebar Widgets */
+    .sidebar-widget {
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .widget-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .trending-item {
+      display: flex;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--color-border);
+      cursor: pointer;
+      transition: opacity var(--transition);
+    }
+
+    .trending-item:last-child { border-bottom: none; }
+    .trending-item:hover { opacity: 0.75; }
+
+    .trending-num {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--color-border);
+      width: 24px;
+      flex-shrink: 0;
+    }
+
+    .trending-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1.4;
+      margin-bottom: 2px;
+    }
+
+    .trending-meta { font-size: 0.75rem; color: var(--color-text-muted); }
+
+    .expert-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .expert-item:last-child { border-bottom: none; }
+    .expert-name { font-size: 0.875rem; font-weight: 600; }
+    .expert-posts { font-size: 0.75rem; color: var(--color-text-muted); }
+
+    /* Write Post Modal */
+    .write-modal .modal { max-width: 640px; }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--color-text-muted);
+    }
+
+    .empty-state-icon { font-size: 3rem; margin-bottom: 16px; }
+    .empty-state-title { font-size: 1.1rem; font-weight: 700; color: var(--color-primary); margin-bottom: 8px; }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 20px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .page-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background: white;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: all var(--transition);
+    }
+
+    .page-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+    .page-btn.active { background: var(--color-accent); color: white; border-color: var(--color-accent); }
+
+    @media (max-width: 968px) {
+      .community-layout { grid-template-columns: 1fr; }
+      .community-sidebar { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .community-hero h1 { font-size: 1.5rem; }
+      .search-bar { flex-direction: column; }
+      .community-stats { flex-wrap: wrap; gap: 16px; }
+    }
+
+    [data-theme="dark"] .community-tabs { background: var(--color-surface, #1e293b); }
+    [data-theme="dark"] .tabs-header { background: #162032; }
+    [data-theme="dark"] .tab-btn.active { background: var(--color-surface, #1e293b); }
+    [data-theme="dark"] .sort-select { background: var(--color-surface, #1e293b); color: var(--color-text); border-color: var(--color-border); }
+    [data-theme="dark"] .sidebar-widget { background: var(--color-surface, #1e293b); }
+    [data-theme="dark"] .page-btn { background: var(--color-surface, #1e293b); color: var(--color-text); }
+    [data-theme="dark"] .post-card:hover { background: rgba(255,255,255,0.04); }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="logo">
+      AX플랫폼 <span class="logo-badge">BETA</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">홈</a></li>
+      <li><a href="./courses.html">강의</a></li>
+      <li><a href="./community.html" class="active">커뮤니티</a></li>
+      <li><a href="./expert-profile.html">전문가</a></li>
+      <li><a href="./enterprise.html">기업서비스</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="themeToggle" onclick="ThemeManager.toggle()" title="테마 전환">🌙</button>
+      <a href="./login.html" class="btn btn-outline btn-sm">로그인</a>
+      <a href="./signup.html" class="btn btn-primary btn-sm">무료 시작</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../index.html">홈</a>
+  <a href="./courses.html">강의</a>
+  <a href="./community.html">커뮤니티</a>
+  <a href="./expert-profile.html">전문가</a>
+  <a href="./enterprise.html">기업서비스</a>
+  <a href="./login.html">로그인</a>
+</div>
+
+<!-- Community Hero -->
+<section class="community-hero">
+  <div class="container">
+    <h1>🤝 AX 커뮤니티</h1>
+    <p>AI 전환 전문가들이 모이는 곳. 질문하고, 공유하고, 함께 성장하세요.</p>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="질문, 주제, 키워드 검색..." oninput="filterPosts()">
+      <button class="btn btn-primary" onclick="openWriteModal()">✏️ 글쓰기</button>
+    </div>
+    <div class="community-stats">
+      <div class="community-stat">👥 <strong>2,847</strong> 회원</div>
+      <div class="community-stat">📝 <strong>1,234</strong> 게시글</div>
+      <div class="community-stat">💬 <strong>8,901</strong> 댓글</div>
+      <div class="community-stat">🔥 <strong>오늘 47</strong> 새 글</div>
+    </div>
+  </div>
+</section>
+
+<!-- Community Layout -->
+<div class="community-layout">
+
+  <!-- Main Posts Area -->
+  <div class="community-main">
+    <div class="community-tabs">
+
+      <!-- Tab Header -->
+      <div class="tabs-header">
+        <button class="tab-btn active" onclick="switchTab('all', this)">📋 전체 게시글</button>
+        <button class="tab-btn" onclick="switchTab('qa', this)">❓ 기술 Q&A</button>
+        <button class="tab-btn" onclick="switchTab('project', this)">🚀 프로젝트 모집</button>
+        <button class="tab-btn" onclick="switchTab('study', this)">📚 스터디 모임</button>
+      </div>
+
+      <!-- Actions Bar -->
+      <div class="tabs-actions">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span class="badge badge-orange" id="resultCount">전체 10개</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <select class="sort-select" onchange="sortPosts(this.value)">
+            <option value="latest">최신순</option>
+            <option value="popular">인기순</option>
+            <option value="comments">댓글순</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Post List -->
+      <div class="post-list" id="postList">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">›</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="community-sidebar">
+
+    <!-- Trending Posts -->
+    <div class="sidebar-widget">
+      <div class="widget-title">🔥 인기 게시글</div>
+      <div id="trendingList"></div>
+    </div>
+
+    <!-- Active Experts -->
+    <div class="sidebar-widget">
+      <div class="widget-title">⭐ 활발한 전문가</div>
+      <div id="expertList"></div>
+    </div>
+
+    <!-- Tags -->
+    <div class="sidebar-widget">
+      <div class="widget-title">🏷️ 인기 태그</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <span class="badge badge-primary" style="cursor:pointer;" onclick="filterByTag('Gemini API')">Gemini API</span>
+        <span class="badge badge-green" style="cursor:pointer;" onclick="filterByTag('Supabase')">Supabase</span>
+        <span class="badge badge-orange" style="cursor:pointer;" onclick="filterByTag('바이브코딩')">바이브코딩</span>
+        <span class="badge badge-blue" style="cursor:pointer;" onclick="filterByTag('Claude')">Claude</span>
+        <span class="badge badge-purple" style="cursor:pointer;" onclick="filterByTag('AI자동화')">AI자동화</span>
+        <span class="badge badge-gray" style="cursor:pointer;" onclick="filterByTag('프롬프트')">프롬프트</span>
+        <span class="badge badge-yellow" style="cursor:pointer;" onclick="filterByTag('LangChain')">LangChain</span>
+        <span class="badge badge-red" style="cursor:pointer;" onclick="filterByTag('RAG')">RAG</span>
+      </div>
+    </div>
+
+    <!-- Write Button -->
+    <button class="btn btn-primary btn-block btn-lg" onclick="openWriteModal()">
+      ✏️ 새 글 작성하기
+    </button>
+  </aside>
+</div>
+
+<!-- Write Post Modal -->
+<div class="modal-overlay" id="writeModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h3 class="modal-title">✏️ 새 글 작성</h3>
+      <button class="modal-close" onclick="closeWriteModal()">✕</button>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label required">카테고리</label>
+      <select class="form-select" id="postCategory">
+        <option value="">카테고리 선택</option>
+        <option value="Q&A">❓ 기술 Q&A</option>
+        <option value="프로젝트 모집">🚀 프로젝트 모집</option>
+        <option value="스터디 모임">📚 스터디 모임</option>
+        <option value="정보 공유">📢 정보 공유</option>
+        <option value="취업/커리어">💼 취업/커리어</option>
+        <option value="후기">📝 후기</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label required">제목</label>
+      <input type="text" class="form-input" id="postTitle" placeholder="명확하고 구체적인 제목을 입력하세요">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label required">내용</label>
+      <textarea class="form-textarea" id="postContent" style="min-height:200px;"
+        placeholder="질문 또는 공유할 내용을 작성하세요. 코드는 ``` 으로 감싸주세요."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">태그 (쉼표로 구분)</label>
+      <input type="text" class="form-input" id="postTags" placeholder="예: Gemini API, Supabase, 바이브코딩">
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeWriteModal()">취소</button>
+      <button class="btn btn-primary" onclick="submitPost()">게시하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- Post Detail Modal -->
+<div class="modal-overlay" id="postDetailModal">
+  <div class="modal modal-lg" style="max-width:720px;">
+    <div class="modal-header">
+      <div>
+        <div id="detailCategory" style="margin-bottom:6px;"></div>
+        <h3 class="modal-title" id="detailTitle"></h3>
+      </div>
+      <button class="modal-close" onclick="closePostDetail()">✕</button>
+    </div>
+
+    <div id="detailMeta" style="display:flex;gap:16px;margin-bottom:16px;font-size:0.875rem;color:var(--color-text-muted);flex-wrap:wrap;"></div>
+    <div id="detailContent" style="line-height:1.8;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--color-border);"></div>
+
+    <div id="detailTags" style="margin-bottom:20px;"></div>
+
+    <!-- Comments -->
+    <div style="font-weight:700;margin-bottom:12px;" id="commentCount">댓글 0개</div>
+    <div id="commentList" style="margin-bottom:20px;"></div>
+
+    <div class="form-group" style="margin-bottom:0;">
+      <textarea class="form-textarea" id="newComment" placeholder="댓글을 작성하세요..." style="min-height:80px;"></textarea>
+      <div style="display:flex;justify-content:flex-end;margin-top:8px;">
+        <button class="btn btn-primary btn-sm" onclick="submitComment()">댓글 달기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+<!-- Help Button -->
+<button class="help-btn" onclick="openManual()" title="도움말">?</button>
+
+<script src="../js/config.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/theme.js"></script>
+<script>
+/* =====================
+   Data
+   ===================== */
+const POSTS = [
+  {
+    id: 1, category: 'Q&A', tab: 'qa',
+    title: 'Gemini API 연동할 때 CORS 오류 해결 방법',
+    author: '김철수', authorInitial: '김', authorColor: 'primary',
+    date: '2026-03-10', likes: 23, comments: 8, views: 412,
+    excerpt: 'React 앱에서 Gemini API를 직접 호출하면 CORS 오류가 발생합니다. 백엔드 프록시 없이 해결하는 방법이 있을까요?',
+    content: `Gemini API를 React 프론트엔드에서 직접 호출하면 다음과 같은 오류가 발생합니다:\n\n\`\`\`\nAccess to fetch has been blocked by CORS policy\n\`\`\`\n\n백엔드 서버를 따로 구성하지 않고 해결할 방법이 있을지 궁금합니다. Supabase Edge Functions를 활용하면 된다는 글을 봤는데, 구체적인 방법을 알고 싶습니다.`,
+    tags: ['Gemini API', 'CORS', 'React'],
+    pinned: true,
+    comments_data: [
+      { author: '이영희', date: '2026-03-10', text: 'Supabase Edge Functions 사용하시면 됩니다! function 안에서 API 호출하면 CORS 우회 가능해요.' },
+      { author: '박민준', date: '2026-03-11', text: 'Vercel API Routes도 좋은 방법이에요. 간단하게 설정할 수 있습니다.' }
+    ]
+  },
+  {
+    id: 2, category: '프로젝트 모집', tab: 'project',
+    title: 'AI 고객 상담 시스템 팀원 모집 (3/5 완성)',
+    author: '이영희', authorInitial: '이', authorColor: 'accent',
+    date: '2026-03-11', likes: 15, comments: 12, views: 287,
+    excerpt: 'Gemini API 기반 고객 상담 자동화 시스템을 개발 중입니다. 프론트엔드 개발자 1명, PM 1명을 추가 모집합니다.',
+    content: `## 프로젝트 개요\n\nGemini API와 Supabase를 활용한 고객 상담 자동화 시스템 개발 프로젝트입니다.\n\n## 현재 진행 상황\n- 백엔드 API: 완성 (Supabase Edge Functions)\n- AI 모델 연동: 완성 (Gemini 1.5 Pro)\n- 관리자 대시보드: 진행 중\n\n## 모집 인원\n- 프론트엔드 개발자 1명 (React 필수)\n- PM 1명 (AI 프로젝트 경험 우대)`,
+    tags: ['프로젝트 모집', 'Gemini API', 'React', 'Supabase'],
+    comments_data: []
+  },
+  {
+    id: 3, category: '스터디 모임', tab: 'study',
+    title: '바이브코딩으로 SaaS 만들기 스터디 (3월 모집)',
+    author: '박지수', authorInitial: '박', authorColor: 'green',
+    date: '2026-03-08', likes: 41, comments: 19, views: 623,
+    excerpt: '매주 토요일 오전 10시, Claude Code와 Cursor를 활용한 SaaS 개발 실습 스터디입니다. 초보자 환영!',
+    content: `매주 토요일 오전 10시에 온라인으로 진행되는 바이브코딩 실습 스터디입니다.\n\n**진행 방식**: 줌(Zoom)으로 화면 공유하며 함께 개발\n**인원**: 6명 (현재 4명)\n**기간**: 4주\n\n**커리큘럼**\n1주: 아이디어 → 와이어프레임 → 기본 구조\n2주: 핵심 기능 구현\n3주: AI 기능 연동\n4주: 배포 및 발표`,
+    tags: ['스터디', '바이브코딩', 'SaaS', 'Claude'],
+    comments_data: [{ author: '최현우', date: '2026-03-09', text: '참가 신청합니다! 토요일 10시 가능합니다.' }]
+  },
+  {
+    id: 4, category: '정보 공유', tab: 'all',
+    title: 'Supabase Row Level Security 완전 정복 가이드',
+    author: '최현우', authorInitial: '최', authorColor: 'purple',
+    date: '2026-03-09', likes: 67, comments: 22, views: 1204,
+    excerpt: 'Supabase RLS 설정이 헷갈리는 분들을 위해 실전 예제와 함께 정리했습니다. JWT 인증 연동 방법도 포함.',
+    content: `Supabase의 Row Level Security(RLS)는 강력하지만 처음에는 설정이 어렵게 느껴집니다.\n\n이 글에서는 실제 프로젝트에서 사용한 RLS 정책들을 예제와 함께 정리했습니다.`,
+    tags: ['Supabase', 'RLS', '보안', 'PostgreSQL'],
+    comments_data: []
+  },
+  {
+    id: 5, category: 'Q&A', tab: 'qa',
+    title: 'Claude API vs Gemini API - 어떤 걸 선택해야 할까요?',
+    author: '정민호', authorInitial: '정', authorColor: 'blue',
+    date: '2026-03-12', likes: 34, comments: 28, views: 891,
+    excerpt: '상업용 챗봇을 개발하려고 하는데, Claude API와 Gemini API 중 어떤 걸 선택하면 좋을지 의견을 듣고 싶습니다.',
+    content: `상업용 고객 서비스 챗봇을 개발 예정입니다.\n\n고려 사항:\n- 한국어 처리 품질\n- 비용 (월 트래픽 50만 건 예상)\n- 안정성과 속도\n- 개발 편의성\n\n경험 있으신 분들의 의견 부탁드립니다!`,
+    tags: ['Claude API', 'Gemini API', 'AI 선택', '챗봇'],
+    comments_data: []
+  },
+  {
+    id: 6, category: '취업/커리어', tab: 'all',
+    title: 'AX Architect 인증 취득 후기 - 3개월 걸렸습니다',
+    author: '강서연', authorInitial: '강', authorColor: 'accent',
+    date: '2026-03-07', likes: 89, comments: 31, views: 2143,
+    excerpt: '드디어 AX Architect 인증을 받았습니다! 준비 과정, 시험 팁, 포트폴리오 준비 방법을 공유합니다.',
+    content: `3개월간의 준비 끝에 AX Architect 인증을 받았습니다.\n\n**준비 과정**\n1. AX교육플랫폼 기초 강의 완료 (6주)\n2. 실전 프로젝트 3개 완성\n3. 포트폴리오 제출 및 심사\n4. 실기 시험 응시\n\n**핵심 팁**: 이론보다 실전 프로젝트가 중요합니다!`,
+    tags: ['AX Architect', '인증', '취업', '커리어'],
+    comments_data: []
+  },
+  {
+    id: 7, category: 'Q&A', tab: 'qa',
+    title: 'Vercel에 환경변수 설정하는 방법 (Supabase Key 포함)',
+    author: '임태양', authorInitial: '임', authorColor: 'green',
+    date: '2026-03-13', likes: 12, comments: 5, views: 334,
+    excerpt: 'Vercel 배포 후 .env 파일의 SUPABASE_URL, SUPABASE_KEY가 undefined로 나옵니다. 설정 방법을 알려주세요.',
+    content: `Vercel에 배포했더니 Supabase 연결이 안 됩니다.\n\n로컬에서는 .env 파일로 잘 동작하는데, Vercel 배포 후에는 undefined가 뜹니다.\n\n**현재 코드**:\n\`\`\`javascript\nconst supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY)\n\`\`\``,
+    tags: ['Vercel', 'Supabase', '환경변수', '배포'],
+    comments_data: []
+  },
+  {
+    id: 8, category: '프로젝트 모집', tab: 'project',
+    title: '치과 AI 예약 시스템 MVP 공동 개발 파트너 구합니다',
+    author: '손예진', authorInitial: '손', authorColor: 'primary',
+    date: '2026-03-11', likes: 8, comments: 7, views: 198,
+    excerpt: '치과 원장님과 협의 완료. 실제 수익을 나눌 수 있는 리얼 프로젝트입니다. 기술 스택 협의 가능.',
+    content: `실제 치과 원장님과 계약 완료된 프로젝트입니다.\n\n**프로젝트 내용**: AI 기반 예약 자동화 + 환자 관리 시스템\n**수익 배분**: 개발팀 30% (출시 후 월 구독료)\n**기간**: 2개월\n\n**필요한 분**:\n- 풀스택 개발자 (Supabase + React)\n- 관심 있으신 분은 댓글 남겨주세요!`,
+    tags: ['프로젝트', '수익화', '의료AI', '파트너십'],
+    comments_data: []
+  },
+  {
+    id: 9, category: '정보 공유', tab: 'all',
+    title: '2026년 AI 개발자 연봉 현황 (국내 기준)',
+    author: '윤서준', authorInitial: '윤', authorColor: 'blue',
+    date: '2026-03-06', likes: 156, comments: 43, views: 5621,
+    excerpt: '국내 IT 기업 150곳 공고 분석. AI 엔지니어, LLM 개발자, ML Ops 포지션별 평균 연봉과 요구 스킬을 정리했습니다.',
+    content: `링크드인, 원티드, 잡플래닛 데이터를 바탕으로 2026년 1분기 AI 관련 직군 연봉을 분석했습니다.\n\n**AI 엔지니어 (3년 이상)**: 평균 6,800만원\n**LLM 파인튜닝 전문가**: 평균 7,500만원\n**AI 솔루션 아키텍트**: 평균 8,200만원\n\n자세한 내용은 본문에서 확인하세요.`,
+    tags: ['연봉', 'AI 취업', '커리어', '정보'],
+    comments_data: []
+  },
+  {
+    id: 10, category: '스터디 모임', tab: 'study',
+    title: 'RAG 시스템 구현 스터디 - Langchain + Supabase pgvector',
+    author: '한지민', authorInitial: '한', authorColor: 'purple',
+    date: '2026-03-14', likes: 29, comments: 11, views: 447,
+    excerpt: 'RAG(검색 증강 생성) 시스템을 직접 구현해보는 스터디. LangChain, pgvector, OpenAI Embeddings 사용 예정.',
+    content: `**RAG 시스템 구현 스터디** 참가자를 모집합니다!\n\n4주간 매주 수요일 저녁 8시 온라인으로 진행됩니다.\n\n**커리큘럼**:\n1주: 벡터 DB 개념 + pgvector 설치\n2주: Embeddings 생성 및 저장\n3주: 검색 쿼리 최적화\n4주: Gemini API와 통합 및 완성\n\n현재 3명 신청, 5명 모집 중.`,
+    tags: ['RAG', 'LangChain', 'pgvector', '스터디'],
+    comments_data: []
+  }
+];
+
+let currentTab = 'all';
+let currentPosts = [...POSTS];
+let selectedPostId = null;
+
+const categoryColors = {
+  'Q&A': 'badge-blue',
+  '프로젝트 모집': 'badge-accent',
+  '스터디 모임': 'badge-green',
+  '정보 공유': 'badge-primary',
+  '취업/커리어': 'badge-purple',
+  '후기': 'badge-yellow'
+};
+
+const avatarColors = {
+  primary: '#0A2540',
+  accent: '#FF6B35',
+  green: '#00C896',
+  blue: '#2563eb',
+  purple: '#7c3aed'
+};
+
+/* =====================
+   Render
+   ===================== */
+function renderPosts(posts) {
+  const container = document.getElementById('postList');
+  document.getElementById('resultCount').textContent = `전체 ${posts.length}개`;
+
+  if (!posts.length) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">🔍</div>
+        <div class="empty-state-title">검색 결과가 없습니다</div>
+        <p>다른 키워드로 검색해보세요.</p>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = posts.map(post => `
+    <div class="post-card" onclick="openPostDetail(${post.id})">
+      <div class="post-header">
+        <div class="avatar avatar-sm" style="background:${avatarColors[post.authorColor] || '#0A2540'}">
+          ${post.authorInitial}
+        </div>
+        <div class="post-author-info">
+          <div class="post-author-name">${post.author}</div>
+          <div class="post-meta">${post.date} · 조회 ${post.views}</div>
+        </div>
+        ${post.pinned ? '<span class="badge badge-red">📌 고정</span>' : ''}
+      </div>
+      <div class="post-title">${post.title}</div>
+      <div class="post-excerpt">${post.excerpt}</div>
+      <div class="post-footer">
+        <div class="post-tags">
+          <span class="badge ${categoryColors[post.category] || 'badge-gray'}">${post.category}</span>
+          ${post.tags.slice(0,2).map(t => `<span class="badge badge-gray">${t}</span>`).join('')}
+        </div>
+        <div class="post-stats">
+          <button class="post-stat" onclick="event.stopPropagation();toggleLike(${post.id}, this)">
+            ♡ ${post.likes}
+          </button>
+          <span class="post-stat">💬 ${post.comments}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderTrending() {
+  const sorted = [...POSTS].sort((a,b) => b.views - a.views).slice(0,5);
+  document.getElementById('trendingList').innerHTML = sorted.map((p,i) => `
+    <div class="trending-item" onclick="openPostDetail(${p.id})">
+      <div class="trending-num">${i+1}</div>
+      <div>
+        <div class="trending-title">${p.title}</div>
+        <div class="trending-meta">👀 ${p.views} · ♡ ${p.likes}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderExperts() {
+  const experts = [
+    { name: '강서연', initial: '강', posts: 34, color: '#FF6B35' },
+    { name: '윤서준', initial: '윤', posts: 28, color: '#2563eb' },
+    { name: '최현우', initial: '최', posts: 22, color: '#7c3aed' },
+    { name: '김철수', initial: '김', posts: 19, color: '#0A2540' },
+    { name: '이영희', initial: '이', posts: 15, color: '#00C896' }
+  ];
+  document.getElementById('expertList').innerHTML = experts.map(e => `
+    <div class="expert-item">
+      <div class="avatar avatar-sm" style="background:${e.color}">${e.initial}</div>
+      <div>
+        <div class="expert-name">${e.name}</div>
+        <div class="expert-posts">게시글 ${e.posts}개</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* =====================
+   Interactions
+   ===================== */
+function switchTab(tab, btn) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterPosts();
+}
+
+function filterPosts() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  let posts = currentTab === 'all' ? POSTS : POSTS.filter(p => p.tab === currentTab);
+  if (query) {
+    posts = posts.filter(p =>
+      p.title.toLowerCase().includes(query) ||
+      p.excerpt.toLowerCase().includes(query) ||
+      p.tags.some(t => t.toLowerCase().includes(query))
+    );
+  }
+  currentPosts = posts;
+  renderPosts(posts);
+}
+
+function filterByTag(tag) {
+  document.getElementById('searchInput').value = tag;
+  filterPosts();
+}
+
+function sortPosts(by) {
+  let sorted = [...currentPosts];
+  if (by === 'popular') sorted.sort((a,b) => b.likes - a.likes);
+  else if (by === 'comments') sorted.sort((a,b) => b.comments - a.comments);
+  else sorted.sort((a,b) => new Date(b.date) - new Date(a.date));
+  renderPosts(sorted);
+}
+
+function toggleLike(id, btn) {
+  const post = POSTS.find(p => p.id === id);
+  if (!post) return;
+  if (btn.classList.contains('liked')) {
+    btn.classList.remove('liked');
+    post.likes--;
+  } else {
+    btn.classList.add('liked');
+    post.likes++;
+  }
+  btn.innerHTML = `♡ ${post.likes}`;
+}
+
+function openPostDetail(id) {
+  const post = POSTS.find(p => p.id === id);
+  if (!post) return;
+  selectedPostId = id;
+
+  document.getElementById('detailCategory').innerHTML = `<span class="badge ${categoryColors[post.category] || 'badge-gray'}">${post.category}</span>`;
+  document.getElementById('detailTitle').textContent = post.title;
+  document.getElementById('detailMeta').innerHTML = `
+    <span>👤 ${post.author}</span>
+    <span>📅 ${post.date}</span>
+    <span>👀 ${post.views}</span>
+    <span>♡ ${post.likes}</span>
+    <span>💬 ${post.comments}</span>
+  `;
+  document.getElementById('detailContent').innerHTML = post.content.replace(/\n/g, '<br>').replace(/`{3}[\s\S]*?`{3}/g, m => `<pre style="background:#F1F5F9;padding:12px;border-radius:8px;overflow-x:auto;margin:8px 0;">${m.replace(/```/g,'')}</pre>`);
+  document.getElementById('detailTags').innerHTML = post.tags.map(t => `<span class="badge badge-gray" style="margin-right:4px;">${t}</span>`).join('');
+
+  renderComments(post);
+  document.getElementById('postDetailModal').classList.add('active');
+}
+
+function renderComments(post) {
+  document.getElementById('commentCount').textContent = `댓글 ${post.comments_data.length}개`;
+  document.getElementById('commentList').innerHTML = post.comments_data.length
+    ? post.comments_data.map(c => `
+        <div style="padding:12px;background:#F8F9FA;border-radius:8px;margin-bottom:8px;">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px;">
+            <div class="avatar avatar-sm" style="background:#0A2540">${c.author[0]}</div>
+            <strong>${c.author}</strong>
+            <span style="font-size:0.78rem;color:var(--color-text-muted);">${c.date}</span>
+          </div>
+          <div style="font-size:0.9rem;">${c.text}</div>
+        </div>
+      `).join('')
+    : '<p style="color:var(--color-text-muted);font-size:0.875rem;">첫 댓글을 작성해보세요!</p>';
+}
+
+function closePostDetail() {
+  document.getElementById('postDetailModal').classList.remove('active');
+}
+
+function submitComment() {
+  const text = document.getElementById('newComment').value.trim();
+  if (!text) { Toast.warning('댓글 내용을 입력하세요.'); return; }
+  const post = POSTS.find(p => p.id === selectedPostId);
+  if (!post) return;
+  post.comments_data.push({ author: '나', date: '2026-03-14', text });
+  post.comments++;
+  document.getElementById('newComment').value = '';
+  renderComments(post);
+  renderPosts(currentPosts);
+  Toast.success('댓글이 등록되었습니다!');
+}
+
+function openWriteModal() {
+  document.getElementById('writeModal').classList.add('active');
+}
+
+function closeWriteModal() {
+  document.getElementById('writeModal').classList.remove('active');
+}
+
+function submitPost() {
+  const category = document.getElementById('postCategory').value;
+  const title = document.getElementById('postTitle').value.trim();
+  const content = document.getElementById('postContent').value.trim();
+
+  if (!category) { Toast.warning('카테고리를 선택하세요.'); return; }
+  if (!title) { Toast.warning('제목을 입력하세요.'); return; }
+  if (!content) { Toast.warning('내용을 입력하세요.'); return; }
+
+  const newPost = {
+    id: POSTS.length + 1,
+    category, tab: 'all',
+    title, content,
+    author: '나',
+    authorInitial: '나',
+    authorColor: 'accent',
+    date: '2026-03-14',
+    likes: 0, comments: 0, views: 1,
+    excerpt: content.substring(0, 100) + '...',
+    tags: document.getElementById('postTags').value.split(',').map(t=>t.trim()).filter(Boolean),
+    comments_data: []
+  };
+
+  POSTS.unshift(newPost);
+  closeWriteModal();
+  document.getElementById('postTitle').value = '';
+  document.getElementById('postContent').value = '';
+  document.getElementById('postTags').value = '';
+  document.getElementById('postCategory').value = '';
+  filterPosts();
+  Toast.success('게시글이 등록되었습니다!');
+}
+
+function openManual() {
+  window.location.href = './manual.html';
+}
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('active');
+    }
+  });
+});
+
+/* =====================
+   Init
+   ===================== */
+document.addEventListener('DOMContentLoaded', () => {
+  renderPosts(POSTS);
+  renderTrending();
+  renderExperts();
+});
+</script>
+
+<footer style="background:#0A2540;color:rgba(255,255,255,0.7);text-align:center;padding:24px;font-size:0.85rem;margin-top:40px;">
+  <p>© 2026 AX교육플랫폼. All rights reserved. | <a href="../index.html" style="color:#FF6B35;text-decoration:none;">홈으로</a> | <a href="manual.html" style="color:rgba(255,255,255,0.6);text-decoration:none;">이용가이드</a></p>
+</footer>
+</body>
+</html>

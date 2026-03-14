@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AX교육플랫폼 — AI 전환 전문가 양성 생태계</title>
+  <meta name="description" content="교육 → 인증 → 커뮤니티 → AX 프로젝트까지 이어지는 한국 최초 AX 전문가 생태계 플랫폼">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AX교육플랫폼 — AI 전환 전문가 양성 생태계">
+  <meta property="og:description" content="교육 → 인증 → 커뮤니티 → AX 프로젝트까지 이어지는 한국 최초 AX 전문가 생태계 플랫폼">
+  <meta property="og:image" content="images/architecture.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AX교육플랫폼 — AI 전환 전문가 양성 생태계">
+  <meta name="keywords" content="AX교육, AI전환, 바이브코딩, 프롬프트엔지니어링, AX자격증, AI플랫폼설계, Claude, Gemini">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script>/* FOUC 방지 */const _t=localStorage.getItem('ax-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);</script>
+  <style>
+    /* 랜딩 페이지 전용 스타일 */
+    .hero {
+      background: linear-gradient(135deg, #0A2540 0%, #1a3a5c 50%, #0d3060 100%);
+      padding: 100px 24px 80px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .hero-tag { display: inline-block; background: rgba(255,107,53,0.2); border: 1px solid rgba(255,107,53,0.4); color: #FF6B35; padding: 5px 16px; border-radius: 999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 20px; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.2; margin-bottom: 20px; }
+    .hero h1 .highlight { color: #FF6B35; }
+    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 32px; }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+    .hero-stats { display: flex; gap: 32px; }
+    .hero-stat-num { font-size: 1.8rem; font-weight: 800; color: #FF6B35; }
+    .hero-stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.65); margin-top: 2px; }
+    .hero-visual { position: relative; }
+    .hero-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 28px; }
+    .hero-flow { display: flex; flex-direction: column; gap: 12px; }
+    .flow-step { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: rgba(255,255,255,0.06); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); transition: background 0.3s; }
+    .flow-step:hover { background: rgba(255,255,255,0.1); }
+    .flow-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .flow-info h4 { color: white; font-weight: 700; font-size: 0.95rem; }
+    .flow-info p { color: rgba(255,255,255,0.6); font-size: 0.8rem; margin-top: 2px; }
+    .flow-arrow { text-align: center; color: rgba(255,255,255,0.3); font-size: 1.2rem; }
+
+    /* 교육 카테고리 */
+    .course-card { background: white; border-radius: 16px; padding: 28px; border: 1px solid #E5E7EB; transition: all 0.3s; cursor: pointer; }
+    .course-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); border-color: transparent; }
+    .course-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 16px; }
+    .course-count { font-size: 0.8rem; color: #6B7280; margin-top: 8px; }
+    .course-card h3 { font-size: 1.05rem; font-weight: 700; color: #0A2540; margin-bottom: 8px; }
+    .course-card p { font-size: 0.9rem; color: #6B7280; line-height: 1.6; }
+
+    /* 생태계 플로우 */
+    .ecosystem { background: #0A2540; color: white; padding: 80px 24px; }
+    .eco-flow { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; margin-top: 48px; }
+    .eco-node { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 24px 20px; text-align: center; flex: 1; min-width: 160px; max-width: 200px; transition: background 0.3s; }
+    .eco-node:hover { background: rgba(255,255,255,0.12); }
+    .eco-node-icon { font-size: 2rem; margin-bottom: 10px; }
+    .eco-node h4 { color: white; font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
+    .eco-node p { color: rgba(255,255,255,0.6); font-size: 0.8rem; }
+    .eco-arrow { font-size: 1.5rem; color: #FF6B35; padding: 0 8px; }
+
+    /* 인증 */
+    .cert-card { background: white; border-radius: 16px; padding: 28px; border: 2px solid #E5E7EB; transition: all 0.3s; text-align: center; position: relative; overflow: hidden; }
+    .cert-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--color, #0A2540), var(--color2, #FF6B35)); }
+    .cert-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); border-color: transparent; }
+    .cert-badge { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 16px; }
+    .cert-level { font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+    .cert-name { font-size: 1.1rem; font-weight: 800; color: #0A2540; margin-bottom: 12px; }
+    .cert-desc { font-size: 0.875rem; color: #6B7280; line-height: 1.6; }
+
+    /* 통계 */
+    .stats-section { background: linear-gradient(135deg, #FF6B35, #FF8C5A); color: white; padding: 60px 24px; }
+    .stat-item { text-align: center; }
+    .stat-num { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 900; display: block; }
+    .stat-unit { color: rgba(255,255,255,0.8); font-size: 0.9rem; margin-top: 6px; }
+
+    /* 후기 */
+    .review-card { background: white; border-radius: 16px; padding: 28px; border: 1px solid #E5E7EB; }
+    .review-stars { color: #F59E0B; font-size: 1rem; margin-bottom: 12px; }
+    .review-text { color: #374151; line-height: 1.7; font-size: 0.95rem; margin-bottom: 20px; }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .reviewer-name { font-weight: 700; font-size: 0.9rem; }
+    .reviewer-role { font-size: 0.8rem; color: #6B7280; }
+
+    /* 요금제 */
+    .plan-card { background: white; border-radius: 20px; padding: 36px; border: 2px solid #E5E7EB; transition: all 0.3s; }
+    .plan-card.featured { border-color: #FF6B35; background: linear-gradient(135deg, #0A2540, #1a3a5c); color: white; }
+    .plan-card:hover:not(.featured) { border-color: #FF6B35; transform: translateY(-4px); }
+    .plan-price { font-size: 2.5rem; font-weight: 900; color: #0A2540; margin: 16px 0 8px; }
+    .plan-card.featured .plan-price { color: #FF6B35; }
+    .plan-card.featured h3 { color: white; }
+    .plan-features { list-style: none; margin: 20px 0 28px; }
+    .plan-features li { padding: 8px 0; font-size: 0.9rem; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; gap: 8px; }
+    .plan-card.featured .plan-features li { color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.1); }
+
+    /* 파트너 */
+    .partner-logos { display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap; }
+    .partner-logo { background: #F3F4F6; border-radius: 8px; padding: 16px 28px; color: #9CA3AF; font-weight: 700; font-size: 1rem; letter-spacing: 1px; }
+
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .hero { padding: 60px 20px; }
+      .eco-flow { gap: 8px; }
+      .eco-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 네비게이션 -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo"><span class="ax">AX</span>교육플랫폼</a>
+    <ul class="nav-links">
+      <li><a href="pages/courses.html">교육과정</a></li>
+      <li><a href="pages/projects.html">프로젝트</a></li>
+      <li><a href="pages/certification.html">인증</a></li>
+      <li><a href="pages/community.html">커뮤니티</a></li>
+      <li><a href="pages/enterprise.html">기업서비스</a></li>
+      <li><a href="pages/manual.html">매뉴얼</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="themeToggle" onclick="ThemeManager.toggle()" title="테마 전환">🌙</button>
+      <a href="pages/auth.html" class="btn btn-outline btn-sm" id="loginBtn">로그인</a>
+      <a href="pages/dashboard.html" class="btn btn-primary btn-sm" id="dashboardBtn" style="display:none">대시보드</a>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="메뉴 열기/닫기" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="pages/courses.html">📚 교육과정</a>
+    <a href="pages/projects.html">📁 프로젝트</a>
+    <a href="pages/certification.html">🏅 인증</a>
+    <a href="pages/community.html">💬 커뮤니티</a>
+    <a href="pages/enterprise.html">🏢 기업서비스</a>
+    <a href="pages/auth.html" class="btn btn-primary btn-block" style="margin-top:12px">로그인 / 회원가입</a>
+  </div>
+</nav>
+
+<!-- 히어로 -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left reveal">
+      <span class="hero-tag">🚀 한국 최초 AX 전문가 생태계</span>
+      <h1>AI 전환(AX)의 시대,<br><span class="highlight">당신은 준비</span>되어 있나요?</h1>
+      <p class="hero-sub">교육 → 인증 → 커뮤니티 → AX 프로젝트까지<br>이어지는 완전한 AX 전문가 성장 시스템</p>
+      <div class="hero-ctas">
+        <a href="pages/auth.html" class="btn btn-primary btn-lg">지금 무료 시작</a>
+        <a href="pages/courses.html" class="btn btn-outline-white btn-lg">교육과정 보기</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num" id="statStudents">1,200+</div>
+          <div class="hero-stat-label">수강생</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">50개</div>
+          <div class="hero-stat-label">전문 강의</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">100+</div>
+          <div class="hero-stat-label">기업 프로젝트</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <div class="hero-card">
+        <p style="color:rgba(255,255,255,0.6);font-size:0.85rem;margin-bottom:16px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">AX 전문가 성장 경로</p>
+        <div class="hero-flow">
+          <div class="flow-step">
+            <div class="flow-icon" style="background:rgba(255,107,53,0.2);">🎓</div>
+            <div class="flow-info"><h4>온라인 기본 교육</h4><p>50개 강의 · AX 이해 ~ 컨설팅</p></div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">
+            <div class="flow-icon" style="background:rgba(0,200,150,0.2);">⚡</div>
+            <div class="flow-info"><h4>프로젝트 실습</h4><p>팀 프로젝트 · 실전 문제 해결</p></div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">
+            <div class="flow-icon" style="background:rgba(59,130,246,0.2);">🏅</div>
+            <div class="flow-info"><h4>AX 전문가 인증</h4><p>4단계 인증 · Practitioner ~ Strategist</p></div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">
+            <div class="flow-icon" style="background:rgba(139,92,246,0.2);">🏢</div>
+            <div class="flow-info"><h4>기업 AX 프로젝트</h4><p>실제 기업 · 컨설팅 · 수익 창출</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 교육 과정 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">CURRICULUM</span>
+      <h2 class="section-title">5개 영역 · 50개 전문 강의</h2>
+      <p class="section-subtitle">AX 실무에 필요한 모든 지식을 체계적으로 학습하세요</p>
+    </div>
+    <div class="grid grid-5 reveal" style="gap:20px;">
+      <div class="course-card">
+        <div class="course-icon" style="background:rgba(10,37,64,0.08);">🧠</div>
+        <h3>AX 이해</h3>
+        <p>AI 시대 산업 변화, 기업 AX 전략, 성공 사례 분석</p>
+        <div class="course-count">📖 10개 강의 · 입문</div>
+      </div>
+      <div class="course-card">
+        <div class="course-icon" style="background:rgba(255,107,53,0.1);">🛠️</div>
+        <h3>AI 도구 활용</h3>
+        <p>ChatGPT, Claude, Gemini, Cursor 실전 활용법</p>
+        <div class="course-count">📖 10개 강의 · 초급</div>
+      </div>
+      <div class="course-card">
+        <div class="course-icon" style="background:rgba(0,200,150,0.1);">💻</div>
+        <h3>바이브코딩</h3>
+        <p>AI로 서비스 개발, 노코드/로우코드, SaaS 구축</p>
+        <div class="course-count">📖 10개 강의 · 초급~중급</div>
+      </div>
+      <div class="course-card">
+        <div class="course-icon" style="background:rgba(59,130,246,0.1);">🏗️</div>
+        <h3>AI 플랫폼 설계</h3>
+        <p>아키텍처 설계, RAG 시스템, AI Agent, 자동화</p>
+        <div class="course-count">📖 10개 강의 · 중급~고급</div>
+      </div>
+      <div class="course-card">
+        <div class="course-icon" style="background:rgba(139,92,246,0.1);">💼</div>
+        <h3>AX 컨설팅</h3>
+        <p>기업 문제 진단, AX 전략 수립, 프로젝트 설계</p>
+        <div class="course-count">📖 10개 강의 · 고급</div>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top:40px;">
+      <a href="pages/courses.html" class="btn btn-secondary btn-lg">전체 강의 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 생태계 플로우 -->
+<section class="ecosystem">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag" style="background:rgba(255,107,53,0.2);color:#FF6B35;">ECOSYSTEM</span>
+      <h2 class="section-title" style="color:white;">교육에서 프로젝트까지 이어지는 생태계</h2>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.65);">한국형 Palantir + Accenture + 교육 플랫폼이 결합된 AX 인재 생산 시스템</p>
+    </div>
+    <div class="eco-flow reveal">
+      <div class="eco-node">
+        <div class="eco-node-icon">🎓</div>
+        <h4>AX 교육</h4>
+        <p>50개 온라인 강의<br>오프라인 워크숍</p>
+      </div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node">
+        <div class="eco-node-icon">🏅</div>
+        <h4>전문가 인증</h4>
+        <p>4단계 AX 인증<br>시험 + 프로젝트</p>
+      </div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node">
+        <div class="eco-node-icon">👥</div>
+        <h4>커뮤니티</h4>
+        <p>전문가 네트워크<br>팀 구성</p>
+      </div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node">
+        <div class="eco-node-icon">🚀</div>
+        <h4>AX 프로젝트</h4>
+        <p>기업 문제 해결<br>분대 조직 운영</p>
+      </div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node" style="border-color:rgba(255,107,53,0.4);background:rgba(255,107,53,0.1);">
+        <div class="eco-node-icon">🏢</div>
+        <h4>기업 서비스</h4>
+        <p>컨설팅 · 개발<br>자동화 · 분석</p>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top:40px;">
+      <a href="images/architecture.svg" target="_blank" rel="noopener" class="btn btn-outline-white">시스템 아키텍처 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 인증 시스템 -->
+<section class="section" style="background:#F8F9FA;">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">CERTIFICATION</span>
+      <h2 class="section-title">4단계 AX 전문가 인증</h2>
+      <p class="section-subtitle">인증을 받은 전문가만 기업 AX 프로젝트에 참여할 수 있습니다</p>
+    </div>
+    <div class="grid grid-4 reveal">
+      <div class="cert-card" style="--color:#0A2540;--color2:#1a3a5c;">
+        <div class="cert-badge" style="background:rgba(10,37,64,0.08);">🥉</div>
+        <div class="cert-level" style="color:#6B7280;">LEVEL 1</div>
+        <div class="cert-name">AX Practitioner</div>
+        <div class="cert-desc">AX 이해 10강 수료 + 기초 시험 합격</div>
+      </div>
+      <div class="cert-card" style="--color:#FF6B35;--color2:#FF8C5A;">
+        <div class="cert-badge" style="background:rgba(255,107,53,0.1);">🥈</div>
+        <div class="cert-level" style="color:#FF6B35;">LEVEL 2</div>
+        <div class="cert-name">AX Builder</div>
+        <div class="cert-desc">바이브코딩 10강 + 프로젝트 1개 완료</div>
+      </div>
+      <div class="cert-card" style="--color:#00C896;--color2:#00a07a;">
+        <div class="cert-badge" style="background:rgba(0,200,150,0.1);">🥇</div>
+        <div class="cert-level" style="color:#00C896;">LEVEL 3</div>
+        <div class="cert-name">AX Architect</div>
+        <div class="cert-desc">AI 플랫폼 설계 10강 + 프로젝트 2개</div>
+      </div>
+      <div class="cert-card" style="--color:#7c3aed;--color2:#8B5CF6;">
+        <div class="cert-badge" style="background:rgba(139,92,246,0.1);">👑</div>
+        <div class="cert-level" style="color:#7c3aed;">LEVEL 4</div>
+        <div class="cert-name">AX Strategist</div>
+        <div class="cert-desc">전 과정 수료 + 컨설팅 프로젝트 리드</div>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top:40px;">
+      <a href="pages/certification.html" class="btn btn-primary btn-lg">인증 취득하기</a>
+    </div>
+  </div>
+</section>
+
+<!-- 통계 -->
+<section class="stats-section">
+  <div class="container">
+    <div class="grid grid-4 reveal">
+      <div class="stat-item">
+        <span class="stat-num" data-target="1200">0</span>+
+        <div class="stat-unit">AX 전문가 수강생</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="50">0</span>개
+        <div class="stat-unit">전문 강의</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="100">0</span>+
+        <div class="stat-unit">기업 AX 프로젝트</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="93">0</span>%
+        <div class="stat-unit">수료 후 프로젝트 참여율</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 수강 후기 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">REVIEWS</span>
+      <h2 class="section-title">수강생 후기</h2>
+    </div>
+    <div class="grid grid-3 reveal">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"바이브코딩 강의 덕분에 처음으로 AI 서비스를 만들었습니다. 기획만 하던 제가 실제 SaaS를 런칭했어요. AX Practitioner 인증도 취득하고 지금은 기업 프로젝트에도 참여하고 있습니다."</p>
+        <div class="reviewer">
+          <div class="avatar avatar-accent">김</div>
+          <div>
+            <div class="reviewer-name">김민준</div>
+            <div class="reviewer-role">스타트업 기획자 → AX Builder</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"AI 플랫폼 설계 강의가 특히 훌륭했습니다. RAG 시스템과 AI Agent 아키텍처를 배우고 실제로 기업 문서 분석 시스템을 구축했어요. AX Architect 인증 취득 후 컨설팅 수입이 2배 됐습니다."</p>
+        <div class="reviewer">
+          <div class="avatar" style="background:#00C896;">이</div>
+          <div>
+            <div class="reviewer-name">이서연</div>
+            <div class="reviewer-role">IT 컨설턴트 → AX Architect</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"AX 컨설팅 강의와 오프라인 워크숍이 인생을 바꿨습니다. 20년 영업 경력에 AX 전략 역량을 더하니 기업들이 먼저 찾아옵니다. AX Strategist가 되어 지금은 팀을 이끌고 있어요."</p>
+        <div class="reviewer">
+          <div class="avatar" style="background:#7c3aed;">박</div>
+          <div>
+            <div class="reviewer-name">박종현</div>
+            <div class="reviewer-role">영업 임원 → AX Strategist</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 기업 파트너 -->
+<section class="section-sm" style="background:#F8F9FA;">
+  <div class="container">
+    <p class="text-center text-muted" style="margin-bottom:28px;font-weight:600;font-size:0.875rem;letter-spacing:1px;">AX 프로젝트 협력 기업</p>
+    <div class="partner-logos reveal">
+      <div class="partner-logo">SAMSUNG</div>
+      <div class="partner-logo">LG</div>
+      <div class="partner-logo">HYUNDAI</div>
+      <div class="partner-logo">KAKAO</div>
+      <div class="partner-logo">NAVER</div>
+      <div class="partner-logo">SK</div>
+    </div>
+  </div>
+</section>
+
+<!-- 요금제 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">PRICING</span>
+      <h2 class="section-title">합리적인 요금제</h2>
+      <p class="section-subtitle">기초부터 전문가까지, 당신의 성장 단계에 맞게 선택하세요</p>
+    </div>
+    <div class="grid grid-3 reveal" style="max-width:900px;margin:0 auto;">
+      <div class="plan-card">
+        <span class="badge badge-gray">무료</span>
+        <div class="plan-price">₩0</div>
+        <p style="color:#6B7280;font-size:0.9rem;">기초 학습을 시작하세요</p>
+        <ul class="plan-features">
+          <li>✅ AX 이해 10강 무료</li>
+          <li>✅ AI 도구 활용 5강</li>
+          <li>✅ 커뮤니티 참여</li>
+          <li>✅ AX Practitioner 시험</li>
+          <li style="color:#ccc;">❌ 프로젝트 참여</li>
+          <li style="color:#ccc;">❌ 오프라인 워크숍</li>
+        </ul>
+        <a href="pages/auth.html" class="btn btn-outline btn-block">무료로 시작</a>
+      </div>
+      <div class="plan-card featured">
+        <span class="badge badge-orange">가장 인기</span>
+        <div class="plan-price">₩99,000<span style="font-size:1rem;font-weight:400;color:rgba(255,255,255,0.6)">/월</span></div>
+        <p style="color:rgba(255,255,255,0.7);font-size:0.9rem;">AX 전문가로 성장하세요</p>
+        <ul class="plan-features">
+          <li>✅ 전체 강의 50개 무제한</li>
+          <li>✅ 팀 프로젝트 참여</li>
+          <li>✅ AI 튜터 무제한</li>
+          <li>✅ 모든 인증 시험</li>
+          <li>✅ 커뮤니티 프리미엄</li>
+          <li>✅ 오프라인 워크숍 할인</li>
+        </ul>
+        <a href="pages/auth.html" class="btn btn-primary btn-block">지금 시작하기</a>
+      </div>
+      <div class="plan-card">
+        <span class="badge badge-primary">기업</span>
+        <div class="plan-price" style="font-size:1.8rem;">별도 문의</div>
+        <p style="color:#6B7280;font-size:0.9rem;">팀 전체를 AX 전문가로</p>
+        <ul class="plan-features">
+          <li>✅ 팀원 전체 수강</li>
+          <li>✅ 전용 AX 컨설팅</li>
+          <li>✅ 맞춤형 교육 과정</li>
+          <li>✅ 기업 프로젝트 우선 매칭</li>
+          <li>✅ 전담 멘토 배정</li>
+          <li>✅ 오프라인 워크숍 무제한</li>
+        </ul>
+        <a href="pages/enterprise.html" class="btn btn-secondary btn-block">문의하기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA 배너 -->
+<section style="background:linear-gradient(135deg,#FF6B35,#FF8C5A);padding:80px 24px;text-align:center;color:white;">
+  <div class="container reveal">
+    <h2 style="font-size:clamp(1.8rem,4vw,2.5rem);font-weight:900;margin-bottom:16px;">지금 바로 AX 전문가 여정을 시작하세요</h2>
+    <p style="font-size:1.1rem;opacity:0.9;margin-bottom:32px;">1,200명 이상의 전문가가 이미 AX교육플랫폼과 함께 성장하고 있습니다</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="pages/auth.html" class="btn" style="background:white;color:#FF6B35;font-size:1.05rem;padding:14px 32px;">무료로 시작하기</a>
+      <a href="pages/courses.html" class="btn btn-outline-white btn-lg">교육과정 둘러보기</a>
+    </div>
+  </div>
+</section>
+
+<!-- 푸터 -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3><span style="color:#FF6B35">AX</span>교육플랫폼</h3>
+      <p>AI 전환(AX) 전문가를 발굴하고 교육하고 프로젝트에 투입하는 한국 최초 AX 인재 생태계 플랫폼입니다.</p>
+      <div style="margin-top:16px;display:flex;gap:10px;">
+        <a href="#" aria-label="Facebook" style="width:36px;height:36px;background:rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;font-size:0.9rem;">f</a>
+        <a href="#" aria-label="LinkedIn" style="width:36px;height:36px;background:rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;font-size:0.9rem;">in</a>
+        <a href="#" aria-label="YouTube" style="width:36px;height:36px;background:rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;font-size:0.9rem;">y</a>
+      </div>
+    </div>
+    <div>
+      <h4>교육</h4>
+      <ul class="footer-links">
+        <li><a href="pages/courses.html">전체 강의</a></li>
+        <li><a href="pages/courses.html#ax">AX 이해</a></li>
+        <li><a href="pages/courses.html#coding">바이브코딩</a></li>
+        <li><a href="pages/workshops.html">오프라인 워크숍</a></li>
+        <li><a href="pages/ai-tutor.html">AI 튜터</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>커뮤니티</h4>
+      <ul class="footer-links">
+        <li><a href="pages/community.html">게시판</a></li>
+        <li><a href="pages/projects.html">프로젝트</a></li>
+        <li><a href="pages/expert-profile.html">전문가 찾기</a></li>
+        <li><a href="pages/certification.html">AX 인증</a></li>
+        <li><a href="pages/enterprise.html">기업 서비스</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>지원</h4>
+      <ul class="footer-links">
+        <li><a href="pages/manual.html">이용 가이드</a></li>
+        <li><a href="pages/sitemap.html">사이트맵</a></li>
+        <li><a href="mailto:contact@ax-edu.co.kr">이메일 문의</a></li>
+        <li><a href="#">개인정보처리방침</a></li>
+        <li><a href="#">이용약관</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom" style="max-width:1200px;margin:0 auto;padding-top:24px;text-align:center;">
+    <p>© 2026 AX교육플랫폼. All rights reserved. | 사업자등록번호: 000-00-00000 | 서울특별시 강남구</p>
+  </div>
+</footer>
+
+<!-- 도움말 버튼 -->
+<button class="help-btn" onclick="window.location.href='pages/manual.html'" title="도움말">?</button>
+
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/theme.js"></script>
+<script>
+  // 모바일 메뉴
+  function toggleMobile() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+    const btn = document.getElementById('hamburger');
+    btn.classList.toggle('open');
+    btn.setAttribute('aria-expanded', btn.classList.contains('open') ? 'true' : 'false');
+  }
+
+  // 스크롤 애니메이션
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // 숫자 카운터 애니메이션
+  const counters = document.querySelectorAll('[data-target]');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const target = parseInt(el.getAttribute('data-target'));
+        const duration = 2000;
+        const start = Date.now();
+        const tick = () => {
+          const progress = Math.min((Date.now() - start) / duration, 1);
+          el.textContent = Math.floor(progress * target).toLocaleString();
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterObserver.observe(c));
+
+  // 스크롤 시 네비 그림자
+  window.addEventListener('scroll', () => {
+    document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 10);
+  });
+</script>
+</body>
+</html>
