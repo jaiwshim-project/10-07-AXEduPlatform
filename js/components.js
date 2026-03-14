@@ -25,6 +25,7 @@ const Components = {
       <img src="${base}images/logo.png" alt="AX EDU GROUP">
     </a>
     <ul class="nav-links">
+      <li><a href="${base}pages/about.html"${active('about.html')}>회사소개</a></li>
       <li class="nav-dropdown">
         <a href="${base}pages/courses.html"${active('courses.html')} class="nav-dropdown-toggle">교육과정 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="vertical-align:middle;margin-left:2px;"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <ul class="nav-submenu">
@@ -38,7 +39,6 @@ const Components = {
       <li><a href="${base}pages/community.html"${active('community.html')}>커뮤니티</a></li>
       <li><a href="${base}pages/enterprise.html"${active('enterprise.html')}>기업서비스</a></li>
       <li><a href="${base}pages/manual.html"${active('manual.html')}>매뉴얼</a></li>
-      <li><a href="${base}pages/about.html"${active('about.html')}>회사소개</a></li>
     </ul>
     <div class="nav-actions">
       <button id="themeToggle" onclick="ThemeManager && ThemeManager.toggle()" title="테마 전환">🌙</button>
@@ -76,13 +76,13 @@ const Components = {
     </button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
+    <a href="${base}pages/about.html">🏢 회사소개</a>
     <a href="${base}pages/courses.html">📚 교육과정</a>
     <a href="${base}pages/projects.html">📁 프로젝트</a>
     <a href="${base}pages/certification.html">🏅 인증</a>
     <a href="${base}pages/community.html">💬 커뮤니티</a>
     <a href="${base}pages/enterprise.html">🏢 기업서비스</a>
     <a href="${base}pages/manual.html">📖 매뉴얼</a>
-    <a href="${base}pages/about.html">🏢 회사소개</a>
     <a href="${base}pages/auth.html" class="btn btn-primary btn-block" style="margin-top:12px">로그인 / 회원가입</a>
   </div>
 </nav>`;
@@ -129,11 +129,9 @@ const Components = {
       <ul class="footer-links">
         <li><a href="${base}pages/manual.html">이용 가이드</a></li>
         <li><a href="${base}pages/sitemap.html">사이트맵</a></li>
-        <li><a href="${base}images/architecture.svg" target="_blank" rel="noopener">시스템 구조도</a></li>
-        <li><a href="${base}images/ecosystem.svg" target="_blank" rel="noopener">에코시스템</a></li>
+        <li><a href="#" onclick="axProtectedOpen('${base}images/architecture.svg');return false;">시스템 구조도</a></li>
+        <li><a href="#" onclick="axProtectedOpen('${base}images/ecosystem.svg');return false;">에코시스템</a></li>
         <li><a href="mailto:jaiwshim@gmail.com">이메일 문의</a></li>
-        <li><a href="#">개인정보처리방침</a></li>
-        <li><a href="#">이용약관</a></li>
       </ul>
     </div>
   </div>
@@ -193,7 +191,29 @@ const Components = {
       profileBtn.setAttribute('onclick', 'window._axToggleUserDrop()');
     }
 
-    // 6. 드롭다운 hover 스타일 (동적 삽입)
+    // 6. 비밀번호 모달 삽입 (1회)
+    if (!document.getElementById('ax-pwd-modal')) {
+      document.body.insertAdjacentHTML('beforeend', `
+        <div id="ax-pwd-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(10,37,64,0.55);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+          <div style="background:white;border-radius:20px;padding:36px 32px;width:100%;max-width:360px;margin:16px;box-shadow:0 24px 64px rgba(10,37,64,0.22);border-top:4px solid #FF6B35;text-align:center;">
+            <div style="font-size:2rem;margin-bottom:12px;">🔐</div>
+            <div style="font-size:1.1rem;font-weight:800;color:#0A2540;margin-bottom:6px;">접근 제한</div>
+            <div style="font-size:0.875rem;color:#6B7280;margin-bottom:20px;">비밀번호를 입력하세요</div>
+            <input id="ax-pwd-input" type="password" maxlength="20"
+              style="width:100%;padding:11px 14px;border:1.5px solid #D1D5DB;border-radius:10px;font-size:1.1rem;text-align:center;letter-spacing:6px;outline:none;font-family:monospace;box-sizing:border-box;"
+              placeholder="••••"
+              onkeydown="if(event.key==='Enter')axPwdConfirm()">
+            <div id="ax-pwd-error" style="color:#EF4444;font-size:0.8rem;margin-top:8px;display:none;">비밀번호가 틀렸습니다.</div>
+            <div style="display:flex;gap:10px;margin-top:20px;">
+              <button onclick="axPwdClose()" style="flex:1;padding:11px;border:1.5px solid #E5E7EB;border-radius:10px;background:white;font-size:0.9rem;font-weight:600;cursor:pointer;font-family:inherit;color:#6B7280;">취소</button>
+              <button onclick="axPwdConfirm()" style="flex:1;padding:11px;border:none;border-radius:10px;background:linear-gradient(135deg,#FF6B35,#e85d20);color:white;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:inherit;">확인</button>
+            </div>
+          </div>
+        </div>
+      `);
+    }
+
+    // 7. 드롭다운 hover 스타일 (동적 삽입)
     if (!document.getElementById('ax-dropdown-style')) {
       const st = document.createElement('style');
       st.id = 'ax-dropdown-style';
@@ -218,4 +238,38 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => Components.init());
 } else {
   Components.init();
+}
+
+// ── 비밀번호 보호 함수 ────────────────────────────────────────
+let _axPwdTarget = null;
+
+function axProtectedOpen(url) {
+  _axPwdTarget = url;
+  const modal = document.getElementById('ax-pwd-modal');
+  const input = document.getElementById('ax-pwd-input');
+  const err   = document.getElementById('ax-pwd-error');
+  if (!modal) return;
+  err.style.display = 'none';
+  input.value = '';
+  modal.style.display = 'flex';
+  setTimeout(() => input.focus(), 100);
+}
+
+function axPwdConfirm() {
+  const input = document.getElementById('ax-pwd-input');
+  const err   = document.getElementById('ax-pwd-error');
+  if (input.value === '9633') {
+    axPwdClose();
+    window.open(_axPwdTarget, '_blank', 'noopener');
+  } else {
+    err.style.display = 'block';
+    input.value = '';
+    input.focus();
+  }
+}
+
+function axPwdClose() {
+  const modal = document.getElementById('ax-pwd-modal');
+  if (modal) modal.style.display = 'none';
+  _axPwdTarget = null;
 }
