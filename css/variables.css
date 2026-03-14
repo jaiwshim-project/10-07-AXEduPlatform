@@ -13,16 +13,16 @@
   --color-bg: #F8F9FA;
   --color-bg-secondary: #EFF2F7;
   --color-white: #FFFFFF;
-  --color-text: #1a1a2e;
-  --color-text-muted: #6B7280;
-  --color-text-light: #9CA3AF;
-  --color-border: #E5E7EB;
+  --color-text: #0a0a14;
+  --color-text-muted: #374151;
+  --color-text-light: #6B7280;
+  --color-border: #D1D5DB;
   --color-card: #FFFFFF;
 
   /* 표면 컬러 */
   --color-surface: #FFFFFF;
-  --color-text-secondary: #374151;
-  --color-text-tertiary: #6B7280;
+  --color-text-secondary: #111827;
+  --color-text-tertiary: #374151;
 
   /* 상태 컬러 */
   --color-success: #10B981;
@@ -65,9 +65,9 @@
   --color-bg-secondary: #1e293b;
   --color-card: #1e293b;
   --color-surface: #1e293b;
-  --color-text: #f1f5f9;
-  --color-text-secondary: #CBD5E1;
-  --color-text-tertiary: #94a3b8;
+  --color-text: #f8fafc;
+  --color-text-secondary: #e2e8f0;
+  --color-text-tertiary: #cbd5e1;
   --color-text-muted: #94a3b8;
   --color-border: #334155;
   --color-white: #1e293b;

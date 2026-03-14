@@ -1777,70 +1777,105 @@ tr:hover td { background: rgba(255,107,53,0.03); }
 .alert-error   { background: rgba(239,68,68,0.07);   border-color: rgba(239,68,68,0.28);   border-left: 4px solid #EF4444; }
 
 /* ─────────────────────────────────────────────
-   TEXT 가독성 최대화 (main/card/section 스코프)
+   TEXT 가독성 최대화 — 전역 적용
    ───────────────────────────────────────────── */
-:is(main, .card, .feature-card, .stat-card, .section, article) p,
-:is(main, .card, .feature-card, .stat-card, .section, article) li { color: var(--color-text); }
-:is(main, .card, .feature-card, .stat-card, .section, article) h1,
-:is(main, .card, .feature-card, .stat-card, .section, article) h2,
-:is(main, .card, .feature-card, .stat-card, .section, article) h3,
-:is(main, .card, .feature-card, .stat-card, .section, article) h4 { color: var(--color-primary); }
-[data-theme="dark"] :is(main, .card, .feature-card, .stat-card, .section, article) h1,
-[data-theme="dark"] :is(main, .card, .feature-card, .stat-card, .section, article) h2,
-[data-theme="dark"] :is(main, .card, .feature-card, .stat-card, .section, article) h3,
-[data-theme="dark"] :is(main, .card, .feature-card, .stat-card, .section, article) h4 { color: #f1f5f9; }
-[data-theme="dark"] :is(main, .card, .feature-card, .stat-card, .section, article) p,
-[data-theme="dark"] :is(main, .card, .feature-card, .stat-card, .section, article) li { color: #e2e8f0; }
+
+/* 기본 body 텍스트 */
+body { color: var(--color-text); }
+
+/* 헤딩 */
+h1, h2, h3, h4, h5, h6 { color: var(--color-primary); }
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 { color: #f8fafc; }
+
+/* 본문 p, li */
+p, li { color: var(--color-text); }
+[data-theme="dark"] p,
+[data-theme="dark"] li { color: #e2e8f0; }
+
+/* 흐릿한 보조 텍스트도 최소 #374151 이상 */
+.text-muted, .form-label, .card-meta, .badge-text,
+small, .small { color: var(--color-text-muted); }
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] .form-label,
+[data-theme="dark"] small,
+[data-theme="dark"] .small { color: #94a3b8; }
+
+/* 카드 내부 텍스트 — 다크모드 */
+[data-theme="dark"] .card,
+[data-theme="dark"] .feature-card,
+[data-theme="dark"] .stat-card { color: #e2e8f0; }
+
+/* 푸터는 제외 (자체 흰색) */
+.footer p, .footer li, .footer a { color: inherit; }
 
 /* ─────────────────────────────────────────────
-   모바일 최적화 (480px 이하)
+   모바일 최적화
    ───────────────────────────────────────────── */
-@media (max-width: 480px) {
-  .container, .container-sm, .container-lg { padding: 0 16px; }
 
-  /* 카드 패딩 축소 */
-  .card, .feature-card, .stat-card { padding: 16px; }
-
-  /* 버튼 — 모바일 전체 너비 */
-  .hero-ctas .btn { width: 100%; justify-content: center; margin-bottom: 8px; }
-  .hero-ctas { flex-direction: column; gap: 0; }
-
-  /* stat 카드 2열 */
-  .grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
-
-  /* 섹션 여백 축소 */
-  .section { padding: 40px 0; }
-  .section-title { font-size: 1.5rem; }
-
-  /* 버튼 폰트/패딩 */
-  .btn-lg { padding: 12px 24px; font-size: 1rem; }
-  .btn-xl { padding: 14px 28px; font-size: 1rem; }
-
-  /* 폼 */
-  .form-row { grid-template-columns: 1fr; }
-  .form-input, .form-select, .form-textarea { font-size: 16px; } /* iOS zoom 방지 */
-
-  /* 모달 */
-  .modal { padding: 20px 16px; }
-
-  /* 히어로 통계 */
-  .hero-stats { gap: 16px; flex-wrap: wrap; }
-}
-
-/* 태블릿 개선 (768px) */
+/* 태블릿 (768px) */
 @media (max-width: 768px) {
+  .container, .container-sm, .container-lg { padding: 0 20px; }
   .section-title { font-size: 1.65rem; }
   .section-subtitle { font-size: 0.95rem; }
   .feature-card { padding: 20px; }
-
-  /* 그리드 — 2열 유지 가능한 경우 */
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
   .grid-3.force-1 { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
 
-  /* 카드 hover 효과 제거 (터치 기기) */
+  /* 네비 링크 숨김 — 햄버거 사용 */
+  .nav-links { display: none; }
+
+  /* 터치 기기 hover 제거 */
   @media (hover: none) {
-    .card:hover, .feature-card:hover, .stat-card:hover { transform: none; }
+    .card:hover, .feature-card:hover, .stat-card:hover { transform: none; box-shadow: none; }
   }
+}
+
+/* 모바일 (480px) */
+@media (max-width: 480px) {
+  .container, .container-sm, .container-lg { padding: 0 16px; }
+
+  /* 헤딩 크기 */
+  h1 { font-size: 1.75rem !important; }
+  h2 { font-size: 1.4rem !important; }
+  .section-title { font-size: 1.4rem; }
+
+  /* 카드 */
+  .card, .feature-card, .stat-card { padding: 16px; }
+
+  /* 버튼 */
+  .hero-ctas { flex-direction: column; gap: 8px; }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
+  .btn-lg { padding: 12px 20px; font-size: 0.95rem; }
+  .btn-xl { padding: 13px 22px; font-size: 0.95rem; }
+
+  /* 그리드 단열화 */
+  .grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr !important; }
+
+  /* 섹션 여백 */
+  .section { padding: 40px 0; }
+
+  /* 폼 — iOS 자동 확대 방지 */
+  .form-input, .form-select, .form-textarea { font-size: 16px !important; }
+  .form-row { grid-template-columns: 1fr !important; }
+
+  /* 모달 */
+  .modal { padding: 20px 16px; margin: 16px; max-width: calc(100vw - 32px); }
+
+  /* 히어로 */
+  .hero-stats { gap: 16px; flex-wrap: wrap; }
+
+  /* 드롭다운 서브메뉴 — 모바일에서 숨김 (모바일 메뉴 사용) */
+  .nav-submenu { display: none !important; }
+
+  /* 테이블 — 가로 스크롤 */
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
 
 /* ─────────────────────────────────────────────
