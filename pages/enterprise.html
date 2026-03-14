@@ -10,6 +10,16 @@
   <link rel="stylesheet" href="../css/variables.css">
   <link rel="stylesheet" href="../css/main.css">
   <script>/* FOUC 방지 */const _t=localStorage.getItem('ax-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);</script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    // ── EmailJS 설정 ──────────────────────────────────────────
+    // 1. https://www.emailjs.com 가입 후 아래 값을 교체하세요
+    const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // Account > API Keys
+    const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // Email Services > Service ID
+    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // Email Templates > Template ID
+    // ──────────────────────────────────────────────────────────
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  </script>
   <style>
     /* Hero */
     .enterprise-hero {
@@ -914,13 +924,35 @@ function validateForm() {
   return true;
 }
 
-function submitInquiry() {
+async function submitInquiry() {
   if (!validateForm()) return;
 
   const overlay = document.getElementById('matchingOverlay');
   overlay.classList.add('active');
 
-  // Simulate matching
+  // 폼 데이터 수집
+  const params = {
+    company_name  : document.getElementById('companyName').value.trim(),
+    contact_name  : document.getElementById('contactName').value.trim(),
+    contact_email : document.getElementById('contactEmail').value.trim(),
+    contact_phone : document.getElementById('contactPhone').value.trim() || '미입력',
+    project_types : getSelectedTypes().join(', '),
+    project_desc  : document.getElementById('projectDesc').value.trim(),
+    submitted_at  : new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }),
+    to_email      : 'jaiwshim@gmail.com',
+  };
+
+  // EmailJS 키가 설정된 경우에만 실제 발송
+  if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+    } catch (err) {
+      console.error('EmailJS 발송 실패:', err);
+      // 발송 실패해도 매칭 결과는 보여줌 (UX 유지)
+    }
+  }
+
+  // 매칭 애니메이션 후 결과 표시
   setTimeout(() => {
     showMatchingResult();
   }, 3000);
