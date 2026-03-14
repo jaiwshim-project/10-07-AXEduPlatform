@@ -157,6 +157,7 @@
       font-size: 3.2rem;
       position: relative;
       flex-shrink: 0;
+      background: linear-gradient(135deg, #2D1B69 0%, #4A1D96 100%) !important;
     }
     .thumb-badges {
       position: absolute;
@@ -178,18 +179,20 @@
       font-weight: 700;
       line-height: 1.4;
     }
-    .badge-cat-ax     { background: rgba(59,130,246,0.15); color: #2563EB; }
-    .badge-cat-ai     { background: rgba(16,185,129,0.15); color: #059669; }
-    .badge-cat-vibe   { background: rgba(255,107,53,0.15); color: #DC4A0A; }
-    .badge-cat-plat   { background: rgba(139,92,246,0.15); color: #7C3AED; }
-    .badge-cat-cons   { background: rgba(245,158,11,0.15); color: #B45309; }
-    .badge-free  { background: #DCFCE7; color: #15803D; }
-    .badge-paid  { background: #FEF3C7; color: #B45309; }
+    /* 썸네일 위 뱃지: 보라 배경에서 잘 보이도록 흰색 계열 */
+    .badge-cat-ax     { background: rgba(255,255,255,0.22); color: #fff; }
+    .badge-cat-ai     { background: rgba(255,255,255,0.22); color: #fff; }
+    .badge-cat-vibe   { background: rgba(255,107,53,0.8);   color: #fff; }
+    .badge-cat-plat   { background: rgba(255,255,255,0.22); color: #fff; }
+    .badge-cat-cons   { background: rgba(245,158,11,0.8);   color: #fff; }
+    .badge-free  { background: rgba(22,163,74,0.85);  color: #fff; }
+    .badge-paid  { background: rgba(255,107,53,0.85); color: #fff; }
+    /* 카드 body 안 레벨 뱃지 */
     .level-badge { background: #F3F4F6; color: #374151; }
-    .level-입문  { background: #EFF6FF; color: #2563EB; }
-    .level-초급  { background: #F0FDF4; color: #16A34A; }
-    .level-중급  { background: #FFF7ED; color: #C2410C; }
-    .level-고급  { background: #FDF4FF; color: #7C3AED; }
+    .level-입문  { background: #EFF6FF; color: #1d4ed8; }
+    .level-초급  { background: #F0FDF4; color: #15803d; }
+    .level-중급  { background: #FFF7ED; color: #c2410c; }
+    .level-고급  { background: #FDF4FF; color: #7c3aed; }
 
     /* Card body */
     .course-body {
@@ -197,7 +200,9 @@
       flex: 1;
       display: flex;
       flex-direction: column;
+      background: #ffffff;
     }
+    [data-theme="dark"] .course-body { background: #1e293b; }
     .course-cat-row {
       display: flex;
       align-items: center;
@@ -207,15 +212,17 @@
     .course-title {
       font-size: 1rem;
       font-weight: 700;
-      color: var(--color-text);
+      color: #111827;
       line-height: 1.45;
       margin-bottom: 6px;
     }
+    [data-theme="dark"] .course-title { color: #f1f5f9; }
     .course-instructor {
       font-size: 0.82rem;
-      color: var(--color-text-muted);
+      color: #6B7280;
       margin-bottom: 12px;
     }
+    [data-theme="dark"] .course-instructor { color: #94a3b8; }
 
     /* Rating row */
     .rating-row {
@@ -226,33 +233,38 @@
       font-size: 0.82rem;
     }
     .stars { color: #F59E0B; letter-spacing: 1px; font-size: 0.78rem; }
-    .rating-score { font-weight: 700; color: var(--color-text); }
-    .review-count { color: var(--color-text-muted); }
+    .rating-score { font-weight: 700; color: #111827; }
+    [data-theme="dark"] .rating-score { color: #f1f5f9; }
+    .review-count { color: #6B7280; }
+    [data-theme="dark"] .review-count { color: #94a3b8; }
 
     /* Meta row */
     .meta-row {
       display: flex;
       gap: 14px;
       font-size: 0.8rem;
-      color: var(--color-text-muted);
+      color: #6B7280;
       margin-bottom: 14px;
     }
+    [data-theme="dark"] .meta-row { color: #94a3b8; }
     .meta-row span { display: flex; align-items: center; gap: 3px; }
 
     /* Footer */
     .course-footer {
       margin-top: auto;
       padding-top: 14px;
-      border-top: 1px solid var(--color-border);
+      border-top: 1px solid #E5E7EB;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
+    [data-theme="dark"] .course-footer { border-top-color: #334155; }
     .price-tag {
       font-size: 1.1rem;
       font-weight: 800;
-      color: var(--color-text);
+      color: #111827;
     }
+    [data-theme="dark"] .price-tag { color: #f1f5f9; }
     .price-tag.free { color: #16A34A; }
     .enroll-btn {
       padding: 8px 18px;

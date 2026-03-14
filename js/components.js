@@ -82,19 +82,19 @@ const Components = {
     </button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <div class="mob-group">
-      <button class="mob-group-toggle" onclick="this.parentElement.classList.toggle('open')">🏢 회사소개 <span class="mob-arrow">▾</span></button>
-      <div class="mob-sub">
-        <a href="${base}pages/about.html">🏢 회사 소개</a>
-        <a href="${base}pages/ceo.html">👤 CEO 소개</a>
+    <div style="display:flex;flex-direction:column;">
+      <button onclick="var s=this.nextElementSibling;var open=s.style.display==='flex';s.style.display=open?'none':'flex';this.querySelector('.marr').style.transform=open?'rotate(0deg)':'rotate(180deg)';" style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:14px 0;background:none;border:none;border-bottom:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.95);font-size:1.1rem;font-weight:500;font-family:inherit;cursor:pointer;text-align:left;">🏢 회사소개 <span class="marr" style="transition:transform 0.2s;font-size:0.8rem;">▾</span></button>
+      <div style="display:none;flex-direction:column;background:rgba(0,0,0,0.2);">
+        <a href="${base}pages/about.html" style="padding:10px 0 10px 24px!important;font-size:0.95rem!important;">🏢 회사 소개</a>
+        <a href="${base}pages/ceo.html" style="padding:10px 0 10px 24px!important;font-size:0.95rem!important;">👤 CEO 소개</a>
       </div>
     </div>
-    <div class="mob-group">
-      <button class="mob-group-toggle" onclick="this.parentElement.classList.toggle('open')">📚 교육과정 <span class="mob-arrow">▾</span></button>
-      <div class="mob-sub">
-        <a href="${base}pages/online-courses.html">🖥️ 온라인 교육</a>
-        <a href="${base}pages/online-projects.html">💻 온라인 프로젝트</a>
-        <a href="${base}pages/offline-courses.html">🏫 오프라인 교육</a>
+    <div style="display:flex;flex-direction:column;">
+      <button onclick="var s=this.nextElementSibling;var open=s.style.display==='flex';s.style.display=open?'none':'flex';this.querySelector('.marr').style.transform=open?'rotate(0deg)':'rotate(180deg)';" style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:14px 0;background:none;border:none;border-bottom:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.95);font-size:1.1rem;font-weight:500;font-family:inherit;cursor:pointer;text-align:left;">📚 교육과정 <span class="marr" style="transition:transform 0.2s;font-size:0.8rem;">▾</span></button>
+      <div style="display:none;flex-direction:column;background:rgba(0,0,0,0.2);">
+        <a href="${base}pages/online-courses.html" style="padding:10px 0 10px 24px!important;font-size:0.95rem!important;">🖥️ 온라인 교육</a>
+        <a href="${base}pages/online-projects.html" style="padding:10px 0 10px 24px!important;font-size:0.95rem!important;">💻 온라인 프로젝트</a>
+        <a href="${base}pages/offline-courses.html" style="padding:10px 0 10px 24px!important;font-size:0.95rem!important;">🏫 오프라인 교육</a>
       </div>
     </div>
     <a href="${base}pages/projects.html">📁 프로젝트</a>
@@ -295,7 +295,7 @@ if (document.readyState === 'loading') {
 // ── 비밀번호 보호 함수 ────────────────────────────────────────
 let _axPwdTarget = null;
 
-function axProtectedOpen(url) {
+window.axProtectedOpen = function(url) {
   _axPwdTarget = url;
   const modal = document.getElementById('ax-pwd-modal');
   const input = document.getElementById('ax-pwd-input');
@@ -305,26 +305,33 @@ function axProtectedOpen(url) {
   input.value = '';
   modal.style.display = 'flex';
   setTimeout(() => input.focus(), 100);
-}
+};
 
-function axPwdConfirm() {
+window.axPwdConfirm = function() {
   const input = document.getElementById('ax-pwd-input');
   const err   = document.getElementById('ax-pwd-error');
   if (input.value === '9633') {
+    const target = _axPwdTarget;
     axPwdClose();
-    window.open(_axPwdTarget, '_blank', 'noopener');
+    const a = document.createElement('a');
+    a.href = target;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   } else {
     err.style.display = 'block';
     input.value = '';
     input.focus();
   }
-}
+};
 
-function axPwdClose() {
+window.axPwdClose = function() {
   const modal = document.getElementById('ax-pwd-modal');
   if (modal) modal.style.display = 'none';
   _axPwdTarget = null;
-}
+};
 
 // ── AI 봇 기능 ──
 // ── Gemini API 설정 ──
