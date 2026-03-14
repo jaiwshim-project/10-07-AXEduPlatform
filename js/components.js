@@ -38,6 +38,7 @@ const Components = {
       <li><a href="${base}pages/community.html"${active('community.html')}>커뮤니티</a></li>
       <li><a href="${base}pages/enterprise.html"${active('enterprise.html')}>기업서비스</a></li>
       <li><a href="${base}pages/manual.html"${active('manual.html')}>매뉴얼</a></li>
+      <li><a href="${base}pages/about.html"${active('about.html')}>회사소개</a></li>
     </ul>
     <div class="nav-actions">
       <button id="themeToggle" onclick="ThemeManager && ThemeManager.toggle()" title="테마 전환">🌙</button>
@@ -81,6 +82,7 @@ const Components = {
     <a href="${base}pages/community.html">💬 커뮤니티</a>
     <a href="${base}pages/enterprise.html">🏢 기업서비스</a>
     <a href="${base}pages/manual.html">📖 매뉴얼</a>
+    <a href="${base}pages/about.html">🏢 회사소개</a>
     <a href="${base}pages/auth.html" class="btn btn-primary btn-block" style="margin-top:12px">로그인 / 회원가입</a>
   </div>
 </nav>`;
