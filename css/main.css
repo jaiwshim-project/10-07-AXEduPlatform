@@ -124,8 +124,8 @@ ul, ol {
   position: sticky;
   top: 0;
   z-index: var(--z-navbar);
-  background: var(--color-white);
-  border-bottom: 1px solid var(--color-border);
+  background: #0A2540;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   padding: 0 var(--space-lg);
   height: 64px;
   display: flex;
@@ -134,7 +134,12 @@ ul, ol {
 }
 
 .navbar.scrolled {
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+
+[data-theme="dark"] .navbar {
+  background: #060f1c;
+  border-bottom-color: rgba(255,255,255,0.06);
 }
 
 .nav-container {
@@ -179,7 +184,7 @@ ul, ol {
 
 .nav-links a {
   text-decoration: none;
-  color: var(--color-text);
+  color: rgba(255,255,255,0.85);
   font-weight: 500;
   font-size: 0.95rem;
   transition: color var(--transition);
@@ -228,7 +233,7 @@ ul, ol {
   display: block;
   width: 24px;
   height: 2px;
-  background: var(--color-text);
+  background: rgba(255,255,255,0.85);
   border-radius: 2px;
   transition: all var(--transition);
 }
@@ -243,15 +248,16 @@ ul, ol {
   position: fixed;
   inset: 0;
   top: 64px;
-  background: var(--color-white);
+  background: #0A2540;
   z-index: 999;
   padding: var(--space-xl) var(--space-lg);
   flex-direction: column;
   gap: var(--space-md);
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 
-.mobile-menu.open {
+.mobile-menu.open,
+.mobile-menu.active {
   display: flex;
 }
 
@@ -259,8 +265,8 @@ ul, ol {
   font-size: 1.1rem;
   font-weight: 500;
   padding: var(--space-md) 0;
-  border-bottom: 1px solid var(--color-border);
-  color: var(--color-text);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.85);
   transition: color var(--transition);
 }
 
@@ -320,13 +326,14 @@ ul, ol {
 
 .btn-outline {
   background: transparent;
-  color: var(--color-primary);
-  border-color: var(--color-primary);
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.4);
 }
 
 .btn-outline:hover:not(:disabled) {
-  background: var(--color-primary);
+  background: rgba(255,255,255,0.12);
   color: white;
+  border-color: rgba(255,255,255,0.7);
 }
 
 .btn-outline-white {
