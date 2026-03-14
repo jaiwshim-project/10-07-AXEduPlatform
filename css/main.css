@@ -1783,19 +1783,34 @@ tr:hover td { background: rgba(255,107,53,0.03); }
 /* 기본 body 텍스트 */
 body { color: var(--color-text); }
 
-/* 헤딩 */
-h1, h2, h3, h4, h5, h6 { color: var(--color-primary); }
-[data-theme="dark"] h1,
-[data-theme="dark"] h2,
-[data-theme="dark"] h3,
-[data-theme="dark"] h4,
-[data-theme="dark"] h5,
-[data-theme="dark"] h6 { color: #f8fafc; }
+/* 헤딩 — 밝은 배경 영역만 진하게 */
+:is(.card, .feature-card, .stat-card, main, .section, section, article, .container) h1,
+:is(.card, .feature-card, .stat-card, main, .section, section, article, .container) h2,
+:is(.card, .feature-card, .stat-card, main, .section, section, article, .container) h3,
+:is(.card, .feature-card, .stat-card, main, .section, section, article, .container) h4 { color: var(--color-primary); }
 
-/* 본문 p, li */
-p, li { color: var(--color-text); }
-[data-theme="dark"] p,
-[data-theme="dark"] li { color: #e2e8f0; }
+[data-theme="dark"] :is(.card, .feature-card, .stat-card, main, .section, section, article, .container) h1,
+[data-theme="dark"] :is(.card, .feature-card, .stat-card, main, .section, section, article, .container) h2,
+[data-theme="dark"] :is(.card, .feature-card, .stat-card, main, .section, section, article, .container) h3,
+[data-theme="dark"] :is(.card, .feature-card, .stat-card, main, .section, section, article, .container) h4 { color: #f8fafc; }
+
+/* 본문 p, li — 카드/섹션 내부만 */
+:is(.card, .feature-card, .stat-card, main, .section, section, article) p,
+:is(.card, .feature-card, .stat-card, main, .section, section, article) li { color: var(--color-text); }
+[data-theme="dark"] :is(.card, .feature-card, .stat-card, main, .section, section, article) p,
+[data-theme="dark"] :is(.card, .feature-card, .stat-card, main, .section, section, article) li { color: #e2e8f0; }
+
+/* 다크 배경 섹션 (hero, 배너, 푸터 등) — 흰색 강제 유지 */
+.hero h1, .hero h2, .hero h3, .hero h4, .hero h5,
+.hero p, .hero li, .hero span:not(.highlight),
+[class*="-hero"] h1, [class*="-hero"] h2, [class*="-hero"] h3,
+[class*="-hero"] p, [class*="-hero"] li,
+.page-hero h1, .page-hero h2, .page-hero p,
+.about-hero h1, .about-hero p,
+.qna-hero h1, .qna-hero p,
+.sitemap-hero h1, .sitemap-hero p,
+.cta-section h1, .cta-section h2, .cta-section p,
+.contact-cta h1, .contact-cta h2, .contact-cta h3, .contact-cta p { color: inherit; }
 
 /* 흐릿한 보조 텍스트도 최소 #374151 이상 */
 .text-muted, .form-label, .card-meta, .badge-text,
