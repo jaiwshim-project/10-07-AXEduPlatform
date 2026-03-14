@@ -11,7 +11,7 @@
   <script>/* FOUC 방지 */const _t=localStorage.getItem('ax-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);</script>
   <style>
     .page-hero {
-      background: linear-gradient(135deg, #0A2540 0%, #1a3a5c 60%, #0e3050 100%);
+      background: linear-gradient(135deg, #2D1B69 0%, #4A1D96 60%, #1e0a44 100%);
       color: white;
       padding: 64px 0 56px;
       position: relative;
@@ -70,7 +70,7 @@
     }
 
     .courses-section { padding: 56px 0; }
-    .section-title { font-size: 1.4rem; font-weight: 800; color: var(--color-primary, #0A2540); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .section-title { font-size: 1.4rem; font-weight: 800; color: var(--color-primary, #2D1B69); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
     [data-theme="dark"] .section-title { color: #f1f5f9; }
 
     .courses-grid {
@@ -81,15 +81,15 @@
 
     .course-card {
       background: linear-gradient(160deg, #ffffff 0%, #f8fafd 100%);
-      border: 1px solid rgba(10,37,64,0.08);
+      border: 1px solid rgba(45,27,105,0.08);
       border-top: 3px solid #FF6B35;
       border-radius: 16px;
       overflow: hidden;
       transition: all 0.25s;
-      box-shadow: 0 2px 12px rgba(10,37,64,0.06);
+      box-shadow: 0 2px 12px rgba(45,27,105,0.06);
     }
     [data-theme="dark"] .course-card { background: linear-gradient(160deg, #1e293b, #0f172a); border-color: rgba(255,255,255,0.07); }
-    .course-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(10,37,64,0.12); }
+    .course-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(45,27,105,0.12); }
 
     .course-thumb {
       height: 160px;
@@ -98,7 +98,7 @@
       justify-content: center;
       font-size: 3rem;
     }
-    .course-thumb.ax    { background: linear-gradient(135deg,#0A2540,#1a3a5c); }
+    .course-thumb.ax    { background: linear-gradient(135deg,#2D1B69,#4A1D96); }
     .course-thumb.code  { background: linear-gradient(135deg,#1a1a2e,#16213e); }
     .course-thumb.data  { background: linear-gradient(135deg,#0d4f3c,#1a6b52); }
     .course-thumb.biz   { background: linear-gradient(135deg,#4a1942,#6d2b5e); }
@@ -116,7 +116,7 @@
     .tag-level-intermediate { background: rgba(255,107,53,0.1); color: #FF6B35; border: 1px solid rgba(255,107,53,0.3); }
     .tag-level-advanced { background: rgba(139,92,246,0.1); color: #8b5cf6; border: 1px solid rgba(139,92,246,0.3); }
     .tag-free { background: rgba(0,200,150,0.1); color: #00C896; border: 1px solid rgba(0,200,150,0.3); }
-    .tag-paid { background: rgba(10,37,64,0.07); color: #4B5563; border: 1px solid rgba(10,37,64,0.15); }
+    .tag-paid { background: rgba(45,27,105,0.07); color: #4B5563; border: 1px solid rgba(45,27,105,0.15); }
     [data-theme="dark"] .tag-paid { background: rgba(255,255,255,0.07); color: #94a3b8; border-color: rgba(255,255,255,0.12); }
 
     .course-title { font-size: 1rem; font-weight: 700; color: #111827; margin-bottom: 8px; line-height: 1.4; }
@@ -140,7 +140,7 @@
       border-radius: 14px;
       padding: 22px;
       text-align: center;
-      box-shadow: 0 2px 8px rgba(10,37,64,0.05);
+      box-shadow: 0 2px 8px rgba(45,27,105,0.05);
     }
     [data-theme="dark"] .stat-box { background: #1e293b; border-color: #334155; border-bottom-color: #00C896; }
     .stat-num { font-size: 1.8rem; font-weight: 900; color: #FF6B35; }
@@ -192,7 +192,7 @@
     <div class="section-title">🔥 인기 강의</div>
     <div class="courses-grid">
 
-      <div class="course-card" data-level="beginner" data-price="free">
+      <div class="course-card" data-level="beginner" data-price="free" data-course-id="course-ax-understanding">
         <div class="course-thumb ax">🤖</div>
         <div class="course-body">
           <div class="course-meta">
@@ -206,7 +206,7 @@
         </div>
       </div>
 
-      <div class="course-card" data-level="beginner" data-price="paid">
+      <div class="course-card" data-level="beginner" data-price="paid" data-course-id="course-vibe-coding-intro">
         <div class="course-thumb code">💻</div>
         <div class="course-body">
           <div class="course-meta">
@@ -220,7 +220,7 @@
         </div>
       </div>
 
-      <div class="course-card" data-level="intermediate" data-price="paid">
+      <div class="course-card" data-level="intermediate" data-price="paid" data-course-id="course-data-analysis-ai">
         <div class="course-thumb data">📊</div>
         <div class="course-body">
           <div class="course-meta">
@@ -234,7 +234,7 @@
         </div>
       </div>
 
-      <div class="course-card" data-level="intermediate" data-price="paid">
+      <div class="course-card" data-level="intermediate" data-price="paid" data-course-id="course-ai-marketing">
         <div class="course-thumb biz">📈</div>
         <div class="course-body">
           <div class="course-meta">
@@ -248,7 +248,7 @@
         </div>
       </div>
 
-      <div class="course-card" data-level="advanced" data-price="paid">
+      <div class="course-card" data-level="advanced" data-price="paid" data-course-id="course-llm-api-dev">
         <div class="course-thumb tool">⚙️</div>
         <div class="course-body">
           <div class="course-meta">
@@ -262,7 +262,7 @@
         </div>
       </div>
 
-      <div class="course-card" data-level="beginner" data-price="free">
+      <div class="course-card" data-level="beginner" data-price="free" data-course-id="course-chatgpt-business">
         <div class="course-thumb ax">🎯</div>
         <div class="course-body">
           <div class="course-meta">
@@ -286,6 +286,7 @@
 <script src="../js/utils.js"></script>
 <script src="../js/auth.js"></script>
 <script src="../js/theme.js"></script>
+<script src="../js/lms.js"></script>
 <script>
   function filterCourses(level, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -296,6 +297,22 @@
       card.style.display = match ? '' : 'none';
     });
   }
+</script>
+<script>
+// 강의 카드에 진도 표시
+document.addEventListener('DOMContentLoaded', function() {
+  function refreshCourseCards() {
+    document.querySelectorAll('[data-course-id]').forEach(card => {
+      const courseId = card.getAttribute('data-course-id');
+      const c = AXLMS.getCourse(courseId);
+      let badge = card.querySelector('.lms-badge');
+      if (!badge) { badge = document.createElement('div'); badge.className = 'lms-badge'; badge.style.cssText = 'margin-top:8px;'; card.querySelector('.course-btn')?.before(badge) || card.appendChild(badge); }
+      if (c) { badge.innerHTML = AXLMS.renderProgressBar(c.progress) + '<div style="font-size:0.72rem;color:#7c3aed;margin-top:3px;font-weight:600;">' + c.progress + '% 완료</div>'; }
+    });
+  }
+  refreshCourseCards();
+  window.addEventListener('ax-lms-updated', refreshCourseCards);
+});
 </script>
 </body>
 </html>

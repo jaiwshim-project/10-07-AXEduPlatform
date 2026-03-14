@@ -13,7 +13,7 @@
   <style>
     /* ── Hero Banner ── */
     .course-hero {
-      background: linear-gradient(135deg, #0A2540 0%, #0d2d4f 50%, #061829 100%);
+      background: linear-gradient(135deg, #2D1B69 0%, #1e0a44 50%, #1e0a44 100%);
       color: white;
       padding: 56px 0 48px;
       position: relative;
@@ -108,7 +108,7 @@
     }
     .card-preview {
       height: 180px;
-      background: linear-gradient(135deg,#0A2540,#1a3a5c);
+      background: linear-gradient(135deg,#2D1B69,#4A1D96);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -203,7 +203,7 @@
       white-space: nowrap;
     }
     .tab-btn:hover { color: var(--color-text); }
-    .tab-btn.active { color: #0A2540; border-bottom-color: #FF6B35; }
+    .tab-btn.active { color: #2D1B69; border-bottom-color: #FF6B35; }
     .tab-pane { display: none; }
     .tab-pane.active { display: block; }
 
@@ -319,7 +319,7 @@
     .reviewer-avatar {
       width: 38px; height: 38px;
       border-radius: 50%;
-      background: linear-gradient(135deg,#0A2540,#1a3a5c);
+      background: linear-gradient(135deg,#2D1B69,#4A1D96);
       display: flex; align-items: center; justify-content: center;
       color: white; font-weight: 700; font-size: 0.9rem;
     }
@@ -344,7 +344,7 @@
     }
     .qa-q-badge {
       width: 28px; height: 28px;
-      background: #0A2540; color: white;
+      background: #2D1B69; color: white;
       border-radius: 6px;
       display: flex; align-items: center; justify-content: center;
       font-weight: 800; font-size: 0.85rem;
@@ -378,7 +378,7 @@
       border-bottom: 2px solid var(--color-border);
     }
 
-    [data-theme="dark"] .course-hero { background: linear-gradient(135deg,#061829,#0a2138); }
+    [data-theme="dark"] .course-hero { background: linear-gradient(135deg,#1e0a44,#2D1B69); }
     [data-theme="dark"] .enrollment-card { background: #1e293b; border-color: #334155; }
     [data-theme="dark"] .section-header { background: #1a2537; }
     [data-theme="dark"] .section-header:hover { background: #1e2f45; }
@@ -893,5 +893,65 @@ function shareKakao() {
 }
 </script>
 <script src="../js/components.js"></script>
+<script src="../js/lms.js"></script>
+<script>
+// ── LMS 진도 카드 동적 삽입 ──
+document.addEventListener('DOMContentLoaded', function() {
+  const courseId = 'course-' + (window.location.search || 'default').replace(/[^a-z0-9]/gi, '') || 'course-001';
+  const courseTitle = document.querySelector('h1')?.textContent?.trim() || '강의';
+
+  // 진도 카드 생성
+  const progressCard = document.createElement('div');
+  progressCard.id = 'lms-progress-card';
+  progressCard.style.cssText = 'position:fixed;bottom:100px;left:24px;background:white;border:1px solid rgba(124,58,237,0.2);border-radius:16px;padding:18px 20px;width:240px;box-shadow:0 4px 20px rgba(45,27,105,0.12);z-index:900;';
+
+  function renderCard() {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    progressCard.style.background = dark ? '#1e293b' : 'white';
+    progressCard.style.color = dark ? '#f1f5f9' : '#111827';
+
+    const c = AXLMS.getCourse(courseId);
+    const progress = c ? c.progress : 0;
+    const status = c ? c.status : 'not_started';
+
+    progressCard.innerHTML = `
+      <div style="font-size:0.78rem;font-weight:700;color:#7c3aed;margin-bottom:10px;">📊 내 학습 현황</div>
+      <div style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:${dark?'#f1f5f9':'#111827'};">${courseTitle.substring(0,20)}${courseTitle.length>20?'...':''}</div>
+      ${AXLMS.renderProgressBar(progress)}
+      <div style="display:flex;justify-content:space-between;margin-top:6px;margin-bottom:12px;">
+        <span style="font-size:0.75rem;color:${dark?'#94a3b8':'#374151'};">${AXLMS.renderStatusBadge(status)}</span>
+        <span style="font-size:0.78rem;font-weight:700;color:#7c3aed;">${progress}%</span>
+      </div>
+      <div style="display:flex;gap:6px;">
+        <button onclick="axLmsUpdateProgress25()" style="flex:1;padding:8px 0;background:rgba(124,58,237,0.1);color:#7c3aed;border:1px solid rgba(124,58,237,0.3);border-radius:8px;font-size:0.78rem;font-weight:700;cursor:pointer;">+25%</button>
+        <button onclick="axLmsComplete()" style="flex:1;padding:8px 0;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:white;border:none;border-radius:8px;font-size:0.78rem;font-weight:700;cursor:pointer;">완료 ✓</button>
+      </div>
+    `;
+  }
+
+  window.axLmsUpdateProgress25 = function() {
+    const c = AXLMS.getCourse(courseId);
+    const cur = c ? c.progress : 0;
+    AXLMS.updateProgress(courseId, courseTitle, Math.min(100, cur + 25));
+    renderCard();
+  };
+  window.axLmsComplete = function() {
+    AXLMS.completeCourse(courseId, courseTitle);
+    renderCard();
+    // 완료 토스트
+    const toast = document.createElement('div');
+    toast.style.cssText = 'position:fixed;top:24px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#00C896,#00a87c);color:white;padding:14px 28px;border-radius:12px;font-weight:700;z-index:9999;box-shadow:0 4px 20px rgba(0,200,150,0.3);';
+    toast.textContent = '🎉 강의 완료! 수고하셨습니다.';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  };
+
+  document.body.appendChild(progressCard);
+  renderCard();
+
+  // 다크모드 변경 감지
+  new MutationObserver(renderCard).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+});
+</script>
 </body>
 </html>

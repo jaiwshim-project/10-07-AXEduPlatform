@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CEO 소개 — AX EDU GROUP</title>
+  <meta name="description" content="AX EDU GROUP 창립자 심재우 대표 소개. AI 전환 전략 전문가, Marquis Who's Who 세계인명사전 등재.">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <script>/* FOUC 방지 */const _t=localStorage.getItem('ax-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);</script>
+  <style>
+    .ceo-hero {
+      background: linear-gradient(135deg, #2D1B69 0%, #4A1D96 60%, #1e0a44 100%);
+      color: white;
+      padding: 80px 0 72px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .ceo-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(124,58,237,0.25) 0%, transparent 65%);
+    }
+    .ceo-hero .container { position: relative; }
+    .ceo-hero .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(124,58,237,0.25); border: 1px solid rgba(124,58,237,0.5);
+      color: #c4b5fd; padding: 6px 16px; border-radius: 20px;
+      font-size: 0.8rem; font-weight: 700; margin-bottom: 28px;
+    }
+    .ceo-photo-wrap {
+      position: relative; display: inline-block; margin-bottom: 28px;
+    }
+    .ceo-photo {
+      width: 280px; height: 360px; border-radius: 16px; object-fit: cover; object-position: top;
+      border: 4px solid rgba(255,255,255,0.3);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+    }
+    .ceo-photo-fallback {
+      width: 280px; height: 360px; border-radius: 16px;
+      background: linear-gradient(135deg, #7c3aed, #5b21b6);
+      border: 4px solid rgba(255,255,255,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; font-weight: 900; color: white;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+    }
+    .ceo-award-badge {
+      position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white; padding: 6px 16px; border-radius: 20px;
+      font-size: 0.75rem; font-weight: 700; white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .ceo-hero h1 { font-size: 2.4rem; font-weight: 900; margin-bottom: 8px; }
+    .ceo-hero .ceo-title { font-size: 1.1rem; color: rgba(255,255,255,0.85); margin-bottom: 24px; }
+    .ceo-hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+    .ceo-stat-num { font-size: 1.8rem; font-weight: 900; color: #c4b5fd; }
+    .ceo-stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.8); margin-top: 3px; }
+
+    /* Profile Section */
+    .profile-section { padding: 72px 0; background: var(--color-bg, #f0f4f9); }
+    [data-theme="dark"] .profile-section { background: #0f172a; }
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .profile-card {
+      background: white; border-radius: 20px; padding: 36px;
+      border: 1px solid rgba(124,58,237,0.1);
+      box-shadow: 0 4px 20px rgba(45,27,105,0.08);
+    }
+    [data-theme="dark"] .profile-card { background: #1e293b; border-color: rgba(124,58,237,0.2); }
+    .profile-card h3 {
+      font-size: 1.1rem; font-weight: 800; color: #2D1B69; margin-bottom: 18px;
+      display: flex; align-items: center; gap: 10px;
+      padding-bottom: 12px; border-bottom: 2px solid rgba(124,58,237,0.15);
+    }
+    [data-theme="dark"] .profile-card h3 { color: #c4b5fd; border-bottom-color: rgba(124,58,237,0.3); }
+    .career-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .career-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 0.9rem; color: #374151; line-height: 1.5;
+      padding: 10px 14px;
+      background: rgba(124,58,237,0.04);
+      border-radius: 8px;
+      border-left: 3px solid #7c3aed;
+    }
+    [data-theme="dark"] .career-list li { color: #e2e8f0; background: rgba(124,58,237,0.08); }
+    .career-list li::before { content: '▸'; color: #7c3aed; flex-shrink: 0; font-size: 0.8rem; margin-top: 2px; }
+
+    /* Philosophy Section */
+    .philosophy-section { padding: 72px 0; }
+    .philosophy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .phil-card {
+      background: linear-gradient(160deg, #ffffff, #f9f7ff);
+      border: 1px solid rgba(124,58,237,0.1);
+      border-top: 3px solid #7c3aed;
+      border-radius: 16px; padding: 28px 22px; text-align: center;
+      box-shadow: 0 2px 12px rgba(45,27,105,0.06);
+      transition: transform 0.2s;
+    }
+    [data-theme="dark"] .phil-card { background: linear-gradient(160deg,#1e293b,#0f172a); border-color: rgba(124,58,237,0.2); }
+    .phil-card:nth-child(2) { border-top-color: #FF6B35; }
+    .phil-card:nth-child(3) { border-top-color: #00C896; }
+    .phil-card:hover { transform: translateY(-4px); }
+    .phil-icon { font-size: 2.2rem; margin-bottom: 14px; }
+    .phil-title { font-size: 1.05rem; font-weight: 800; color: #2D1B69; margin-bottom: 10px; }
+    [data-theme="dark"] .phil-title { color: #f1f5f9; }
+    .phil-desc { font-size: 0.85rem; color: #374151; line-height: 1.7; }
+    [data-theme="dark"] .phil-desc { color: #94a3b8; }
+
+    /* Media Section */
+    .media-section { padding: 64px 0; background: var(--color-bg, #f0f4f9); }
+    [data-theme="dark"] .media-section { background: #0f172a; }
+    .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .media-card {
+      display: flex; align-items: center; gap: 16px;
+      background: white; border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 14px; padding: 20px;
+      text-decoration: none; color: inherit;
+      box-shadow: 0 2px 8px rgba(45,27,105,0.05);
+      transition: all 0.2s;
+    }
+    [data-theme="dark"] .media-card { background: #1e293b; border-color: rgba(124,58,237,0.2); }
+    .media-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(45,27,105,0.1); border-color: rgba(124,58,237,0.3); }
+    .media-card-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .media-card-title { font-size: 0.875rem; font-weight: 700; color: #2D1B69; margin-bottom: 4px; }
+    [data-theme="dark"] .media-card-title { color: #c4b5fd; }
+    .media-card-desc { font-size: 0.78rem; color: #374151; }
+    [data-theme="dark"] .media-card-desc { color: #94a3b8; }
+
+    /* CTA */
+    .ceo-cta {
+      padding: 72px 0;
+      background: linear-gradient(135deg, #2D1B69 0%, #4A1D96 100%);
+      text-align: center; color: white;
+    }
+    .ceo-cta h2 { font-size: 1.9rem; font-weight: 900; margin-bottom: 12px; color: #ffffff !important; }
+    .ceo-cta h2 span { color: #c4b5fd !important; }
+    .ceo-cta p { color: rgba(255,255,255,0.95) !important; margin-bottom: 32px; font-size: 1rem; }
+    .ceo-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-purple { padding: 13px 30px; background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.4); color: white; border-radius: 10px; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+    .btn-purple:hover { background: rgba(255,255,255,0.25); border-color: white; }
+    .btn-white { padding: 13px 30px; background: white; color: #2D1B69; border-radius: 10px; font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
+    .btn-white:hover { opacity: 0.9; }
+
+    @media (max-width: 768px) {
+      .ceo-hero h1 { font-size: 1.8rem; }
+      .profile-grid { grid-template-columns: 1fr; }
+      .philosophy-grid { grid-template-columns: 1fr; }
+      .ceo-hero-stats { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="logo"><img src="../images/logo.png" alt="AX EDU GROUP"></a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="ceo-hero">
+  <div class="container">
+    <div class="badge">👤 CEO 소개</div>
+    <div class="ceo-photo-wrap">
+      <img src="../images/ceo-profile.jpg" alt="심재우 대표" class="ceo-photo"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="ceo-photo-fallback" style="display:none;">심</div>
+      <div class="ceo-award-badge">🏆 Who's Who 2회 등재</div>
+    </div>
+    <h1>심재우</h1>
+    <div class="ceo-title">AX EDU GROUP 대표 / CEO</div>
+    <div class="ceo-hero-stats">
+      <div><div class="ceo-stat-num">30년+</div><div class="ceo-stat-label">컨설팅 경력</div></div>
+      <div><div class="ceo-stat-num">100+</div><div class="ceo-stat-label">AX 프로젝트 수행</div></div>
+      <div><div class="ceo-stat-num">8개국</div><div class="ceo-stat-label">B2B 세일즈 활동</div></div>
+      <div><div class="ceo-stat-num">2회</div><div class="ceo-stat-label">Marquis Who's Who 세계인명사전</div></div>
+      <div><div class="ceo-stat-num">51권</div><div class="ceo-stat-label">출간</div></div>
+      <div><div class="ceo-stat-num">5년</div><div class="ceo-stat-label">현대자동차 연구소</div></div>
+      <div><div class="ceo-stat-num">8년</div><div class="ceo-stat-label">General Electric</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Profile -->
+<div class="profile-section">
+  <div class="container">
+    <div class="profile-grid">
+      <div class="profile-card">
+        <h3>📋 주요 경력</h3>
+        <ul class="career-list">
+          <li>기계공학 석사 (구조해석 & 디지털트윈)</li>
+          <li>현대자동차 기술연구소 — 5년</li>
+          <li>General Electric (GE) — 8년</li>
+          <li>에스비컨설팅 — 30년+</li>
+          <li>8개국 B2B세일즈 국제공인 마스터트레이너</li>
+          <li>AI 전환(AX) 전략 전문가</li>
+          <li>기업·스타트업 AX 프로젝트 100건+ 수행</li>
+          <li>AX EDU GROUP 창립자</li>
+        </ul>
+      </div>
+      <div class="profile-card">
+        <h3>🏆 주요 성과 및 수상</h3>
+        <ul class="career-list">
+          <li>Marquis Who's Who 세계인명사전 등재 (2016)</li>
+          <li>Marquis Who's Who 세계인명사전 등재 (2020)</li>
+          <li>QLRCQ 상담 엔진 개발자</li>
+          <li>DF-AI 신용점수 시스템 설계자</li>
+          <li>5단계 상담 모델 창시자</li>
+          <li>한국 최초 AX 전문가 생태계 플랫폼 구축</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Philosophy -->
+<div class="philosophy-section">
+  <div class="container">
+    <div class="section-header" style="text-align:center;margin-bottom:40px;">
+      <h2 style="font-size:1.9rem;font-weight:900;color:#2D1B69;margin-bottom:10px;">경영 <span style="color:#7c3aed;">철학</span></h2>
+      <p style="color:#374151;">AI 시대를 이끄는 세 가지 핵심 가치</p>
+    </div>
+    <div class="philosophy-grid">
+      <div class="phil-card">
+        <div class="phil-icon">🎯</div>
+        <div class="phil-title">실전 중심 AX</div>
+        <div class="phil-desc">AI를 배우는 것이 아닌, AI로 실제 비즈니스 성과를 만드는 것이 진정한 AX입니다. 이론보다 현장에서 증명된 방법론을 가르칩니다.</div>
+      </div>
+      <div class="phil-card">
+        <div class="phil-icon">🌱</div>
+        <div class="phil-title">생태계 구축</div>
+        <div class="phil-desc">개인의 성장이 곧 생태계의 성장입니다. 교육 → 인증 → 프로젝트 → 취업으로 이어지는 완전한 성장 경로를 함께 만들어갑니다.</div>
+      </div>
+      <div class="phil-card">
+        <div class="phil-icon">🤝</div>
+        <div class="phil-title">상생 파트너십</div>
+        <div class="phil-desc">30년 B2B 컨설팅 경험을 바탕으로, 전문가와 기업 모두가 윈-윈하는 구조를 설계합니다. 신뢰 기반의 장기 파트너십을 추구합니다.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Group Logos -->
+<div style="padding: 56px 0; background: #0a0a0f; text-align: center;">
+  <div class="container">
+    <div style="font-size: 1.0rem; font-weight: 700; color: rgba(255,255,255,0.85); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 32px;">심재우 대표 운영 그룹사</div>
+    <div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
+      <img src="../images/logo-ax-biz.jpg" alt="AX BIZ GROUP" style="height: 70px; width: auto; display: block; opacity: 0.92; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.92'">
+      <img src="../images/logo-ax-dental.png" alt="AX DENTAL GROUP" style="height: 70px; width: auto; display: block; opacity: 0.92; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.92'">
+      <img src="../images/logo-full.png" alt="AX EDU GROUP" style="height: 78px; width: auto; display: block; opacity: 0.92; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.92'">
+    </div>
+  </div>
+</div>
+
+<!-- Media -->
+<div class="media-section">
+  <div class="container">
+    <div class="section-header" style="text-align:center;margin-bottom:32px;">
+      <h2 style="font-size:1.6rem;font-weight:800;color:#2D1B69;margin-bottom:8px;">📰 언론 <span style="color:#7c3aed;">보도</span></h2>
+    </div>
+    <div class="media-grid" style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px;">
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=11731" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #11731</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=11692" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #11692</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=11506" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">세 리더, 하나의 비전</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=11419" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #11419</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=11415" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">치과의료의 새로운 미래</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=11396" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">상담 혁신이 신뢰점수를 만나다</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=11309" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #11309</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=11304" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #11304</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=11302" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #11302</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=11039" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #11039</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=10892" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #10892</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=10872" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #10872</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=10844" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #10844</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=10738" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #10738</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=10729" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #10729</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=10530" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">AI 예술 융합 공간으로 진화!</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=10309" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #10309</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=10174" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #10174</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=10124" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #10124</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=10123" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #10123</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+      <a href="https://www.ibrandnews.com/news/articleView.html?idxno=270" target="_blank" rel="noopener noreferrer" class="media-card" style="padding:12px 14px;gap:10px;">
+        <div class="media-card-icon" style="font-size:1.2rem;">📰</div>
+        <div><div class="media-card-title" style="font-size:0.8rem;">기사 #270</div><div class="media-card-desc" style="font-size:0.7rem;">브랜드뉴스</div></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="ceo-cta">
+  <div class="container">
+    <h2>심재우 대표와 함께<br><span>AX 전문가</span>로 성장하세요</h2>
+    <p>30년 현장 경험과 100건+ AX 프로젝트 노하우가 담긴 교육을 만나보세요.</p>
+    <div class="ceo-cta-btns">
+      <a href="online-courses.html" class="btn-white">🎓 강의 보기</a>
+      <a href="enterprise.html" class="btn-purple">🏢 기업 문의</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer"></footer>
+<script src="../js/components.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/theme.js"></script>
+</body>
+</html>

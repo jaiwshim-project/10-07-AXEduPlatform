@@ -21,7 +21,7 @@
   <style>
     /* 랜딩 페이지 전용 스타일 */
     .hero {
-      background: linear-gradient(135deg, #0A2540 0%, #1a3a5c 50%, #0d3060 100%);
+      background: linear-gradient(135deg, #2D1B69 0%, #4A1D96 50%, #1e0a44 100%);
       padding: 100px 24px 80px;
       color: white;
       position: relative;
@@ -53,15 +53,15 @@
     .flow-arrow { text-align: center; color: rgba(255,255,255,0.3); font-size: 1.2rem; }
 
     /* 교육 카테고리 */
-    .course-card { background: linear-gradient(160deg,#fff 0%,#f8fafd 100%); border-radius: 16px; padding: 28px; border: 1px solid rgba(10,37,64,0.1); border-top: 3px solid #FF6B35; transition: all 0.3s; cursor: pointer; box-shadow: 0 2px 10px rgba(10,37,64,0.06); }
-    .course-card:hover { transform: translateY(-6px); box-shadow: 0 14px 44px rgba(10,37,64,0.13); border-color: rgba(255,107,53,0.25); }
+    .course-card { background: linear-gradient(160deg,#fff 0%,#f8fafd 100%); border-radius: 16px; padding: 28px; border: 1px solid rgba(45,27,105,0.1); border-top: 3px solid #FF6B35; transition: all 0.3s; cursor: pointer; box-shadow: 0 2px 10px rgba(45,27,105,0.06); }
+    .course-card:hover { transform: translateY(-6px); box-shadow: 0 14px 44px rgba(45,27,105,0.13); border-color: rgba(255,107,53,0.25); }
     .course-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 16px; }
     .course-count { font-size: 0.8rem; color: #4B5563; margin-top: 8px; font-weight: 600; }
-    .course-card h3 { font-size: 1.05rem; font-weight: 800; color: #0A2540; margin-bottom: 8px; }
+    .course-card h3 { font-size: 1.05rem; font-weight: 800; color: #2D1B69; margin-bottom: 8px; }
     .course-card p { font-size: 0.9rem; color: #374151; line-height: 1.65; }
 
     /* 생태계 플로우 */
-    .ecosystem { background: #0A2540; color: white; padding: 80px 24px; }
+    .ecosystem { background: #2D1B69; color: white; padding: 80px 24px; }
     .eco-flow { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; margin-top: 48px; }
     .eco-node { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 24px 20px; text-align: center; flex: 1; min-width: 160px; max-width: 200px; transition: background 0.3s; }
     .eco-node:hover { background: rgba(255,255,255,0.12); }
@@ -71,12 +71,12 @@
     .eco-arrow { font-size: 1.5rem; color: #FF6B35; padding: 0 8px; }
 
     /* 인증 */
-    .cert-card { background: linear-gradient(160deg,#fff 0%,#f8fafd 100%); border-radius: 16px; padding: 28px; border: 1px solid rgba(10,37,64,0.1); transition: all 0.3s; text-align: center; position: relative; overflow: hidden; box-shadow: 0 2px 10px rgba(10,37,64,0.06); }
-    .cert-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--color, #0A2540), var(--color2, #FF6B35)); }
-    .cert-card:hover { transform: translateY(-4px); box-shadow: 0 14px 44px rgba(10,37,64,0.13); border-color: rgba(255,107,53,0.2); }
-    .cert-badge { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 16px; border: 2px solid rgba(10,37,64,0.08); }
+    .cert-card { background: linear-gradient(160deg,#fff 0%,#f8fafd 100%); border-radius: 16px; padding: 28px; border: 1px solid rgba(45,27,105,0.1); transition: all 0.3s; text-align: center; position: relative; overflow: hidden; box-shadow: 0 2px 10px rgba(45,27,105,0.06); }
+    .cert-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--color, #2D1B69), var(--color2, #FF6B35)); }
+    .cert-card:hover { transform: translateY(-4px); box-shadow: 0 14px 44px rgba(45,27,105,0.13); border-color: rgba(255,107,53,0.2); }
+    .cert-badge { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 16px; border: 2px solid rgba(45,27,105,0.08); }
     .cert-level { font-size: 0.75rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
-    .cert-name { font-size: 1.1rem; font-weight: 800; color: #0A2540; margin-bottom: 12px; }
+    .cert-name { font-size: 1.1rem; font-weight: 800; color: #2D1B69; margin-bottom: 12px; }
     .cert-desc { font-size: 0.875rem; color: #374151; line-height: 1.65; }
 
     /* 통계 */
@@ -86,19 +86,19 @@
     .stat-unit { color: rgba(255,255,255,0.95); font-size: 0.9rem; margin-top: 6px; }
 
     /* 후기 */
-    .review-card { background: linear-gradient(160deg,#fff 0%,#f8fafd 100%); border-radius: 16px; padding: 28px; border: 1px solid rgba(10,37,64,0.09); border-left: 4px solid #FF6B35; box-shadow: 0 2px 10px rgba(10,37,64,0.06); transition: all 0.3s; }
-    .review-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(10,37,64,0.11); }
+    .review-card { background: linear-gradient(160deg,#fff 0%,#f8fafd 100%); border-radius: 16px; padding: 28px; border: 1px solid rgba(45,27,105,0.09); border-left: 4px solid #FF6B35; box-shadow: 0 2px 10px rgba(45,27,105,0.06); transition: all 0.3s; }
+    .review-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(45,27,105,0.11); }
     .review-stars { color: #F59E0B; font-size: 1rem; margin-bottom: 12px; }
     .review-text { color: #1f2937; line-height: 1.75; font-size: 0.95rem; margin-bottom: 20px; font-weight: 400; }
     .reviewer { display: flex; align-items: center; gap: 12px; }
-    .reviewer-name { font-weight: 800; font-size: 0.9rem; color: #0A2540; }
+    .reviewer-name { font-weight: 800; font-size: 0.9rem; color: #2D1B69; }
     .reviewer-role { font-size: 0.8rem; color: #4B5563; font-weight: 500; }
 
     /* 요금제 */
     .plan-card { background: white; border-radius: 20px; padding: 36px; border: 2px solid #E5E7EB; transition: all 0.3s; }
-    .plan-card.featured { border-color: #FF6B35; background: linear-gradient(135deg, #0A2540, #1a3a5c); color: white; }
+    .plan-card.featured { border-color: #FF6B35; background: linear-gradient(135deg, #2D1B69, #4A1D96); color: white; }
     .plan-card:hover:not(.featured) { border-color: #FF6B35; transform: translateY(-4px); }
-    .plan-price { font-size: 2.5rem; font-weight: 900; color: #0A2540; margin: 16px 0 8px; }
+    .plan-price { font-size: 2.5rem; font-weight: 900; color: #2D1B69; margin: 16px 0 8px; }
     .plan-card.featured .plan-price { color: #FF6B35; }
     .plan-card.featured h3 { color: white; }
     .plan-features { list-style: none; margin: 20px 0 28px; }
@@ -107,8 +107,8 @@
 
     /* 파트너 */
     .partner-logos { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
-    .partner-logo { background: #ffffff; border-radius: 10px; padding: 14px 28px; color: #374151; font-weight: 700; font-size: 1rem; letter-spacing: 1px; border: 1.5px solid rgba(10,37,64,0.12); box-shadow: 0 2px 8px rgba(10,37,64,0.05); transition: all 0.2s; }
-    .partner-logo:hover { border-color: rgba(255,107,53,0.3); color: #0A2540; box-shadow: 0 4px 16px rgba(10,37,64,0.1); }
+    .partner-logo { background: #ffffff; border-radius: 10px; padding: 14px 28px; color: #374151; font-weight: 700; font-size: 1rem; letter-spacing: 1px; border: 1.5px solid rgba(45,27,105,0.12); box-shadow: 0 2px 8px rgba(45,27,105,0.05); transition: all 0.2s; }
+    .partner-logo:hover { border-color: rgba(255,107,53,0.3); color: #2D1B69; box-shadow: 0 4px 16px rgba(45,27,105,0.1); }
 
     @media (max-width: 768px) {
       .hero-inner { grid-template-columns: 1fr; gap: 32px; }
@@ -225,7 +225,7 @@
     </div>
     <div class="grid grid-5 reveal" style="gap:20px;">
       <div class="course-card">
-        <div class="course-icon" style="background:rgba(10,37,64,0.08);">🧠</div>
+        <div class="course-icon" style="background:rgba(45,27,105,0.08);">🧠</div>
         <h3>AX 이해</h3>
         <p>AI 시대 산업 변화, 기업 AX 전략, 성공 사례 분석</p>
         <div class="course-count">📖 10개 강의 · 입문</div>
@@ -315,8 +315,8 @@
       <p class="section-subtitle">인증을 받은 전문가만 기업 AX 프로젝트에 참여할 수 있습니다</p>
     </div>
     <div class="grid grid-4 reveal">
-      <div class="cert-card" style="--color:#0A2540;--color2:#1a3a5c;">
-        <div class="cert-badge" style="background:rgba(10,37,64,0.08);">🥉</div>
+      <div class="cert-card" style="--color:#2D1B69;--color2:#4A1D96;">
+        <div class="cert-badge" style="background:rgba(45,27,105,0.08);">🥉</div>
         <div class="cert-level" style="color:#6B7280;">LEVEL 1</div>
         <div class="cert-name">AX Practitioner</div>
         <div class="cert-desc">AX 이해 10강 수료 + 기초 시험 합격</div>

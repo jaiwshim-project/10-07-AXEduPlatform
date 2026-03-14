@@ -523,3 +523,99 @@ if (typeof window !== 'undefined') {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = LMS;
 }
+
+// ── AX LMS — LocalStorage 기반 학습 진도 관리 ──
+// Storage key: 'ax-lms-v1'
+// 구조: { courses: { [courseId]: { title, progress, status, startedAt, completedAt, lastAccessedAt } } }
+
+const AXLMS = {
+  _key: 'ax-lms-v1',
+
+  _load() {
+    try { return JSON.parse(localStorage.getItem(this._key)) || { courses: {} }; }
+    catch { return { courses: {} }; }
+  },
+
+  _save(data) {
+    localStorage.setItem(this._key, JSON.stringify(data));
+  },
+
+  // 강의 시작 또는 진도 업데이트 (progress: 0~100)
+  updateProgress(courseId, courseTitle, progress) {
+    const data = this._load();
+    const now = new Date().toISOString();
+    if (!data.courses[courseId]) {
+      data.courses[courseId] = { title: courseTitle, progress: 0, status: 'not_started', startedAt: null, completedAt: null, lastAccessedAt: null };
+    }
+    const c = data.courses[courseId];
+    c.progress = Math.min(100, Math.max(0, progress));
+    c.lastAccessedAt = now;
+    if (c.status === 'not_started' && progress > 0) { c.status = 'in_progress'; c.startedAt = now; }
+    if (progress >= 100) { c.status = 'completed'; c.completedAt = now; }
+    this._save(data);
+    this._dispatchEvent(courseId, c);
+    return c;
+  },
+
+  // 강의 완료 처리
+  completeCourse(courseId, courseTitle) {
+    return this.updateProgress(courseId, courseTitle, 100);
+  },
+
+  // 특정 강의 정보 가져오기
+  getCourse(courseId) {
+    const data = this._load();
+    return data.courses[courseId] || null;
+  },
+
+  // 전체 통계
+  getStats() {
+    const data = this._load();
+    const courses = Object.values(data.courses);
+    return {
+      total: courses.length,
+      inProgress: courses.filter(c => c.status === 'in_progress').length,
+      completed: courses.filter(c => c.status === 'completed').length,
+      avgProgress: courses.length ? Math.round(courses.reduce((s, c) => s + c.progress, 0) / courses.length) : 0,
+      recentCourses: courses.sort((a, b) => (b.lastAccessedAt || '').localeCompare(a.lastAccessedAt || '')).slice(0, 5),
+    };
+  },
+
+  // 모든 수강 기록
+  getAllCourses() {
+    return this._load().courses;
+  },
+
+  // 강의 삭제
+  removeCourse(courseId) {
+    const data = this._load();
+    delete data.courses[courseId];
+    this._save(data);
+  },
+
+  // 전체 초기화
+  clearAll() {
+    localStorage.removeItem(this._key);
+  },
+
+  _dispatchEvent(courseId, courseData) {
+    window.dispatchEvent(new CustomEvent('ax-lms-updated', { detail: { courseId, courseData } }));
+  },
+
+  // 진도 바 렌더링 헬퍼
+  renderProgressBar(progress, color = '#7c3aed') {
+    return `<div style="background:#e5e7eb;border-radius:99px;height:6px;overflow:hidden;"><div style="width:${progress}%;background:${color};height:100%;border-radius:99px;transition:width 0.4s;"></div></div>`;
+  },
+
+  // 상태 뱃지 헬퍼
+  renderStatusBadge(status) {
+    const map = {
+      'not_started': '<span style="background:rgba(107,114,128,0.1);color:#374151;border:1px solid rgba(107,114,128,0.2);padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:700;">미시작</span>',
+      'in_progress': '<span style="background:rgba(124,58,237,0.1);color:#7c3aed;border:1px solid rgba(124,58,237,0.3);padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:700;">수강 중</span>',
+      'completed': '<span style="background:rgba(0,200,150,0.1);color:#00C896;border:1px solid rgba(0,200,150,0.3);padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:700;">✓ 완료</span>',
+    };
+    return map[status] || map['not_started'];
+  }
+};
+
+window.AXLMS = AXLMS;

@@ -25,7 +25,13 @@ const Components = {
       <img src="${base}images/logo.png" alt="AX EDU GROUP">
     </a>
     <ul class="nav-links">
-      <li><a href="${base}pages/about.html"${active('about.html')}>회사소개</a></li>
+      <li class="nav-dropdown">
+        <a href="${base}pages/about.html"${active('about.html')} class="nav-dropdown-toggle">회사소개 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="vertical-align:middle;margin-left:2px;"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <ul class="nav-submenu">
+          <li><a href="${base}pages/about.html"${active('about.html')}>🏢 회사 소개</a></li>
+          <li><a href="${base}pages/ceo.html"${active('ceo.html')}>👤 CEO 소개</a></li>
+        </ul>
+      </li>
       <li class="nav-dropdown">
         <a href="${base}pages/courses.html"${active('courses.html')} class="nav-dropdown-toggle">교육과정 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="vertical-align:middle;margin-left:2px;"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <ul class="nav-submenu">
@@ -49,7 +55,7 @@ const Components = {
           <span id="userName" style="font-weight:700;font-size:0.85rem;color:#FF6B35;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
           <svg id="userDropArrow" width="12" height="12" viewBox="0 0 12 12" fill="none" style="flex-shrink:0;transition:transform 0.2s;"><path d="M2 4l4 4 4-4" stroke="#FF6B35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div id="userDropdown" style="position:absolute;right:0;top:calc(100% + 10px);background:white;border:1px solid #E5E7EB;border-radius:14px;box-shadow:0 12px 32px rgba(10,37,64,0.14);min-width:196px;padding:8px;z-index:9999;display:none;">
+        <div id="userDropdown" style="position:absolute;right:0;top:calc(100% + 10px);background:white;border:1px solid #E5E7EB;border-radius:14px;box-shadow:0 12px 32px rgba(45,27,105,0.14);min-width:196px;padding:8px;z-index:9999;display:none;">
           <div id="userEmailLabel" style="padding:8px 12px 10px;border-bottom:1px solid #F3F4F6;margin-bottom:6px;">
             <div id="userFullName" style="font-weight:700;font-size:0.875rem;color:#111827;"></div>
             <div id="userEmailText" style="font-size:0.75rem;color:#9CA3AF;margin-top:2px;"></div>
@@ -77,6 +83,7 @@ const Components = {
   </div>
   <div class="mobile-menu" id="mobileMenu">
     <a href="${base}pages/about.html">🏢 회사소개</a>
+    <a href="${base}pages/ceo.html">👤 CEO 소개</a>
     <a href="${base}pages/courses.html">📚 교육과정</a>
     <a href="${base}pages/projects.html">📁 프로젝트</a>
     <a href="${base}pages/certification.html">🏅 인증</a>
@@ -194,10 +201,10 @@ const Components = {
     // 6. 비밀번호 모달 삽입 (1회)
     if (!document.getElementById('ax-pwd-modal')) {
       document.body.insertAdjacentHTML('beforeend', `
-        <div id="ax-pwd-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(10,37,64,0.55);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
-          <div style="background:white;border-radius:20px;padding:36px 32px;width:100%;max-width:360px;margin:16px;box-shadow:0 24px 64px rgba(10,37,64,0.22);border-top:4px solid #FF6B35;text-align:center;">
+        <div id="ax-pwd-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(45,27,105,0.55);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+          <div style="background:white;border-radius:20px;padding:36px 32px;width:100%;max-width:360px;margin:16px;box-shadow:0 24px 64px rgba(45,27,105,0.22);border-top:4px solid #FF6B35;text-align:center;">
             <div style="font-size:2rem;margin-bottom:12px;">🔐</div>
-            <div style="font-size:1.1rem;font-weight:800;color:#0A2540;margin-bottom:6px;">접근 제한</div>
+            <div style="font-size:1.1rem;font-weight:800;color:#2D1B69;margin-bottom:6px;">접근 제한</div>
             <div style="font-size:0.875rem;color:#6B7280;margin-bottom:20px;">비밀번호를 입력하세요</div>
             <input id="ax-pwd-input" type="password" maxlength="20"
               style="width:100%;padding:11px 14px;border:1.5px solid #D1D5DB;border-radius:10px;font-size:1.1rem;text-align:center;letter-spacing:6px;outline:none;font-family:monospace;box-sizing:border-box;"
@@ -230,6 +237,32 @@ const Components = {
       `;
       document.head.appendChild(st);
     }
+
+    // 8. ax-knowledge.js 동적 로드
+    const _ks = document.createElement('script');
+    const _isP = window.location.pathname.includes('/pages/');
+    _ks.src = _isP ? '../js/ax-knowledge.js' : './js/ax-knowledge.js';
+    document.head.appendChild(_ks);
+
+    // 9. AI 봇 플로팅 버튼 + 챗봇 패널 삽입
+    document.body.insertAdjacentHTML('beforeend', `
+      <button id="ax-bot-btn" onclick="axBotToggle()" title="AI 봇" style="position:fixed;bottom:24px;right:24px;z-index:1000;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:white;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(124,58,237,0.4);font-size:1.5rem;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;">🤖</button>
+      <div id="ax-bot-panel" style="position:fixed;bottom:96px;right:24px;z-index:999;width:340px;height:720px;max-height:85vh;background:white;border-radius:20px;box-shadow:0 8px 40px rgba(45,27,105,0.2);display:none;flex-direction:column;overflow:hidden;border:1px solid rgba(124,58,237,0.2);">
+        <div style="background:linear-gradient(135deg,#2D1B69,#4A1D96);color:white;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
+          <div><div style="font-weight:700;font-size:0.95rem;">🤖 AX 봇</div><div style="font-size:0.75rem;opacity:0.8;">AX EDU GROUP 안내 도우미</div></div>
+          <button onclick="axBotToggle()" style="background:none;border:none;color:white;cursor:pointer;font-size:1.2rem;line-height:1;">✕</button>
+        </div>
+        <div id="ax-bot-messages" style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;"></div>
+        <div style="padding:12px 16px;border-top:1px solid #e5e7eb;display:flex;gap:8px;flex-shrink:0;">
+          <input id="ax-bot-input" type="text" placeholder="궁금한 점을 입력하세요..." style="flex:1;padding:10px 14px;border:1px solid #e5e7eb;border-radius:20px;font-size:0.875rem;outline:none;font-family:inherit;" onkeydown="if(event.key==='Enter')axBotSend()">
+          <button onclick="axBotSend()" style="padding:10px 16px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:white;border:none;border-radius:20px;cursor:pointer;font-size:0.875rem;font-weight:600;">전송</button>
+        </div>
+      </div>
+    `);
+    axBotAddMsg('안녕하세요! AX EDU GROUP 안내 봇입니다. 수강료, 인증, 강의, 기업 서비스 등 궁금한 점을 물어보세요 😊', true);
+    axBotApplyTheme();
+    const _themeObs = new MutationObserver(axBotApplyTheme);
+    _themeObs.observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
   }
 };
 
@@ -273,3 +306,122 @@ function axPwdClose() {
   if (modal) modal.style.display = 'none';
   _axPwdTarget = null;
 }
+
+// ── AI 봇 기능 ──
+// ── Gemini API 설정 ──
+const GEMINI_API_KEY = 'AIzaSyD2gFf6e5yw3sRPYW0nPxUcw369Qwl2j6k';
+const GEMINI_MODEL = 'gemini-2.0-flash';
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+
+const AX_FAQ = [
+  {q:['수강료','가격','얼마','비용','요금','플랜'],a:'강의별로 다르지만 월 구독 플랜(49,000원~)과 개별 강의 구매 방식을 제공합니다. 무료 체험도 가능합니다.'},
+  {q:['인증','자격증','ax 전문','practitioner','strategist','자격'],a:'AX 전문가 인증은 Practitioner → Associate → Professional → Strategist 4단계로 구성됩니다. 시험 합격 시 인증서를 발급합니다.'},
+  {q:['강의','커리큘럼','과정','수업','강좌','학습','배우'],a:'온라인 강의, 오프라인 워크숍, 팀 프로젝트 세 가지 형태로 제공됩니다. 현재 50개+ 강의를 운영 중입니다.'},
+  {q:['기업','법인','b2b','회사','단체','조직'],a:'기업 AX 컨설팅 및 전문가 매칭 서비스를 제공합니다. 📞 010-2397-5734 또는 📧 jaiwshim@gmail.com으로 문의주세요.'},
+  {q:['오프라인','워크숍','대면','집합','현장'],a:'월 1~2회 오프라인 워크숍을 운영합니다. 집중 실습 위주로 진행되며 일정은 온라인교육 메뉴에서 확인 가능합니다.'},
+  {q:['환불','취소','반환'],a:'수강 시작 7일 이내 100% 환불, 30% 미만 수강 시 70% 환불 정책을 적용합니다. 문의: jaiwshim@gmail.com'},
+  {q:['로그인','회원가입','계정','가입','등록'],a:'상단 오른쪽 로그인 버튼을 클릭하거나 로그인 페이지를 통해 가입하실 수 있습니다.'},
+  {q:['프로젝트','포트폴리오','실습','팀'],a:'팀 프로젝트를 통해 실제 기업 과제를 해결하며 포트폴리오를 만들 수 있습니다. 수료 시 인증서도 발급됩니다.'},
+  {q:['가치','차별','특징','장점','다른점','왜','선택','좋은','강점','어떤'],a:'AX EDU GROUP의 3가지 차별점: ① 이론이 아닌 실제 기업 과제 중심 교육 ② 교육→인증→프로젝트→취업까지 완전한 성장 경로 ③ 30년 경력 심재우 대표가 직접 설계한 실전 커리큘럼입니다.'},
+  {q:['ax란','ai 전환','ai전환','인공지능','ax가','뭔가요','무엇','ax는','소개'],a:'AX(AI Transformation)는 AI를 업무에 실제 적용해 조직을 혁신하는 것입니다. AX EDU GROUP은 이 AX 역량을 갖춘 전문가를 양성하는 플랫폼입니다.'},
+  {q:['추천','입문','처음','시작','초보','초급','어디서'],a:'처음이시라면 "AI 이해와 활용" 입문 강의부터 시작하세요. 비개발자도 쉽게 따라올 수 있는 실무 중심 커리큘럼입니다.'},
+  {q:['취업','채용','일자리','커리어','경력','직업'],a:'AX 인증 취득 후 기업 AX 프로젝트 매칭 서비스를 통해 실제 프리랜서 수익 창출 및 경력 개발이 가능합니다.'},
+  {q:['기간','얼마나','몇 달','몇달','단기','장기','시간'],a:'강의별로 다르지만 입문 과정은 4주, 전문가 과정은 8~12주 내외입니다. 자기 페이스대로 학습 가능합니다.'},
+  {q:['안녕','반가워','hello','hi','도움','질문','처음'],a:'안녕하세요! AX EDU GROUP 안내 봇입니다 😊 수강료, 강의, 인증, 기업 서비스 등 궁금한 점을 물어보세요!'},
+  {q:['연락','문의','상담','전화','이메일','카카오'],a:'📞 010-2397-5734 (평일 9~18시) 📧 jaiwshim@gmail.com 으로 연락주시면 빠르게 답변드립니다.'},
+  {q:['플랫폼','서비스','ax edu','axedu','이곳','여기'],a:'AX EDU GROUP은 한국 최초 AI 전환(AX) 전문가 생태계 플랫폼입니다. 교육 → 인증 → 프로젝트 → 취업까지 완전한 성장 경로를 제공합니다. 누적 수강생 1,200명+, 만족도 98%.'},
+];
+window.axBotReply = function(input){
+  const lower = input.toLowerCase();
+  for(const item of AX_FAQ){
+    if(item.q.some(k=>lower.includes(k))) return item.a;
+  }
+  return '죄송합니다, 해당 내용은 상담원을 통해 안내드리겠습니다. 📧 jaiwshim@gmail.com 또는 📞 010-2397-5734로 문의해 주세요.';
+};
+window.axBotAddMsg = function(text, isBot, id){
+  const area = document.getElementById('ax-bot-messages');
+  if(!area) return;
+  const div = document.createElement('div');
+  if(id) div.id = id;
+  div.style.cssText = 'max-width:85%;padding:10px 14px;border-radius:'+(isBot?'4px 14px 14px 14px':'14px 4px 14px 14px')+';font-size:0.875rem;line-height:1.5;word-break:break-word;'+(isBot?'background:#f3f0ff;color:#2D1B69;align-self:flex-start;':'background:linear-gradient(135deg,#7c3aed,#5b21b6);color:white;align-self:flex-end;margin-left:auto;');
+  div.textContent = text;
+  area.appendChild(div);
+  area.scrollTop = area.scrollHeight;
+};
+window.axBotApplyTheme = function(){
+  const panel = document.getElementById('ax-bot-panel');
+  if(!panel) return;
+  const dark = document.documentElement.getAttribute('data-theme')==='dark';
+  panel.style.background = dark?'#1e293b':'white';
+  panel.style.borderColor = dark?'rgba(124,58,237,0.3)':'rgba(124,58,237,0.2)';
+  const msgArea = document.getElementById('ax-bot-messages');
+  if(msgArea) msgArea.style.background = dark?'#1e293b':'white';
+  const input = document.getElementById('ax-bot-input');
+  if(input){input.style.background=dark?'#334155':'white';input.style.color=dark?'#f1f5f9':'#111827';input.style.borderColor=dark?'#475569':'#e5e7eb';}
+};
+window.axBotToggle = function(){
+  const panel = document.getElementById('ax-bot-panel');
+  if(!panel) return;
+  const open = panel.style.display==='flex';
+  panel.style.display = open?'none':'flex';
+  if(!open){axBotApplyTheme();document.getElementById('ax-bot-input').focus();}
+};
+window.axBotSend = async function(){
+  const input = document.getElementById('ax-bot-input');
+  if(!input||!input.value.trim()) return;
+  const text = input.value.trim();
+  input.value = '';
+  input.disabled = true;
+  axBotAddMsg(text, false);
+
+  // 로딩 메시지
+  const loadingId = 'ax-bot-loading-' + Date.now();
+  axBotAddMsg('⏳ 답변을 생성 중입니다...', true, loadingId);
+
+  try {
+    const knowledgeBase = window.AX_KNOWLEDGE_BASE || '';
+    const systemInstruction = `너는 AX EDU GROUP 교육 플랫폼의 친절한 AI 안내 봇이야. 아래 플랫폼 정보를 바탕으로만 답변해줘.
+답변은 한국어로, 친절하게 해줘. 핵심을 4~6문장으로 답변해줘. 필요하면 항목별로 줄바꿈해서 읽기 쉽게 작성해.
+모르는 내용이나 정보에 없는 내용은 "자세한 내용은 📞 010-2397-5734 또는 📧 jaiwshim@gmail.com으로 문의해주세요"라고 안내해줘.
+
+[플랫폼 정보]
+${knowledgeBase}`;
+
+    const response = await fetch(GEMINI_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        systemInstruction: { parts: [{ text: systemInstruction }] },
+        contents: [{ role: 'user', parts: [{ text: text }] }],
+        generationConfig: { temperature: 0.7, maxOutputTokens: 600 }
+      })
+    });
+
+    // 로딩 메시지 제거
+    const loadingEl = document.getElementById(loadingId);
+    if(loadingEl) loadingEl.remove();
+
+    if(!response.ok) {
+      const errBody = await response.json().catch(()=>({}));
+      console.error('[AX봇 API 오류 상세]', errBody);
+      throw new Error('API 오류: ' + response.status + ' ' + (errBody.error?.message || ''));
+    }
+    const data = await response.json();
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || '답변을 가져오지 못했습니다.';
+    axBotAddMsg(reply, true);
+
+  } catch(e) {
+    const loadingEl = document.getElementById(loadingId);
+    if(loadingEl) loadingEl.remove();
+    console.error('[AX봇 오류]', e);
+    // API 키 미설정이면 FAQ 폴백
+    if(GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') {
+      axBotAddMsg(axBotReply(text), true);
+    } else {
+      axBotAddMsg('일시적인 오류가 발생했습니다. (오류: ' + e.message + ') 📞 010-2397-5734로 문의해주세요.', true);
+    }
+  } finally {
+    input.disabled = false;
+    input.focus();
+  }
+};

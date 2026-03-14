@@ -12,7 +12,7 @@
   <script>/* FOUC 방지 */const _t=localStorage.getItem('ax-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);</script>
   <style>
     .hero {
-      background: linear-gradient(135deg, var(--color-primary) 0%, #1a3a5c 60%, #0d2035 100%);
+      background: linear-gradient(135deg, var(--color-primary) 0%, #4A1D96 60%, #1e0a44 100%);
       color: white;
       padding: 56px 0 48px;
       text-align: center;
@@ -184,7 +184,7 @@
 
     /* Profile Modal */
     .profile-modal-header {
-      background: linear-gradient(135deg, var(--color-primary), #1a3a5c);
+      background: linear-gradient(135deg, var(--color-primary), #4A1D96);
       margin: -32px -32px 24px;
       padding: 32px;
       border-radius: var(--radius-lg) var(--radius-lg) 0 0;
@@ -461,7 +461,7 @@ const EXPERTS = [
   {
     id: 1,
     name: '김민준', title: 'AI 플랫폼 아키텍트', initial: '민',
-    color: '#0A2540',
+    color: '#2D1B69',
     level: 'AX Architect', levelClass: 'level-architect',
     skills: ['Gemini API', 'Supabase', '바이브코딩', 'Claude API', 'RAG', 'Vector DB'],
     domain: ['LLM', 'Supabase', '바이브코딩'],
@@ -713,7 +713,7 @@ function openProfile(id) {
   `).join('');
 
   document.getElementById('profileCerts').innerHTML = e.certs.map(c => `
-    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(10,37,64,0.06);
+    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(45,27,105,0.06);
       border:1px solid var(--color-border);border-radius:8px;padding:8px 14px;font-size:0.875rem;font-weight:600;">
       🏅 ${c}
     </div>

@@ -13,7 +13,7 @@
   <style>
     /* Community-specific styles */
     .community-hero {
-      background: linear-gradient(135deg, var(--color-primary) 0%, #1a3a5c 100%);
+      background: linear-gradient(135deg, var(--color-primary) 0%, #4A1D96 100%);
       color: white;
       padding: 48px 0 40px;
     }
@@ -97,7 +97,7 @@
       font-family: var(--font-korean);
     }
 
-    .tab-btn:hover { color: var(--color-primary); background: rgba(10,37,64,0.04); }
+    .tab-btn:hover { color: var(--color-primary); background: rgba(45,27,105,0.04); }
     .tab-btn.active { color: var(--color-accent); border-bottom-color: var(--color-accent); background: white; }
 
     .tabs-actions {
@@ -663,7 +663,7 @@ const categoryColors = {
 };
 
 const avatarColors = {
-  primary: '#0A2540',
+  primary: '#2D1B69',
   accent: '#FF6B35',
   green: '#00C896',
   blue: '#2563eb',
@@ -690,7 +690,7 @@ function renderPosts(posts) {
   container.innerHTML = posts.map(post => `
     <div class="post-card" onclick="openPostDetail(${post.id})">
       <div class="post-header">
-        <div class="avatar avatar-sm" style="background:${avatarColors[post.authorColor] || '#0A2540'}">
+        <div class="avatar avatar-sm" style="background:${avatarColors[post.authorColor] || '#2D1B69'}">
           ${post.authorInitial}
         </div>
         <div class="post-author-info">
@@ -735,7 +735,7 @@ function renderExperts() {
     { name: '강서연', initial: '강', posts: 34, color: '#FF6B35' },
     { name: '윤서준', initial: '윤', posts: 28, color: '#2563eb' },
     { name: '최현우', initial: '최', posts: 22, color: '#7c3aed' },
-    { name: '김철수', initial: '김', posts: 19, color: '#0A2540' },
+    { name: '김철수', initial: '김', posts: 19, color: '#2D1B69' },
     { name: '이영희', initial: '이', posts: 15, color: '#00C896' }
   ];
   document.getElementById('expertList').innerHTML = experts.map(e => `
@@ -826,7 +826,7 @@ function renderComments(post) {
     ? post.comments_data.map(c => `
         <div style="padding:12px;background:#F8F9FA;border-radius:8px;margin-bottom:8px;">
           <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px;">
-            <div class="avatar avatar-sm" style="background:#0A2540">${c.author[0]}</div>
+            <div class="avatar avatar-sm" style="background:#2D1B69">${c.author[0]}</div>
             <strong>${c.author}</strong>
             <span style="font-size:0.78rem;color:var(--color-text-muted);">${c.date}</span>
           </div>

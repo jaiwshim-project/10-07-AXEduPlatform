@@ -598,7 +598,7 @@ function markdownToHtml(text) {
         const cells = row.split('|').slice(1, -1);
         const tag = i === 0 ? 'th' : 'td';
         const style = i === 0
-          ? 'background:rgba(10,37,64,0.07);padding:6px 10px;border:1px solid var(--color-border);font-weight:600;'
+          ? 'background:rgba(45,27,105,0.07);padding:6px 10px;border:1px solid var(--color-border);font-weight:600;'
           : 'padding:6px 10px;border:1px solid var(--color-border);';
         html += `<tr>${cells.map(c => `<${tag} style="${style}">${c.trim()}</${tag}>`).join('')}</tr>`;
       });

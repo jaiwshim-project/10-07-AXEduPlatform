@@ -503,7 +503,7 @@
   flex-shrink: 0;
 }
 
-.stat-widget-icon-primary { background: rgba(10,37,64,0.08); }
+.stat-widget-icon-primary { background: rgba(45,27,105,0.08); }
 .stat-widget-icon-accent { background: rgba(255,107,53,0.1); }
 .stat-widget-icon-green { background: rgba(0,200,150,0.1); }
 .stat-widget-icon-blue { background: rgba(59,130,246,0.1); }

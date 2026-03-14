@@ -12,13 +12,13 @@
   <link rel="stylesheet" href="../css/sidebar.css">
   <style>
     .top-bar { background: white; border-bottom: 1px solid #E5E7EB; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
-    .page-title { font-size: 1.3rem; font-weight: 800; color: #0A2540; }
+    .page-title { font-size: 1.3rem; font-weight: 800; color: #2D1B69; }
     .user-menu { display: flex; align-items: center; gap: 12px; }
     .course-scroll { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
     .course-scroll::-webkit-scrollbar { display: none; }
     .mini-course-card { min-width: 200px; background: white; border-radius: 12px; border: 1px solid #E5E7EB; padding: 16px; flex-shrink: 0; }
     .mini-course-thumb { height: 80px; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
-    .ai-rec-card { background: linear-gradient(135deg,#0A2540,#1a3a5c); color: white; border-radius: 16px; padding: 20px; }
+    .ai-rec-card { background: linear-gradient(135deg,#2D1B69,#4A1D96); color: white; border-radius: 16px; padding: 20px; }
     .activity-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid #F3F4F6; }
     .activity-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
     .workshop-item { display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid #F3F4F6; }
@@ -65,10 +65,10 @@
     <div class="grid grid-4" style="margin-bottom:32px;">
       <div class="stat-card">
         <div style="font-size:1.5rem;margin-bottom:8px;">📚</div>
-        <div class="stat-value">12</div>
+        <div class="stat-value" data-lms-stat="completed">12</div>
         <div class="stat-label">완료 강의</div>
         <div style="margin-top:8px;">
-          <div class="progress-label"><span style="font-size:0.8rem;color:#6B7280;">전체 50개</span><span style="font-size:0.8rem;font-weight:700;color:#FF6B35;">24%</span></div>
+          <div class="progress-label"><span style="font-size:0.8rem;color:#6B7280;">전체 50개</span><span style="font-size:0.8rem;font-weight:700;color:#FF6B35;" data-lms-stat="avgProgress">24%</span></div>
           <div class="progress-bar"><div class="progress-fill" style="width:24%"></div></div>
         </div>
       </div>
@@ -95,25 +95,25 @@
     <!-- 진행 중 강의 -->
     <div class="card" style="margin-bottom:24px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-        <h3 style="font-size:1.05rem;font-weight:700;color:#0A2540;">📖 진행 중인 강의</h3>
+        <h3 style="font-size:1.05rem;font-weight:700;color:#2D1B69;">📖 진행 중인 강의</h3>
         <a href="courses.html" class="btn btn-ghost btn-sm">전체 보기 →</a>
       </div>
       <div class="course-scroll">
         <div class="mini-course-card">
           <div class="mini-course-thumb" style="background:rgba(255,107,53,0.1);">🧠</div>
-          <div style="font-size:0.875rem;font-weight:700;color:#0A2540;margin-bottom:4px;">AX 개념과 정의</div>
+          <div style="font-size:0.875rem;font-weight:700;color:#2D1B69;margin-bottom:4px;">AX 개념과 정의</div>
           <div style="font-size:0.75rem;color:#6B7280;margin-bottom:8px;">3/6 레슨 완료</div>
           <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
         </div>
         <div class="mini-course-card">
           <div class="mini-course-thumb" style="background:rgba(0,200,150,0.1);">💻</div>
-          <div style="font-size:0.875rem;font-weight:700;color:#0A2540;margin-bottom:4px;">바이브코딩 시작하기</div>
+          <div style="font-size:0.875rem;font-weight:700;color:#2D1B69;margin-bottom:4px;">바이브코딩 시작하기</div>
           <div style="font-size:0.75rem;color:#6B7280;margin-bottom:8px;">4/8 레슨 완료</div>
           <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
         </div>
         <div class="mini-course-card">
           <div class="mini-course-thumb" style="background:rgba(59,130,246,0.1);">🛠️</div>
-          <div style="font-size:0.875rem;font-weight:700;color:#0A2540;margin-bottom:4px;">Claude 프롬프트 기법</div>
+          <div style="font-size:0.875rem;font-weight:700;color:#2D1B69;margin-bottom:4px;">Claude 프롬프트 기법</div>
           <div style="font-size:0.75rem;color:#6B7280;margin-bottom:8px;">2/10 레슨 완료</div>
           <div class="progress-bar"><div class="progress-fill" style="width:20%"></div></div>
         </div>
@@ -130,7 +130,7 @@
       <!-- AI 추천 강의 -->
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-          <h3 style="font-size:1.05rem;font-weight:700;color:#0A2540;">🤖 AI 맞춤 추천</h3>
+          <h3 style="font-size:1.05rem;font-weight:700;color:#2D1B69;">🤖 AI 맞춤 추천</h3>
           <span class="badge badge-green">Gemini AI</span>
         </div>
         <div id="aiRecommendations" style="display:flex;flex-direction:column;gap:12px;">
@@ -141,7 +141,7 @@
             <a href="course-detail.html" style="display:inline-block;margin-top:10px;background:rgba(255,255,255,0.15);color:white;padding:6px 14px;border-radius:6px;font-size:0.8rem;font-weight:600;text-decoration:none;">강의 보기 →</a>
           </div>
           <div style="background:#F3F4F6;border-radius:12px;padding:14px;">
-            <div style="font-size:0.8rem;font-weight:700;color:#0A2540;margin-bottom:4px;">RAG 시스템 구축</div>
+            <div style="font-size:0.8rem;font-weight:700;color:#2D1B69;margin-bottom:4px;">RAG 시스템 구축</div>
             <div style="font-size:0.75rem;color:#6B7280;">AI 플랫폼 설계 역량 강화에 도움이 됩니다</div>
           </div>
         </div>
@@ -149,7 +149,7 @@
 
       <!-- 최근 활동 -->
       <div class="card">
-        <h3 style="font-size:1.05rem;font-weight:700;color:#0A2540;margin-bottom:16px;">📋 최근 활동</h3>
+        <h3 style="font-size:1.05rem;font-weight:700;color:#2D1B69;margin-bottom:16px;">📋 최근 활동</h3>
         <div>
           <div class="activity-item">
             <div class="activity-icon" style="background:rgba(0,200,150,0.1);">✅</div>
@@ -183,10 +183,16 @@
       </div>
     </div>
 
+    <!-- 최근 수강 강의 (LMS) -->
+    <div style="background:white;border-radius:16px;padding:24px;border:1px solid rgba(124,58,237,0.1);margin-bottom:24px;">
+      <div style="font-size:1rem;font-weight:800;color:#2D1B69;margin-bottom:16px;">📚 최근 수강 강의</div>
+      <div id="lms-recent-courses"></div>
+    </div>
+
     <!-- 워크숍 일정 -->
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-        <h3 style="font-size:1.05rem;font-weight:700;color:#0A2540;">📅 예정된 워크숍</h3>
+        <h3 style="font-size:1.05rem;font-weight:700;color:#2D1B69;">📅 예정된 워크숍</h3>
         <a href="workshops.html" class="btn btn-ghost btn-sm">전체 보기 →</a>
       </div>
       <div>
@@ -202,7 +208,7 @@
           </div>
         </div>
         <div class="workshop-item" style="border:none;">
-          <div class="workshop-date" style="background:#0A2540;">
+          <div class="workshop-date" style="background:#2D1B69;">
             <div class="day">19</div>
             <div class="month">APR</div>
           </div>
@@ -232,5 +238,46 @@
   });
 </script>
 <script src="../js/components.js"></script>
+<script src="../js/lms.js"></script>
+<script>
+// ── 대시보드 LMS 통계 업데이트 ──
+document.addEventListener('DOMContentLoaded', function() {
+  function updateDashboardStats() {
+    const stats = AXLMS.getStats();
+
+    // 진행 중 강의 수 업데이트 (숫자 요소 찾아서 업데이트)
+    const statEls = document.querySelectorAll('[data-lms-stat]');
+    statEls.forEach(el => {
+      const type = el.getAttribute('data-lms-stat');
+      if (type === 'inProgress') el.textContent = stats.inProgress;
+      if (type === 'completed') el.textContent = stats.completed;
+      if (type === 'avgProgress') el.textContent = stats.avgProgress + '%';
+      if (type === 'total') el.textContent = stats.total;
+    });
+
+    // 최근 수강 강의 목록 렌더링
+    const recentEl = document.getElementById('lms-recent-courses');
+    if (recentEl && stats.recentCourses.length > 0) {
+      recentEl.innerHTML = stats.recentCourses.map(c => `
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(124,58,237,0.08);">
+          <div style="flex:1;">
+            <div style="font-size:0.875rem;font-weight:600;color:var(--color-text,#111827);margin-bottom:4px;">${c.title}</div>
+            ${AXLMS.renderProgressBar(c.progress)}
+          </div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div style="font-size:0.85rem;font-weight:700;color:#7c3aed;">${c.progress}%</div>
+            ${AXLMS.renderStatusBadge(c.status)}
+          </div>
+        </div>
+      `).join('');
+    } else if (recentEl) {
+      recentEl.innerHTML = '<div style="text-align:center;padding:24px;color:#94a3b8;font-size:0.875rem;">아직 수강한 강의가 없습니다.<br><a href="online-courses.html" style="color:#7c3aed;font-weight:600;">강의 보러 가기 →</a></div>';
+    }
+  }
+
+  updateDashboardStats();
+  window.addEventListener('ax-lms-updated', updateDashboardStats);
+});
+</script>
 </body>
 </html>

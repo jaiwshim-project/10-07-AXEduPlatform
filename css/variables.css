@@ -1,9 +1,9 @@
 /* AX교육플랫폼 CSS 변수 시스템 */
 :root {
   /* 브랜드 컬러 */
-  --color-primary: #0A2540;
-  --color-primary-light: #1a3a5c;
-  --color-primary-dark: #061829;
+  --color-primary: #2D1B69;
+  --color-primary-light: #4A1D96;
+  --color-primary-dark: #1e0a44;
   --color-accent: #FF6B35;
   --color-accent-hover: #e55a27;
   --color-green: #00C896;
