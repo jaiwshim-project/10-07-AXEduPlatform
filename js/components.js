@@ -104,7 +104,7 @@ const Components = {
     </div>
   </div>
   <div class="footer-bottom" style="max-width:1200px;margin:0 auto;padding-top:24px;text-align:center;">
-    <p>© 2026 AX EDU GROUP. All rights reserved. | 사업자등록번호: 000-00-00000 | 서울특별시 강남구</p>
+    <p style="color:rgba(255,255,255,0.65);">© 2026 AX EDU GROUP. All rights reserved. | 사업자등록번호: 000-00-00000 | 서울특별시 강남구</p>
   </div>
 </footer>`;
   },

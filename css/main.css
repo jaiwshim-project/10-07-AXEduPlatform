@@ -1706,16 +1706,23 @@ tr:hover td {
 .alert-error { background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.25); border-left-width: 4px; }
 
 /* === 나머지 텍스트 강화 === */
-p, li, td { color: var(--color-text); }
-h1, h2, h3, h4, h5, h6 { color: var(--color-primary); }
-[data-theme="dark"] h1,
-[data-theme="dark"] h2,
-[data-theme="dark"] h3,
-[data-theme="dark"] h4,
-[data-theme="dark"] h5,
-[data-theme="dark"] h6 { color: #f1f5f9; }
-[data-theme="dark"] p,
-[data-theme="dark"] li,
+:is(main, .card, .section, article) p,
+:is(main, .card, .section, article) li { color: var(--color-text); }
+td { color: var(--color-text); }
+:is(main, .card, .section, article) h1,
+:is(main, .card, .section, article) h2,
+:is(main, .card, .section, article) h3,
+:is(main, .card, .section, article) h4,
+:is(main, .card, .section, article) h5,
+:is(main, .card, .section, article) h6 { color: var(--color-primary); }
+[data-theme="dark"] :is(main, .card, .section, article) h1,
+[data-theme="dark"] :is(main, .card, .section, article) h2,
+[data-theme="dark"] :is(main, .card, .section, article) h3,
+[data-theme="dark"] :is(main, .card, .section, article) h4,
+[data-theme="dark"] :is(main, .card, .section, article) h5,
+[data-theme="dark"] :is(main, .card, .section, article) h6 { color: #f1f5f9; }
+[data-theme="dark"] :is(main, .card, .section, article) p,
+[data-theme="dark"] :is(main, .card, .section, article) li,
 [data-theme="dark"] td { color: #e2e8f0; }
 
 /* === 프리미엄 유틸리티 클래스 === */
