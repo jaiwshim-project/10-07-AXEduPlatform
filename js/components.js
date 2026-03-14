@@ -131,7 +131,7 @@ const Components = {
         <li><a href="${base}pages/sitemap.html">사이트맵</a></li>
         <li><a href="#" onclick="axProtectedOpen('${base}images/architecture.svg');return false;">시스템 구조도</a></li>
         <li><a href="#" onclick="axProtectedOpen('${base}images/ecosystem.svg');return false;">에코시스템</a></li>
-        <li><a href="mailto:jaiwshim@gmail.com">이메일 문의</a></li>
+        <li><a href="${base}pages/qna.html">Q&amp;A</a></li>
       </ul>
     </div>
   </div>
