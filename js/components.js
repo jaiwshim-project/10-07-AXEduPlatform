@@ -95,6 +95,7 @@ const Components = {
       <ul class="footer-links">
         <li><a href="${base}pages/manual.html">이용 가이드</a></li>
         <li><a href="${base}pages/sitemap.html">사이트맵</a></li>
+        <li><a href="${base}images/architecture.svg" target="_blank" rel="noopener">시스템 구조도</a></li>
         <li><a href="mailto:contact@ax-edu.co.kr">이메일 문의</a></li>
         <li><a href="#">개인정보처리방침</a></li>
         <li><a href="#">이용약관</a></li>

@@ -1,134 +1,280 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600" font-family="'Noto Sans KR', 'Inter', Arial, sans-serif">
-  <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#F8F9FA;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#EFF2F7;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#0A2540;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1a3a5c;stop-opacity:1" />
-    </linearGradient>
-    <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
-      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(0,0,0,0.10)"/>
-    </filter>
-    <marker id="arrowDown" markerWidth="10" markerHeight="7" refX="5" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#CBD5E1"/>
-    </marker>
-  </defs>
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="'Noto Sans KR', 'Arial', sans-serif">
   <!-- Background -->
-  <rect width="900" height="600" fill="url(#bgGrad)" rx="16"/>
+  <rect width="1200" height="900" fill="#F8F9FA"/>
 
   <!-- Title Bar -->
-  <rect x="0" y="0" width="900" height="64" rx="16" fill="url(#titleGrad)"/>
-  <rect x="0" y="48" width="900" height="16" fill="url(#titleGrad)"/>
-  <text x="450" y="38" text-anchor="middle" font-size="18" font-weight="700" fill="white" letter-spacing="0.5">AX교육플랫폼 시스템 아키텍처 · 7-Layer Architecture</text>
+  <rect x="0" y="0" width="1200" height="64" fill="#0A2540"/>
+  <text x="600" y="32" text-anchor="middle" fill="white" font-size="20" font-weight="800" dy="0.35em">AX교육플랫폼 — 시스템 아키텍처 구조도</text>
 
-  <!-- Layer definitions: y, height, color, title, subtitle, icons -->
+  <!-- ===== 레이어 1: 프론트엔드 ===== -->
+  <rect x="20" y="78" width="1160" height="22" rx="5" fill="#EFF6FF"/>
+  <text x="30" y="89" fill="#2563EB" font-size="11" font-weight="700" dy="0.35em">🖥 프론트엔드 레이어 (HTML / CSS / JavaScript — 정적 사이트)</text>
 
-  <!-- Layer 1: 사용자 레이어 -->
-  <g filter="url(#shadow)">
-    <rect x="40" y="82" width="820" height="62" rx="12" fill="#FF6B35"/>
-    <rect x="40" y="82" width="6" height="62" rx="3" fill="rgba(255,255,255,0.4)"/>
-  </g>
-  <text x="80" y="106" font-size="11" font-weight="700" fill="white" opacity="0.85" letter-spacing="1">LAYER 1</text>
-  <text x="80" y="124" font-size="15" font-weight="700" fill="white">사용자 레이어</text>
-  <text x="270" y="118" font-size="12" fill="rgba(255,255,255,0.85)">Web Browser  ·  Mobile App  ·  PWA</text>
-  <!-- Icons right side -->
-  <text x="760" y="119" font-size="22" text-anchor="middle">🌐</text>
-  <text x="800" y="119" font-size="22" text-anchor="middle">📱</text>
-  <text x="840" y="119" font-size="22" text-anchor="middle">💻</text>
+  <!-- Row 1: Main pages -->
+  <rect x="30" y="108" width="130" height="52" rx="7" fill="#0A2540" stroke="#FF6B35" stroke-width="2"/>
+  <text x="95" y="130" text-anchor="middle" fill="white" font-size="11" font-weight="700">🏠 index.html</text>
+  <text x="95" y="147" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">랜딩 페이지</text>
 
-  <!-- Arrow 1→2 -->
-  <line x1="450" y1="144" x2="450" y2="155" stroke="#CBD5E1" stroke-width="2" marker-end="url(#arrowDown)"/>
+  <rect x="172" y="108" width="118" height="52" rx="7" fill="#1e3a5f" stroke="#475569" stroke-width="1.5"/>
+  <text x="231" y="130" text-anchor="middle" fill="white" font-size="10" font-weight="700">🔐 auth.html</text>
+  <text x="231" y="147" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">로그인/회원가입</text>
 
-  <!-- Layer 2: CDN/Vercel Edge -->
-  <g filter="url(#shadow)">
-    <rect x="40" y="157" width="820" height="62" rx="12" fill="#00C896"/>
-    <rect x="40" y="157" width="6" height="62" rx="3" fill="rgba(255,255,255,0.4)"/>
-  </g>
-  <text x="80" y="181" font-size="11" font-weight="700" fill="white" opacity="0.85" letter-spacing="1">LAYER 2</text>
-  <text x="80" y="199" font-size="15" font-weight="700" fill="white">CDN / Vercel Edge Layer</text>
-  <text x="310" y="193" font-size="12" fill="rgba(255,255,255,0.85)">Global CDN  ·  Edge Functions  ·  캐싱 &amp; 최적화  ·  HTTPS/SSL</text>
-  <text x="760" y="194" font-size="22" text-anchor="middle">⚡</text>
-  <text x="800" y="194" font-size="22" text-anchor="middle">🌍</text>
-  <text x="840" y="194" font-size="22" text-anchor="middle">🔒</text>
+  <rect x="302" y="108" width="128" height="52" rx="7" fill="#1e3a5f" stroke="#475569" stroke-width="1.5"/>
+  <text x="366" y="130" text-anchor="middle" fill="white" font-size="10" font-weight="700">📊 dashboard.html</text>
+  <text x="366" y="147" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">학습 현황 대시보드</text>
 
-  <!-- Arrow 2→3 -->
-  <line x1="450" y1="219" x2="450" y2="230" stroke="#CBD5E1" stroke-width="2" marker-end="url(#arrowDown)"/>
+  <rect x="442" y="108" width="118" height="52" rx="7" fill="#1e3a5f" stroke="#475569" stroke-width="1.5"/>
+  <text x="501" y="130" text-anchor="middle" fill="white" font-size="10" font-weight="700">📚 courses.html</text>
+  <text x="501" y="147" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">강의 목록</text>
 
-  <!-- Layer 3: 정적 파일 -->
-  <g filter="url(#shadow)">
-    <rect x="40" y="232" width="820" height="62" rx="12" fill="#0A2540"/>
-    <rect x="40" y="232" width="6" height="62" rx="3" fill="rgba(255,255,255,0.4)"/>
-  </g>
-  <text x="80" y="256" font-size="11" font-weight="700" fill="rgba(255,255,255,0.7)" letter-spacing="1">LAYER 3</text>
-  <text x="80" y="274" font-size="15" font-weight="700" fill="white">정적 파일 레이어</text>
-  <text x="268" y="268" font-size="12" fill="rgba(255,255,255,0.85)">HTML5  ·  CSS3 (Variables)  ·  Vanilla JS  ·  SVG Assets  ·  Web Fonts</text>
-  <text x="760" y="269" font-size="22" text-anchor="middle">📄</text>
-  <text x="800" y="269" font-size="22" text-anchor="middle">🎨</text>
-  <text x="840" y="269" font-size="22" text-anchor="middle">⚙️</text>
+  <rect x="572" y="108" width="128" height="52" rx="7" fill="#1e3a5f" stroke="#475569" stroke-width="1.5"/>
+  <text x="636" y="130" text-anchor="middle" fill="white" font-size="10" font-weight="700">📖 course-detail.html</text>
+  <text x="636" y="147" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">강의 상세</text>
 
-  <!-- Arrow 3→4 -->
-  <line x1="450" y1="294" x2="450" y2="305" stroke="#CBD5E1" stroke-width="2" marker-end="url(#arrowDown)"/>
+  <rect x="712" y="108" width="118" height="52" rx="7" fill="#1e3a5f" stroke="#475569" stroke-width="1.5"/>
+  <text x="771" y="130" text-anchor="middle" fill="white" font-size="10" font-weight="700">🚀 projects.html</text>
+  <text x="771" y="147" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">팀 프로젝트</text>
 
-  <!-- Layer 4: API 레이어 -->
-  <g filter="url(#shadow)">
-    <rect x="40" y="307" width="820" height="62" rx="12" fill="#FF6B35"/>
-    <rect x="40" y="307" width="6" height="62" rx="3" fill="rgba(255,255,255,0.4)"/>
-  </g>
-  <text x="80" y="331" font-size="11" font-weight="700" fill="white" opacity="0.85" letter-spacing="1">LAYER 4</text>
-  <text x="80" y="349" font-size="15" font-weight="700" fill="white">API 레이어</text>
-  <text x="242" y="343" font-size="12" fill="rgba(255,255,255,0.85)">Gemini API  ·  Supabase REST API  ·  Edge Functions  ·  Rate Limiting</text>
-  <text x="760" y="344" font-size="22" text-anchor="middle">🔌</text>
-  <text x="800" y="344" font-size="22" text-anchor="middle">🚀</text>
-  <text x="840" y="344" font-size="22" text-anchor="middle">🛡️</text>
+  <rect x="842" y="108" width="128" height="52" rx="7" fill="#1e3a5f" stroke="#475569" stroke-width="1.5"/>
+  <text x="906" y="130" text-anchor="middle" fill="white" font-size="10" font-weight="700">🏅 certification.html</text>
+  <text x="906" y="147" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">AX 인증 시스템</text>
 
-  <!-- Arrow 4→5 -->
-  <line x1="450" y1="369" x2="450" y2="380" stroke="#CBD5E1" stroke-width="2" marker-end="url(#arrowDown)"/>
+  <rect x="982" y="108" width="118" height="52" rx="7" fill="#1e3a5f" stroke="#475569" stroke-width="1.5"/>
+  <text x="1041" y="130" text-anchor="middle" fill="white" font-size="10" font-weight="700">💬 community.html</text>
+  <text x="1041" y="147" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">커뮤니티</text>
 
-  <!-- Layer 5: 데이터 레이어 -->
-  <g filter="url(#shadow)">
-    <rect x="40" y="382" width="820" height="62" rx="12" fill="#00C896"/>
-    <rect x="40" y="382" width="6" height="62" rx="3" fill="rgba(255,255,255,0.4)"/>
-  </g>
-  <text x="80" y="406" font-size="11" font-weight="700" fill="white" opacity="0.85" letter-spacing="1">LAYER 5</text>
-  <text x="80" y="424" font-size="15" font-weight="700" fill="white">데이터 레이어</text>
-  <text x="262" y="418" font-size="12" fill="rgba(255,255,255,0.85)">PostgreSQL  ·  Supabase Storage  ·  pgvector (임베딩)  ·  Realtime</text>
-  <text x="760" y="419" font-size="22" text-anchor="middle">🗄️</text>
-  <text x="800" y="419" font-size="22" text-anchor="middle">📦</text>
-  <text x="840" y="419" font-size="22" text-anchor="middle">⚡</text>
+  <!-- Row 2: Support pages -->
+  <rect x="30" y="170" width="118" height="46" rx="7" fill="#1e3a5f" stroke="#475569" stroke-width="1.5"/>
+  <text x="89" y="190" text-anchor="middle" fill="white" font-size="10" font-weight="700">📅 workshops.html</text>
+  <text x="89" y="206" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">워크숍</text>
 
-  <!-- Arrow 5→6 -->
-  <line x1="450" y1="444" x2="450" y2="455" stroke="#CBD5E1" stroke-width="2" marker-end="url(#arrowDown)"/>
+  <rect x="160" y="170" width="128" height="46" rx="7" fill="#1e3a5f" stroke="#475569" stroke-width="1.5"/>
+  <text x="224" y="190" text-anchor="middle" fill="white" font-size="10" font-weight="700">🏢 enterprise.html</text>
+  <text x="224" y="206" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">기업 서비스</text>
 
-  <!-- Layer 6: 인증 레이어 -->
-  <g filter="url(#shadow)">
-    <rect x="40" y="457" width="820" height="62" rx="12" fill="#0A2540"/>
-    <rect x="40" y="457" width="6" height="62" rx="3" fill="rgba(255,255,255,0.4)"/>
-  </g>
-  <text x="80" y="481" font-size="11" font-weight="700" fill="rgba(255,255,255,0.7)" letter-spacing="1">LAYER 6</text>
-  <text x="80" y="499" font-size="15" font-weight="700" fill="white">인증 레이어</text>
-  <text x="248" y="493" font-size="12" fill="rgba(255,255,255,0.85)">Supabase Auth  ·  Google OAuth  ·  JWT Token  ·  RLS (Row Level Security)</text>
-  <text x="760" y="494" font-size="22" text-anchor="middle">🔐</text>
-  <text x="800" y="494" font-size="22" text-anchor="middle">👤</text>
-  <text x="840" y="494" font-size="22" text-anchor="middle">🎫</text>
+  <rect x="300" y="170" width="138" height="46" rx="7" fill="#1e3a5f" stroke="#475569" stroke-width="1.5"/>
+  <text x="369" y="190" text-anchor="middle" fill="white" font-size="10" font-weight="700">👤 expert-profile.html</text>
+  <text x="369" y="206" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">전문가 프로필</text>
 
-  <!-- Arrow 6→7 -->
-  <line x1="450" y1="519" x2="450" y2="530" stroke="#CBD5E1" stroke-width="2" marker-end="url(#arrowDown)"/>
+  <rect x="450" y="170" width="118" height="46" rx="7" fill="#1e3a5f" stroke="#475569" stroke-width="1.5"/>
+  <text x="509" y="190" text-anchor="middle" fill="white" font-size="10" font-weight="700">🤖 ai-tutor.html</text>
+  <text x="509" y="206" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">AI 튜터 챗봇</text>
 
-  <!-- Layer 7: AI 레이어 -->
-  <g filter="url(#shadow)">
-    <rect x="40" y="532" width="820" height="52" rx="12" fill="#FF6B35"/>
-    <rect x="40" y="532" width="6" height="52" rx="3" fill="rgba(255,255,255,0.4)"/>
-  </g>
-  <text x="80" y="553" font-size="11" font-weight="700" fill="white" opacity="0.85" letter-spacing="1">LAYER 7</text>
-  <text x="80" y="571" font-size="15" font-weight="700" fill="white">AI 레이어</text>
-  <text x="232" y="564" font-size="12" fill="rgba(255,255,255,0.85)">Gemini 1.5 Flash  ·  RAG Pipeline  ·  Vector Embeddings  ·  Prompt Engineering</text>
-  <text x="760" y="564" font-size="22" text-anchor="middle">🤖</text>
-  <text x="800" y="564" font-size="22" text-anchor="middle">🧠</text>
-  <text x="840" y="564" font-size="22" text-anchor="middle">✨</text>
+  <rect x="580" y="170" width="108" height="46" rx="7" fill="#1e3a5f" stroke="#475569" stroke-width="1.5"/>
+  <text x="634" y="190" text-anchor="middle" fill="white" font-size="10" font-weight="700">📖 manual.html</text>
+  <text x="634" y="206" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">이용 매뉴얼</text>
 
-  <!-- Footer watermark -->
-  <text x="450" y="594" text-anchor="middle" font-size="10" fill="#9CA3AF">AX교육플랫폼 · System Architecture v1.0 · Built with Vibe Coding</text>
+  <rect x="700" y="170" width="108" height="46" rx="7" fill="#1e3a5f" stroke="#475569" stroke-width="1.5"/>
+  <text x="754" y="190" text-anchor="middle" fill="white" font-size="10" font-weight="700">🗺 sitemap.html</text>
+  <text x="754" y="206" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">사이트맵</text>
+
+  <!-- ===== 레이어 2: 공통 모듈 ===== -->
+  <rect x="20" y="228" width="1160" height="22" rx="5" fill="#F0FDF4"/>
+  <text x="30" y="239" fill="#16A34A" font-size="11" font-weight="700" dy="0.35em">⚙️ 공통 모듈 (CSS Design System &amp; JavaScript)</text>
+
+  <rect x="30" y="258" width="135" height="48" rx="7" fill="white" stroke="#00C896" stroke-width="2"/>
+  <text x="97" y="278" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="700">variables.css</text>
+  <text x="97" y="294" text-anchor="middle" fill="#6B7280" font-size="9">디자인 토큰 시스템</text>
+
+  <rect x="178" y="258" width="115" height="48" rx="7" fill="white" stroke="#00C896" stroke-width="2"/>
+  <text x="235" y="278" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="700">main.css</text>
+  <text x="235" y="294" text-anchor="middle" fill="#6B7280" font-size="9">디자인 시스템 전체</text>
+
+  <rect x="306" y="258" width="115" height="48" rx="7" fill="white" stroke="#00C896" stroke-width="2"/>
+  <text x="363" y="278" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="700">sidebar.css</text>
+  <text x="363" y="294" text-anchor="middle" fill="#6B7280" font-size="9">사이드바 레이아웃</text>
+
+  <rect x="434" y="258" width="125" height="48" rx="7" fill="white" stroke="#3B82F6" stroke-width="2"/>
+  <text x="496" y="278" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="700">components.js</text>
+  <text x="496" y="294" text-anchor="middle" fill="#6B7280" font-size="9">공통 Navbar/Footer</text>
+
+  <rect x="572" y="258" width="105" height="48" rx="7" fill="white" stroke="#3B82F6" stroke-width="2"/>
+  <text x="624" y="278" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="700">config.js</text>
+  <text x="624" y="294" text-anchor="middle" fill="#6B7280" font-size="9">Supabase 설정</text>
+
+  <rect x="690" y="258" width="100" height="48" rx="7" fill="white" stroke="#3B82F6" stroke-width="2"/>
+  <text x="740" y="278" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="700">auth.js</text>
+  <text x="740" y="294" text-anchor="middle" fill="#6B7280" font-size="9">인증 로직</text>
+
+  <rect x="803" y="258" width="100" height="48" rx="7" fill="white" stroke="#3B82F6" stroke-width="2"/>
+  <text x="853" y="278" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="700">utils.js</text>
+  <text x="853" y="294" text-anchor="middle" fill="#6B7280" font-size="9">공통 유틸리티</text>
+
+  <rect x="916" y="258" width="100" height="48" rx="7" fill="white" stroke="#3B82F6" stroke-width="2"/>
+  <text x="966" y="278" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="700">theme.js</text>
+  <text x="966" y="294" text-anchor="middle" fill="#6B7280" font-size="9">다크/라이트 테마</text>
+
+  <!-- Connector -->
+  <line x1="600" y1="316" x2="600" y2="336" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arr)"/>
+
+  <!-- ===== 레이어 3: 백엔드 (Supabase) ===== -->
+  <rect x="20" y="326" width="1160" height="22" rx="5" fill="#FFF7ED"/>
+  <text x="30" y="337" fill="#C2410C" font-size="11" font-weight="700" dy="0.35em">☁️ 백엔드 레이어 (Supabase — Backend as a Service)</text>
+
+  <rect x="30" y="358" width="180" height="72" rx="8" fill="white" stroke="#FF6B35" stroke-width="2"/>
+  <text x="120" y="380" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">🔐 Auth</text>
+  <text x="120" y="396" text-anchor="middle" fill="#6B7280" font-size="9">이메일/소셜 로그인</text>
+  <text x="120" y="410" text-anchor="middle" fill="#6B7280" font-size="9">JWT 세션 · RLS</text>
+
+  <rect x="222" y="358" width="198" height="72" rx="8" fill="white" stroke="#FF6B35" stroke-width="2"/>
+  <text x="321" y="378" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">🗄 PostgreSQL DB</text>
+  <text x="321" y="394" text-anchor="middle" fill="#6B7280" font-size="9">users · courses · lessons</text>
+  <text x="321" y="408" text-anchor="middle" fill="#6B7280" font-size="9">enrollments · projects · posts</text>
+  <text x="321" y="422" text-anchor="middle" fill="#6B7280" font-size="9">certifications · workshops</text>
+
+  <rect x="432" y="358" width="158" height="72" rx="8" fill="white" stroke="#FF6B35" stroke-width="2"/>
+  <text x="511" y="380" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">📦 Storage</text>
+  <text x="511" y="396" text-anchor="middle" fill="#6B7280" font-size="9">강의 영상 파일</text>
+  <text x="511" y="410" text-anchor="middle" fill="#6B7280" font-size="9">아바타 · 첨부파일</text>
+
+  <rect x="602" y="358" width="168" height="72" rx="8" fill="white" stroke="#FF6B35" stroke-width="2"/>
+  <text x="686" y="378" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">⚡ Edge Functions</text>
+  <text x="686" y="394" text-anchor="middle" fill="#6B7280" font-size="9">AI 추천 로직</text>
+  <text x="686" y="408" text-anchor="middle" fill="#6B7280" font-size="9">알림 발송 · 결제 웹훅</text>
+
+  <rect x="782" y="358" width="158" height="72" rx="8" fill="white" stroke="#FF6B35" stroke-width="2"/>
+  <text x="861" y="380" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">📡 Realtime</text>
+  <text x="861" y="396" text-anchor="middle" fill="#6B7280" font-size="9">실시간 알림</text>
+  <text x="861" y="410" text-anchor="middle" fill="#6B7280" font-size="9">WebSocket 채팅</text>
+
+  <rect x="952" y="358" width="168" height="72" rx="8" fill="white" stroke="#FF6B35" stroke-width="2"/>
+  <text x="1036" y="378" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">🛡 RLS 정책</text>
+  <text x="1036" y="394" text-anchor="middle" fill="#6B7280" font-size="9">사용자별 데이터 격리</text>
+  <text x="1036" y="408" text-anchor="middle" fill="#6B7280" font-size="9">역할 기반 접근제어</text>
+
+  <!-- Connector -->
+  <line x1="600" y1="440" x2="600" y2="458" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arr)"/>
+
+  <!-- ===== 레이어 4: 외부 API ===== -->
+  <rect x="20" y="448" width="1160" height="22" rx="5" fill="#FDF4FF"/>
+  <text x="30" y="459" fill="#7C3AED" font-size="11" font-weight="700" dy="0.35em">🔌 외부 API 및 서드파티 서비스</text>
+
+  <rect x="30" y="480" width="185" height="62" rx="8" fill="white" stroke="#8B5CF6" stroke-width="2"/>
+  <text x="122" y="502" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">🤖 Google Gemini API</text>
+  <text x="122" y="516" text-anchor="middle" fill="#6B7280" font-size="9">AI 튜터 응답 · 학습 추천</text>
+
+  <rect x="228" y="480" width="165" height="62" rx="8" fill="white" stroke="#8B5CF6" stroke-width="2"/>
+  <text x="310" y="502" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">💳 결제 게이트웨이</text>
+  <text x="310" y="516" text-anchor="middle" fill="#6B7280" font-size="9">구독 · 환불 · 인보이스</text>
+
+  <rect x="406" y="480" width="155" height="62" rx="8" fill="white" stroke="#8B5CF6" stroke-width="2"/>
+  <text x="483" y="502" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">📧 Email (SMTP)</text>
+  <text x="483" y="516" text-anchor="middle" fill="#6B7280" font-size="9">이메일 인증 · 알림 발송</text>
+
+  <rect x="574" y="480" width="165" height="62" rx="8" fill="white" stroke="#8B5CF6" stroke-width="2"/>
+  <text x="656" y="502" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">📱 소셜 로그인</text>
+  <text x="656" y="516" text-anchor="middle" fill="#6B7280" font-size="9">Google / Kakao / Naver</text>
+
+  <rect x="752" y="480" width="155" height="62" rx="8" fill="white" stroke="#8B5CF6" stroke-width="2"/>
+  <text x="829" y="502" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">📊 Analytics</text>
+  <text x="829" y="516" text-anchor="middle" fill="#6B7280" font-size="9">학습 통계 · 행동 분석</text>
+
+  <rect x="920" y="480" width="155" height="62" rx="8" fill="white" stroke="#8B5CF6" stroke-width="2"/>
+  <text x="997" y="502" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">☁️ CDN</text>
+  <text x="997" y="516" text-anchor="middle" fill="#6B7280" font-size="9">이미지 · 동영상 글로벌 배포</text>
+
+  <!-- Connector -->
+  <line x1="600" y1="552" x2="600" y2="570" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arr)"/>
+
+  <!-- ===== 레이어 5: 배포 ===== -->
+  <rect x="20" y="560" width="1160" height="22" rx="5" fill="#F0F9FF"/>
+  <text x="30" y="571" fill="#0369A1" font-size="11" font-weight="700" dy="0.35em">🚀 배포 및 인프라 레이어 (Vercel Edge Network)</text>
+
+  <rect x="30" y="592" width="220" height="62" rx="8" fill="white" stroke="#0EA5E9" stroke-width="2"/>
+  <text x="140" y="614" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">▲ Vercel CDN Edge</text>
+  <text x="140" y="630" text-anchor="middle" fill="#6B7280" font-size="9">전 세계 엣지 · 자동 HTTPS</text>
+
+  <rect x="263" y="592" width="195" height="62" rx="8" fill="white" stroke="#0EA5E9" stroke-width="2"/>
+  <text x="360" y="614" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">🔒 보안 헤더</text>
+  <text x="360" y="630" text-anchor="middle" fill="#6B7280" font-size="9">CSP · HSTS · X-Frame · XSS</text>
+
+  <rect x="470" y="592" width="195" height="62" rx="8" fill="white" stroke="#0EA5E9" stroke-width="2"/>
+  <text x="567" y="614" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">⚡ 캐시 전략</text>
+  <text x="567" y="630" text-anchor="middle" fill="#6B7280" font-size="9">CSS/JS 1년 · API 응답 캐시</text>
+
+  <rect x="677" y="592" width="195" height="62" rx="8" fill="white" stroke="#0EA5E9" stroke-width="2"/>
+  <text x="774" y="614" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">🌐 커스텀 도메인</text>
+  <text x="774" y="630" text-anchor="middle" fill="#6B7280" font-size="9">ax-edu.co.kr · SSL 자동갱신</text>
+
+  <rect x="884" y="592" width="215" height="62" rx="8" fill="white" stroke="#0EA5E9" stroke-width="2"/>
+  <text x="991" y="614" text-anchor="middle" fill="#0A2540" font-size="12" font-weight="700">📝 vercel.json 설정</text>
+  <text x="991" y="630" text-anchor="middle" fill="#6B7280" font-size="9">URL Rewrite · 환경변수 관리</text>
+
+  <!-- ===== 레이어 6: DB 테이블 ===== -->
+  <rect x="20" y="670" width="1160" height="22" rx="5" fill="#FFF1F2"/>
+  <text x="30" y="681" fill="#BE123C" font-size="11" font-weight="700" dy="0.35em">🗃 데이터베이스 테이블 15개 — supabase/schema.sql + Row Level Security</text>
+
+  <!-- 15 tables, 2 rows -->
+  <rect x="30" y="702" width="104" height="34" rx="5" fill="white" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="82" y="723" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="600">users</text>
+
+  <rect x="144" y="702" width="104" height="34" rx="5" fill="white" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="196" y="723" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="600">courses</text>
+
+  <rect x="258" y="702" width="104" height="34" rx="5" fill="white" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="310" y="723" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="600">lessons</text>
+
+  <rect x="372" y="702" width="114" height="34" rx="5" fill="white" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="429" y="723" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="600">enrollments</text>
+
+  <rect x="496" y="702" width="124" height="34" rx="5" fill="white" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="558" y="723" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="600">lesson_progress</text>
+
+  <rect x="630" y="702" width="114" height="34" rx="5" fill="white" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="687" y="723" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="600">assignments</text>
+
+  <rect x="754" y="702" width="114" height="34" rx="5" fill="white" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="811" y="723" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="600">submissions</text>
+
+  <rect x="878" y="702" width="104" height="34" rx="5" fill="white" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="930" y="723" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="600">projects</text>
+
+  <rect x="30" y="746" width="124" height="34" rx="5" fill="white" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="92" y="767" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="600">project_members</text>
+
+  <rect x="164" y="746" width="124" height="34" rx="5" fill="white" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="226" y="767" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="600">certifications</text>
+
+  <rect x="298" y="746" width="114" height="34" rx="5" fill="white" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="355" y="767" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="600">workshops</text>
+
+  <rect x="422" y="746" width="154" height="34" rx="5" fill="white" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="499" y="767" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="600">workshop_registrations</text>
+
+  <rect x="586" y="746" width="124" height="34" rx="5" fill="white" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="648" y="767" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="600">expert_profiles</text>
+
+  <rect x="720" y="746" width="144" height="34" rx="5" fill="white" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="792" y="767" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="600">enterprise_projects</text>
+
+  <rect x="874" y="746" width="80" height="34" rx="5" fill="white" stroke="#FDA4AF" stroke-width="1.5"/>
+  <text x="914" y="767" text-anchor="middle" fill="#0A2540" font-size="10" font-weight="600">posts</text>
+
+  <!-- ===== Footer ===== -->
+  <rect x="0" y="794" width="1200" height="106" fill="#0A2540"/>
+
+  <!-- Legend -->
+  <text x="30" y="820" fill="rgba(255,255,255,0.9)" font-size="12" font-weight="700">범례</text>
+  <rect x="30" y="832" width="14" height="14" rx="3" fill="#FF6B35"/>
+  <text x="50" y="843" fill="rgba(255,255,255,0.8)" font-size="10" dy="0.35em">Supabase BaaS</text>
+  <rect x="150" y="832" width="14" height="14" rx="3" fill="#00C896"/>
+  <text x="170" y="843" fill="rgba(255,255,255,0.8)" font-size="10" dy="0.35em">CSS 모듈</text>
+  <rect x="260" y="832" width="14" height="14" rx="3" fill="#3B82F6"/>
+  <text x="280" y="843" fill="rgba(255,255,255,0.8)" font-size="10" dy="0.35em">JS 모듈</text>
+  <rect x="370" y="832" width="14" height="14" rx="3" fill="#8B5CF6"/>
+  <text x="390" y="843" fill="rgba(255,255,255,0.8)" font-size="10" dy="0.35em">외부 API</text>
+  <rect x="480" y="832" width="14" height="14" rx="3" fill="#0EA5E9"/>
+  <text x="500" y="843" fill="rgba(255,255,255,0.8)" font-size="10" dy="0.35em">Vercel 배포</text>
+  <rect x="590" y="832" width="14" height="14" rx="3" fill="#FDA4AF"/>
+  <text x="610" y="843" fill="rgba(255,255,255,0.8)" font-size="10" dy="0.35em">DB 테이블</text>
+
+  <line x1="30" y1="862" x2="1170" y2="862" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="600" y="880" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="10" dy="0.35em">AX EDU GROUP · ax-edu.co.kr · 2026 © All Rights Reserved — 한국 최초 AX 인재 생태계 플랫폼</text>
+
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arr" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
 </svg>
