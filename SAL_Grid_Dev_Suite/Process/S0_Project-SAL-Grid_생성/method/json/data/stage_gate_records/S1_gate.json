@@ -1,0 +1,24 @@
+{
+  "stage": 1,
+  "stage_name": "디자인시스템 & 기반구조",
+  "stage_name_en": "Design System & Foundation",
+  "total_tasks": 5,
+  "completed_tasks": 5,
+  "verification_status": "Approved (Retroactive)",
+  "ai_verification_note": "소급 도입 - S1 전체 Task 완료 상태로 등록됨. PO 승인으로 검증 생략.",
+  "ai_verification_date": "2026-03-15",
+  "verification_report_path": "stage-gates/S1GATE_verification_report.md",
+  "stage_gate_status": "Approved (Retroactive)",
+  "po_approval_status": "Approved",
+  "po_approval_user": "PO",
+  "po_approval_note": "소급 도입 승인",
+  "po_approval_date": "2026-03-15",
+  "checklist": {
+    "all_tasks_completed": true,
+    "all_verifications_passed": true,
+    "no_blockers": true,
+    "build_success": true,
+    "test_success": true
+  },
+  "remarks": "소급 도입 - 모든 Task Completed, 검증 Skipped (PO Approved)"
+}

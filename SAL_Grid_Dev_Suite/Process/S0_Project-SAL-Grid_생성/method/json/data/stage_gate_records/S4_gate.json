@@ -1,0 +1,24 @@
+{
+  "stage": 4,
+  "stage_name": "Supabase 실 연동 & 배포",
+  "stage_name_en": "Supabase Real Integration & Deployment",
+  "total_tasks": 8,
+  "completed_tasks": 0,
+  "verification_status": "Not Verified",
+  "ai_verification_note": "",
+  "ai_verification_date": "",
+  "verification_report_path": "stage-gates/S4GATE_verification_report.md",
+  "stage_gate_status": "Pending",
+  "po_approval_status": "Pending",
+  "po_approval_user": "",
+  "po_approval_note": "",
+  "po_approval_date": "",
+  "checklist": {
+    "all_tasks_completed": false,
+    "all_verifications_passed": false,
+    "no_blockers": false,
+    "build_success": false,
+    "test_success": false
+  },
+  "remarks": "신규 개발 Stage - 실행 대기 중"
+}
