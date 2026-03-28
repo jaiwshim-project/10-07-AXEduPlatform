@@ -216,7 +216,7 @@ const Components = {
         <div id="ax-pwd-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(45,27,105,0.55);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
           <div style="background:white;border-radius:20px;padding:36px 32px;width:100%;max-width:360px;margin:16px;box-shadow:0 24px 64px rgba(45,27,105,0.22);border-top:4px solid #FF6B35;text-align:center;">
             <div style="font-size:2rem;margin-bottom:12px;">🔐</div>
-            <div style="font-size:1.1rem;font-weight:800;color:#2D1B69;margin-bottom:6px;">접근 제한</div>
+            <div style="font-size:1.1rem;font-weight:800;color:#000000;margin-bottom:6px;">접근 제한</div>
             <div style="font-size:0.875rem;color:#6B7280;margin-bottom:20px;">비밀번호를 입력하세요</div>
             <input id="ax-pwd-input" type="password" maxlength="20"
               style="width:100%;padding:11px 14px;border:1.5px solid #D1D5DB;border-radius:10px;font-size:1.1rem;text-align:center;letter-spacing:6px;outline:none;font-family:monospace;box-sizing:border-box;"
@@ -267,7 +267,7 @@ const Components = {
     document.body.insertAdjacentHTML('beforeend', `
       <button id="ax-bot-btn" onclick="axBotToggle()" title="AI 봇" style="position:fixed;bottom:24px;right:24px;z-index:1000;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:white;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(124,58,237,0.4);font-size:1.5rem;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;">🤖</button>
       <div id="ax-bot-panel" style="position:fixed;bottom:96px;right:24px;z-index:999;width:340px;height:720px;max-height:85vh;background:white;border-radius:20px;box-shadow:0 8px 40px rgba(45,27,105,0.2);display:none;flex-direction:column;overflow:hidden;border:1px solid rgba(124,58,237,0.2);">
-        <div style="background:linear-gradient(135deg,#2D1B69,#4A1D96);color:white;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
+        <div style="background:linear-gradient(135deg,#000000,#4A1D96);color:white;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
           <div><div style="font-weight:700;font-size:0.95rem;">🤖 AX 봇</div><div style="font-size:0.75rem;opacity:0.8;">AX EDU GROUP 안내 도우미</div></div>
           <button onclick="axBotToggle()" style="background:none;border:none;color:white;cursor:pointer;font-size:1.2rem;line-height:1;">✕</button>
         </div>
@@ -369,7 +369,7 @@ window.axBotAddMsg = function(text, isBot, id){
   if(!area) return;
   const div = document.createElement('div');
   if(id) div.id = id;
-  div.style.cssText = 'max-width:85%;padding:10px 14px;border-radius:'+(isBot?'4px 14px 14px 14px':'14px 4px 14px 14px')+';font-size:0.875rem;line-height:1.5;word-break:break-word;'+(isBot?'background:#f3f0ff;color:#2D1B69;align-self:flex-start;':'background:linear-gradient(135deg,#7c3aed,#5b21b6);color:white;align-self:flex-end;margin-left:auto;');
+  div.style.cssText = 'max-width:85%;padding:10px 14px;border-radius:'+(isBot?'4px 14px 14px 14px':'14px 4px 14px 14px')+';font-size:0.875rem;line-height:1.5;word-break:break-word;'+(isBot?'background:#f3f0ff;color:#000000;align-self:flex-start;':'background:linear-gradient(135deg,#7c3aed,#5b21b6);color:white;align-self:flex-end;margin-left:auto;');
   div.textContent = text;
   area.appendChild(div);
   area.scrollTop = area.scrollHeight;

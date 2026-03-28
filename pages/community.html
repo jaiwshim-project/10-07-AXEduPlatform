@@ -663,7 +663,7 @@ const categoryColors = {
 };
 
 const avatarColors = {
-  primary: '#2D1B69',
+  primary: '#000000',
   accent: '#FF6B35',
   green: '#00C896',
   blue: '#2563eb',
@@ -690,7 +690,7 @@ function renderPosts(posts) {
   container.innerHTML = posts.map(post => `
     <div class="post-card" onclick="openPostDetail(${post.id})">
       <div class="post-header">
-        <div class="avatar avatar-sm" style="background:${avatarColors[post.authorColor] || '#2D1B69'}">
+        <div class="avatar avatar-sm" style="background:${avatarColors[post.authorColor] || '#000000'}">
           ${post.authorInitial}
         </div>
         <div class="post-author-info">
@@ -735,7 +735,7 @@ function renderExperts() {
     { name: '강서연', initial: '강', posts: 34, color: '#FF6B35' },
     { name: '윤서준', initial: '윤', posts: 28, color: '#2563eb' },
     { name: '최현우', initial: '최', posts: 22, color: '#7c3aed' },
-    { name: '김철수', initial: '김', posts: 19, color: '#2D1B69' },
+    { name: '김철수', initial: '김', posts: 19, color: '#000000' },
     { name: '이영희', initial: '이', posts: 15, color: '#00C896' }
   ];
   document.getElementById('expertList').innerHTML = experts.map(e => `
@@ -826,7 +826,7 @@ function renderComments(post) {
     ? post.comments_data.map(c => `
         <div style="padding:12px;background:#F8F9FA;border-radius:8px;margin-bottom:8px;">
           <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px;">
-            <div class="avatar avatar-sm" style="background:#2D1B69">${c.author[0]}</div>
+            <div class="avatar avatar-sm" style="background:#000000">${c.author[0]}</div>
             <strong>${c.author}</strong>
             <span style="font-size:0.78rem;color:var(--color-text-muted);">${c.date}</span>
           </div>

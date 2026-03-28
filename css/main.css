@@ -6,7 +6,7 @@
 /* === CSS Variables (Design Tokens) === */
 :root {
   /* Brand Colors */
-  --color-primary: #2D1B69;
+  --color-primary: #000000;
   --color-accent: #FF6B35;
   --color-green: #00C896;
   --color-bg: #F8F9FA;
@@ -124,8 +124,8 @@ ul, ol {
   position: sticky;
   top: 0;
   z-index: var(--z-navbar);
-  background: #2D1B69;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: #000000;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
   padding: 0 var(--space-lg);
   height: 64px;
   display: flex;
@@ -138,7 +138,7 @@ ul, ol {
 }
 
 [data-theme="dark"] .navbar {
-  background: #060f1c;
+  background: #000000;
   border-bottom-color: rgba(255,255,255,0.06);
 }
 
@@ -324,7 +324,7 @@ ul, ol {
   position: fixed;
   inset: 0;
   top: 64px;
-  background: #2D1B69;
+  background: #000000;
   z-index: 999;
   padding: var(--space-xl) var(--space-lg);
   flex-direction: column;
@@ -1645,13 +1645,13 @@ body { color: var(--color-text); line-height: 1.7; }
 }
 
 .btn-secondary {
-  background: linear-gradient(135deg, #2D1B69 0%, #4A1D96 100%);
-  border: 2px solid #2D1B69;
+  background: linear-gradient(135deg, #000000 0%, #4A1D96 100%);
+  border: 2px solid #000000;
   box-shadow: 0 2px 10px rgba(45,27,105,0.22);
   font-weight: 700;
 }
 .btn-secondary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #1e0a44 0%, #2D1B69 100%);
+  background: linear-gradient(135deg, #1e0a44 0%, #000000 100%);
   box-shadow: 0 6px 22px rgba(45,27,105,0.38);
   transform: translateY(-2px);
 }
@@ -1687,7 +1687,7 @@ body { color: var(--color-text); line-height: 1.7; }
 }
 
 .section-title {
-  color: #2D1B69;
+  color: #000000;
   letter-spacing: -0.025em;
   font-weight: 900;
 }
@@ -1707,7 +1707,7 @@ body { color: var(--color-text); line-height: 1.7; }
 /* ─────────────────────────────────────────────
    BADGES — 컬러 테두리
    ───────────────────────────────────────────── */
-.badge-primary  { background: rgba(45,27,105,0.07);    color: #2D1B69;  border: 1px solid rgba(45,27,105,0.18); }
+.badge-primary  { background: rgba(45,27,105,0.07);    color: #000000;  border: 1px solid rgba(45,27,105,0.18); }
 .badge-accent,
 .badge-orange   { background: rgba(255,107,53,0.09);  color: #c95220;  border: 1px solid rgba(255,107,53,0.25); }
 .badge-green    { background: rgba(0,200,150,0.09);   color: #00705c;  border: 1px solid rgba(0,200,150,0.25); }

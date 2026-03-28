@@ -13,7 +13,7 @@
   <style>
     /* ── Hero ── */
     .courses-hero {
-      background: linear-gradient(135deg, #2D1B69 0%, #4A1D96 60%, #1e0a44 100%);
+      background: linear-gradient(135deg, #000000 0%, #4A1D96 60%, #1e0a44 100%);
       color: white;
       padding: 56px 0 48px;
       position: relative;
@@ -95,8 +95,8 @@
       font-family: var(--font-korean);
       white-space: nowrap;
     }
-    .cat-tab:hover { border-color: #2D1B69; color: #2D1B69; }
-    .cat-tab.active { background: #2D1B69; color: white; border-color: #2D1B69; }
+    .cat-tab:hover { border-color: #000000; color: #000000; }
+    .cat-tab.active { background: #000000; color: white; border-color: #000000; }
 
     /* ── Sort + Results ── */
     .sort-row {
@@ -120,7 +120,7 @@
       cursor: pointer;
       outline: none;
     }
-    .sort-select:focus { border-color: #2D1B69; }
+    .sort-select:focus { border-color: #000000; }
 
     /* ── Course Grid ── */
     .courses-grid {
@@ -157,7 +157,7 @@
       font-size: 3.2rem;
       position: relative;
       flex-shrink: 0;
-      background: linear-gradient(135deg, #2D1B69 0%, #4A1D96 100%) !important;
+      background: linear-gradient(135deg, #000000 0%, #4A1D96 100%) !important;
     }
     .thumb-badges {
       position: absolute;
@@ -311,12 +311,12 @@
       color: var(--color-text);
       transition: all 0.18s;
     }
-    .page-btn:hover:not(.active) { border-color: #2D1B69; color: #2D1B69; }
-    .page-btn.active { background: #2D1B69; color: white; border-color: #2D1B69; }
+    .page-btn:hover:not(.active) { border-color: #000000; color: #000000; }
+    .page-btn.active { background: #000000; color: white; border-color: #000000; }
     .page-btn-arrow { width: auto; padding: 0 14px; }
 
     /* ── Dark theme ── */
-    [data-theme="dark"] .courses-hero { background: linear-gradient(135deg,#1e0a44,#2D1B69); }
+    [data-theme="dark"] .courses-hero { background: linear-gradient(135deg,#1e0a44,#000000); }
     [data-theme="dark"] .cat-tab { background: var(--color-bg-secondary, #1e293b); }
     [data-theme="dark"] .cat-tab:hover { background: #1e293b; }
     [data-theme="dark"] .sort-select { background: var(--color-bg-secondary, #1e293b); }
