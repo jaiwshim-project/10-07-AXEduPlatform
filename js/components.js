@@ -30,6 +30,7 @@ const Components = {
         <ul class="nav-submenu">
           <li><a href="${base}pages/about.html"${active('about.html')}>🏢 회사 소개</a></li>
           <li><a href="${base}pages/ceo.html"${active('ceo.html')}>👤 CEO 소개</a></li>
+          <li><a href="${base}pages/books.html"${active('books.html')}>📖 책 소개</a></li>
         </ul>
       </li>
       <li class="nav-dropdown">
@@ -87,6 +88,7 @@ const Components = {
       <div style="display:none;flex-direction:column;background:rgba(0,0,0,0.2);">
         <a href="${base}pages/about.html" style="padding:10px 0 10px 24px!important;font-size:0.95rem!important;">🏢 회사 소개</a>
         <a href="${base}pages/ceo.html" style="padding:10px 0 10px 24px!important;font-size:0.95rem!important;">👤 CEO 소개</a>
+        <a href="${base}pages/books.html" style="padding:10px 0 10px 24px!important;font-size:0.95rem!important;">📖 책 소개</a>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;">

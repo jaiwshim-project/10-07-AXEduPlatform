@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>신간 서적 — AX EDU GROUP</title>
+  <meta name="description" content="AX EDU GROUP 신간 서적 소개. 바이브 코딩, AI 창업, AX 전문가를 위한 도서를 만나보세요.">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <script>const _t=localStorage.getItem('ax-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);</script>
+  <style>
+    /* ── Hero ── */
+    .books-hero {
+      background: linear-gradient(135deg, #0A1628 0%, #1a2a4a 50%, #0d1f3c 100%);
+      color: white;
+      padding: 80px 0 72px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .books-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(255,107,53,0.12) 0%, transparent 65%);
+    }
+    .books-hero .container { position: relative; }
+    .books-hero .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,107,53,0.15); border: 1px solid rgba(255,107,53,0.3);
+      color: #FF6B35; padding: 6px 16px; border-radius: 999px;
+      font-size: 0.85rem; font-weight: 700; margin-bottom: 20px;
+    }
+    .books-hero h1 {
+      font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900;
+      line-height: 1.3; margin-bottom: 16px;
+    }
+    .books-hero h1 .highlight { color: #FF6B35; }
+    .books-hero p {
+      font-size: 1.1rem; color: rgba(255,255,255,0.85);
+      max-width: 600px; margin: 0 auto; line-height: 1.7;
+    }
+
+    /* ── Book Card ── */
+    .book-section { padding: 80px 0; }
+    .book-card {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 60px;
+      align-items: start;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    [data-theme="dark"] .book-card {
+      background: #1a1a2e;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.3);
+    }
+    .book-cover {
+      position: relative;
+    }
+    .book-cover img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .book-cover .new-badge {
+      position: absolute;
+      top: 16px; left: 16px;
+      background: #FF6B35;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 8px rgba(255,107,53,0.4);
+    }
+    .book-info {
+      padding: 48px 48px 48px 0;
+    }
+    .book-info .book-tag {
+      display: inline-block;
+      background: rgba(255,107,53,0.1);
+      color: #FF6B35;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .book-info h2 {
+      font-size: 1.9rem;
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 8px;
+      color: #0A2540;
+    }
+    [data-theme="dark"] .book-info h2 { color: #f0f0f0; }
+    .book-info .book-subtitle {
+      font-size: 1.05rem;
+      color: #555;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    [data-theme="dark"] .book-info .book-subtitle { color: #aaa; }
+    .book-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+      font-size: 0.95rem;
+    }
+    .book-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #555;
+    }
+    [data-theme="dark"] .book-meta-row { color: #bbb; }
+    .book-meta-row strong {
+      color: #0A2540;
+      min-width: 56px;
+    }
+    [data-theme="dark"] .book-meta-row strong { color: #e0e0e0; }
+    .book-highlights {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .book-highlights li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: #333;
+      line-height: 1.5;
+    }
+    [data-theme="dark"] .book-highlights li { color: #ccc; }
+    .book-highlights li::before {
+      content: '✦';
+      color: #FF6B35;
+      font-size: 0.85rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .book-quote {
+      background: linear-gradient(135deg, #FFF7ED, #FEF3E2);
+      border-left: 4px solid #FF6B35;
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 28px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #0A2540;
+      line-height: 1.6;
+    }
+    [data-theme="dark"] .book-quote {
+      background: linear-gradient(135deg, #2a1a0a, #1f1408);
+      color: #f0e0c0;
+    }
+
+    [data-theme="dark"] .guide-section { background: #111827 !important; }
+    [data-theme="dark"] .guide-section h2 { color: #f0f0f0 !important; }
+    [data-theme="dark"] .guide-section p { color: #aaa !important; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .book-card {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .book-cover img {
+        max-width: 320px;
+        margin: 24px auto 0;
+        border-radius: 12px;
+      }
+      .book-info {
+        padding: 32px 24px;
+      }
+      .book-info h2 { font-size: 1.5rem; }
+      .books-hero { padding: 60px 0 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="ax-header"></div>
+
+<!-- Hero -->
+<section class="books-hero">
+  <div class="container">
+    <span class="badge">📖 NEW RELEASE</span>
+    <h1>AX EDU GROUP<br><span class="highlight">신간 서적</span></h1>
+    <p>바이브코딩으로 시니어 1인 창업자가 되어, AI 시대를 준비하는 당신을 위한 필독서</p>
+  </div>
+</section>
+
+<!-- Book 1: 말로 만드는 창업의 시대 -->
+<section class="book-section">
+  <div class="container">
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="../images/book-vibe-coding.jpg" alt="말로 만드는 창업의 시대 표지">
+        <span class="new-badge">NEW</span>
+      </div>
+      <div class="book-info">
+        <span class="book-tag">바이브 코딩 x 창업</span>
+        <h2>말로 만드는<br>창업의 시대</h2>
+        <p class="book-subtitle">바이브 코딩으로 완성하는 시니어 1인 창업 혁명</p>
+
+        <div class="book-quote">
+          "당신의 경험이 플랫폼이 된다!<br>
+          지금, 당신의 아이디어로 창업에 도전하라!"
+        </div>
+
+        <div class="book-meta">
+          <div class="book-meta-row"><strong>저자</strong> 심재우 · 선웅규</div>
+          <div class="book-meta-row"><strong>키워드</strong> Claude Code · 바이브 코딩 · 시니어 창업 · 1인 플랫폼</div>
+        </div>
+
+        <ul class="book-highlights">
+          <li>2시간이면 당신도 플랫폼 창업가</li>
+          <li>코딩 경험 없이 말로 서비스를 만드는 바이브 코딩 실전 가이드</li>
+          <li>시니어의 풍부한 경험을 AI와 결합한 1인 창업 전략</li>
+          <li>Claude Code를 활용한 실제 플랫폼 구축 사례 수록</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 바이브 코딩 가이드 인포그래픽 -->
+<section class="guide-section" style="padding:60px 0; background:#F8F9FA;">
+  <div class="container" style="max-width:1100px; margin:0 auto; text-align:center;">
+    <h2 style="font-size:1.6rem; font-weight:900; color:#0A2540; margin-bottom:12px;">2시간 만에 완성하는 AI 플랫폼 창업</h2>
+    <p style="font-size:1.05rem; color:#555; margin-bottom:36px;">바이브코딩(VIBE Coding) 핵심 가이드</p>
+    <img src="../images/book-vibe-guide.jpg" alt="바이브코딩 가이드 인포그래픽" style="width:100%; max-width:848px; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.1); display:block; margin:0 auto;">
+  </div>
+</section>
+
+<!-- PDF 뷰어: 안내자료 -->
+<section class="pdf-viewer-section" style="padding:60px 0; background:#fff;">
+  <div class="container" style="max-width:1100px; margin:0 auto; text-align:center;">
+    <h2 style="font-size:1.6rem; font-weight:900; color:#0A2540; margin-bottom:12px;">📄 도서 안내 자료</h2>
+    <p style="font-size:1.05rem; color:#555; margin-bottom:24px;">좌우로 넘기며 안내 자료를 확인하세요</p>
+
+    <!-- 컨트롤 -->
+    <div class="pdf-controls" style="display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:20px;">
+      <button id="pdfPrev" style="background:#0A2540; color:#fff; border:none; border-radius:10px; padding:10px 24px; font-size:1rem; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px;">
+        ◀ 이전
+      </button>
+      <span id="pdfPageInfo" style="font-size:1rem; font-weight:700; color:#0A2540; min-width:100px;">1 / 1</span>
+      <button id="pdfNext" style="background:#FF6B35; color:#fff; border:none; border-radius:10px; padding:10px 24px; font-size:1rem; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px;">
+        다음 ▶
+      </button>
+    </div>
+
+    <!-- 이미지 슬라이드 영역 -->
+    <div id="pdfContainer" style="position:relative; overflow:hidden; border-radius:16px; box-shadow:0 4px 32px rgba(0,0,0,0.12); background:#e5e5e5; max-width:740px; margin:0 auto;">
+      <img id="pdfSlide" src="../images/pdf-pages/page-01.jpg" alt="안내자료 1페이지" style="display:block; width:100%; height:auto;">
+      <!-- 좌우 터치/클릭 영역 -->
+      <div id="pdfTapLeft" style="position:absolute; top:0; left:0; width:40%; height:100%; cursor:pointer; z-index:2;"></div>
+      <div id="pdfTapRight" style="position:absolute; top:0; right:0; width:40%; height:100%; cursor:pointer; z-index:2;"></div>
+    </div>
+
+    <!-- 페이지 인디케이터 -->
+    <div id="pdfDots" style="display:flex; justify-content:center; gap:8px; margin-top:16px; flex-wrap:wrap;"></div>
+  </div>
+</section>
+
+<style>
+  .pdf-viewer-section button:hover { opacity:0.85; transform:scale(1.03); }
+  .pdf-viewer-section button { transition: all 0.15s; }
+  .pdf-dot { width:10px; height:10px; border-radius:50%; background:#ccc; cursor:pointer; transition:all 0.2s; }
+  .pdf-dot.active { background:#FF6B35; transform:scale(1.3); }
+  [data-theme="dark"] .pdf-viewer-section { background:#111827 !important; }
+  [data-theme="dark"] .pdf-viewer-section h2 { color:#f0f0f0 !important; }
+  [data-theme="dark"] .pdf-viewer-section p { color:#aaa !important; }
+  [data-theme="dark"] #pdfPageInfo { color:#f0f0f0 !important; }
+  [data-theme="dark"] #pdfPrev { background:#1e293b; }
+  [data-theme="dark"] #pdfContainer { background:#1e293b; }
+</style>
+
+<div id="ax-footer"></div>
+
+<script>
+(function() {
+  var totalPages = 10;
+  var pageNum = 1;
+  var slide = document.getElementById('pdfSlide');
+
+  function showPage(num) {
+    if (num < 1 || num > totalPages) return;
+    pageNum = num;
+    var padded = String(num).padStart(2, '0');
+    slide.src = '../images/pdf-pages/page-' + padded + '.jpg';
+    slide.alt = '안내자료 ' + num + '페이지';
+    document.getElementById('pdfPageInfo').textContent = num + ' / ' + totalPages;
+    document.querySelectorAll('.pdf-dot').forEach(function(dot, i) {
+      dot.classList.toggle('active', i + 1 === num);
+    });
+  }
+
+  // 도트 생성
+  var dotsEl = document.getElementById('pdfDots');
+  for (var i = 1; i <= totalPages; i++) {
+    var dot = document.createElement('span');
+    dot.className = 'pdf-dot' + (i === 1 ? ' active' : '');
+    dot.dataset.page = i;
+    dot.onclick = function() { showPage(Number(this.dataset.page)); };
+    dotsEl.appendChild(dot);
+  }
+
+  document.getElementById('pdfPrev').onclick = function() { showPage(pageNum - 1); };
+  document.getElementById('pdfNext').onclick = function() { showPage(pageNum + 1); };
+  document.getElementById('pdfTapLeft').onclick = function() { showPage(pageNum - 1); };
+  document.getElementById('pdfTapRight').onclick = function() { showPage(pageNum + 1); };
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') showPage(pageNum - 1);
+    if (e.key === 'ArrowRight') showPage(pageNum + 1);
+  });
+
+  var touchStartX = 0;
+  var container = document.getElementById('pdfContainer');
+  container.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; });
+  container.addEventListener('touchend', function(e) {
+    var diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) showPage(pageNum + 1);
+      else showPage(pageNum - 1);
+    }
+  });
+
+  showPage(1);
+})();
+</script>
+<script src="../js/components.js"></script>
+</body>
+</html>
