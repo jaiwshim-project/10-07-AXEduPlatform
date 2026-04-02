@@ -144,6 +144,12 @@
     .btn-white { padding: 13px 30px; background: white; color: #000000; border-radius: 10px; font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
     .btn-white:hover { opacity: 0.9; }
 
+    [data-theme="dark"] .book-section-title { color: #f1f5f9 !important; }
+    [data-theme="dark"] .book-section-sub { color: #94a3b8 !important; }
+    [data-theme="dark"] .book-title { color: #f1f5f9 !important; }
+    [data-theme="dark"] .book-desc { color: #94a3b8 !important; }
+    [data-theme="dark"] .book-author-card { background: #1e293b !important; border-color: rgba(124,58,237,0.2) !important; }
+
     @media (max-width: 768px) {
       .ceo-hero h1 { font-size: 1.8rem; }
       .profile-grid { grid-template-columns: 1fr; }
@@ -237,6 +243,46 @@
         <div class="phil-icon">🤝</div>
         <div class="phil-title">상생 파트너십</div>
         <div class="phil-desc">30년 B2B 컨설팅 경험을 바탕으로, 전문가와 기업 모두가 윈-윈하는 구조를 설계합니다. 신뢰 기반의 장기 파트너십을 추구합니다.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Latest Book -->
+<div style="padding: 72px 0; background: var(--color-bg, #f0f4f9);">
+  <div class="container">
+    <div class="section-header" style="text-align:center;margin-bottom:40px;">
+      <h2 style="font-size:1.9rem;font-weight:900;color:#000000;margin-bottom:10px;">최신 <span style="color:#FF6B35;">저서</span></h2>
+      <p style="color:#374151;">바이브 코딩으로 여는 시니어 1인 창업의 새로운 길</p>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;">
+      <div style="flex-shrink:0;">
+        <img src="../images/표지-바이브코딩.jpg" alt="말로 만드는 창업의 시대 - 표지"
+          style="width:320px;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,0.25);transition:transform 0.3s;"
+          onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="max-width:420px;">
+        <div style="display:inline-block;background:rgba(255,107,53,0.1);color:#FF6B35;padding:4px 14px;border-radius:20px;font-size:0.78rem;font-weight:700;margin-bottom:16px;">NEW · 공저</div>
+        <h3 style="font-size:1.6rem;font-weight:900;color:#000000;margin-bottom:8px;line-height:1.4;">말로 만드는 창업의 시대</h3>
+        <p style="font-size:0.95rem;color:#FF6B35;font-weight:700;margin-bottom:16px;">바이브 코딩으로 완성하는 시니어 1인 창업 혁명</p>
+        <p style="font-size:0.88rem;color:#555;line-height:1.8;margin-bottom:20px;">
+          코딩 경험이 없어도, 말만으로 플랫폼을 만들 수 있는 시대가 왔습니다.
+          Claude Code를 활용한 바이브 코딩으로 2시간 만에 나만의 서비스를 완성하는 방법을 안내합니다.
+          당신의 경험이 곧 플랫폼이 됩니다.
+        </p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;">
+          <div style="background:white;border:1px solid #eee;border-radius:10px;padding:12px 18px;text-align:center;">
+            <div style="font-size:1.2rem;font-weight:900;color:#FF6B35;">심재우</div>
+            <div style="font-size:0.72rem;color:#999;margin-top:2px;">저자</div>
+          </div>
+          <div style="background:white;border:1px solid #eee;border-radius:10px;padding:12px 18px;text-align:center;">
+            <div style="font-size:1.2rem;font-weight:900;color:#FF6B35;">선웅규</div>
+            <div style="font-size:0.72rem;color:#999;margin-top:2px;">공저자</div>
+          </div>
+        </div>
+        <a href="books.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:#FF6B35;color:white;border-radius:10px;font-weight:700;text-decoration:none;font-size:0.9rem;transition:background 0.2s;" onmouseover="this.style.background='#e55a28'" onmouseout="this.style.background='#FF6B35'">
+          📖 도서 상세 보기 →
+        </a>
       </div>
     </div>
   </div>
