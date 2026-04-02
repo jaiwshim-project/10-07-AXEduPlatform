@@ -12,6 +12,65 @@
   <script>/* FOUC 방지 */const _t=localStorage.getItem('ax-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);</script>
   <link rel="stylesheet" href="../css/sidebar.css">
   <style>
+    /* PDF Download Bar */
+    .pdf-download-bar {
+      background: linear-gradient(135deg, #1a1a2e 0%, #2d1b69 100%);
+      padding: 14px 20px;
+      position: sticky;
+      top: 64px;
+      z-index: 200;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    .pdf-download-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .pdf-download-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+    }
+    .pdf-download-info strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+    .pdf-meta {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .pdf-icon {
+      font-size: 1.6rem;
+    }
+    .pdf-download-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 24px;
+      background: #FF6B35;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .pdf-download-btn:hover {
+      background: #e55a28;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255,107,53,0.4);
+    }
+    @media (max-width: 768px) {
+      .pdf-download-bar { top: 64px; }
+      .pdf-download-inner { gap: 12px; }
+      .pdf-download-info strong { font-size: 0.85rem; }
+      .pdf-download-btn { padding: 8px 16px; font-size: 0.8rem; }
+    }
+
     /* Manual Layout */
     .manual-wrapper {
       display: flex;
@@ -24,8 +83,8 @@
       background: white;
       border-right: 1px solid var(--color-border);
       position: sticky;
-      top: 64px;
-      height: calc(100vh - 64px);
+      top: 118px;
+      height: calc(100vh - 118px);
       overflow-y: auto;
       flex-shrink: 0;
       scrollbar-width: thin;
@@ -426,6 +485,25 @@
     <option value="enterprise-guide">6. 프로젝트 의뢰</option>
     <option value="matching">6-2. 전문가 매칭 프로세스</option>
   </select>
+</div>
+
+<!-- PDF 다운로드 바 -->
+<div class="pdf-download-bar">
+  <div class="pdf-download-inner">
+    <div class="pdf-download-info">
+      <span class="pdf-icon">📘</span>
+      <div>
+        <strong>매뉴얼 전체 PDF 다운로드</strong>
+        <span class="pdf-meta">전체 15개 섹션 · A4 포맷</span>
+      </div>
+    </div>
+    <a href="../downloads/AX교육플랫폼_사용자매뉴얼.pdf" download="AX교육플랫폼_사용자매뉴얼.pdf" class="pdf-download-btn">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="vertical-align:middle;margin-right:6px;">
+        <path d="M8 1v10M8 11L4 7M8 11l4-4M2 14h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      PDF 다운로드
+    </a>
+  </div>
 </div>
 
 <div class="manual-wrapper">
