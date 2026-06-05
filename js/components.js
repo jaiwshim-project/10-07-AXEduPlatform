@@ -41,6 +41,7 @@ const Components = {
           <li><a href="${base}pages/offline-courses.html"${active('offline-courses.html')}>🏫 오프라인 교육</a></li>
         </ul>
       </li>
+      <li><a href="${base}pages/sunmyung-ax.html"${active('sunmyung-ax.html')}>선명AX 교육과정</a></li>
       <li><a href="${base}pages/projects.html"${active('projects.html')}>프로젝트</a></li>
       <li><a href="${base}pages/certification.html"${active('certification.html')}>인증</a></li>
       <li><a href="${base}pages/community.html"${active('community.html')}>커뮤니티</a></li>
@@ -99,6 +100,7 @@ const Components = {
         <a href="${base}pages/offline-courses.html" style="padding:10px 0 10px 24px!important;font-size:0.95rem!important;">🏫 오프라인 교육</a>
       </div>
     </div>
+    <a href="${base}pages/sunmyung-ax.html">🌟 선명AX 교육과정</a>
     <a href="${base}pages/projects.html">📁 프로젝트</a>
     <a href="${base}pages/certification.html">🏅 인증</a>
     <a href="${base}pages/community.html">💬 커뮤니티</a>

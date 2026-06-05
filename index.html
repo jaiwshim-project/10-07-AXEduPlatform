@@ -53,12 +53,12 @@
     .flow-arrow { text-align: center; color: rgba(255,255,255,0.3); font-size: 1.2rem; }
 
     /* 교육 카테고리 */
-    .course-card { background: #F5F3FF; border-radius: 16px; padding: 28px; border: 1px solid rgba(45,27,105,0.15); border-top: 3px solid #FF6B35; transition: all 0.3s; cursor: pointer; box-shadow: 0 4px 16px rgba(45,27,105,0.10); }
+    .course-card { display: block; background: #F5F3FF; border-radius: 16px; padding: 28px; border: 1px solid rgba(45,27,105,0.15); border-top: 3px solid #FF6B35; transition: all 0.3s; cursor: pointer; box-shadow: 0 4px 16px rgba(45,27,105,0.10); }
     .course-card:hover { transform: translateY(-6px); box-shadow: 0 14px 44px rgba(45,27,105,0.13); border-color: rgba(255,107,53,0.25); }
-    .course-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 16px; }
-    .course-count { font-size: 0.8rem; color: #4B5563; margin-top: 8px; font-weight: 600; }
-    .course-card h3 { font-size: 1.05rem; font-weight: 800; color: #000000; margin-bottom: 8px; }
-    .course-card p { font-size: 0.9rem; color: #374151; line-height: 1.65; }
+    .course-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 16px; pointer-events: none; }
+    .course-count { font-size: 0.8rem; color: #4B5563; margin-top: 8px; font-weight: 600; pointer-events: none; }
+    .course-card h3 { font-size: 1.05rem; font-weight: 800; color: #000000; margin-bottom: 8px; pointer-events: none; }
+    .course-card p { font-size: 0.9rem; color: #374151; line-height: 1.65; pointer-events: none; }
 
     /* 생태계 플로우 */
     .ecosystem { background: #000000; color: white; padding: 80px 24px; }
@@ -135,6 +135,7 @@
     <a href="index.html" class="logo"><img src="images/logo.png" alt="AX EDU GROUP"></a>
     <ul class="nav-links">
       <li><a href="pages/courses.html">교육과정</a></li>
+      <li><a href="pages/sunmyung-ax.html">선명AX 교육과정</a></li>
       <li><a href="pages/projects.html">프로젝트</a></li>
       <li><a href="pages/certification.html">인증</a></li>
       <li><a href="pages/community.html">커뮤니티</a></li>
@@ -152,6 +153,7 @@
   </div>
   <div class="mobile-menu" id="mobileMenu">
     <a href="pages/courses.html">📚 교육과정</a>
+    <a href="pages/sunmyung-ax.html">🌟 선명AX 교육과정</a>
     <a href="pages/projects.html">📁 프로젝트</a>
     <a href="pages/certification.html">🏅 인증</a>
     <a href="pages/community.html">💬 커뮤니티</a>
@@ -244,6 +246,46 @@
 <section style="background:#F8F9FA; padding:48px 20px;">
   <div style="max-width:900px; margin:0 auto; text-align:center;">
     <img src="images/ecosystem.svg" alt="AX 인재 양성 파이프라인 · Talent Production Ecosystem" style="width:100%; height:auto;">
+  </div>
+</section>
+
+<!-- 선명AX 4가지 과정 -->
+<section class="section" style="background:#F8F9FA;">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">🌟 SUNMYUNG AX</span>
+      <h2 class="section-title">선명AX 교육과정 — 4단계 학습 경로</h2>
+      <p class="section-subtitle">초보자부터 고급 전문가까지, 체계적인 단계별 커리큘럼</p>
+    </div>
+    <div class="grid grid-4 reveal">
+      <a href="pages/course-beginner.html" class="course-card" style="text-decoration:none;">
+        <div class="course-icon" style="background:rgba(107,114,128,0.1);">🌱</div>
+        <h3>초보자 과정</h3>
+        <p>AI 첫걸음 6도구 실습<br>대화형·이미지생성형·프로젝트형 ChatGPT</p>
+        <div class="course-count">⏱️ 6시간 · 6개 도구</div>
+      </a>
+      <a href="pages/course-basic.html" class="course-card" style="text-decoration:none;">
+        <div class="course-icon" style="background:rgba(255,107,53,0.1);">🚀</div>
+        <h3>초급 과정</h3>
+        <p>AI 실무 활용 4도구 실습<br>업무용 산출물 제작 + Claude Code</p>
+        <div class="course-count">⏱️ 14시간 · 실무 프로젝트</div>
+      </a>
+      <a href="pages/course-intermediate.html" class="course-card" style="text-decoration:none;">
+        <div class="course-icon" style="background:rgba(0,200,150,0.1);">🏗️</div>
+        <h3>중급 과정</h3>
+        <p>AI 플랫폼 설계<br>RAG 시스템 · AI Agent 구축</p>
+        <div class="course-count">⏱️ 추후 공개</div>
+      </a>
+      <a href="pages/course-advanced.html" class="course-card" style="text-decoration:none;">
+        <div class="course-icon" style="background:rgba(124,58,237,0.1);">👑</div>
+        <h3>고급 과정</h3>
+        <p>AX 컨설팅 전략<br>기업 AX 전략 수립 · 프로젝트 리드</p>
+        <div class="course-count">⏱️ 추후 공개</div>
+      </a>
+    </div>
+    <div class="text-center" style="margin-top:40px;">
+      <a href="pages/sunmyung-ax.html" class="btn btn-primary btn-lg">전체 과정 상세보기 →</a>
+    </div>
   </div>
 </section>
 
