@@ -41,7 +41,15 @@ const Components = {
           <li><a href="${base}pages/offline-courses.html"${active('offline-courses.html')}>🏫 오프라인 교육</a></li>
         </ul>
       </li>
-      <li><a href="${base}pages/sunmyung-ax.html"${active('sunmyung-ax.html')}>선명AX 교육과정</a></li>
+      <li class="nav-dropdown">
+        <a href="${base}pages/sunmyung-ax.html"${active('sunmyung-ax.html')} class="nav-dropdown-toggle">선명AX 교육과정 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="vertical-align:middle;margin-left:2px;"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <ul class="nav-submenu">
+          <li><a href="${base}pages/course-beginner.html"${active('course-beginner.html')}>🌱 초보자 과정</a></li>
+          <li><a href="${base}pages/course-basic.html"${active('course-basic.html')}>🚀 초급 과정</a></li>
+          <li><a href="${base}pages/course-intermediate.html"${active('course-intermediate.html')}>🏗️ 중급 과정</a></li>
+          <li><a href="${base}pages/course-advanced.html"${active('course-advanced.html')}>👑 고급 과정</a></li>
+        </ul>
+      </li>
       <li><a href="${base}pages/projects.html"${active('projects.html')}>프로젝트</a></li>
       <li><a href="${base}pages/certification.html"${active('certification.html')}>인증</a></li>
       <li><a href="${base}pages/community.html"${active('community.html')}>커뮤니티</a></li>
@@ -100,7 +108,15 @@ const Components = {
         <a href="${base}pages/offline-courses.html" style="padding:10px 0 10px 24px!important;font-size:0.95rem!important;">🏫 오프라인 교육</a>
       </div>
     </div>
-    <a href="${base}pages/sunmyung-ax.html">🌟 선명AX 교육과정</a>
+    <div style="display:flex;flex-direction:column;">
+      <button onclick="var s=this.nextElementSibling;var open=s.style.display==='flex';s.style.display=open?'none':'flex';this.querySelector('.marr').style.transform=open?'rotate(0deg)':'rotate(180deg)';" style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:14px 0;background:none;border:none;border-bottom:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.95);font-size:1.1rem;font-weight:500;font-family:inherit;cursor:pointer;text-align:left;">🌟 선명AX 교육과정 <span class="marr" style="transition:transform 0.2s;font-size:0.8rem;">▾</span></button>
+      <div style="display:none;flex-direction:column;background:rgba(0,0,0,0.2);">
+        <a href="${base}pages/course-beginner.html" style="padding:10px 0 10px 24px!important;font-size:0.95rem!important;">🌱 초보자 과정</a>
+        <a href="${base}pages/course-basic.html" style="padding:10px 0 10px 24px!important;font-size:0.95rem!important;">🚀 초급 과정</a>
+        <a href="${base}pages/course-intermediate.html" style="padding:10px 0 10px 24px!important;font-size:0.95rem!important;">🏗️ 중급 과정</a>
+        <a href="${base}pages/course-advanced.html" style="padding:10px 0 10px 24px!important;font-size:0.95rem!important;">👑 고급 과정</a>
+      </div>
+    </div>
     <a href="${base}pages/projects.html">📁 프로젝트</a>
     <a href="${base}pages/certification.html">🏅 인증</a>
     <a href="${base}pages/community.html">💬 커뮤니티</a>
