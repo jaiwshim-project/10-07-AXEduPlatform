@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>고급 과정 교재 — AI 플랫폼 아키텍트 실전 교재 | 선명AX 교육과정</title>
+  <meta name="description" content="30시간 고급 과정 완전 교재 — RAG, MCP, 멀티에이전트, SaaS 사업화 실전 가이드">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <script>const _t=localStorage.getItem('ax-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);</script>
+  <style>
+    .hero-course {
+      background: linear-gradient(135deg, #7c3aed 0%, #8B5CF6 100%);
+      padding: 80px 24px 60px;
+      color: white;
+      text-align: center;
+    }
+    .hero-course h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 16px; }
+    .hero-course p { font-size: 1.1rem; opacity: 0.95; max-width: 900px; margin: 0 auto 32px; line-height: 1.7; }
+
+    .toc-section {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05), rgba(139,92,246,0.02));
+      border: 2px solid rgba(124,58,237,0.15);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 40px 0;
+    }
+    .toc-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #7c3aed;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .toc-item {
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      background: white;
+      border-radius: 8px;
+      border-left: 4px solid #7c3aed;
+      font-weight: 600;
+      color: #374151;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .toc-item:hover {
+      transform: translateX(8px);
+      box-shadow: 0 2px 8px rgba(124,58,237,0.15);
+    }
+    .toc-item a {
+      color: #374151;
+      text-decoration: none;
+      display: block;
+    }
+
+    .day-section {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      margin: 40px 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .day-header {
+      background: linear-gradient(135deg, #7c3aed 0%, #8B5CF6 100%);
+      color: white;
+      padding: 24px 32px;
+      border-radius: 12px;
+      margin-bottom: 32px;
+    }
+    .day-number {
+      font-size: 1rem;
+      font-weight: 700;
+      opacity: 0.9;
+      margin-bottom: 8px;
+    }
+    .day-title {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .day-duration {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .module-section {
+      background: #F9FAFB;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 32px;
+      border-left: 4px solid #7c3aed;
+    }
+    .module-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .module-number {
+      background: #7c3aed;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .module-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #000;
+    }
+    .module-duration {
+      color: #6B7280;
+      font-size: 0.95rem;
+      margin-left: auto;
+    }
+
+    .subsection {
+      margin-top: 24px;
+    }
+    .subsection-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #7c3aed;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .subsection-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      line-height: 1.8;
+      color: #374151;
+    }
+    .subsection-content ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .subsection-content li {
+      margin-bottom: 8px;
+    }
+
+    .code-example {
+      background: #1F2937;
+      color: #E5E7EB;
+      padding: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      margin: 16px 0;
+    }
+    .code-comment {
+      color: #9CA3AF;
+    }
+
+    .checklist {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      border: 2px solid #E5E7EB;
+    }
+    .checklist-item {
+      padding: 8px 0;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .checklist-item:last-child {
+      border-bottom: none;
+    }
+
+    .reference-box {
+      background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(139,92,246,0.04));
+      border: 1px solid rgba(124,58,237,0.2);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 20px;
+    }
+    .reference-title {
+      font-weight: 700;
+      color: #7c3aed;
+      margin-bottom: 8px;
+    }
+    .reference-list {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 0.95rem;
+      color: #374151;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar"></nav>
+
+<section class="hero-course">
+  <div class="container">
+    <span style="display: inline-block; background: rgba(255,255,255,0.2); padding: 6px 18px; border-radius: 999px; font-size: 0.9rem; font-weight: 700; margin-bottom: 20px;">📚 고급 과정 교재</span>
+    <h1>AI 플랫폼 아키텍트 실전 교재</h1>
+    <p>RAG · MCP · 멀티에이전트 · SaaS 사업화 완전 가이드<br>30시간 고급 과정의 모든 학습 내용과 실습 가이드</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width: 1200px;">
+
+    <!-- 목차 -->
+    <div class="toc-section">
+      <div class="toc-title">📋 교재 목차</div>
+      <ul class="toc-list">
+        <li class="toc-item"><a href="#day1">Day 1: AI 플랫폼 아키텍처와 서비스 기획 (6시간)</a></li>
+        <li class="toc-item"><a href="#day2">Day 2: Claude Code 풀스택 플랫폼 고도화 (6시간)</a></li>
+        <li class="toc-item"><a href="#day3">Day 3: RAG 지식베이스와 멀티에이전트 설계 (6시간)</a></li>
+        <li class="toc-item"><a href="#day4">Day 4: MCP · 스킬 · 훅 · 옵시디언 위키 통합 (6시간)</a></li>
+        <li class="toc-item"><a href="#day5">Day 5: 배포 · 운영 · 수익화 · 최종 발표 (6시간)</a></li>
+      </ul>
+    </div>
+
+    <!-- Day 1 -->
+    <div id="day1" class="day-section">
+      <div class="day-header">
+        <div class="day-number">Day 1</div>
+        <div class="day-title">AI 플랫폼 아키텍처와 서비스 기획</div>
+        <div class="day-duration">⏱️ 6시간</div>
+      </div>
+
+      <!-- Module 1.1 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 1.1</span>
+          <h3 class="module-title">AI 플랫폼 아키텍처 이해</h3>
+          <span class="module-duration">1시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>AI Native vs AI Enhanced 앱의 차이를 이해하고 프로젝트에 맞는 유형을 선택할 수 있다</li>
+              <li>RAG와 Fine-tuning의 장단점을 비교하고 적절한 전략을 수립할 수 있다</li>
+              <li>멀티에이전트 아키텍처 패턴을 이해하고 설계에 적용할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">💡 핵심 개념</div>
+          <div class="subsection-content">
+            <strong>1. AI Native vs AI Enhanced</strong>
+            <ul>
+              <li><strong>AI Native</strong>: AI가 핵심 기능 (예: Claude 기반 상담 플랫폼, AI 튜터)</li>
+              <li><strong>AI Enhanced</strong>: 기존 기능에 AI 추가 (예: 검색 자동완성, 추천 시스템)</li>
+            </ul>
+            <strong>2. RAG vs Fine-tuning</strong>
+            <ul>
+              <li><strong>RAG</strong>: 실시간 지식 검색 + 답변 생성 (빠른 업데이트, 낮은 비용)</li>
+              <li><strong>Fine-tuning</strong>: 모델 학습 (특정 도메인 전문화, 높은 비용)</li>
+            </ul>
+            <strong>3. 멀티에이전트 패턴</strong>
+            <ul>
+              <li><strong>Sequential</strong>: 순차 실행 (검증 → 분석 → 요약)</li>
+              <li><strong>Parallel</strong>: 병렬 실행 (여러 소스 동시 검색)</li>
+              <li><strong>Hierarchical</strong>: 계층 실행 (코디네이터 → 전문 에이전트)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>3가지 AI 플랫폼 사례 분석 (30분)
+                <ul>
+                  <li>ChatGPT, Notion AI, Claude Code 아키텍처 분해</li>
+                  <li>핵심 기술 스택 정리</li>
+                </ul>
+              </li>
+              <li>아키텍처 비교표 작성 (20분)
+                <ul>
+                  <li>AI Native vs AI Enhanced 비교</li>
+                  <li>RAG vs Fine-tuning 비교</li>
+                </ul>
+              </li>
+              <li>멀티에이전트 패턴 설계 (10분)
+                <ul>
+                  <li>본인 프로젝트에 맞는 패턴 선택</li>
+                  <li>에이전트 역할 정의</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ AI Native와 AI Enhanced의 차이를 설명할 수 있다</div>
+            <div class="checklist-item">☐ RAG와 Fine-tuning의 장단점을 비교할 수 있다</div>
+            <div class="checklist-item">☐ 멀티에이전트 패턴 3가지를 이해하고 선택할 수 있다</div>
+            <div class="checklist-item">☐ 아키텍처 유형 정리표를 작성했다</div>
+          </div>
+        </div>
+
+        <div class="reference-box">
+          <div class="reference-title">📖 참고 자료</div>
+          <ul class="reference-list">
+            <li>Anthropic - Building with Claude (공식 문서)</li>
+            <li>OpenAI - RAG Best Practices</li>
+            <li>LangChain - Multi-agent Architectures</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Module 1.2 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 1.2</span>
+          <h3 class="module-title">서비스 기획</h3>
+          <span class="module-duration">2시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>해결하려는 문제를 명확히 정의하고 타겟 고객을 식별할 수 있다</li>
+              <li>사용자 여정(User Journey)을 설계하고 핵심 기능을 도출할 수 있다</li>
+              <li>MVP 범위를 결정하고 우선순위를 설정할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">💡 핵심 개념</div>
+          <div class="subsection-content">
+            <strong>1. 문제 정의 (Problem Statement)</strong>
+            <ul>
+              <li>누구의 문제인가? (타겟 고객)</li>
+              <li>어떤 문제인가? (Pain Point)</li>
+              <li>왜 중요한가? (시장 크기, 빈도)</li>
+            </ul>
+            <strong>2. 사용자 여정 (User Journey)</strong>
+            <ul>
+              <li>인지 → 고려 → 전환 → 사용 → 추천</li>
+              <li>각 단계별 터치포인트</li>
+              <li>핵심 경험 (Aha Moment)</li>
+            </ul>
+            <strong>3. MVP 범위</strong>
+            <ul>
+              <li>Must Have: 없으면 안 되는 기능</li>
+              <li>Should Have: 있으면 좋은 기능</li>
+              <li>Nice to Have: 나중에 추가할 기능</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>문제 정의서 작성 (30분)
+                <ul>
+                  <li>타겟 고객 페르소나 작성</li>
+                  <li>Pain Point 3가지 도출</li>
+                  <li>기존 솔루션의 한계 분석</li>
+                </ul>
+              </li>
+              <li>User Journey Map 작성 (40분)
+                <ul>
+                  <li>5단계 여정 설계</li>
+                  <li>각 단계별 사용자 행동, 감정, 터치포인트 정의</li>
+                  <li>Aha Moment 식별</li>
+                </ul>
+              </li>
+              <li>기능 우선순위 설정 (30분)
+                <ul>
+                  <li>Must/Should/Nice to Have 분류</li>
+                  <li>MVP 범위 결정</li>
+                </ul>
+              </li>
+              <li>발표 준비 (20분)</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">📝 설계 예제</div>
+          <div class="subsection-content">
+            <strong>예시: AI 기반 치과 상담 플랫폼</strong>
+            <div class="code-example">
+<span class="code-comment">## 문제 정의</span>
+타겟: 치과 내원 전 궁금증이 많은 환자
+Pain Point:
+1. 전화 상담은 진료 중 불가능
+2. 인터넷 정보는 신뢰도가 낮음
+3. 병원 방문 전 불안감이 높음
+
+<span class="code-comment">## User Journey</span>
+1. 인지: 치과 증상 발생 → 검색
+2. 고려: 플랫폼 접속 → AI 상담 시작
+3. 전환: 치과 예약
+4. 사용: 방문 전 AI 브리핑
+5. 추천: 지인에게 추천
+
+<span class="code-comment">## MVP 기능</span>
+Must Have:
+- AI 증상 상담
+- 치과 검색 및 예약
+- 방문 전 체크리스트
+
+Should Have:
+- 치과 리뷰
+- 비용 추정
+
+Nice to Have:
+- 치과 비교
+- 보험 안내
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ 타겟 고객 페르소나를 작성했다</div>
+            <div class="checklist-item">☐ Pain Point 3가지를 도출했다</div>
+            <div class="checklist-item">☐ User Journey Map을 작성했다</div>
+            <div class="checklist-item">☐ MVP 범위를 결정했다</div>
+            <div class="checklist-item">☐ 서비스 기획서를 작성했다</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 1.3 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 1.3</span>
+          <h3 class="module-title">기술 스택 선정</h3>
+          <span class="module-duration">2시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>프론트엔드/백엔드/DB/AI 모델/인프라 기술 스택을 선정할 수 있다</li>
+              <li>ADR(Architecture Decision Record)을 작성할 수 있다</li>
+              <li>기술 스택의 장단점을 비교하고 의사결정을 문서화할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">💡 핵심 개념</div>
+          <div class="subsection-content">
+            <strong>1. 기술 스택 선정 기준</strong>
+            <ul>
+              <li>개발 속도 vs 성능</li>
+              <li>학습 곡선 vs 확장성</li>
+              <li>비용 vs 안정성</li>
+            </ul>
+            <strong>2. 추천 스택 (AI 플랫폼)</strong>
+            <ul>
+              <li><strong>Frontend</strong>: HTML/CSS/JS + Tailwind CSS</li>
+              <li><strong>Backend</strong>: Vercel Serverless Functions</li>
+              <li><strong>DB</strong>: Supabase (PostgreSQL + pgvector)</li>
+              <li><strong>AI</strong>: Claude Sonnet 4.5, OpenAI GPT-4</li>
+              <li><strong>Deployment</strong>: Vercel + GitHub</li>
+            </ul>
+            <strong>3. ADR 작성법</strong>
+            <ul>
+              <li>상황 (Context): 왜 결정이 필요한가?</li>
+              <li>결정 (Decision): 무엇을 선택했는가?</li>
+              <li>근거 (Rationale): 왜 선택했는가?</li>
+              <li>결과 (Consequences): 어떤 영향이 있는가?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>기술 스택 비교표 작성 (40분)
+                <ul>
+                  <li>Frontend: React vs Vanilla JS</li>
+                  <li>Backend: Express vs Serverless</li>
+                  <li>DB: Firebase vs Supabase</li>
+                  <li>AI: Claude vs OpenAI</li>
+                </ul>
+              </li>
+              <li>ADR 작성 (40분)
+                <ul>
+                  <li>각 레이어별 ADR 작성</li>
+                  <li>결정 근거 문서화</li>
+                </ul>
+              </li>
+              <li>기술 스택 문서 작성 (30분)
+                <ul>
+                  <li>전체 아키텍처 다이어그램</li>
+                  <li>기술 스택 정리 문서</li>
+                </ul>
+              </li>
+              <li>검토 및 발표 (10분)</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">📝 설계 예제</div>
+          <div class="subsection-content">
+            <strong>ADR 예시: Backend 선택</strong>
+            <div class="code-example">
+<span class="code-comment"># ADR-001: Serverless Functions 선택</span>
+
+<span class="code-comment">## 상황 (Context)</span>
+- 초기 트래픽 예측 불가
+- 서버 관리 리소스 부족
+- 빠른 배포 필요
+
+<span class="code-comment">## 결정 (Decision)</span>
+Vercel Serverless Functions 선택
+
+<span class="code-comment">## 근거 (Rationale)</span>
+1. 자동 스케일링 (트래픽 급증 대응)
+2. 서버 관리 불필요 (Managed Service)
+3. GitHub 연동으로 빠른 배포
+4. 무료 플랜으로 시작 가능
+
+<span class="code-comment">## 결과 (Consequences)</span>
+장점:
+- 운영 비용 절감
+- 빠른 개발 속도
+- 자동 HTTPS
+
+단점:
+- Cold Start 지연 (첫 요청)
+- Stateless 제약
+- 실행 시간 제한 (10초)
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ 기술 스택 비교표를 작성했다</div>
+            <div class="checklist-item">☐ 각 레이어별 ADR을 작성했다</div>
+            <div class="checklist-item">☐ 아키텍처 다이어그램을 작성했다</div>
+            <div class="checklist-item">☐ 기술 스택 문서를 작성했다</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 1.4 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 1.4</span>
+          <h3 class="module-title">실습 및 발표</h3>
+          <span class="module-duration">1시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>Day 1에서 학습한 내용을 통합하여 플랫폼 기획서를 작성할 수 있다</li>
+              <li>기획 내용을 효과적으로 발표하고 피드백을 받을 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>플랫폼 기획서 작성 (30분)
+                <ul>
+                  <li>문제 정의</li>
+                  <li>타겟 고객</li>
+                  <li>핵심 기능</li>
+                  <li>기술 스택</li>
+                  <li>MVP 범위</li>
+                </ul>
+              </li>
+              <li>발표 자료 준비 (15분)</li>
+              <li>발표 및 피드백 (15분)</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ 플랫폼 기획서를 작성했다</div>
+            <div class="checklist-item">☐ 발표 자료를 준비했다</div>
+            <div class="checklist-item">☐ 발표를 완료했다</div>
+            <div class="checklist-item">☐ 피드백을 받고 반영했다</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div id="day2" class="day-section">
+      <div class="day-header">
+        <div class="day-number">Day 2</div>
+        <div class="day-title">Claude Code 풀스택 플랫폼 고도화</div>
+        <div class="day-duration">⏱️ 6시간</div>
+      </div>
+
+      <!-- Module 2.1 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 2.1</span>
+          <h3 class="module-title">인증/권한 시스템</h3>
+          <span class="module-duration">2시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>회원가입/로그인 시스템을 구현할 수 있다</li>
+              <li>JWT 기반 인증과 세션 관리를 이해하고 구현할 수 있다</li>
+              <li>RBAC (Role-Based Access Control)을 설계하고 적용할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">💡 핵심 개념</div>
+          <div class="subsection-content">
+            <strong>1. 인증 (Authentication) vs 권한 (Authorization)</strong>
+            <ul>
+              <li><strong>인증</strong>: 사용자가 누구인지 확인 (로그인)</li>
+              <li><strong>권한</strong>: 사용자가 무엇을 할 수 있는지 확인 (역할)</li>
+            </ul>
+            <strong>2. JWT (JSON Web Token)</strong>
+            <ul>
+              <li>Header: 알고리즘 (HS256)</li>
+              <li>Payload: 사용자 정보 (userId, role)</li>
+              <li>Signature: 서명 (비밀키)</li>
+            </ul>
+            <strong>3. RBAC (Role-Based Access Control)</strong>
+            <ul>
+              <li>Admin: 모든 권한</li>
+              <li>User: 일반 사용자 권한</li>
+              <li>Guest: 읽기 전용</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>회원가입 API 구현 (30분)
+                <ul>
+                  <li>이메일/비밀번호 검증</li>
+                  <li>비밀번호 해싱 (bcrypt)</li>
+                  <li>DB 저장 (Supabase)</li>
+                </ul>
+              </li>
+              <li>로그인 API 구현 (30분)
+                <ul>
+                  <li>이메일/비밀번호 확인</li>
+                  <li>JWT 토큰 발급</li>
+                  <li>세션 저장 (localStorage)</li>
+                </ul>
+              </li>
+              <li>권한 검증 미들웨어 구현 (30분)
+                <ul>
+                  <li>JWT 토큰 검증</li>
+                  <li>Role 기반 접근 제어</li>
+                </ul>
+              </li>
+              <li>Frontend 통합 (30분)
+                <ul>
+                  <li>로그인 폼</li>
+                  <li>회원가입 폼</li>
+                  <li>세션 관리</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">📝 코드 예제</div>
+          <div class="subsection-content">
+            <strong>JWT 인증 미들웨어</strong>
+            <div class="code-example">
+import jwt from 'jsonwebtoken';
+
+export function verifyToken(req, res, next) {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) {
+    return res.status(401).json({ error: 'No token' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.status(403).json({ error: 'Invalid token' });
+  }
+}
+
+export function requireRole(role) {
+  return (req, res, next) => {
+    if (req.user.role !== role) {
+      return res.status(403).json({ error: 'Forbidden' });
+    }
+    next();
+  };
+}
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ 회원가입 API를 구현했다</div>
+            <div class="checklist-item">☐ 로그인 API를 구현했다</div>
+            <div class="checklist-item">☐ JWT 인증 미들웨어를 구현했다</div>
+            <div class="checklist-item">☐ RBAC를 구현했다</div>
+            <div class="checklist-item">☐ Frontend와 통합했다</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 2.2 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 2.2</span>
+          <h3 class="module-title">결제 연동</h3>
+          <span class="module-duration">2시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>Stripe 또는 Portone 결제를 연동할 수 있다</li>
+              <li>요금제 (Free/Pro/Max)를 설계하고 구현할 수 있다</li>
+              <li>Webhook을 처리하고 구독 상태를 관리할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">💡 핵심 개념</div>
+          <div class="subsection-content">
+            <strong>1. 요금제 설계</strong>
+            <ul>
+              <li><strong>Free</strong>: 기본 기능, 제한된 사용량</li>
+              <li><strong>Pro</strong>: 고급 기능, 확장된 사용량</li>
+              <li><strong>Max</strong>: 모든 기능, 무제한 사용량</li>
+            </ul>
+            <strong>2. Stripe 연동 흐름</strong>
+            <ul>
+              <li>1단계: Stripe Product/Price 생성</li>
+              <li>2단계: Checkout Session 생성</li>
+              <li>3단계: 결제 완료 후 Webhook 처리</li>
+              <li>4단계: DB 업데이트 (tier, subscription_id)</li>
+            </ul>
+            <strong>3. Webhook 처리</strong>
+            <ul>
+              <li>checkout.session.completed: 첫 결제 완료</li>
+              <li>invoice.payment_succeeded: 구독 갱신</li>
+              <li>customer.subscription.deleted: 구독 취소</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>Stripe 설정 (20분)
+                <ul>
+                  <li>Stripe 계정 생성</li>
+                  <li>Product/Price 생성</li>
+                  <li>API 키 발급</li>
+                </ul>
+              </li>
+              <li>Checkout API 구현 (40분)
+                <ul>
+                  <li>Checkout Session 생성 API</li>
+                  <li>Frontend 결제 버튼 연동</li>
+                </ul>
+              </li>
+              <li>Webhook 처리 (40분)
+                <ul>
+                  <li>Webhook Endpoint 구현</li>
+                  <li>이벤트별 처리 로직</li>
+                  <li>DB 업데이트</li>
+                </ul>
+              </li>
+              <li>테스트 (20분)
+                <ul>
+                  <li>Stripe Test Mode로 결제 테스트</li>
+                  <li>Webhook 이벤트 확인</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">📝 코드 예제</div>
+          <div class="subsection-content">
+            <strong>Stripe Checkout API</strong>
+            <div class="code-example">
+import Stripe from 'stripe';
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+export default async function handler(req, res) {
+  const { tier, userId } = req.body;
+
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: [{
+      price: process.env[`STRIPE_PRICE_${tier.toUpperCase()}`],
+      quantity: 1,
+    }],
+    mode: 'subscription',
+    success_url: `${process.env.SITE_URL}/success`,
+    cancel_url: `${process.env.SITE_URL}/cancel`,
+    metadata: { userId, tier },
+  });
+
+  res.json({ url: session.url });
+}
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ Stripe 계정을 생성했다</div>
+            <div class="checklist-item">☐ 요금제를 설계했다</div>
+            <div class="checklist-item">☐ Checkout API를 구현했다</div>
+            <div class="checklist-item">☐ Webhook 처리를 구현했다</div>
+            <div class="checklist-item">☐ 결제 테스트를 완료했다</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 2.3 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 2.3</span>
+          <h3 class="module-title">관리자 대시보드</h3>
+          <span class="module-duration">2시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>관리자 대시보드 UI를 구현할 수 있다</li>
+              <li>사용자 관리, 사용량 모니터링, 요금제 변경 기능을 구현할 수 있다</li>
+              <li>API 로그를 조회하고 분석할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>대시보드 UI 구현 (40분)
+                <ul>
+                  <li>사용자 목록 테이블</li>
+                  <li>통계 카드 (총 사용자, 매출 등)</li>
+                  <li>차트 (가입 추이, 사용량)</li>
+                </ul>
+              </li>
+              <li>사용자 관리 API (40min)
+                <ul>
+                  <li>사용자 목록 조회</li>
+                  <li>요금제 변경</li>
+                  <li>사용자 삭제</li>
+                </ul>
+              </li>
+              <li>로그 조회 (40분)
+                <ul>
+                  <li>API 호출 로그</li>
+                  <li>에러 로그</li>
+                  <li>필터링 및 검색</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ 대시보드 UI를 구현했다</div>
+            <div class="checklist-item">☐ 사용자 관리 API를 구현했다</div>
+            <div class="checklist-item">☐ 로그 조회 기능을 구현했다</div>
+            <div class="checklist-item">☐ 관리자 권한 검증을 추가했다</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div id="day3" class="day-section">
+      <div class="day-header">
+        <div class="day-number">Day 3</div>
+        <div class="day-title">RAG 지식베이스와 멀티에이전트 설계</div>
+        <div class="day-duration">⏱️ 6시간</div>
+      </div>
+
+      <!-- Module 3.1 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 3.1</span>
+          <h3 class="module-title">RAG 아키텍처</h3>
+          <span class="module-duration">2시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>RAG (Retrieval-Augmented Generation) 개념을 이해하고 설계할 수 있다</li>
+              <li>Vector DB (Pinecone/Supabase pgvector)를 선택하고 연동할 수 있다</li>
+              <li>임베딩 모델을 선택하고 검색 전략을 수립할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">💡 핵심 개념</div>
+          <div class="subsection-content">
+            <strong>1. RAG 파이프라인</strong>
+            <ul>
+              <li>Step 1: 문서 수집 (PDF, Markdown, HTML)</li>
+              <li>Step 2: 청크 분할 (Chunk Size, Overlap)</li>
+              <li>Step 3: 임베딩 생성 (OpenAI, Cohere)</li>
+              <li>Step 4: Vector DB 저장 (Pinecone, pgvector)</li>
+              <li>Step 5: 검색 (Semantic Search)</li>
+              <li>Step 6: LLM 답변 생성</li>
+            </ul>
+            <strong>2. Vector DB 비교</strong>
+            <ul>
+              <li><strong>Pinecone</strong>: 관리형, 빠름, 유료</li>
+              <li><strong>Supabase pgvector</strong>: 오픈소스, PostgreSQL, 무료 티어</li>
+            </ul>
+            <strong>3. 임베딩 모델</strong>
+            <ul>
+              <li>OpenAI text-embedding-3-small (저비용)</li>
+              <li>OpenAI text-embedding-3-large (고정확도)</li>
+              <li>Cohere embed-multilingual (다국어)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>Vector DB 설정 (30분)
+                <ul>
+                  <li>Supabase pgvector 활성화</li>
+                  <li>documents 테이블 생성</li>
+                  <li>Vector index 생성</li>
+                </ul>
+              </li>
+              <li>임베딩 생성 (40분)
+                <ul>
+                  <li>OpenAI API 연동</li>
+                  <li>문서 청크 임베딩</li>
+                  <li>DB 저장</li>
+                </ul>
+              </li>
+              <li>검색 API 구현 (40min)
+                <ul>
+                  <li>쿼리 임베딩</li>
+                  <li>Vector Similarity Search</li>
+                  <li>Top-K 결과 반환</li>
+                </ul>
+              </li>
+              <li>테스트 (10분)</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">📝 코드 예제</div>
+          <div class="subsection-content">
+            <strong>Supabase pgvector 검색</strong>
+            <div class="code-example">
+import { createClient } from '@supabase/supabase-js';
+import OpenAI from 'openai';
+
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
+const openai = new OpenAI();
+
+export async function search(query, topK = 5) {
+  <span class="code-comment">// 1. 쿼리 임베딩</span>
+  const embedding = await openai.embeddings.create({
+    model: 'text-embedding-3-small',
+    input: query,
+  });
+
+  <span class="code-comment">// 2. Vector 검색</span>
+  const { data, error } = await supabase.rpc('match_documents', {
+    query_embedding: embedding.data[0].embedding,
+    match_count: topK,
+  });
+
+  return data;
+}
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ Vector DB를 설정했다</div>
+            <div class="checklist-item">☐ 임베딩 생성 파이프라인을 구현했다</div>
+            <div class="checklist-item">☐ 검색 API를 구현했다</div>
+            <div class="checklist-item">☐ RAG 설계 문서를 작성했다</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 3.2 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 3.2</span>
+          <h3 class="module-title">청크 전략과 검색</h3>
+          <span class="module-duration">2시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>문서 분할 전략 (Chunk Size, Overlap)을 이해하고 최적화할 수 있다</li>
+              <li>메타데이터를 활용하여 검색 품질을 향상시킬 수 있다</li>
+              <li>Hybrid Search와 Reranking을 구현할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">💡 핵심 개념</div>
+          <div class="subsection-content">
+            <strong>1. 청크 분할 전략</strong>
+            <ul>
+              <li><strong>Chunk Size</strong>: 512~1024 토큰 권장</li>
+              <li><strong>Overlap</strong>: 10~20% 중복 (문맥 유지)</li>
+              <li><strong>분할 기준</strong>: 문단, 제목, 구조적 요소</li>
+            </ul>
+            <strong>2. 메타데이터</strong>
+            <ul>
+              <li>문서 제목, 작성자, 날짜</li>
+              <li>섹션, 카테고리, 태그</li>
+              <li>필터링 및 재순위 지정에 활용</li>
+            </ul>
+            <strong>3. Hybrid Search</strong>
+            <ul>
+              <li><strong>Semantic Search</strong>: Vector Similarity</li>
+              <li><strong>Keyword Search</strong>: Full-text Search</li>
+              <li><strong>결합</strong>: 두 결과를 가중 평균</li>
+            </ul>
+            <strong>4. Reranking</strong>
+            <ul>
+              <li>검색 결과를 LLM으로 재순위 지정</li>
+              <li>Cohere Rerank API</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>청크 분할 구현 (40분)
+                <ul>
+                  <li>문서 파싱 (PDF, Markdown)</li>
+                  <li>청크 분할 (Chunk Size, Overlap)</li>
+                  <li>메타데이터 추출</li>
+                </ul>
+              </li>
+              <li>Hybrid Search 구현 (40min)
+                <ul>
+                  <li>Vector Search + Full-text Search</li>
+                  <li>결과 결합 알고리즘</li>
+                </ul>
+              </li>
+              <li>Reranking 구현 (30분)
+                <ul>
+                  <li>Cohere Rerank API 연동</li>
+                  <li>재순위 지정 로직</li>
+                </ul>
+              </li>
+              <li>최적화 및 테스트 (10분)</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ 청크 분할 파이프라인을 구현했다</div>
+            <div class="checklist-item">☐ 메타데이터를 추출하고 저장했다</div>
+            <div class="checklist-item">☐ Hybrid Search를 구현했다</div>
+            <div class="checklist-item">☐ Reranking을 구현했다</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 3.3 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 3.3</span>
+          <h3 class="module-title">멀티에이전트 설계</h3>
+          <span class="module-duration">2시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>멀티에이전트 아키텍처를 설계하고 에이전트 역할을 분리할 수 있다</li>
+              <li>Orchestration 패턴을 이해하고 Workflow를 설계할 수 있다</li>
+              <li>병렬/순차 실행을 구현하고 최적화할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">💡 핵심 개념</div>
+          <div class="subsection-content">
+            <strong>1. 에이전트 역할</strong>
+            <ul>
+              <li><strong>Coordinator</strong>: 전체 흐름 제어</li>
+              <li><strong>Retriever</strong>: 정보 검색</li>
+              <li><strong>Analyzer</strong>: 데이터 분석</li>
+              <li><strong>Generator</strong>: 답변 생성</li>
+            </ul>
+            <strong>2. Orchestration 패턴</strong>
+            <ul>
+              <li><strong>Sequential</strong>: 순차 실행 (A → B → C)</li>
+              <li><strong>Parallel</strong>: 병렬 실행 (A, B, C 동시)</li>
+              <li><strong>Conditional</strong>: 조건부 실행 (if A then B)</li>
+              <li><strong>Loop</strong>: 반복 실행 (while condition)</li>
+            </ul>
+            <strong>3. Workflow 설계</strong>
+            <ul>
+              <li>상태 관리 (State Machine)</li>
+              <li>에러 핸들링 (Retry, Fallback)</li>
+              <li>로깅 및 모니터링</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>에이전트 정의 (30분)
+                <ul>
+                  <li>Coordinator 에이전트</li>
+                  <li>Retriever 에이전트</li>
+                  <li>Generator 에이전트</li>
+                </ul>
+              </li>
+              <li>Workflow 설계 (40분)
+                <ul>
+                  <li>상태 다이어그램 작성</li>
+                  <li>에이전트 간 통신 프로토콜</li>
+                </ul>
+              </li>
+              <li>Orchestration 구현 (40분)
+                <ul>
+                  <li>순차/병렬 실행 로직</li>
+                  <li>에러 핸들링</li>
+                </ul>
+              </li>
+              <li>테스트 (10분)</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">📝 코드 예제</div>
+          <div class="subsection-content">
+            <strong>멀티에이전트 Orchestrator</strong>
+            <div class="code-example">
+class Orchestrator {
+  async run(query) {
+    <span class="code-comment">// 1. Coordinator: 의도 파악</span>
+    const intent = await this.coordinator.analyze(query);
+
+    <span class="code-comment">// 2. Retriever: 정보 검색 (병렬)</span>
+    const [docs, web] = await Promise.all([
+      this.retriever.searchDocs(query),
+      this.retriever.searchWeb(query),
+    ]);
+
+    <span class="code-comment">// 3. Analyzer: 데이터 분석</span>
+    const analysis = await this.analyzer.process([...docs, ...web]);
+
+    <span class="code-comment">// 4. Generator: 답변 생성</span>
+    const answer = await this.generator.create({
+      query,
+      intent,
+      analysis,
+    });
+
+    return answer;
+  }
+}
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ 에이전트 역할을 정의했다</div>
+            <div class="checklist-item">☐ Workflow를 설계했다</div>
+            <div class="checklist-item">☐ Orchestration을 구현했다</div>
+            <div class="checklist-item">☐ 병렬/순차 실행을 최적화했다</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div id="day4" class="day-section">
+      <div class="day-header">
+        <div class="day-number">Day 4</div>
+        <div class="day-title">MCP · 스킬 · 훅 · 옵시디언 위키 통합</div>
+        <div class="day-duration">⏱️ 6시간</div>
+      </div>
+
+      <!-- Module 4.1 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 4.1</span>
+          <h3 class="module-title">MCP 서버 개발</h3>
+          <span class="module-duration">2시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>MCP (Model Context Protocol) 프로토콜을 이해하고 커스텀 MCP 서버를 개발할 수 있다</li>
+              <li>Tool을 등록하고 Claude Code와 연동할 수 있다</li>
+              <li>MCP 서버를 배포하고 운영할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">💡 핵심 개념</div>
+          <div class="subsection-content">
+            <strong>1. MCP 프로토콜</strong>
+            <ul>
+              <li>Claude Code와 외부 시스템 간 통신 프로토콜</li>
+              <li>Tool 호출, 리소스 접근, Prompt 확장</li>
+            </ul>
+            <strong>2. MCP 서버 구조</strong>
+            <ul>
+              <li><strong>Transport</strong>: stdio, HTTP, WebSocket</li>
+              <li><strong>Tools</strong>: 커스텀 기능 정의</li>
+              <li><strong>Resources</strong>: 데이터 제공</li>
+            </ul>
+            <strong>3. Tool 정의</strong>
+            <ul>
+              <li>name: 도구 이름</li>
+              <li>description: 도구 설명</li>
+              <li>inputSchema: 입력 파라미터 (JSON Schema)</li>
+              <li>handler: 실행 함수</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>MCP 서버 초기화 (20분)
+                <ul>
+                  <li>프로젝트 생성</li>
+                  <li>@anthropic-ai/mcp-sdk 설치</li>
+                  <li>서버 템플릿 작성</li>
+                </ul>
+              </li>
+              <li>커스텀 Tool 개발 (60분)
+                <ul>
+                  <li>Tool 정의 (name, description, schema)</li>
+                  <li>Handler 구현</li>
+                  <li>에러 핸들링</li>
+                </ul>
+              </li>
+              <li>Claude Code 연동 (30분)
+                <ul>
+                  <li>.claude/config.json 설정</li>
+                  <li>MCP 서버 실행</li>
+                  <li>Tool 호출 테스트</li>
+                </ul>
+              </li>
+              <li>배포 (10분)</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">📝 코드 예제</div>
+          <div class="subsection-content">
+            <strong>MCP 서버 예시</strong>
+            <div class="code-example">
+import { Server } from '@anthropic-ai/mcp-sdk/server/index.js';
+import { StdioServerTransport } from '@anthropic-ai/mcp-sdk/server/stdio.js';
+
+const server = new Server({
+  name: 'my-mcp-server',
+  version: '1.0.0',
+}, {
+  capabilities: {
+    tools: {},
+  },
+});
+
+<span class="code-comment">// Tool 등록</span>
+server.setRequestHandler('tools/list', async () => ({
+  tools: [{
+    name: 'search_docs',
+    description: '문서를 검색합니다',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        query: { type: 'string' },
+      },
+      required: ['query'],
+    },
+  }],
+}));
+
+<span class="code-comment">// Tool 실행</span>
+server.setRequestHandler('tools/call', async (request) => {
+  const { name, arguments: args } = request.params;
+  if (name === 'search_docs') {
+    const results = await searchDocs(args.query);
+    return { content: [{ type: 'text', text: JSON.stringify(results) }] };
+  }
+});
+
+const transport = new StdioServerTransport();
+await server.connect(transport);
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ MCP 서버를 초기화했다</div>
+            <div class="checklist-item">☐ 커스텀 Tool을 개발했다</div>
+            <div class="checklist-item">☐ Claude Code와 연동했다</div>
+            <div class="checklist-item">☐ Tool 호출을 테스트했다</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 4.2 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 4.2</span>
+          <h3 class="module-title">커스텀 스킬과 훅</h3>
+          <span class="module-duration">2시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>SKILL.md를 작성하여 커스텀 스킬을 생성할 수 있다</li>
+              <li>Pre-commit 훅을 설정하여 코드 품질을 자동 검증할 수 있다</li>
+              <li>CI/CD 자동화 파이프라인을 구축할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">💡 핵심 개념</div>
+          <div class="subsection-content">
+            <strong>1. Claude Code 스킬</strong>
+            <ul>
+              <li>재사용 가능한 워크플로우</li>
+              <li>SKILL.md로 정의</li>
+              <li>/skill-name으로 호출</li>
+            </ul>
+            <strong>2. Pre-commit 훅</strong>
+            <ul>
+              <li>커밋 전 자동 실행</li>
+              <li>린팅, 포맷팅, 테스트</li>
+              <li>husky 또는 .git/hooks</li>
+            </ul>
+            <strong>3. CI/CD 파이프라인</strong>
+            <ul>
+              <li>GitHub Actions</li>
+              <li>자동 테스트, 빌드, 배포</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>커스텀 스킬 작성 (40분)
+                <ul>
+                  <li>SKILL.md 작성</li>
+                  <li>스킬 로직 정의</li>
+                  <li>테스트</li>
+                </ul>
+              </li>
+              <li>Pre-commit 훅 설정 (40분)
+                <ul>
+                  <li>husky 설치</li>
+                  <li>lint-staged 설정</li>
+                  <li>ESLint, Prettier 통합</li>
+                </ul>
+              </li>
+              <li>GitHub Actions 설정 (40분)
+                <ul>
+                  <li>.github/workflows/ci.yml 작성</li>
+                  <li>자동 테스트 파이프라인</li>
+                  <li>Vercel 자동 배포</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ 커스텀 스킬을 작성했다</div>
+            <div class="checklist-item">☐ Pre-commit 훅을 설정했다</div>
+            <div class="checklist-item">☐ CI/CD 파이프라인을 구축했다</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 4.3 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 4.3</span>
+          <h3 class="module-title">옵시디언 위키 고급</h3>
+          <span class="module-duration">2시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>옵시디언 플러그인을 연동하여 고급 기능을 활용할 수 있다</li>
+              <li>Dataview 쿼리를 작성하여 동적 콘텐츠를 생성할 수 있다</li>
+              <li>Graph View를 최적화하고 자동 백링크를 구성할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">💡 핵심 개념</div>
+          <div class="subsection-content">
+            <strong>1. 핵심 플러그인</strong>
+            <ul>
+              <li><strong>Dataview</strong>: 데이터 쿼리</li>
+              <li><strong>Templater</strong>: 템플릿 자동화</li>
+              <li><strong>Graph View</strong>: 네트워크 시각화</li>
+            </ul>
+            <strong>2. Dataview 쿼리</strong>
+            <ul>
+              <li>LIST, TABLE, CALENDAR 뷰</li>
+              <li>WHERE, SORT, GROUP BY</li>
+            </ul>
+            <strong>3. 자동 백링크</strong>
+            <ul>
+              <li>[[링크]] 자동 생성</li>
+              <li>MOC (Map of Contents)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>플러그인 설치 및 설정 (30분)</li>
+              <li>Dataview 쿼리 작성 (40분)</li>
+              <li>Templater 템플릿 작성 (40분)</li>
+              <li>Graph View 최적화 (10분)</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ 플러그인을 설치하고 설정했다</div>
+            <div class="checklist-item">☐ Dataview 쿼리를 작성했다</div>
+            <div class="checklist-item">☐ Templater 템플릿을 작성했다</div>
+            <div class="checklist-item">☐ Graph View를 최적화했다</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 5 -->
+    <div id="day5" class="day-section">
+      <div class="day-header">
+        <div class="day-number">Day 5</div>
+        <div class="day-title">배포 · 운영 · 수익화 · 최종 발표</div>
+        <div class="day-duration">⏱️ 6시간</div>
+      </div>
+
+      <!-- Module 5.1 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 5.1</span>
+          <h3 class="module-title">프로덕션 배포</h3>
+          <span class="module-duration">2시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>Vercel 또는 AWS에 프로덕션 환경을 배포할 수 있다</li>
+              <li>환경 변수를 안전하게 관리하고 HTTPS를 설정할 수 있다</li>
+              <li>커스텀 도메인과 CDN을 설정할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>Vercel 배포 (40분)</li>
+              <li>환경 변수 설정 (30분)</li>
+              <li>커스텀 도메인 설정 (30분)</li>
+              <li>CDN 및 성능 최적화 (20분)</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ 프로덕션 환경에 배포했다</div>
+            <div class="checklist-item">☐ 환경 변수를 설정했다</div>
+            <div class="checklist-item">☐ HTTPS를 활성화했다</div>
+            <div class="checklist-item">☐ 커스텀 도메인을 연결했다</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 5.2 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 5.2</span>
+          <h3 class="module-title">모니터링과 운영</h3>
+          <span class="module-duration">1.5시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>로그 분석과 에러 추적 (Sentry)을 설정할 수 있다</li>
+              <li>성능 모니터링과 사용량 분석을 구현할 수 있다</li>
+              <li>알림 시스템을 설정하고 장애 대응 프로세스를 수립할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>Sentry 연동 (30분)</li>
+              <li>성능 모니터링 (30분)</li>
+              <li>알림 설정 (30분)</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ Sentry를 연동했다</div>
+            <div class="checklist-item">☐ 성능 모니터링을 설정했다</div>
+            <div class="checklist-item">☐ 알림 시스템을 설정했다</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 5.3 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 5.3</span>
+          <h3 class="module-title">SaaS 사업화 전략</h3>
+          <span class="module-duration">1.5시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>요금제 (Free/Pro/Max)를 설계하고 수익화 모델을 수립할 수 있다</li>
+              <li>GTM (Go-To-Market) 전략과 고객 획득 채널을 계획할 수 있다</li>
+              <li>성장 지표 (AARRR)를 설정하고 측정할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">💡 핵심 개념</div>
+          <div class="subsection-content">
+            <strong>1. 요금제 설계</strong>
+            <ul>
+              <li>Free: 제한된 기능으로 유입</li>
+              <li>Pro: 핵심 기능 전체 제공</li>
+              <li>Max: 엔터프라이즈 기능</li>
+            </ul>
+            <strong>2. AARRR 지표</strong>
+            <ul>
+              <li>Acquisition: 고객 획득</li>
+              <li>Activation: 첫 경험</li>
+              <li>Retention: 재방문</li>
+              <li>Revenue: 수익화</li>
+              <li>Referral: 추천</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>요금제 설계 (30분)</li>
+              <li>GTM 전략 수립 (30분)</li>
+              <li>사업 계획서 작성 (30분)</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ 요금제를 설계했다</div>
+            <div class="checklist-item">☐ GTM 전략을 수립했다</div>
+            <div class="checklist-item">☐ 사업 계획서를 작성했다</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 5.4 -->
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-number">모듈 5.4</span>
+          <h3 class="module-title">최종 발표</h3>
+          <span class="module-duration">1시간</span>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🎯 학습 목표</div>
+          <div class="subsection-content">
+            <ul>
+              <li>플랫폼 데모와 아키텍처 설명을 효과적으로 발표할 수 있다</li>
+              <li>사업 피칭을 통해 투자자 또는 고객을 설득할 수 있다</li>
+              <li>피드백을 받고 개선 방향을 수립할 수 있다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">🛠️ 실습 단계</div>
+          <div class="subsection-content">
+            <ol>
+              <li>피칭 덱 작성 (20분)
+                <ul>
+                  <li>문제 정의</li>
+                  <li>솔루션</li>
+                  <li>시장 기회</li>
+                  <li>기술 아키텍처</li>
+                  <li>수익화 모델</li>
+                </ul>
+              </li>
+              <li>발표 연습 (10분)</li>
+              <li>최종 발표 (20분)</li>
+              <li>Q&A 및 피드백 (10분)</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">✅ 체크리스트</div>
+          <div class="checklist">
+            <div class="checklist-item">☐ 피칭 덱을 작성했다</div>
+            <div class="checklist-item">☐ 플랫폼 데모를 준비했다</div>
+            <div class="checklist-item">☐ 최종 발표를 완료했다</div>
+            <div class="checklist-item">☐ 피드백을 받고 반영 계획을 수립했다</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 최종 요약 -->
+    <div style="background: linear-gradient(135deg, #7c3aed, #8B5CF6); color: white; padding: 60px 40px; border-radius: 20px; text-align: center; margin-top: 80px;">
+      <h2 style="font-size: 2rem; font-weight: 900; margin-bottom: 16px; color: white;">고급 과정 완료 후 성과</h2>
+      <p style="font-size: 1.1rem; opacity: 0.95; margin-bottom: 32px; line-height: 1.8;">
+        ✅ 프로덕션 레벨 AI 플랫폼 구축<br>
+        ✅ RAG 지식베이스 + MCP 서버 개발<br>
+        ✅ 멀티에이전트 시스템 설계<br>
+        ✅ SaaS 사업 계획서 완성<br>
+        ✅ 실전 배포 및 운영 경험
+      </p>
+      <a href="auth.html" class="btn btn-lg" style="background: white; color: #7c3aed; font-weight: 700;">지금 신청하기 →</a>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer"></footer>
+
+<script src="../js/components.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/theme.js"></script>
+<script>
+// 목차 스무스 스크롤
+document.querySelectorAll('.toc-item a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
