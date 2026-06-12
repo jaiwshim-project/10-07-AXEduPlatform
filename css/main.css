@@ -80,11 +80,11 @@ body {
   font-family: var(--font-korean);
   color: var(--color-text);
   background: var(--color-bg);
-  line-height: 1.75;
+  line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 }
 
 img {
@@ -105,8 +105,8 @@ ul, ol {
 /* === Typography === */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
   color: var(--color-primary);
 }
 
@@ -118,10 +118,11 @@ h5 { font-size: 1.125rem; margin-bottom: 0.5rem; }
 h6 { font-size: 1rem; margin-bottom: 0.5rem; }
 
 p {
-  font-size: 1rem;
-  line-height: 1.75;
+  font-size: 1.0625rem;
+  line-height: 1.8;
   margin-bottom: 1rem;
   color: var(--color-text);
+  letter-spacing: -0.003em;
 }
 
 strong {
@@ -559,18 +560,18 @@ strong {
 }
 
 .card-title {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-primary);
   margin-bottom: var(--space-xs);
-  line-height: 1.5;
+  line-height: 1.4;
   letter-spacing: -0.01em;
 }
 
 .card-subtitle {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--color-text-muted);
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 .card-body {
@@ -957,12 +958,13 @@ strong {
   color: var(--color-text-muted);
   text-align: center;
   margin-bottom: var(--space-2xl);
-  font-size: 1.125rem;
-  max-width: 600px;
+  font-size: 1.15rem;
+  max-width: 650px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.75;
+  line-height: 1.8;
   font-weight: 400;
+  letter-spacing: -0.005em;
 }
 
 .section-header {
@@ -1599,15 +1601,15 @@ tr:hover td { background: var(--color-bg); }
 
 /* === 텍스트 가독성 최대화 === */
 :root {
-  --color-text: #0f172a;          /* 거의 순수 블랙 — 최대 가독성 */
-  --color-text-muted: #374151;    /* 보조 텍스트 (충분히 어두움) */
+  --color-text: #1a1a1a;          /* 순수 블랙에 가까운 색상 — 최대 가독성 */
+  --color-text-muted: #4a5568;    /* 보조 텍스트 (더 진하게) */
   --color-text-light: #6B7280;    /* 경량 힌트 텍스트 */
-  --color-text-on-dark: rgba(255,255,255,0.92); /* 어두운 배경 위 텍스트 */
+  --color-text-on-dark: rgba(255,255,255,0.95); /* 어두운 배경 위 텍스트 */
 }
 
 /* body 기본 텍스트 강화 */
-body { color: var(--color-text); line-height: 1.7; }
-[data-theme="dark"] body { color: #e2e8f0; }
+body { color: var(--color-text); line-height: 1.8; }
+[data-theme="dark"] body { color: #f1f5f9; }
 
 /* ─────────────────────────────────────────────
    CARDS — 컬러 테두리 + 그라데이션 배경
@@ -1859,7 +1861,12 @@ body { color: var(--color-text); }
 
 /* 본문 p, li — 카드/섹션 내부만 */
 :is(.card, .feature-card, .stat-card, main, .section, section, article) p,
-:is(.card, .feature-card, .stat-card, main, .section, section, article) li { color: var(--color-text); }
+:is(.card, .feature-card, .stat-card, main, .section, section, article) li {
+  color: var(--color-text);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  margin-bottom: 0.5rem;
+}
 [data-theme="dark"] :is(.card, .feature-card, .stat-card, main, .section, section, article) p,
 [data-theme="dark"] :is(.card, .feature-card, .stat-card, main, .section, section, article) li { color: #e2e8f0; }
 
@@ -1875,13 +1882,13 @@ body { color: var(--color-text); }
 .cta-section h1, .cta-section h2, .cta-section p,
 .contact-cta h1, .contact-cta h2, .contact-cta h3, .contact-cta p { color: inherit; }
 
-/* 흐릿한 보조 텍스트도 최소 #374151 이상 */
+/* 보조 텍스트 가독성 개선 */
 .text-muted, .form-label, .card-meta, .badge-text,
-small, .small { color: var(--color-text-muted); }
+small, .small { color: var(--color-text-muted); font-size: 0.9375rem; }
 [data-theme="dark"] .text-muted,
 [data-theme="dark"] .form-label,
 [data-theme="dark"] small,
-[data-theme="dark"] .small { color: #94a3b8; }
+[data-theme="dark"] .small { color: #cbd5e1; }
 
 /* 카드 내부 텍스트 — 다크모드 */
 [data-theme="dark"] .card,
@@ -1897,13 +1904,17 @@ small, .small { color: var(--color-text-muted); }
 
 /* 태블릿 (768px) */
 @media (max-width: 768px) {
+  html { font-size: 16px; }
   .container, .container-sm, .container-lg { padding: 0 20px; }
-  .section-title { font-size: 1.65rem; }
-  .section-subtitle { font-size: 0.95rem; }
+  .section-title { font-size: 1.75rem; }
+  .section-subtitle { font-size: 1rem; line-height: 1.75; }
   .feature-card { padding: 20px; }
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
   .grid-3.force-1 { grid-template-columns: 1fr; }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
+
+  /* 본문 텍스트 크기 조정 */
+  p { font-size: 1.0625rem; line-height: 1.8; }
 
   /* 네비 링크 숨김 — 햄버거 사용 */
   .nav-links { display: none; }
@@ -1916,12 +1927,16 @@ small, .small { color: var(--color-text-muted); }
 
 /* 모바일 (480px) */
 @media (max-width: 480px) {
+  html { font-size: 16px; }
   .container, .container-sm, .container-lg { padding: 0 16px; }
 
   /* 헤딩 크기 */
-  h1 { font-size: 1.75rem !important; }
-  h2 { font-size: 1.4rem !important; }
-  .section-title { font-size: 1.4rem; }
+  h1 { font-size: 1.85rem !important; line-height: 1.3; }
+  h2 { font-size: 1.5rem !important; line-height: 1.35; }
+  .section-title { font-size: 1.5rem; line-height: 1.35; }
+
+  /* 본문 텍스트 */
+  p { font-size: 1.0625rem; line-height: 1.75; }
 
   /* 카드 */
   .card, .feature-card, .stat-card { padding: 16px; }

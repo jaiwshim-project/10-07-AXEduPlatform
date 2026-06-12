@@ -53,12 +53,12 @@
     .flow-arrow { text-align: center; color: rgba(255,255,255,0.3); font-size: 1.2rem; }
 
     /* 교육 카테고리 */
-    .course-card { display: block; background: #F5F3FF; border-radius: 16px; padding: 28px; border: 1px solid rgba(45,27,105,0.15); border-top: 3px solid #FF6B35; transition: all 0.3s; cursor: pointer; box-shadow: 0 4px 16px rgba(45,27,105,0.10); }
+    .course-card { display: block; background: #ffffff; border-radius: 16px; padding: 28px; border: 1px solid rgba(45,27,105,0.15); border-top: 3px solid #FF6B35; transition: all 0.3s; cursor: pointer; box-shadow: 0 4px 16px rgba(45,27,105,0.10); }
     .course-card:hover { transform: translateY(-6px); box-shadow: 0 14px 44px rgba(45,27,105,0.13); border-color: rgba(255,107,53,0.25); }
     .course-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 16px; pointer-events: none; }
-    .course-count { font-size: 0.8rem; color: #4B5563; margin-top: 8px; font-weight: 600; pointer-events: none; }
-    .course-card h3 { font-size: 1.05rem; font-weight: 800; color: #000000; margin-bottom: 8px; pointer-events: none; }
-    .course-card p { font-size: 0.9rem; color: #374151; line-height: 1.65; pointer-events: none; }
+    .course-count { font-size: 0.8rem; color: #6B7280; margin-top: 8px; font-weight: 600; pointer-events: none; }
+    .course-card h3 { font-size: 1.1rem; font-weight: 800; color: #1a1a1a; margin-bottom: 10px; pointer-events: none; line-height: 1.4; }
+    .course-card p { font-size: 0.95rem; color: #4a5568; line-height: 1.7; pointer-events: none; }
 
     /* 생태계 플로우 */
     .ecosystem { background: #000000; color: white; padding: 80px 24px; }
@@ -118,6 +118,9 @@
       .eco-arrow { display: none; }
       .eco-node { min-width: 140px; padding: 18px 14px; }
       .cert-card, .course-card, .review-card { padding: 20px; }
+
+      /* 4단계 과정 카드 모바일 */
+      .section .course-card { min-width: 100% !important; max-width: 100% !important; }
     }
     @media (max-width: 480px) {
       .hero h1 { font-size: 1.75rem; }
@@ -257,30 +260,30 @@
       <h2 class="section-title">선명AX 교육과정 — 4단계 학습 경로</h2>
       <p class="section-subtitle">초보자부터 고급 전문가까지, 체계적인 단계별 커리큘럼</p>
     </div>
-    <div class="grid grid-4 reveal">
-      <a href="pages/course-beginner.html" class="course-card" style="text-decoration:none;">
-        <div class="course-icon" style="background:rgba(107,114,128,0.1);">🌱</div>
+    <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;max-width:1200px;margin:0 auto;" class="reveal">
+      <a href="pages/course-beginner.html" class="course-card" style="text-decoration:none;flex:1;min-width:240px;max-width:280px;">
+        <div class="course-icon" style="background:rgba(107,114,128,0.12);">🌱</div>
         <h3>초보자 과정</h3>
         <p>AI 첫걸음 6도구 실습<br>대화형·이미지생성형·프로젝트형 ChatGPT</p>
         <div class="course-count">⏱️ 6시간 · 6개 도구</div>
       </a>
-      <a href="pages/course-basic.html" class="course-card" style="text-decoration:none;">
-        <div class="course-icon" style="background:rgba(255,107,53,0.1);">🚀</div>
+      <a href="pages/course-basic.html" class="course-card" style="text-decoration:none;flex:1;min-width:240px;max-width:280px;">
+        <div class="course-icon" style="background:rgba(255,107,53,0.12);">🚀</div>
         <h3>초급 과정</h3>
         <p>AI 실무 활용 4도구 실습<br>업무용 산출물 제작 + Claude Code</p>
         <div class="course-count">⏱️ 14시간 · 실무 프로젝트</div>
       </a>
-      <a href="pages/course-intermediate.html" class="course-card" style="text-decoration:none;">
-        <div class="course-icon" style="background:rgba(0,200,150,0.1);">🏗️</div>
+      <a href="pages/course-intermediate.html" class="course-card" style="text-decoration:none;flex:1;min-width:240px;max-width:280px;">
+        <div class="course-icon" style="background:rgba(0,200,150,0.12);">🏗️</div>
         <h3>중급 과정</h3>
-        <p>AI 플랫폼 설계<br>RAG 시스템 · AI Agent 구축</p>
-        <div class="course-count">⏱️ 추후 공개</div>
+        <p>클로드코드 바이브코딩<br>플랫폼·에이전트·스킬·위키 개발</p>
+        <div class="course-count">⏱️ 14시간 · 2일 집중</div>
       </a>
-      <a href="pages/course-advanced.html" class="course-card" style="text-decoration:none;">
-        <div class="course-icon" style="background:rgba(124,58,237,0.1);">👑</div>
+      <a href="pages/course-advanced.html" class="course-card" style="text-decoration:none;flex:1;min-width:240px;max-width:280px;">
+        <div class="course-icon" style="background:rgba(124,58,237,0.12);">👑</div>
         <h3>고급 과정</h3>
-        <p>AX 컨설팅 전략<br>기업 AX 전략 수립 · 프로젝트 리드</p>
-        <div class="course-count">⏱️ 추후 공개</div>
+        <p>AI 플랫폼 아키텍트<br>RAG·MCP·멀티에이전트·사업화</p>
+        <div class="course-count">⏱️ 30시간 · 5일 실전</div>
       </a>
     </div>
     <div class="text-center" style="margin-top:40px;">
