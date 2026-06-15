@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4교시 — 바이브코딩 개발 흐름 체험 | 선명AX 교육과정</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans KR', 'Inter', sans-serif;
+      background: #1a1a1a;
+      color: #ffffff;
+      overflow: hidden;
+    }
+    .slide {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      padding: 60px 80px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 1;
+      z-index: 1;
+    }
+    .slide h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin-bottom: 24px;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #10B981, #059669);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .slide h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 32px;
+      color: #10B981;
+    }
+    .slide h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #10B981;
+    }
+    .slide p {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      color: #e5e7eb;
+    }
+    .slide ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .slide li {
+      font-size: 1.25rem;
+      line-height: 1.9;
+      margin-bottom: 16px;
+      padding-left: 32px;
+      position: relative;
+      color: #e5e7eb;
+    }
+    .slide li:before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #10B981;
+      font-weight: 700;
+    }
+    .subtitle {
+      font-size: 1.8rem;
+      color: #9ca3af;
+      font-weight: 500;
+      margin-top: 16px;
+    }
+    .cover {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      align-items: center;
+      text-align: center;
+    }
+    .cover h1 {
+      font-size: 4.5rem;
+      color: white;
+      background: none;
+      -webkit-text-fill-color: white;
+    }
+    .cover .subtitle {
+      color: rgba(255,255,255,0.95);
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+    .cover .meta {
+      font-size: 1.5rem;
+      color: rgba(255,255,255,0.9);
+      margin-top: 40px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 32px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 32px;
+    }
+    .card {
+      background: rgba(16,185,129,0.1);
+      border: 2px solid #10B981;
+      border-radius: 16px;
+      padding: 32px;
+    }
+    .card h4 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #10B981;
+      margin-bottom: 16px;
+    }
+    .card p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #d1d5db;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 32px;
+    }
+    th, td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid #374151;
+    }
+    th {
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    td {
+      font-size: 1.1rem;
+      color: #e5e7eb;
+    }
+    .navigation {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      display: flex;
+      gap: 16px;
+      z-index: 100;
+    }
+    .nav-btn {
+      background: #10B981;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .nav-btn:hover {
+      background: #059669;
+      transform: scale(1.05);
+    }
+    .progress {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: #374151;
+      z-index: 100;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #10B981, #059669);
+      transition: width 0.3s ease;
+    }
+    .slide-number {
+      position: fixed;
+      bottom: 50px;
+      left: 40px;
+      font-size: 1.2rem;
+      color: #9ca3af;
+      z-index: 100;
+    }
+    .highlight {
+      color: #10B981;
+      font-weight: 700;
+    }
+    .code {
+      font-family: 'Fira Code', monospace;
+      background: #1f2937;
+      padding: 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #e5e7eb;
+      border-left: 4px solid #10B981;
+    }
+    .big-number {
+      font-size: 5rem;
+      font-weight: 900;
+      color: #10B981;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .screenshot-placeholder {
+      background: #374151;
+      border: 2px dashed #10B981;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      color: #9ca3af;
+      font-size: 1.2rem;
+      margin-top: 32px;
+    }
+    @media print {
+      .slide { page-break-after: always; display: block !important; opacity: 1 !important; position: relative; }
+      .navigation, .progress, .slide-number { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Slide 1: Cover -->
+<div class="slide active cover">
+  <h1>4교시 — 바이브코딩<br>개발 흐름 체험</h1>
+  <p class="subtitle">자연어로 프로그래밍하는 새로운 시대</p>
+  <p class="meta">⏱️ 60분 | 👨‍💼 심재우 대표 | 💻 코덱스 · 클로드코드</p>
+</div>
+
+<!-- Slide 2: 학습 목표 -->
+<div class="slide">
+  <h2>🎯 학습 목표</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h4>① 바이브코딩 이해</h4>
+      <p>자연어로 프로그래밍하는 개념과 흐름 이해</p>
+    </div>
+    <div class="card">
+      <h4>② 도구 실전 사용</h4>
+      <p>코덱스/클로드코드를 직접 사용하며 체험</p>
+    </div>
+    <div class="card">
+      <h4>③ 웹사이트 개발</h4>
+      <p>실제 웹사이트를 자연어 명령으로 개발</p>
+    </div>
+    <div class="card">
+      <h4>④ 개발 흐름 습득</h4>
+      <p>의도→생성→검수→반복 사이클 체득</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 3: 시간 배분 -->
+<div class="slide">
+  <h2>⏰ 시간 배분 (총 60분)</h2>
+  <ul style="font-size: 1.5rem; margin-top: 60px;">
+    <li><span class="highlight">0~20분</span> — 설명 + 실시간 시연<br><span style="font-size: 1.2rem; color: #9ca3af; margin-left: 32px;">바이브코딩 개념, 코덱스/클로드코드 소개, 강사가 실시간 개발 시연</span></li>
+    <li style="margin-top: 40px;"><span class="highlight">20~50분</span> — 핸즈온 실습<br><span style="font-size: 1.2rem; color: #9ca3af; margin-left: 32px;">수강생이 직접 코덱스 또는 클로드코드로 매뉴얼 사이트 개발 실습</span></li>
+    <li style="margin-top: 40px;"><span class="highlight">50~60분</span> — 결과 공유 및 토론<br><span style="font-size: 1.2rem; color: #9ca3af; margin-left: 32px;">수강생들이 만든 사이트 발표, 개발 과정 경험 공유</span></li>
+  </ul>
+</div>
+
+<!-- Slide 4: 바이브코딩이란? -->
+<div class="slide">
+  <h2>💡 바이브코딩이란?</h2>
+  <p style="font-size: 1.6rem; margin: 40px 0; line-height: 1.8;">
+    <span class="highlight">Vibe Coding (바이브 코딩)</span>은 전통적인 코딩 문법을 외우지 않고,<br>
+    <span style="color: #10B981; font-weight: 700;">자연어 지시만으로 AI에게 프로그래밍을 시키는 새로운 개발 방식</span>입니다.
+  </p>
+  <div class="card" style="background: rgba(16,185,129,0.05); margin-top: 40px;">
+    <h4 style="font-size: 1.8rem;">"이런 느낌(Vibe)으로 만들어줘"</h4>
+    <p style="font-size: 1.3rem; margin-top: 20px;">
+      AI가 코드를 작성하고, 개발자는 <span class="highlight">의도·검수·방향</span>만 제시합니다.
+    </p>
+  </div>
+  <p style="font-size: 1.2rem; color: #9ca3af; margin-top: 60px;">
+    💡 핵심: 코딩 문법 불필요. 한국어로 "무엇을 만들지" 설명하면 끝.
+  </p>
+</div>
+
+<!-- Slide 5: 전통 코딩 vs 바이브코딩 -->
+<div class="slide">
+  <h2>⚖️ 전통 코딩 vs 바이브코딩</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>단계</th>
+        <th>전통 코딩</th>
+        <th>바이브코딩</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1단계</strong></td>
+        <td>문법 학습 (HTML, CSS, JS)</td>
+        <td>의도 정의 (한국어로)</td>
+      </tr>
+      <tr>
+        <td><strong>2단계</strong></td>
+        <td>코드 작성 (손으로 타이핑)</td>
+        <td>AI 자동 생성</td>
+      </tr>
+      <tr>
+        <td><strong>3단계</strong></td>
+        <td>디버깅 (에러 찾기)</td>
+        <td>검수 및 수정 요청</td>
+      </tr>
+      <tr>
+        <td><strong>4단계</strong></td>
+        <td>리팩토링 (코드 개선)</td>
+        <td>반복 개선 (대화형)</td>
+      </tr>
+      <tr>
+        <td><strong>생산성</strong></td>
+        <td>기준 (1배)</td>
+        <td>10배 ↑</td>
+      </tr>
+      <tr>
+        <td><strong>진입장벽</strong></td>
+        <td>높음 (6개월 학습)</td>
+        <td>낮음 (즉시 시작)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Slide 6: 바이브코딩의 4단계 -->
+<div class="slide">
+  <h2>🔄 바이브코딩의 4단계</h2>
+  <div class="grid-2" style="margin-top: 40px;">
+    <div class="card">
+      <div class="big-number">1</div>
+      <h4>의도 정의</h4>
+      <p>"이런 사이트를 만들고 싶어"</p>
+      <div class="code" style="margin-top: 20px;">
+        "HTML 파일 하나 만들어줘.<br>
+        제목은 '바이브코딩 가이드'야."
+      </div>
+    </div>
+    <div class="card">
+      <div class="big-number">2</div>
+      <h4>AI 생성</h4>
+      <p>HTML/CSS/JS 자동 생성</p>
+      <div class="code" style="margin-top: 20px;">
+        ✅ index.html 생성됨<br>
+        ✅ 기본 구조 완성<br>
+        ✅ 스타일링 적용됨
+      </div>
+    </div>
+    <div class="card">
+      <div class="big-number">3</div>
+      <h4>검수 및 수정</h4>
+      <p>"이 부분을 이렇게 바꿔줘"</p>
+      <div class="code" style="margin-top: 20px;">
+        "Hero 섹션에<br>
+        gradient 배경을 적용해줘.<br>
+        초록색으로."
+      </div>
+    </div>
+    <div class="card">
+      <div class="big-number">4</div>
+      <h4>반복 개선</h4>
+      <p>대화형으로 완성도 높이기</p>
+      <div class="code" style="margin-top: 20px;">
+        "좋아! 이제 네비게이션 바를<br>
+        상단에 고정시켜줘."
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 7: 코덱스 개요 -->
+<div class="slide">
+  <h2>💻 코덱스 개요</h2>
+  <p style="font-size: 1.5rem; margin-bottom: 40px;">ChatGPT 기반 AI 코딩 에이전트 — 개발부터 배포까지 전 과정 지원</p>
+  <ul>
+    <li><span class="highlight">ChatGPT 기반</span> — OpenAI의 최신 GPT 모델 사용</li>
+    <li><span class="highlight">웹 기반 인터페이스</span> — 브라우저에서 바로 실행</li>
+    <li><span class="highlight">프롬프트 템플릿</span> — 자주 쓰는 명령어 내장</li>
+    <li><span class="highlight">단계별 가이드</span> — 초보자도 쉽게 따라할 수 있는 안내</li>
+    <li><span class="highlight">프로젝트 관리</span> — 여러 프로젝트 동시 관리</li>
+    <li><span class="highlight">플랫폼 지원</span> — Windows / macOS</li>
+  </ul>
+  <p style="margin-top: 60px; font-size: 1.2rem; color: #9ca3af;">
+    🔗 접속: <span class="highlight">https://openai.com/ko-KR/codex/</span>
+  </p>
+</div>
+
+<!-- Slide 8: 코덱스 핵심 기능 -->
+<div class="slide">
+  <h2>🔧 코덱스 핵심 기능</h2>
+  <div class="grid-2" style="margin-top: 40px;">
+    <div class="card">
+      <h4>💬 자연어 명령</h4>
+      <p>코딩 문법 없이 한국어로 명령하면 코드 자동 생성</p>
+    </div>
+    <div class="card">
+      <h4>📁 파일 자동 생성/수정</h4>
+      <p>HTML, CSS, JS 파일을 자동으로 생성하고 편집</p>
+    </div>
+    <div class="card">
+      <h4>🔄 Git 통합</h4>
+      <p>커밋, 푸시 등 버전 관리 자동화</p>
+    </div>
+    <div class="card">
+      <h4>📋 프롬프트 템플릿</h4>
+      <p>자주 쓰는 명령어를 템플릿으로 저장</p>
+    </div>
+    <div class="card">
+      <h4>📂 프로젝트 목록</h4>
+      <p>여러 프로젝트를 한 화면에서 관리</p>
+    </div>
+    <div class="card">
+      <h4>🎯 단계별 가이드</h4>
+      <p>초보자를 위한 친절한 안내</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 9: 코덱스 화면 구성 -->
+<div class="slide">
+  <h2>🖥️ 코덱스 화면 구성</h2>
+  <div class="screenshot-placeholder">
+    <p>💻 코덱스 홈페이지</p>
+    <p style="font-size: 1rem; margin-top: 12px; color: #6b7280;">ChatGPT 기반 AI 코딩 에이전트로 개발부터 배포까지 모든 과정을 지원합니다</p>
+  </div>
+  <div class="screenshot-placeholder" style="margin-top: 24px;">
+    <p>🗂️ 코덱스 앱 — 프로젝트 목록 및 대화형 인터페이스</p>
+  </div>
+</div>
+
+<!-- Slide 10: 코덱스 접속 및 설치 -->
+<div class="slide">
+  <h2>🚀 코덱스 접속 및 설치</h2>
+  <div class="card" style="margin-top: 40px; background: rgba(16,185,129,0.05);">
+    <h4>① 홈페이지 접속</h4>
+    <p style="font-size: 1.3rem; margin-top: 16px;">
+      🔗 <span class="highlight">https://openai.com/ko-KR/codex/</span>
+    </p>
+  </div>
+  <div class="card" style="margin-top: 32px; background: rgba(16,185,129,0.05);">
+    <h4>② 다운로드</h4>
+    <p>Windows 버전 또는 macOS 버전 다운로드</p>
+  </div>
+  <div class="card" style="margin-top: 32px; background: rgba(16,185,129,0.05);">
+    <h4>③ 설치 및 로그인</h4>
+    <p>OpenAI 계정으로 로그인 (ChatGPT 계정 사용)</p>
+  </div>
+  <div class="card" style="margin-top: 32px; background: rgba(16,185,129,0.05);">
+    <h4>④ 새 프로젝트 생성</h4>
+    <p>"New Project" 버튼 클릭 → 프로젝트명 입력 → 시작</p>
+  </div>
+</div>
+
+<!-- Slide 11: 클로드코드 개요 -->
+<div class="slide">
+  <h2>⌨️ 클로드코드 개요</h2>
+  <p style="font-size: 1.5rem; margin-bottom: 40px;">Anthropic의 CLI 기반 AI 개발 도구 — 터미널에서 자연어 명령</p>
+  <ul>
+    <li><span class="highlight">CLI 기반</span> — 터미널(명령줄)에서 실행</li>
+    <li><span class="highlight">Sonnet 4.5 (1M context)</span> — 강력한 AI 모델</li>
+    <li><span class="highlight">파일 자동화</span> — 읽기/쓰기/수정 자동화</li>
+    <li><span class="highlight">Git 통합</span> — 커밋, 푸시 자동화</li>
+    <li><span class="highlight">전체 코드베이스 이해</span> — 프로젝트 전체 맥락 파악</li>
+    <li><span class="highlight">컨텍스트 윈도 1M 토큰</span> — 매우 긴 맥락 처리</li>
+  </ul>
+  <p style="margin-top: 60px; font-size: 1.2rem; color: #9ca3af;">
+    💡 특징: <span class="highlight">가볍고 빠른 기동전</span> (몽고 기마병의 마구)
+  </p>
+</div>
+
+<!-- Slide 12: 클로드코드 핵심 기능 -->
+<div class="slide">
+  <h2>🔧 클로드코드 핵심 기능</h2>
+  <div class="grid-2" style="margin-top: 40px;">
+    <div class="card">
+      <h4>⌨️ CLI 명령</h4>
+      <p>터미널에서 자연어 명령으로 코드 생성</p>
+      <div class="code" style="margin-top: 16px; font-size: 0.9rem;">
+        $ claude "HTML 파일 만들어줘"
+      </div>
+    </div>
+    <div class="card">
+      <h4>📁 파일 자동화</h4>
+      <p>파일 읽기, 쓰기, 수정을 자동으로 처리</p>
+    </div>
+    <div class="card">
+      <h4>🔄 Git 통합</h4>
+      <p>커밋 메시지 자동 생성, 푸시 자동화</p>
+    </div>
+    <div class="card">
+      <h4>🧠 코드베이스 이해</h4>
+      <p>프로젝트 전체 구조를 이해하고 일관성 유지</p>
+    </div>
+    <div class="card">
+      <h4>📊 1M 토큰 컨텍스트</h4>
+      <p>매우 긴 맥락(대형 프로젝트)도 한 번에 처리</p>
+    </div>
+    <div class="card">
+      <h4>⚡ 빠른 속도</h4>
+      <p>군더더기 없이 빠르게 실행</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 13: 코덱스 vs 클로드코드 -->
+<div class="slide">
+  <h2>⚖️ 코덱스 vs 클로드코드</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>기준</th>
+        <th>코덱스</th>
+        <th>클로드코드</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>인터페이스</strong></td>
+        <td>웹 / 데스크톱 앱</td>
+        <td>CLI (터미널)</td>
+      </tr>
+      <tr>
+        <td><strong>속도</strong></td>
+        <td>보통</td>
+        <td>⚡ 빠름</td>
+      </tr>
+      <tr>
+        <td><strong>진입장벽</strong></td>
+        <td>✅ 낮음 (UI 친화적)</td>
+        <td>중간 (터미널 필요)</td>
+      </tr>
+      <tr>
+        <td><strong>유연성</strong></td>
+        <td>보통</td>
+        <td>✅ 높음</td>
+      </tr>
+      <tr>
+        <td><strong>가이드</strong></td>
+        <td>✅ 친절함</td>
+        <td>최소한</td>
+      </tr>
+      <tr>
+        <td><strong>추천 대상</strong></td>
+        <td>초보자</td>
+        <td>숙련자</td>
+      </tr>
+      <tr>
+        <td><strong>비유</strong></td>
+        <td>유럽 기사의 마구 (중무장)</td>
+        <td>몽고 기마병의 마구 (경량)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Slide 14: 도구 선택 가이드 -->
+<div class="slide">
+  <h2>🎯 도구 선택 가이드</h2>
+  <div class="grid-2" style="margin-top: 60px;">
+    <div class="card" style="background: rgba(16,185,129,0.15);">
+      <h4>코덱스 추천 상황</h4>
+      <ul style="list-style: none; padding: 0; margin-top: 20px;">
+        <li style="padding-left: 0;">✅ AI 코딩이 처음인 경우</li>
+        <li style="padding-left: 0;">✅ GUI가 편한 경우</li>
+        <li style="padding-left: 0;">✅ 단계별 가이드가 필요한 경우</li>
+        <li style="padding-left: 0;">✅ 프로젝트 관리 기능이 필요한 경우</li>
+      </ul>
+    </div>
+    <div class="card" style="background: rgba(16,185,129,0.15);">
+      <h4>클로드코드 추천 상황</h4>
+      <ul style="list-style: none; padding: 0; margin-top: 20px;">
+        <li style="padding-left: 0;">✅ 터미널 사용이 익숙한 경우</li>
+        <li style="padding-left: 0;">✅ 빠른 속도가 중요한 경우</li>
+        <li style="padding-left: 0;">✅ 유연한 커스터마이징이 필요한 경우</li>
+        <li style="padding-left: 0;">✅ 대형 프로젝트를 다루는 경우</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top: 60px; font-size: 1.3rem; text-align: center; color: #9ca3af;">
+    💡 <span class="highlight">병행 사용 전략:</span> 간단한 작업은 코덱스, 복잡한 작업은 클로드코드
+  </p>
+</div>
+
+<!-- Slide 15: 실습 프로젝트 소개 -->
+<div class="slide">
+  <h2>🌐 실습 프로젝트 소개</h2>
+  <div class="card" style="margin-top: 40px; background: rgba(16,185,129,0.05);">
+    <h4>목표: 바이브코딩 매뉴얼 사이트 개발</h4>
+    <div class="grid-2" style="margin-top: 32px; gap: 24px;">
+      <div>
+        <p style="margin-bottom: 12px;"><span class="highlight">구성:</span></p>
+        <ul style="list-style: none; padding: 0;">
+          <li style="padding-left: 0;">📄 HTML (구조)</li>
+          <li style="padding-left: 0;">🎨 CSS (스타일링)</li>
+          <li style="padding-left: 0;">⚡ JavaScript (인터랙션)</li>
+        </ul>
+      </div>
+      <div>
+        <p style="margin-bottom: 12px;"><span class="highlight">기능:</span></p>
+        <ul style="list-style: none; padding: 0;">
+          <li style="padding-left: 0;">🧭 네비게이션 바</li>
+          <li style="padding-left: 0;">📱 반응형 디자인</li>
+          <li style="padding-left: 0;">🖼️ 이미지 섹션</li>
+          <li style="padding-left: 0;">📋 명령어 목록</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="screenshot-placeholder" style="margin-top: 40px;">
+    <p>✨ 완성 결과물: 22개 명령어로 만든 바이브코딩 매뉴얼 홈페이지</p>
+  </div>
+</div>
+
+<!-- Slide 16: 22단계 명령어 흐름 -->
+<div class="slide">
+  <h2>📋 22단계 명령어 흐름</h2>
+  <div class="grid-2" style="margin-top: 40px;">
+    <div class="card">
+      <h4>1~5단계: 기본 구조</h4>
+      <ul style="list-style: none; padding: 0; margin-top: 16px;">
+        <li style="padding-left: 0;">① HTML 파일 생성</li>
+        <li style="padding-left: 0;">② 제목과 메타 태그</li>
+        <li style="padding-left: 0;">③ 기본 섹션 구조</li>
+        <li style="padding-left: 0;">④ CSS 파일 연결</li>
+        <li style="padding-left: 0;">⑤ JavaScript 파일 연결</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>6~10단계: 콘텐츠 추가</h4>
+      <ul style="list-style: none; padding: 0; margin-top: 16px;">
+        <li style="padding-left: 0;">⑥ Hero 섹션</li>
+        <li style="padding-left: 0;">⑦ 네비게이션 바</li>
+        <li style="padding-left: 0;">⑧ 명령어 목록</li>
+        <li style="padding-left: 0;">⑨ 이미지 추가</li>
+        <li style="padding-left: 0;">⑩ Footer 추가</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>11~15단계: 스타일링</h4>
+      <ul style="list-style: none; padding: 0; margin-top: 16px;">
+        <li style="padding-left: 0;">⑪ Gradient 배경</li>
+        <li style="padding-left: 0;">⑫ 폰트 적용</li>
+        <li style="padding-left: 0;">⑬ 색상 테마</li>
+        <li style="padding-left: 0;">⑭ 간격 조정</li>
+        <li style="padding-left: 0;">⑮ 그림자 효과</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>16~22단계: 인터랙션 + 마무리</h4>
+      <ul style="list-style: none; padding: 0; margin-top: 16px;">
+        <li style="padding-left: 0;">⑯ 복사 버튼</li>
+        <li style="padding-left: 0;">⑰ 호버 효과</li>
+        <li style="padding-left: 0;">⑱ 반응형 디자인</li>
+        <li style="padding-left: 0;">⑲ 스크롤 애니메이션</li>
+        <li style="padding-left: 0;">⑳~㉒ 최종 검수 및 배포</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 17: 실습 명령어 예시 -->
+<div class="slide">
+  <h2>💻 실습 명령어 예시</h2>
+  <div class="card" style="margin-top: 40px; background: rgba(16,185,129,0.05);">
+    <h4>예시 1: HTML 파일 생성</h4>
+    <div class="code" style="margin-top: 16px;">
+      "HTML 파일 하나 만들어줘.<br>
+      제목은 '바이브코딩 가이드'야."
+    </div>
+    <p style="margin-top: 20px; color: #9ca3af;">→ AI가 index.html 생성 + 기본 구조 작성</p>
+  </div>
+  <div class="card" style="margin-top: 32px; background: rgba(16,185,129,0.05);">
+    <h4>예시 2: 네비게이션 바 추가</h4>
+    <div class="code" style="margin-top: 16px;">
+      "네비게이션 바를 추가하고<br>
+      3개 메뉴를 넣어줘: 홈, 가이드, 문의"
+    </div>
+    <p style="margin-top: 20px; color: #9ca3af;">→ AI가 nav 태그 + 메뉴 링크 자동 생성</p>
+  </div>
+  <div class="card" style="margin-top: 32px; background: rgba(16,185,129,0.05);">
+    <h4>예시 3: Gradient 배경 적용</h4>
+    <div class="code" style="margin-top: 16px;">
+      "Hero 섹션에 gradient 배경을 적용해줘.<br>
+      초록색 계열로."
+    </div>
+    <p style="margin-top: 20px; color: #9ca3af;">→ AI가 CSS gradient 코드 자동 생성</p>
+  </div>
+</div>
+
+<!-- Slide 18: 실습 진행 방식 -->
+<div class="slide">
+  <h2>🎯 실습 진행 방식</h2>
+  <div class="grid-2" style="margin-top: 60px;">
+    <div class="card" style="background: rgba(16,185,129,0.15);">
+      <div class="big-number" style="font-size: 3rem;">5분</div>
+      <h4>강사 시연</h4>
+      <p>22단계 중 처음 5단계를 강사가 시연</p>
+    </div>
+    <div class="card" style="background: rgba(16,185,129,0.15);">
+      <div class="big-number" style="font-size: 3rem;">25분</div>
+      <h4>수강생 따라하기</h4>
+      <p>6~15단계를 수강생이 직접 명령</p>
+    </div>
+    <div class="card" style="background: rgba(16,185,129,0.15);">
+      <div class="big-number" style="font-size: 3rem;">20분</div>
+      <h4>자유 개발</h4>
+      <p>16~22단계를 자유롭게 개발하며 개선</p>
+    </div>
+    <div class="card" style="background: rgba(16,185,129,0.15);">
+      <div class="big-number" style="font-size: 3rem;">10분</div>
+      <h4>결과 공유</h4>
+      <p>수강생들이 만든 사이트 발표 및 토론</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 19: 제공 자료 -->
+<div class="slide">
+  <h2>📦 제공 자료</h2>
+  <div class="grid-3" style="margin-top: 40px;">
+    <div class="card">
+      <h4>📄 PDF 매뉴얼</h4>
+      <p>바이브코딩 22단계 매뉴얼</p>
+    </div>
+    <div class="card">
+      <h4>💬 프롬프트 템플릿</h4>
+      <p>개발 프롬프트 템플릿 모음</p>
+    </div>
+    <div class="card">
+      <h4>💻 예제 코드</h4>
+      <p>예제 사이트 코드 (GitHub)</p>
+    </div>
+    <div class="card">
+      <h4>📘 클로드코드 가이드</h4>
+      <p>설치 및 사용법 가이드</p>
+    </div>
+    <div class="card">
+      <h4>📗 코덱스 가이드</h4>
+      <p>접속 및 사용법 가이드</p>
+    </div>
+    <div class="card">
+      <h4>🔗 자료실 링크</h4>
+      <p>axeduplatform.com</p>
+    </div>
+  </div>
+  <p style="margin-top: 60px; font-size: 1.3rem; text-align: center;">
+    🔗 자료실: <span class="highlight">axeduplatform.com/resource-vibe-coding-manual.html</span>
+  </p>
+</div>
+
+<!-- Slide 20: Q&A 및 마무리 -->
+<div class="slide cover">
+  <h1>Q&A 및 마무리</h1>
+  <p class="subtitle">바이브코딩 체험 소감 및 질의응답</p>
+  <div style="margin-top: 60px; font-size: 1.3rem; color: rgba(255,255,255,0.9); line-height: 2;">
+    <p>📚 자료실: <span style="color: #ffffff; font-weight: 700;">axeduplatform.com</span></p>
+    <p style="margin-top: 20px;">💻 바이브코딩 매뉴얼: <span style="color: #ffffff; font-weight: 700;">/resource-vibe-coding-manual.html</span></p>
+    <p style="margin-top: 20px;">📧 문의: <span style="color: #ffffff; font-weight: 700;">jaiwshim@gmail.com</span></p>
+    <p style="margin-top: 40px; font-size: 1.5rem; color: #ffffff;">👉 다음 단계: <strong>중급 과정 (14시간)</strong></p>
+  </div>
+</div>
+
+<div class="navigation">
+  <button class="nav-btn" onclick="prevSlide()">← 이전</button>
+  <button class="nav-btn" onclick="nextSlide()">다음 →</button>
+</div>
+
+<div class="progress">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div class="slide-number" id="slideNumber">1 / 20</div>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+
+function showSlide(n) {
+  slides[currentSlide].classList.remove('active');
+  currentSlide = (n + totalSlides) % totalSlides;
+  slides[currentSlide].classList.add('active');
+
+  document.getElementById('slideNumber').textContent = `${currentSlide + 1} / ${totalSlides}`;
+  document.getElementById('progressBar').style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+}
+
+function nextSlide() {
+  showSlide(currentSlide + 1);
+}
+
+function prevSlide() {
+  showSlide(currentSlide - 1);
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') {
+    nextSlide();
+  } else if (e.key === 'ArrowLeft') {
+    prevSlide();
+  }
+});
+
+// Initialize
+document.getElementById('progressBar').style.width = `${(1 / totalSlides) * 100}%`;
+</script>
+
+</body>
+</html>
