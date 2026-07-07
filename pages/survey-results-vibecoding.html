@@ -193,24 +193,46 @@
     </div>
   </div>
 
-  <!-- 응답자 목록 테이블 -->
-  <h2 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px;">응답자 목록</h2>
+  <!-- 개인별 전체 정보 테이블 -->
+  <h2 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px;">개인별 입력 정보 (전체 항목)</h2>
   <div class="table-wrap">
     <table class="data-table" id="responseTable">
       <thead>
         <tr>
           <th>이름</th>
           <th>소속</th>
+          <th>직책</th>
           <th>이메일</th>
           <th>만들고 싶은 것</th>
+          <th>노트북 OS</th>
           <th>코딩 경험</th>
-          <th>바이브코딩</th>
+          <th>터미널</th>
+          <th>Git</th>
+          <th>코딩 자신감</th>
+          <th>바이브코딩 인지</th>
+          <th>바이브코딩 도구</th>
+          <th>바이브코딩 결과물</th>
+          <th>Claude</th>
+          <th>ChatGPT</th>
+          <th>Gemini</th>
+          <th>Cursor</th>
+          <th>Copilot</th>
+          <th>Perplexity</th>
+          <th>MS Copilot</th>
+          <th>Grok</th>
+          <th>기타 서비스</th>
+          <th>월 지출</th>
+          <th>설치 항목</th>
+          <th>환경 설정 자신감</th>
+          <th>기대 학습</th>
+          <th>참여 동기</th>
+          <th>추가 요청</th>
           <th>교재 구매</th>
           <th>응답일</th>
         </tr>
       </thead>
       <tbody id="tableBody">
-        <tr><td colspan="8" class="loading">데이터를 불러오는 중...</td></tr>
+        <tr><td colspan="30" class="loading">데이터를 불러오는 중...</td></tr>
       </tbody>
     </table>
   </div>
@@ -333,16 +355,42 @@ async function loadData() {
     { label: '미사용', data: ai.notUsed, backgroundColor: '#E5E7EB' },
   ], { scales: { x: { stacked: true }, y: { stacked: true } } });
 
-  // 테이블
+  // 개인별 전체 정보 테이블
+  function lm(field, val) { return (labelMap[field] && labelMap[field][val]) || val || '-'; }
+  function arrStr(arr) { if (!arr || !Array.isArray(arr)) return '-'; return arr.join(', '); }
+  function planLabel(val) { if (val === 'paid') return '유료'; if (val === 'free') return '무료'; if (val === 'not_used') return '-'; return val || '-'; }
+
   const tbody = data.map(r => `<tr>
-    <td>${r.name || ''}</td>
-    <td>${r.organization || ''}</td>
-    <td>${r.email || ''}</td>
-    <td title="${r.want_to_build || ''}">${(r.want_to_build || '').substring(0,30)}</td>
-    <td>${(labelMap.coding_experience[r.coding_experience]) || r.coding_experience || ''}</td>
-    <td>${(labelMap.vibecoding_awareness[r.vibecoding_awareness]) || r.vibecoding_awareness || ''}</td>
-    <td>${(labelMap.book_purchase[r.book_purchase]) || r.book_purchase || ''}</td>
-    <td>${r.created_at ? new Date(r.created_at).toLocaleDateString('ko-KR') : ''}</td>
+    <td>${r.name || '-'}</td>
+    <td>${r.organization || '-'}</td>
+    <td>${r.position || '-'}</td>
+    <td>${r.email || '-'}</td>
+    <td title="${r.want_to_build || ''}">${(r.want_to_build || '-').substring(0,25)}</td>
+    <td>${lm('laptop_os', r.laptop_os)}</td>
+    <td>${lm('coding_experience', r.coding_experience)}</td>
+    <td>${lm('terminal_experience', r.terminal_experience)}</td>
+    <td>${r.git_experience || '-'}</td>
+    <td>${r.coding_confidence || '-'}점</td>
+    <td>${lm('vibecoding_awareness', r.vibecoding_awareness)}</td>
+    <td>${arrStr(r.vibecoding_tools)}</td>
+    <td>${arrStr(r.vibecoding_outputs)}</td>
+    <td>${planLabel(r.claude_plan)}</td>
+    <td>${planLabel(r.chatgpt_plan)}</td>
+    <td>${planLabel(r.gemini_plan)}</td>
+    <td>${planLabel(r.cursor_plan)}</td>
+    <td>${planLabel(r.copilot_plan)}</td>
+    <td>${planLabel(r.perplexity_plan)}</td>
+    <td>${planLabel(r.ms_copilot_plan)}</td>
+    <td>${planLabel(r.grok_plan)}</td>
+    <td>${r.other_service || '-'}</td>
+    <td>${lm('monthly_spend', r.monthly_spend)}</td>
+    <td>${arrStr(r.installed)}</td>
+    <td>${lm('setup_confidence', r.setup_confidence)}</td>
+    <td>${arrStr(r.expectations)}</td>
+    <td>${arrStr(r.motivations)}</td>
+    <td title="${r.additional || ''}">${(r.additional || '-').substring(0,20)}</td>
+    <td>${lm('book_purchase', r.book_purchase)}</td>
+    <td>${r.created_at ? new Date(r.created_at).toLocaleDateString('ko-KR') : '-'}</td>
   </tr>`).join('');
   document.getElementById('tableBody').innerHTML = tbody;
 }
