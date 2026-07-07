@@ -245,14 +245,24 @@ const ADMIN_PW = '12345';
 function checkPw() {
   const input = document.getElementById('adminPw').value;
   if (input === ADMIN_PW) {
-    document.getElementById('loginOverlay').style.display = 'none';
-    document.getElementById('mainContent').style.display = 'block';
-    loadData();
+    sessionStorage.setItem('admin_auth', 'true');
+    showDashboard();
   } else {
     document.getElementById('pwError').style.display = 'block';
     document.getElementById('adminPw').value = '';
     document.getElementById('adminPw').focus();
   }
+}
+
+function showDashboard() {
+  document.getElementById('loginOverlay').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'block';
+  loadData();
+}
+
+// 페이지 로드 시 세션 확인
+if (sessionStorage.getItem('admin_auth') === 'true') {
+  showDashboard();
 }
 </script>
 <script>
