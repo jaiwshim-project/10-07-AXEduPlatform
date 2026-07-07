@@ -119,6 +119,24 @@
     .loading { text-align: center; padding: 60px; color: #9ca3af; font-size: 1.1rem; }
     .error-msg { text-align: center; padding: 40px; color: #dc2626; }
 
+    .tab-btn {
+      padding: 10px 20px;
+      background: #f3f4f6;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: #6b7280;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { border-color: #7C3AED; color: #7C3AED; }
+    .tab-btn.active { background: #7C3AED; color: white; border-color: #7C3AED; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
     .table-wrap { overflow-x: auto; margin-top: 40px; }
 
     @media (max-width: 640px) {
@@ -148,6 +166,13 @@
 
 <div class="container" id="mainContent" style="display:none;">
   <button class="refresh-btn" onclick="loadData()">🔄 데이터 새로고침</button>
+
+  <!-- 탭 메뉴 -->
+  <div style="display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;">
+    <button class="tab-btn active" onclick="switchTab('vibecoding')" id="tab-vibecoding">🚀 바이브코딩 초보자</button>
+    <button class="tab-btn" onclick="switchTab('employee')" id="tab-employee">👥 직원 설문</button>
+    <button class="tab-btn" onclick="switchTab('executive')" id="tab-executive">👔 임원 설문</button>
+  </div>
 
   <!-- 요약 카드 -->
   <div class="stats-summary" id="statsSummary">
@@ -193,7 +218,33 @@
     </div>
   </div>
 
-  <!-- 개인별 전체 정보 테이블 -->
+  <!-- 직원/임원 설문 테이블 (탭) -->
+  <div class="tab-content" id="content-employee">
+    <h2 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px;">직원 설문 응답 (<span id="empCount">0</span>건)</h2>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr>
+          <th>#</th><th>응답일</th><th>Q1. 업무 병목</th><th>Q2. 반복 문제 사례</th><th>Q3. 비효율 상황</th><th>Q4. 정보 부족</th><th>Q5. 평가 체계</th><th>Q6. 시스템/매뉴얼</th><th>Q7. 가장 비효율</th><th>Q8. 조직 분위기</th><th>Q9. 보상/동기</th><th>Q10. 만족도</th>
+        </tr></thead>
+        <tbody id="empTableBody"><tr><td colspan="12" class="loading">로딩 중...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="tab-content" id="content-executive">
+    <h2 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px;">임원 설문 응답 (<span id="execCount">0</span>건)</h2>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr>
+          <th>#</th><th>응답일</th><th>Q1. 조직 핵심 문제</th><th>Q2. 의사결정 어려움</th><th>Q3. 갈등 요인</th><th>Q4. 규정/제도 문제</th><th>Q5. 업무 분장</th><th>Q6. 인간관계 갈등</th><th>Q7. 전략 방향</th><th>Q8. 조직 구조 기대</th><th>Q9. 개선 방안</th><th>Q10. 만족도</th>
+        </tr></thead>
+        <tbody id="execTableBody"><tr><td colspan="12" class="loading">로딩 중...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 바이브코딩 설문 (기본 탭) -->
+  <div class="tab-content active" id="content-vibecoding">
   <h2 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px;">개인별 입력 정보 (전체 항목)</h2>
   <div class="table-wrap">
     <table class="data-table" id="responseTable">
@@ -236,6 +287,7 @@
       </tbody>
     </table>
   </div>
+  </div><!-- end content-vibecoding -->
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -404,6 +456,72 @@ async function loadData() {
   </tr>`).join('');
   document.getElementById('tableBody').innerHTML = tbody;
 }
+
+// 탭 전환
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('content-' + tab).classList.add('active');
+}
+
+// 직원/임원 설문 데이터 로드
+async function loadOtherSurveys() {
+  function truncCell(text, max) {
+    if (!text) return '-';
+    var clean = String(text).replace(/\n/g, ' ');
+    return clean.length > max ? clean.substring(0, max) + '...' : clean;
+  }
+  function escAttr(text) {
+    if (!text) return '';
+    return String(text).replace(/"/g, '&quot;').replace(/\n/g, ' ');
+  }
+
+  // 직원 설문
+  var empRes = await sb.from('pre_survey_employee').select('*').order('submitted_at', { ascending: false });
+  if (empRes.data && empRes.data.length > 0) {
+    document.getElementById('empCount').textContent = empRes.data.length;
+    document.getElementById('empTableBody').innerHTML = empRes.data.map(function(r, i) {
+      return '<tr><td>'+(i+1)+'</td><td>'+(r.submitted_at ? new Date(r.submitted_at).toLocaleDateString('ko-KR') : '-')+'</td>'
+        +'<td title="'+escAttr(r.q1)+'">'+truncCell(r.q1,40)+'</td>'
+        +'<td title="'+escAttr(r.q2)+'">'+truncCell(r.q2,40)+'</td>'
+        +'<td title="'+escAttr(r.q3)+'">'+truncCell(r.q3,40)+'</td>'
+        +'<td title="'+escAttr(r.q4)+'">'+truncCell(r.q4,40)+'</td>'
+        +'<td title="'+escAttr(r.q5)+'">'+truncCell(r.q5,40)+'</td>'
+        +'<td title="'+escAttr(r.q6)+'">'+truncCell(r.q6,40)+'</td>'
+        +'<td title="'+escAttr(r.q7)+'">'+truncCell(r.q7,40)+'</td>'
+        +'<td title="'+escAttr(r.q8)+'">'+truncCell(r.q8,40)+'</td>'
+        +'<td title="'+escAttr(r.q9)+'">'+truncCell(r.q9,40)+'</td>'
+        +'<td>'+(r.q10 || '-')+'</td></tr>';
+    }).join('');
+  }
+
+  // 임원 설문
+  var execRes = await sb.from('pre_survey_executive').select('*').order('submitted_at', { ascending: false });
+  if (execRes.data && execRes.data.length > 0) {
+    document.getElementById('execCount').textContent = execRes.data.length;
+    document.getElementById('execTableBody').innerHTML = execRes.data.map(function(r, i) {
+      return '<tr><td>'+(i+1)+'</td><td>'+(r.submitted_at ? new Date(r.submitted_at).toLocaleDateString('ko-KR') : '-')+'</td>'
+        +'<td title="'+escAttr(r.q1)+'">'+truncCell(r.q1,40)+'</td>'
+        +'<td title="'+escAttr(r.q2)+'">'+truncCell(r.q2,40)+'</td>'
+        +'<td title="'+escAttr(r.q3)+'">'+truncCell(r.q3,40)+'</td>'
+        +'<td title="'+escAttr(r.q4)+'">'+truncCell(r.q4,40)+'</td>'
+        +'<td title="'+escAttr(r.q5)+'">'+truncCell(r.q5,40)+'</td>'
+        +'<td title="'+escAttr(r.q6)+'">'+truncCell(r.q6,40)+'</td>'
+        +'<td title="'+escAttr(r.q7)+'">'+truncCell(r.q7,40)+'</td>'
+        +'<td title="'+escAttr(r.q8)+'">'+truncCell(r.q8,40)+'</td>'
+        +'<td title="'+escAttr(r.q9)+'">'+truncCell(r.q9,40)+'</td>'
+        +'<td>'+(r.q10 || '-')+'</td></tr>';
+    }).join('');
+  }
+}
+
+// 원래 loadData를 래핑하여 다른 설문도 로드
+var _origLoadData = loadData;
+loadData = async function() {
+  await _origLoadData();
+  await loadOtherSurveys();
+};
 
 // loadData는 로그인 성공 후 checkPw()에서 호출됨
 </script>
