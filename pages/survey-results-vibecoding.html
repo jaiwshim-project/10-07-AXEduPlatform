@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>설문 결과 통계 — 바이브코딩 초보자 과정 | 선명AX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #F8F9FA;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+    .header {
+      background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%);
+      padding: 40px 24px;
+      color: white;
+      text-align: center;
+    }
+    .header h1 { font-size: 1.8rem; font-weight: 900; margin-bottom: 8px; }
+    .header p { font-size: 1rem; opacity: 0.9; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+
+    .stats-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .stat-card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-top: 3px solid #7C3AED;
+    }
+    .stat-card .stat-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #7C3AED;
+    }
+    .stat-card .stat-label {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .chart-card {
+      background: white;
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .chart-card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 16px;
+    }
+    .chart-card canvas { max-height: 280px; }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .data-table th {
+      background: #7C3AED;
+      color: white;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid #f3f4f6;
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .data-table tr:hover td { background: #f9fafb; }
+
+    .refresh-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      background: #7C3AED;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Noto Sans KR', sans-serif;
+      margin-bottom: 24px;
+    }
+    .refresh-btn:hover { background: #6D28D9; }
+
+    .loading { text-align: center; padding: 60px; color: #9ca3af; font-size: 1.1rem; }
+    .error-msg { text-align: center; padding: 40px; color: #dc2626; }
+
+    .table-wrap { overflow-x: auto; margin-top: 40px; }
+
+    @media (max-width: 640px) {
+      .chart-grid { grid-template-columns: 1fr; }
+      .header { padding: 30px 20px; }
+      .header h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>바이브코딩 사전 설문 결과 통계</h1>
+  <p>실시간 응답 현황 및 분석</p>
+</div>
+
+<div class="container">
+  <button class="refresh-btn" onclick="loadData()">🔄 데이터 새로고침</button>
+
+  <!-- 요약 카드 -->
+  <div class="stats-summary" id="statsSummary">
+    <div class="stat-card"><div class="stat-num" id="totalCount">-</div><div class="stat-label">총 응답 수</div></div>
+    <div class="stat-card"><div class="stat-num" id="bookYes">-</div><div class="stat-label">교재 구매 희망</div></div>
+    <div class="stat-card"><div class="stat-num" id="avgConfidence">-</div><div class="stat-label">평균 코딩 자신감</div></div>
+    <div class="stat-card"><div class="stat-num" id="noExpCount">-</div><div class="stat-label">코딩 경험 없음</div></div>
+  </div>
+
+  <!-- 차트 그리드 -->
+  <div class="chart-grid">
+    <div class="chart-card">
+      <h3>코딩/프로그래밍 경험</h3>
+      <canvas id="chartCoding"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>바이브코딩 인지도</h3>
+      <canvas id="chartVibecoding"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>AI 서비스 사용 현황 (유료/무료)</h3>
+      <canvas id="chartAI"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>월 AI 서비스 지출액</h3>
+      <canvas id="chartSpend"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>터미널 사용 경험</h3>
+      <canvas id="chartTerminal"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>개발 환경 설치 자신감</h3>
+      <canvas id="chartSetup"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>노트북 OS</h3>
+      <canvas id="chartOS"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>교재 구매 의향</h3>
+      <canvas id="chartBook"></canvas>
+    </div>
+  </div>
+
+  <!-- 응답자 목록 테이블 -->
+  <h2 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px;">응답자 목록</h2>
+  <div class="table-wrap">
+    <table class="data-table" id="responseTable">
+      <thead>
+        <tr>
+          <th>이름</th>
+          <th>소속</th>
+          <th>이메일</th>
+          <th>만들고 싶은 것</th>
+          <th>코딩 경험</th>
+          <th>바이브코딩</th>
+          <th>교재 구매</th>
+          <th>응답일</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr><td colspan="8" class="loading">데이터를 불러오는 중...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = 'https://sqfuqnxlafcilsookmqm.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxZnVxbnhsYWZjaWxzb29rbXFtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyODI4NTMsImV4cCI6MjA4OTg1ODg1M30.QG99xzmjBAIPMXQaC_vpzwKdlIwp4nwUDkqdy2sNz54';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let charts = {};
+
+function countValues(arr, field) {
+  const counts = {};
+  arr.forEach(r => { const v = r[field] || '미응답'; counts[v] = (counts[v] || 0) + 1; });
+  return counts;
+}
+
+function countAIServices(arr) {
+  const services = ['claude_plan','chatgpt_plan','gemini_plan','cursor_plan','copilot_plan','perplexity_plan','ms_copilot_plan','grok_plan'];
+  const labels = ['Claude','ChatGPT','Gemini','Cursor','Copilot','Perplexity','MS Copilot','Grok'];
+  const paid = [], free = [], notUsed = [];
+  services.forEach((s, i) => {
+    let p=0, f=0, n=0;
+    arr.forEach(r => { const v = r[s]; if (v === 'paid') p++; else if (v === 'free') f++; else n++; });
+    paid.push(p); free.push(f); notUsed.push(n);
+  });
+  return { labels, paid, free, notUsed };
+}
+
+function makeChart(id, type, labels, datasets, opts) {
+  if (charts[id]) charts[id].destroy();
+  const ctx = document.getElementById(id).getContext('2d');
+  charts[id] = new Chart(ctx, {
+    type,
+    data: { labels, datasets },
+    options: { responsive: true, plugins: { legend: { position: 'bottom' } }, ...opts }
+  });
+}
+
+function makePie(id, dataObj, colorSet) {
+  const labels = Object.keys(dataObj);
+  const data = Object.values(dataObj);
+  const colors = colorSet || ['#7C3AED','#A78BFA','#C4B5FD','#DDD6FE','#EDE9FE','#F5F3FF','#6D28D9','#4C1D95'];
+  makeChart(id, 'doughnut', labels, [{ data, backgroundColor: colors.slice(0, labels.length) }]);
+}
+
+const labelMap = {
+  coding_experience: { zero:'전혀 없음', html_css:'HTML/CSS 수정', script:'매크로/Python 기초', language:'언어 1개+', developer:'현업 개발자' },
+  vibecoding_awareness: { unknown:'모름', heard:'들어봄', know:'개념만 앎', tried:'1-2번 시도', experienced:'결과물 제작' },
+  terminal_experience: { never:'모름', seen:'본 적 있음', basic:'간단히 사용', comfortable:'익숙함' },
+  setup_confidence: { impossible:'전혀 못함', need_guide:'가이드 필요', can_try:'혼자 가능', easy:'이미 익숙' },
+  laptop_os: { windows:'Windows', mac:'Mac', none:'지참불가' },
+  monthly_spend: { '0':'0원', under_30k:'~3만원', '30k_70k':'3~7만원', '70k_150k':'7~15만원', over_150k:'15만원+' },
+  book_purchase: { yes:'구매', no:'미구매', already:'보유중' },
+};
+
+function mapLabels(counts, field) {
+  const mapped = {};
+  const map = labelMap[field] || {};
+  Object.keys(counts).forEach(k => { mapped[map[k] || k] = counts[k]; });
+  return mapped;
+}
+
+async function loadData() {
+  const { data, error } = await sb.from('pre_survey_vibecoding').select('*').order('created_at', { ascending: false });
+
+  if (error) {
+    document.getElementById('tableBody').innerHTML = '<tr><td colspan="8" class="error-msg">데이터 로드 실패: ' + error.message + '</td></tr>';
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    document.getElementById('totalCount').textContent = '0';
+    document.getElementById('bookYes').textContent = '0';
+    document.getElementById('avgConfidence').textContent = '-';
+    document.getElementById('noExpCount').textContent = '0';
+    document.getElementById('tableBody').innerHTML = '<tr><td colspan="8" style="text-align:center;padding:40px;color:#9ca3af;">아직 응답이 없습니다.</td></tr>';
+    return;
+  }
+
+  // 요약 카드
+  document.getElementById('totalCount').textContent = data.length;
+  document.getElementById('bookYes').textContent = data.filter(r => r.book_purchase === 'yes').length;
+  const confidences = data.map(r => r.coding_confidence).filter(Boolean);
+  document.getElementById('avgConfidence').textContent = confidences.length ? (confidences.reduce((a,b)=>a+b,0)/confidences.length).toFixed(1) + '점' : '-';
+  document.getElementById('noExpCount').textContent = data.filter(r => r.coding_experience === 'zero').length;
+
+  // 차트
+  makePie('chartCoding', mapLabels(countValues(data, 'coding_experience'), 'coding_experience'));
+  makePie('chartVibecoding', mapLabels(countValues(data, 'vibecoding_awareness'), 'vibecoding_awareness'));
+  makePie('chartTerminal', mapLabels(countValues(data, 'terminal_experience'), 'terminal_experience'));
+  makePie('chartSetup', mapLabels(countValues(data, 'setup_confidence'), 'setup_confidence'));
+  makePie('chartOS', mapLabels(countValues(data, 'laptop_os'), 'laptop_os'));
+  makePie('chartSpend', mapLabels(countValues(data, 'monthly_spend'), 'monthly_spend'));
+  makePie('chartBook', mapLabels(countValues(data, 'book_purchase'), 'book_purchase'));
+
+  // AI 서비스 스택 바 차트
+  const ai = countAIServices(data);
+  makeChart('chartAI', 'bar', ai.labels, [
+    { label: '유료', data: ai.paid, backgroundColor: '#7C3AED' },
+    { label: '무료', data: ai.free, backgroundColor: '#A78BFA' },
+    { label: '미사용', data: ai.notUsed, backgroundColor: '#E5E7EB' },
+  ], { scales: { x: { stacked: true }, y: { stacked: true } } });
+
+  // 테이블
+  const tbody = data.map(r => `<tr>
+    <td>${r.name || ''}</td>
+    <td>${r.organization || ''}</td>
+    <td>${r.email || ''}</td>
+    <td title="${r.want_to_build || ''}">${(r.want_to_build || '').substring(0,30)}</td>
+    <td>${(labelMap.coding_experience[r.coding_experience]) || r.coding_experience || ''}</td>
+    <td>${(labelMap.vibecoding_awareness[r.vibecoding_awareness]) || r.vibecoding_awareness || ''}</td>
+    <td>${(labelMap.book_purchase[r.book_purchase]) || r.book_purchase || ''}</td>
+    <td>${r.created_at ? new Date(r.created_at).toLocaleDateString('ko-KR') : ''}</td>
+  </tr>`).join('');
+  document.getElementById('tableBody').innerHTML = tbody;
+}
+
+loadData();
+</script>
+</body>
+</html>
